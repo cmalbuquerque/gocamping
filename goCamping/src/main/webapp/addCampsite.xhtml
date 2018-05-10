@@ -14,7 +14,7 @@
             <b:navBar brand="goCamping" brandHref="#">
                 <b:navbarLinks>
                     <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
-                    <b:navLink icon="signal" value="Ranking" href="#"></b:navLink>
+                    <b:navLink icon="signal" value="Ranking" outcome="/rankings.xhtml"></b:navLink>
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
 
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
@@ -28,8 +28,12 @@
 
             <p:panel style="margin-left: 10%; margin-right: 10%">
                 <h3 style="color: #72b400"><b:iconAwesome name="plus-circle" />  Post a Campsite </h3>
-                <b:inputText id="Title" value="" label="Title " />
-                <b:inputText id="Price" label="Price €" />
+                <b:inputText id="Title" placeholder="Example: Campsite Praia de Mira" value="" label="Title " />
+                <b:inputText id="Location" value="" placeholder="City, country, region" label="Location " col-md="8" />
+                <b:inputText id="Price" label="Price €" col-md="4" />
+                <b:selectBooleanCheckbox value=""  caption="Tent Pitch" label="Pitchs Available" />
+                <b:selectBooleanCheckbox value="" caption="Roulote" />
+                <b:selectBooleanCheckbox value="" caption="Bungalow" />
                 <b:inputTextarea id="Description" label="Description"></b:inputTextarea>
                 <b:button offset="9" value="Add Campsite" iconAwesome="plus-circle" look="success" outcome="/addCampsite.xhtml"></b:button>
                             

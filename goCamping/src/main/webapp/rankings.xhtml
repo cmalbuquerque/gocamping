@@ -23,16 +23,16 @@
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
                     <b:navLink icon="log-in" value="Login" outcome="/login.xhtml"></b:navLink>
-                    <b:navLink icon="edit" value="Sign Up"></b:navLink>
+                    <b:navLink icon="edit" value="Sign Up" ></b:navLink>
                 </b:navbarLinks>
             </b:navBar>
-
+            
             <p:panel style="margin-left: 10%; margin-right: 10%">
-                <h3 align="center" style="color: #72b400"><b:iconAwesome name="heart" />  Favourite Campsites List </h3>
+                <h3 align="center" style="color: #72b400"><b:icon name="stats" />  Rankings </h3>
                 <p:dataGrid var="car" value="" columns="1" layout="grid"
                             rows="12" paginator="true" id="cars"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                            rowsPerPageTemplate="6,12,16" style=" background-color: white" >
+                            rowsPerPageTemplate="10,25,50" style=" background-color: white" >
 
                     <p:panel>
                         <h:panelGrid columns="1" style="width:100%">
@@ -43,7 +43,7 @@
                             <b:button offset="9" value="View Details" iconAwesome="plus-circle" look="success" outcome="/results.xhtml"></b:button>
                             <!--<f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />-->
                             <br></br>
-                            <b:button offset="9" value="Remove Campsite" iconAwesome="times" look="default"></b:button>
+                            <!--<b:button offset="9" value="Remove Campsite" iconAwesome="times" look="default"></b:button>-->
 
 
                         </h:panelGrid>
@@ -71,7 +71,7 @@
                     </p:outputPanel>
                 </p:dialog>
             </p:panel>
-
+            
         </h:form>
     </h:body>
 </html>

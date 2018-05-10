@@ -18,7 +18,7 @@
             <b:navBar brand="goCamping" brandHref="#">
                 <b:navbarLinks>
                     <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
-                    <b:navLink icon="signal" value="Ranking" href="#"></b:navLink>
+                    <b:navLink icon="signal" value="Ranking" outcome="/rankings.xhtml"></b:navLink>
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
 
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
@@ -30,7 +30,7 @@
                 </b:navbarLinks>
             </b:navBar>
             <p:panel style="width: 40%; margin-left: 30%; background: white">
-                <b:tabView>
+                <b:tabView id="tabViewLogin">
                     <b:tab title="Login">
                         <br>&nbsp;</br>
                         <b:form horizontal="true" id="loginForm">
