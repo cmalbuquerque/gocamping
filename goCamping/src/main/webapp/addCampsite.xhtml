@@ -21,22 +21,51 @@
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
-                    <b:navLink icon="log-in" value="Login" outcome="/login.xhtml"></b:navLink>
-                    <b:navLink icon="edit" value="Sign Up"></b:navLink>
+                    <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
                 </b:navbarLinks>
             </b:navBar>
 
-            <p:panel style="margin-left: 10%; margin-right: 10%">
-                <h3 style="color: #72b400"><b:iconAwesome name="plus-circle" />  Post a Campsite </h3>
-                <b:inputText id="Title" placeholder="Example: Campsite Praia de Mira" value="" label="Title " />
-                <b:inputText id="Location" value="" placeholder="City, country, region" label="Location " col-md="8" />
-                <b:inputText id="Price" label="Price €" col-md="4" />
-                <b:selectBooleanCheckbox value=""  caption="Tent Pitch" label="Pitchs Available" />
-                <b:selectBooleanCheckbox value="" caption="Roulote" />
-                <b:selectBooleanCheckbox value="" caption="Bungalow" />
-                <b:inputTextarea id="Description" label="Description"></b:inputTextarea>
+            <p:panel style="margin-left: 10%; margin-right: 10%; height: 100%" >
+                <h3 style="color: #72b400"><b:iconAwesome name="plus-circle" />  Add a Campsite </h3>
+                <b:inputText col-lg="7" id="title" label="Title"></b:inputText>
+                <b:inputText col-lg="5" id="Nif" label="Company Fiscal Number" disabled="true"></b:inputText>
+                <b:inputText col-lg="12" id="location" label="Location"></b:inputText>
+
+                <b:inputTextarea col-lg="12" id="Description" label="Description"></b:inputTextarea>
+                <p><label>Services and Activities</label></p>
+                <b:form horizontal="true" >
+                    <b:formGroup>
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Swimming Pool" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Tenis Camp" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Football Camp" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Restaurant" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Bar, Snack" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Market" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Lavnderette" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Wi-Fi" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Gymn" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Spa" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Nightclub" />
+                        <b:selectBooleanCheckbox  col-lg="4" caption="Playground" />
+                        <b:selectBooleanCheckbox  col-lg="6" caption="Other Service" />
+                        <b:inputText col-lg="6" id="otherText"></b:inputText>
+                    </b:formGroup>
+                </b:form>
+
+                <p><label>Prices</label></p>
+                <b:form horizontal="true" >
+                    <b:formGroup>
+                        <b:inputText label="Adults" col-lg="8" ></b:inputText>
+                        <b:inputText col-lg="8" label="Childs (between 4 and 12 years)"></b:inputText>
+                        <b:inputText col-lg="8" label="Babies (between 0 and 3 years)"></b:inputText>
+
+                    </b:formGroup>
+                </b:form>
+
+                <b:inputText label="Contacts"></b:inputText>
+
                 <b:button offset="9" value="Add Campsite" iconAwesome="plus-circle" look="success" outcome="/addCampsite.xhtml"></b:button>
-                            
+
             </p:panel>
 
         </h:form>

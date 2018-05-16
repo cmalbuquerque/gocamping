@@ -13,15 +13,14 @@
             <b:navBar brand="goCamping" brandHref="#">
                 <b:navbarLinks>
                     <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
-                    <b:navLink icon="signal" value="Ranking" href="#"></b:navLink>
+                    <b:navLink icon="signal" value="Ranking" outcome="/rankings.xhtml"></b:navLink>
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
 
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
-                    <b:navLink icon="log-in" value="Login" outcome="/login.xhtml"></b:navLink>
-                    <b:navLink icon="edit" value="Sign Up"></b:navLink>
+                    <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
                 </b:navbarLinks>
             </b:navBar>
 
@@ -36,17 +35,20 @@
                     </b:inputText>
                     <b:datepicker label="Check-in" placeholder="Check-in" ></b:datepicker>
                     <b:datepicker label="Check-out" placeholder="Check-out"></b:datepicker>
-                    <b:dropButton  value="Pax ">
+
+                    <b:dropButton value="Type " span="4">
+                        <b:navLink value="Tent Pitch" href="#"></b:navLink>
+                        <b:navLink value="Roulote" href="#"></b:navLink>
+                        <b:navLink value="Bungalow" href="#"></b:navLink>
+                    </b:dropButton>
+                    &nbsp;
+                    <b:dropButton  value="Pax " span="4" offset="2">
                         <b:navLink value="1" href="#"></b:navLink>
                         <b:navLink value="2" href="#"></b:navLink>
                         <b:navLink value="3" href="#"></b:navLink>
                         <b:navLink value="4 or more" href="#"></b:navLink>
                     </b:dropButton>
-                    &nbsp;
-                    <b:dropButton value="Type ">
-                        <b:navLink value="Camper Card" href="#"></b:navLink>
-                        <b:navLink value="Normal" href="#"></b:navLink>
-                    </b:dropButton>
+
 
                     <b:slider min="0" max="200" value="#{sliderView.number}" label="Price" />
                     <b:button value="View Campsites" icon="search" look="success" outcome="/results.xhtml"></b:button>
@@ -54,6 +56,12 @@
 
                 <p:layoutUnit position="center">
                     <h3  style="color: #72b400">Results</h3>
+                    <p:dialog header="Campsite Costa Nova" widgetVar="dlg2" modal="true" height="100">
+                        <h:outputText value="This is a description of Campsite Costa Nova" />
+                        <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
+
+                    </p:dialog>  
+
                     <p:dataGrid var="car" value="" columns="1" layout="grid"
                                 rows="12" paginator="true" id="cars"
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -65,11 +73,13 @@
 
                                 <h:outputText value="Campsite Costa Nova" />
 
-                                
+
                                 <b:button offset="9" value="Add Favourite List" iconAwesome="heart" look="default" outcome="/results.xhtml"></b:button>
                                 <br></br>
-                                <b:button offset="9" value="View Details" iconAwesome="plus-circle" look="success" outcome="/results.xhtml"></b:button>
-                                <!--<f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />-->
+                                <b:button onclick="PF('dlg2').show();" offset="9" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
+                            <br></br>
+                                <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
+
 
                             </h:panelGrid>
                         </p:panel>

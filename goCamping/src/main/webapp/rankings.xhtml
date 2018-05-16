@@ -22,28 +22,35 @@
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
-                    <b:navLink icon="log-in" value="Login" outcome="/login.xhtml"></b:navLink>
-                    <b:navLink icon="edit" value="Sign Up" ></b:navLink>
+                    <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
                 </b:navbarLinks>
             </b:navBar>
-            
+
             <p:panel style="margin-left: 10%; margin-right: 10%">
                 <h3 align="center" style="color: #72b400"><b:icon name="stats" />  Rankings </h3>
+
+                <p:dialog header="Campsite Costa Nova" widgetVar="dlg2" modal="true" height="100">
+                    <h:outputText value="This is a description of Campsite Costa Nova" />
+                    <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
+
+                </p:dialog>   
+
                 <p:dataGrid var="car" value="" columns="1" layout="grid"
                             rows="12" paginator="true" id="cars"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="10,25,50" style=" background-color: white" >
 
                     <p:panel>
+
                         <h:panelGrid columns="1" style="width:100%">
                             <p:graphicImage name="/resources/images/nature2.jpg"/> 
 
                             <h:outputText value="Campsite Costa Nova" />
 
-                            <b:button offset="9" value="View Details" iconAwesome="plus-circle" look="success" outcome="/results.xhtml"></b:button>
-                            <!--<f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />-->
+                            <b:button onclick="PF('dlg2').show();" offset="9" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
                             <br></br>
-                            <!--<b:button offset="9" value="Remove Campsite" iconAwesome="times" look="default"></b:button>-->
+                            <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
+
 
 
                         </h:panelGrid>
@@ -71,7 +78,7 @@
                     </p:outputPanel>
                 </p:dialog>
             </p:panel>
-            
+
         </h:form>
     </h:body>
 </html>
