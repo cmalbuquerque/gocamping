@@ -28,8 +28,6 @@ public class RoulotePitch implements Serializable {
     //CHAVE ESTRANGEIRA E PRIMARIA
     @Column(name = "accommodationID")
     private int accommodationID;
-    @Column(name = "quantity")
-    private int quantity;
     
     @Column(name = "area")
     private double area;
@@ -50,10 +48,6 @@ public class RoulotePitch implements Serializable {
         return accommodationID;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
     public double getArea() {
         return area;
     }
@@ -70,9 +64,6 @@ public class RoulotePitch implements Serializable {
         this.accommodationID = accommodationID;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public void setArea(double area) {
         this.area = area;
@@ -108,7 +99,7 @@ public class RoulotePitch implements Serializable {
 
     @Override
     public String toString() {
-        return "RoulotePitch{" + "accommodationID=" + accommodationID + ", quantity=" + quantity + ", area=" + area + ", price=" + price + ", campingCardDiscount=" + campingCardDiscount + '}';
+        return "RoulotePitch{" + "accommodationID=" + accommodationID + ", area=" + area + ", price=" + price + ", campingCardDiscount=" + campingCardDiscount + '}';
     }
 
   

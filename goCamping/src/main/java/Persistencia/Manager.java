@@ -7,6 +7,7 @@ package Persistencia;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.*;
 /**
  *
@@ -40,6 +41,9 @@ public class Manager implements Serializable {
     @Column(name = "address")
     private String address;
     
+    @OneToMany(targetEntity = Campsite.class, mappedBy="manager")
+    @JoinColumn()
+    private Set<Campsite> campsites;
     
 
      public String getFullName() {
@@ -89,7 +93,7 @@ public class Manager implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-
+   
     @Override
     public int hashCode() {
         int hash = 5;

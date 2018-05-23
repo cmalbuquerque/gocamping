@@ -21,7 +21,11 @@ import static javax.persistence.TemporalType.DATE;
 
 /**
  *
- * @author pirex
+ * @author Andreia Patrocínio
+ * @author Carolina Albuquerque
+ * @author Diogo Jorge
+ * @author Pedro Pires
+ * 
  */
 @Entity
 public class Reservation implements Serializable {
@@ -42,18 +46,14 @@ public class Reservation implements Serializable {
     
         //chaves estrangeiras
 
-    @ManyToOne(targetEntity = Camper.class)
-    @JoinColumn(name = "camperUsername")
-    private String camperUsername;
+    @ManyToOne
+    @JoinColumn(name = "camper")
+    private Camper camper;
     
-    @ManyToOne(targetEntity = Campsite.class)
-    @JoinColumn(name = "campsiteID")
-    private int campsiteID;
-
-    @OneToOne(targetEntity = Accommodation.class) 
-    @JoinColumn(name = "accommodationID")
-    private int accommodationID;
-    
+    @ManyToOne
+    @JoinColumn(name = "accommodation")
+    private Accommodation accommodation;
+   
     
     
 
@@ -65,28 +65,20 @@ public class Reservation implements Serializable {
         this.id = id;
     }
 
-    public String getCamperUsername() {
-        return camperUsername;
+    public Camper getCamper() {
+        return camper;
     }
 
-    public void setCamperUsername(String camperUsername) {
-        this.camperUsername = camperUsername;
+    public void setCamper(Camper camper) {
+        this.camper = camper;
     }
 
-    public int getCampsiteID() {
-        return campsiteID;
+    public Accommodation getAccommodation() {
+        return accommodation;
     }
 
-    public void setCampsiteID(int campsiteID) {
-        this.campsiteID = campsiteID;
-    }
-
-    public int getAccommodationID() {
-        return accommodationID;
-    }
-
-    public void setAccommodationID(int accommodationID) {
-        this.accommodationID = accommodationID;
+    public void setAccommodation(Accommodation accommodation) {
+        this.accommodation = accommodation;
     }
 
     public Date getStartDate() {
@@ -129,13 +121,11 @@ public class Reservation implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (this.campsiteID != other.campsiteID) {
+        if (this.accommodation  != other.accommodation) {
             return false;
         }
-        if (this.accommodationID != other.accommodationID) {
-            return false;
-        }
-        if (!Objects.equals(this.camperUsername, other.camperUsername)) {
+        
+        if (!Objects.equals(this.camper, other.camper)) {
             return false;
         }
         return true;
@@ -143,7 +133,7 @@ public class Reservation implements Serializable {
 
     @Override
     public String toString() {
-        return "Reservation{" + "id=" + id + ", camperUsername=" + camperUsername + ", campsiteID=" + campsiteID + ", accommodationID=" + accommodationID + ", startDate=" + startDate + ", endDate=" + endDate + '}';
+        return "Reservation{" + "id=" + id + ", camper=" + camper + ", accommodation=" + accommodation  + ", startDate=" + startDate + ", endDate=" + endDate + '}';
     }
     
     

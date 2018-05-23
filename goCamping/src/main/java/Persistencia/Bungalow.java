@@ -25,9 +25,6 @@ public class Bungalow implements Serializable {
     @Column(name = "accommodationID")
     private int accommodationID;
     
-    @Column(name = "quantity")
-    private int quantity;
-    
     @Column (name ="area")
     private double area;
     
@@ -49,14 +46,6 @@ public class Bungalow implements Serializable {
 
     public void setAccommodationID(int accommodationID) {
         this.accommodationID = accommodationID;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public double getArea() {
@@ -134,7 +123,7 @@ public class Bungalow implements Serializable {
     }
  @Override
     public String toString() {
-        return "Bungalow{" + "accommodationID=" + accommodationID + ", quantity=" + quantity + ", area=" + area + ", price=" + price + ", campingCardDiscount=" + campingCardDiscount + ", bedrooms=" + bedrooms + ", capacity=" + capacity + '}';
+        return "Bungalow{" + "accommodationID=" + accommodationID + ", area=" + area + ", price=" + price + ", campingCardDiscount=" + campingCardDiscount + ", bedrooms=" + bedrooms + ", capacity=" + capacity + '}';
     }
 
 

@@ -26,9 +26,6 @@ public class TentPitch implements Serializable {
     @Column(name = "accommodationID")
     private int accommodationID;
 
-    @Column(name = "quantity")
-    private int quantity;
-
     @Column(name = "area")
     private double area;
 
@@ -44,10 +41,6 @@ public class TentPitch implements Serializable {
 
     public int getAccommodationID() {
         return accommodationID;
-    }
-
-    public int getQuantity() {
-        return quantity;
     }
 
     public double getArea() {
@@ -66,9 +59,6 @@ public class TentPitch implements Serializable {
         this.accommodationID = accommodationID;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public void setArea(double area) {
         this.area = area;
@@ -104,7 +94,9 @@ public class TentPitch implements Serializable {
 
     @Override
     public String toString() {
-        return "TentPitch{" + "quantity=" + quantity + ", area=" + area + ", price=" + price + ", campingCardDiscount=" + campingCardDiscount + ", accommodationID=" + accommodationID + '}';
+        return "TentPitch{" + "accommodationID=" + accommodationID + ", area=" + area + ", price=" + price + ", campingCardDiscount=" + campingCardDiscount + '}';
     }
+
+  
 
 }

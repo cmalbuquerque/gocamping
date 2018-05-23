@@ -17,33 +17,35 @@ import javax.persistence.*;
  * @author Pedro Pires
  * 
  */
-@Entity
-@Table(name = "CampsiteImages")  
-public class CampsiteImages implements Serializable {
+@Entity 
+@IdClass(CampsiteImageKey.class)
+@Table(name = "CampsiteImage")  
+public class CampsiteImage implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
+    
     //AMBAS SAO PRIMARY KEY COMPOSITE
     //CHAVE ESTRANGEIRA
-    @Column (name = "campsiteID")
+    @Id
     private int campsiteID;
-    @Column (name = "imageName")
+    @Id
     private String imageName;
-
+    
+    
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public int getCampsiteID() {
+    public int getCampsite() {
         return campsiteID;
+    }
+
+    public void setCampsite(int campsiteID) {
+        this.campsiteID = campsiteID;
     }
 
     public String getImageName() {
         return imageName;
-    }
-
-    public void setCampsiteID(int campsiteID) {
-        this.campsiteID = campsiteID;
     }
 
     public void setImageName(String imageName) {
@@ -52,9 +54,9 @@ public class CampsiteImages implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + this.campsiteID;
-        hash = 71 * hash + Objects.hashCode(this.imageName);
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.campsiteID);
+        hash = 59 * hash + Objects.hashCode(this.imageName);
         return hash;
     }
 
@@ -69,11 +71,11 @@ public class CampsiteImages implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CampsiteImages other = (CampsiteImages) obj;
-        if (this.campsiteID != other.campsiteID) {
+        final CampsiteImage other = (CampsiteImage) obj;
+        if (!Objects.equals(this.imageName, other.imageName)) {
             return false;
         }
-        if (!Objects.equals(this.imageName, other.imageName)) {
+        if (!Objects.equals(this.campsiteID, other.campsiteID)) {
             return false;
         }
         return true;
@@ -81,8 +83,9 @@ public class CampsiteImages implements Serializable {
 
     @Override
     public String toString() {
-        return "CampsiteImages{" + "campsiteID=" + campsiteID + ", imageName=" + imageName + '}';
+        return "CampsiteImage{" + "campsiteID=" + campsiteID + ", imageName=" + imageName + '}';
     }
+
     
        
     

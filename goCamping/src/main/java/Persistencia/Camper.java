@@ -7,6 +7,7 @@ package Persistencia;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
@@ -37,6 +38,10 @@ public class Camper implements Serializable {
     private int campsiteCard;
     @Column(name = "address")
     private String address;
+    
+    @OneToMany(targetEntity = Reservation.class, mappedBy="camper")
+    @JoinColumn()
+    private Set<Campsite> reservations;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

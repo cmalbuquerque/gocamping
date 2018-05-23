@@ -6,6 +6,7 @@
 package Persistencia;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
@@ -35,9 +36,6 @@ public class Campsite implements Serializable {
     @Column(name = "companyNIF")
     private int companyNIF;
     
-    @Column(name = "servicesID")
-    private int servicesID;
-    
     @Column(name = "adultPrice")
     private double adultPrice;
     
@@ -58,10 +56,14 @@ public class Campsite implements Serializable {
     private String mapsLocation;
     
     //CHAVE ESTRANGEIRA
-    @ManyToOne(targetEntity = Manager.class)
-    @JoinColumn(name="managerUsername")
-    private String managerUsername;
-
+    @ManyToOne
+    @JoinColumn(name="manager")
+    private Manager manager;
+    
+    @OneToMany(targetEntity = Accommodation.class, mappedBy="campsite")
+    @JoinColumn()
+    private Set<Accommodation> accommodations;
+    
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -86,10 +88,6 @@ public class Campsite implements Serializable {
         return companyNIF;
     }
 
-    public int getServicesID() {
-        return servicesID;
-    }
-
     public double getAdultPrice() {
         return adultPrice;
     }
@@ -110,12 +108,12 @@ public class Campsite implements Serializable {
         return description;
     }
 
-    public String getManagerUsername() {
-        return managerUsername;
+    public Manager getManager() {
+        return manager;
     }
 
-    public void setManagerUsername(String managerUsername) {
-        this.managerUsername = managerUsername;
+    public void setManager(Manager manager) {
+        this.manager= manager;
     }
     
     public void setId(int id) {
@@ -138,9 +136,6 @@ public class Campsite implements Serializable {
         this.companyNIF = companyNIF;
     }
 
-    public void setServicesID(int servicesID) {
-        this.servicesID = servicesID;
-    }
 
     public void setAdultPrice(double adultPrice) {
         this.adultPrice = adultPrice;
@@ -194,7 +189,7 @@ public class Campsite implements Serializable {
 
     @Override
     public String toString() {
-        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", mapsLocation=" + mapsLocation + ", companyNIF=" + companyNIF + ", servicesID=" + servicesID + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + '}';
+        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", mapsLocation=" + mapsLocation + ", companyNIF=" + companyNIF + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + '}';
     }
 
     

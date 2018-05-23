@@ -6,6 +6,7 @@
 package Persistencia;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
@@ -23,39 +24,43 @@ public class Accommodation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "accommodationID")
-    private int accommodationID;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "type")
     private String type;
 
     //CHAVE ESTRANGEIRA
-    @ManyToOne(targetEntity = Campsite.class)
-    @JoinColumn(name = "campsiteID")
-    private int campsiteID;
+    @ManyToOne
+    @JoinColumn
+    private Campsite campsite;
+    
+    @OneToMany(targetEntity = Reservation.class, mappedBy="accommodation")
+    @JoinColumn()
+    private Set<Reservation> reservations;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public int getAccommodationID() {
-        return accommodationID;
+    public int getId() {
+        return id;
     }
 
     public String getType() {
         return type;
     }
 
-    public int getCampsiteID() {
-        return campsiteID;
+    public Campsite getCampsite() {
+        return campsite;
     }
 
-    public void setCampsiteID(int campsiteID) {
-        this.campsiteID = campsiteID;
+    public void setCampsite(Campsite campsite) {
+        this.campsite = campsite;
     }
 
-    public void setAccommodationID(int accommodationID) {
-        this.accommodationID = accommodationID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setType(String type) {
@@ -69,7 +74,7 @@ public class Accommodation implements Serializable {
             return false;
         }
         Accommodation other = (Accommodation) object;
-        if (this.accommodationID != other.accommodationID) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -77,7 +82,7 @@ public class Accommodation implements Serializable {
 
     @Override
     public String toString() {
-        return "Accommodation{" + "accommodationID=" + accommodationID + ", type=" + type + ", campsiteID=" + campsiteID + '}';
+        return "Accommodation{" + "id=" + id + ", type=" + type + ", campsite=" + campsite + '}';
     }
 
 }

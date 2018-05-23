@@ -6,7 +6,7 @@
 package Persistencia;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
 /**
  *
  * @author Andreia Patrocínio
@@ -15,46 +15,25 @@ import javax.persistence.*;
  * @author Pedro Pires
  * 
  */
-@Entity
-@IdClass(CampsiteServicesKey.class)
-@Table(name = "CampsiteServices")  
-public class CampsiteServices implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    //AMBOS CAMPSITEID E SERVICEID SAO PRIMARY KEY COMPOSITE
-    //CHAVE ESTRANGEIRA
-    @Id
-    @Column(name = "campsiteID")
+public class CampsiteServicesKey implements Serializable{
     private int campsiteID;
-     @Id
-    @Column(name = "serviceID")
     private int serviceID;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public CampsiteServicesKey(int campsiteID, int serviceID) {
+        this.campsiteID = campsiteID;
+        this.serviceID = serviceID;
     }
 
+    
     public int getCampsiteID() {
         return campsiteID;
     }
 
-    public int getServiceID() {
-        return serviceID;
-    }
-
-    public void setCampsiteID(int campsiteID) {
-        this.campsiteID = campsiteID;
-    }
-
-    public void setServiceID(int serviceID) {
-        this.serviceID = serviceID;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + this.campsiteID;
-        hash = 53 * hash + this.serviceID;
+        int hash = 3;
+        hash = 29 * hash + this.campsiteID;
+        hash = 29 * hash + this.serviceID;
         return hash;
     }
 
@@ -69,7 +48,7 @@ public class CampsiteServices implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CampsiteServices other = (CampsiteServices) obj;
+        final CampsiteServicesKey other = (CampsiteServicesKey) obj;
         if (this.campsiteID != other.campsiteID) {
             return false;
         }
@@ -79,9 +58,13 @@ public class CampsiteServices implements Serializable {
         return true;
     }
 
+    public int getServiceID() {
+        return serviceID;
+    }
+
     @Override
     public String toString() {
-        return "CampsiteServices{" + "campsiteID=" + campsiteID + ", serviceID=" + serviceID + '}';
+        return "CampsiteServicesKey{" + "campsiteID=" + campsiteID + ", serviceID=" + serviceID + '}';
     }
     
     

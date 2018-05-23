@@ -7,53 +7,30 @@ package Persistencia;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.*;
+
 /**
  *
- * @author Andreia Patrocínio
+* @author Andreia Patrocínio
  * @author Carolina Albuquerque
  * @author Diogo Jorge
  * @author Pedro Pires
  * 
  */
-@Entity
-@IdClass(FavouriteListKey.class)
-@Table(name = "FavouriteList")
-public class FavouriteList implements Serializable {
-    //chaves estrangeiras
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "camperUsername")
+public class FavouriteListKey implements Serializable{
     private String camperUsername;
-    @Id
-    @Column(name = "campsiteID")
     private int campsiteID;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public String getCamperUsername() {
-        return camperUsername;
-    }
-
-    public int getCampsiteID() {
-        return campsiteID;
-    }
-
-    public void setCamperUsername(String camperUsername) {
+    public FavouriteListKey(String camperUsername, int campsiteID) {
         this.camperUsername = camperUsername;
-    }
-
-    public void setCampsiteID(int campsiteID) {
         this.campsiteID = campsiteID;
     }
-
+    
+    
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.camperUsername);
-        hash = 61 * hash + this.campsiteID;
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.camperUsername);
+        hash = 41 * hash + this.campsiteID;
         return hash;
     }
 
@@ -68,7 +45,7 @@ public class FavouriteList implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final FavouriteList other = (FavouriteList) obj;
+        final FavouriteListKey other = (FavouriteListKey) obj;
         if (this.campsiteID != other.campsiteID) {
             return false;
         }
@@ -78,10 +55,19 @@ public class FavouriteList implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "FavouriteList{" + "camperUsername=" + camperUsername + ", campsiteID=" + campsiteID + '}';
+    public String getCamperUsername() {
+        return camperUsername;
+    }
+
+    public int getCampsiteID() {
+        return campsiteID;
     }
     
    
+    @Override
+    public String toString() {
+        return "FavouriteListKey{" + "camperUsername=" + camperUsername + ", campsiteID=" + campsiteID + '}';
+    }
+    
+    
 }
