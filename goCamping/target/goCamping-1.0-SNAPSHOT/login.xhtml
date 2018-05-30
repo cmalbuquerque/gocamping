@@ -22,6 +22,8 @@
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
 
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
+                    <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
+                
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
@@ -33,19 +35,19 @@
                     <b:tab title="Login">
                         <br>&nbsp;</br>
                         <b:form horizontal="true" id="loginForm">
-                            <b:inputText required="true" placeholder="Username or email" colMd="12" labelColMd="2">
+                            <b:inputText required="true" value="#{loginbean.username}" placeholder="Username or email" colMd="12" labelColMd="2">
                                 <f:facet name="prepend">
                                     <b:icon name="user" />
                                 </f:facet>
                             </b:inputText>
-                            <b:inputSecret required="true" placeholder="Password" colMd="12" labelColMd="2">
+                            <b:inputSecret required="true" value="#{loginbean.password}" placeholder="Password" colMd="12" labelColMd="2">
                                 <f:facet name="prepend">
                                     <b:iconAwesome name="key" />
                                 </f:facet>
                             </b:inputSecret>
                             <br>&nbsp;</br>
                             <b:button span="4" value="Cancel"  outcome="/index.xhtml"  />
-                            <b:button span="4" value="Login" look="success" outcome="/index.xhtml" />
+                            <h:commandButton value="Login" action="#{loginbean.validate}" />
                             <br>&nbsp;</br>
                         </b:form>
                     </b:tab>

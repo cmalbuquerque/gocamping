@@ -23,14 +23,13 @@ public class JPAExample {
 
     private EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
-
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
-        
+
         System.out.println("CAMPER");
         System.out.println("After Sucessfully insertion ");
-        Camper camper1 = example.saveCamper("patrocinioandreia", "Andreia ", "patrocinioandreia@ua.pt", "password", 123456789, 54321, "Rua do Estaleiro");
-        Camper camper2 = example.saveCamper("ptpires1", "Pedro ", "ptpires@ua.pt", "sabonete", 678901234, 98076, "Sabugal");
+        Camper camper1 = example.saveCamper("patrocinioandreia", "Andreia ", "patrocinioandreia@ua.pt", 123456789, 54321, "Rua do Estaleiro");
+        Camper camper2 = example.saveCamper("ptpires1", "Pedro ", "ptpires@ua.pt", 678901234, 98076, "Sabugal");
         example.listCamper();
 
         System.out.println("After Sucessfully modification ");
@@ -42,13 +41,12 @@ public class JPAExample {
         example.deleteCamper(camper2.getUsername());
         example.listCamper();
         System.out.println("\n\n");
-        
-        
+
         System.out.println("MANAGER");
         System.out.println("After Sucessfully insertion ");
-        Manager manager1 = example.saveManager("cmalbuquerque", "Carolina", "camalbuquerque@ua.pt", "password", 764386974, "Viseu");
-        Manager manager2 = example.saveManager("diogojorge", "Diogo", "dj97@ua.pt", "password", 572853657, "Leiria");
-        Manager manager3 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", "password", 237583456, "Amadora");
+        Manager manager1 = example.saveManager("cmalbuquerque", "Carolina", "camalbuquerque@ua.pt", 764386974, "Viseu");
+        Manager manager2 = example.saveManager("diogojorge", "Diogo", "dj97@ua.pt", 572853657, "Leiria");
+        Manager manager3 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", 237583456, "Amadora");
         example.listManager();
 
         System.out.println("After Sucessfully modification ");
@@ -60,13 +58,20 @@ public class JPAExample {
         example.deleteManager(manager3.getUsername());
         example.listManager();
         System.out.println("\n\n");
+
+        System.out.println("USER");
+        Utilizador user1 = example.saveUtilizador(camper2, null, camper2.getUsername(), "testword");
+        Utilizador user2 = example.saveUtilizador(null, manager3, manager3.getUsername(), "password");
         
+        System.out.println("Listing users");
+        example.searchUtilizador("joana");
+        System.out.println("\n\n");
 
         System.out.println("CAMPSITE");
         System.out.println("After Sucessfully insertion ");
-        Campsite campsite1 = example.saveCampsite(123, "Costa Nova Campsite", "Praia da Costa Nova", "maps", 786637966, 30.0, 15.0, 5.0, "9347652781", "inserir descrição", manager1);
-        Campsite campsite2 = example.saveCampsite(124, "Barra Campsite", "Praia da Barra", "maps", 456327645, 25.0, 10.0, 5.0, "9347652781", "inserir descrição", manager2);
-        Campsite campsite3 = example.saveCampsite(125, "Sol Nascente", "Macedo de Cavaleiros", "maps", 234567894, 20.0, 10.0, 2.0, "9347652781", "inserir descrição", manager1);
+        Campsite campsite1 = example.saveCampsite(123, "Costa Nova Campsite", "Praia da Costa Nova", "maps", 30.0, 15.0, 5.0, "9347652781", "inserir descrição", manager1);
+        Campsite campsite2 = example.saveCampsite(124, "Barra Campsite", "Praia da Barra", "maps", 25.0, 10.0, 5.0, "9347652781", "inserir descrição", manager2);
+        Campsite campsite3 = example.saveCampsite(125, "Sol Nascente", "Macedo de Cavaleiros", "maps", 20.0, 10.0, 2.0, "9347652781", "inserir descrição", manager1);
         example.listCampsite();
 
         System.out.println("After Sucessfully modification ");
@@ -77,8 +82,7 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteCampsite(campsite3.getId());
         example.listCampsite();
-        
-        
+
         System.out.println("ACCOMMODATION");
         System.out.println("After Sucessfully insertion ");
         Accommodation accommodation1 = example.saveAccommodation(71, "bungalow", campsite1);
@@ -97,7 +101,7 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteAccommodation(accommodation4.getId());
         example.listCampsite();
-        
+
         System.out.println("BUNGALOW");
         System.out.println("After Sucessfully insertion ");
         Bungalow bungalow1 = example.saveBungalow(76, 40.0, 35.0, 10.0, 3, 4);
@@ -111,7 +115,7 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteBungalow(bungalow2.getAccommodationID());
         example.listCampsite();
-        
+
         System.out.println("TENT PITCH");
         System.out.println("After Sucessfully insertion ");
         TentPitch tent1 = example.saveTentPitch(71, 18.0, 20.0, 10.0);
@@ -125,7 +129,7 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteTentPitch(tent2.getAccommodationID());
         example.listCampsite();
-        
+
         System.out.println("ROULOTE PITCH");
         System.out.println("After Sucessfully insertion ");
         RoulotePitch roulote1 = example.saveRoulotePitch(73, 15.0, 18.0, 10.0);
@@ -139,7 +143,7 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteRoulotePitch(roulote2.getAccommodationID());
         example.listCampsite();
-        
+
         System.out.println("RESERVATION");
         System.out.println("After Sucessfully insertion ");
         Date date = new Date(2018, 05, 22);
@@ -156,13 +160,12 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteReservation(reservation2.getId());
         example.listCampsite();
-              
-        
+
         System.out.println("CAMPSITE IMAGES");
         System.out.println("After Sucessfully insertion ");
-        CampsiteImage image1 = example.saveCampsiteImage(campsite1, "foto1" );
-        CampsiteImage image2 = example.saveCampsiteImage(campsite1, "foto2" );
-        CampsiteImage image3 = example.saveCampsiteImage(campsite1, "foto3" );
+        CampsiteImage image1 = example.saveCampsiteImage(campsite1, "foto1");
+        CampsiteImage image2 = example.saveCampsiteImage(campsite1, "foto2");
+        CampsiteImage image3 = example.saveCampsiteImage(campsite1, "foto3");
         CampsiteImageKey imageKey = new CampsiteImageKey(campsite1.getId(), "foto3");
 
         example.listCampsiteImage();
@@ -170,12 +173,12 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteCampsiteImage(imageKey);
         example.listCampsiteImage();
-        
+
         System.out.println("FAVOURITE LIST");
         System.out.println("After Sucessfully insertion ");
         FavouriteList fav1 = example.saveFavouriteList(camper1, campsite1);
         FavouriteList fav2 = example.saveFavouriteList(camper1, campsite2);
-        
+
         FavouriteListKey favKey = new FavouriteListKey(camper1.getUsername(), campsite2.getId());
 
         example.listCampsiteImage();
@@ -183,8 +186,7 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteFavouriteList(favKey);
         example.listCampsiteImage();
-        
-        
+
         System.out.println("SERVICES ACTIVITIES");
         System.out.println("After Sucessfully insertion ");
         ServicesActivities serviceActivities1 = example.saveServicesActivities(44, "Restaurante");
@@ -199,15 +201,14 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteServicesActivities(serviceActivities3.getServiceID());
         example.listServicesActivities();
-        
+
         System.out.println("CAMPSITE SERVICES");
         System.out.println("After Sucessfully insertion ");
         CampsiteServices service1 = example.saveCampsiteService(campsite1, serviceActivities1);
         CampsiteServices service2 = example.saveCampsiteService(campsite1, serviceActivities2);
         CampsiteServices service3 = example.saveCampsiteService(campsite2, serviceActivities2);
         CampsiteServices service4 = example.saveCampsiteService(campsite2, serviceActivities1);
-        
-        
+
         CampsiteServicesKey servicesKey = new CampsiteServicesKey(campsite2.getId(), serviceActivities1.getServiceID());
 
         example.listCampsiteImage();
@@ -217,7 +218,7 @@ public class JPAExample {
         example.listCampsiteImage();
     }
 
-    public Camper saveCamper(String username, String fullname, String email, String password, int NIF, int campsiteCard, String address) {
+    public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard, String address) {
         Camper camper = new Camper();
         System.out.println("new camper");
         try {
@@ -226,7 +227,6 @@ public class JPAExample {
             camper.setUsername(username);
             camper.setFullName(fullname);
             camper.setEmail(email);
-            camper.setPassword(password);
             camper.setNIF(NIF);
             camper.setCampsiteCard(campsiteCard);
             camper.setAddress(address);
@@ -280,7 +280,7 @@ public class JPAExample {
         }
     }
 
-    public Manager saveManager(String username, String fullname, String email, String password, int NIF, String address) {
+    public Manager saveManager(String username, String fullname, String email, int NIF, String address) {
         Manager manager = new Manager();
         System.out.println("new manager");
         try {
@@ -289,7 +289,6 @@ public class JPAExample {
             manager.setUsername(username);
             manager.setFullName(fullname);
             manager.setEmail(email);
-            manager.setPassword(password);
             manager.setNIF(NIF);
             manager.setAddress(address);
             entityManager.persist(manager);
@@ -342,7 +341,52 @@ public class JPAExample {
         }
     }
 
-    public Campsite saveCampsite(int id, String title, String location, String mapsLocation, int companyNIF, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager) {
+    public Utilizador saveUtilizador(Camper camper, Manager manager, String username, String password) {
+        Utilizador user = new Utilizador();
+        System.out.println("new user");
+        try {
+            entityManager.getTransaction().begin();
+            System.out.println("at the start of transaction");
+            if (camper != null) {
+                System.out.println("camper is not null");
+                user.setCamper(camper);
+            } else {
+                System.out.println("manager is not null");
+                user.setManager(manager);
+            }
+            user.setUsername(username);
+            user.setPassword(password);
+            System.out.println(user.toString());
+            entityManager.persist(user);
+            entityManager.getTransaction().commit();
+            System.out.println("just after comit, saved a user");
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("save didn't work on camper");
+        }
+        return user;
+    }
+
+    public Utilizador searchUtilizador(String name) {
+        Utilizador user = new Utilizador();
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
+            query.setParameter("name", name);
+            List<Utilizador> utilizador = query.getResultList();
+            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
+                user = (Utilizador) iterator.next();
+                System.out.println(user.getUsername() + " \t" + user.getPassword());
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("utilizador search didn't work");
+        }
+        return user;
+    }
+
+    public Campsite saveCampsite(int id, String title, String location, String mapsLocation, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager) {
         Campsite campsite = new Campsite();
         System.out.println("new campsite");
         try {
@@ -352,7 +396,6 @@ public class JPAExample {
             campsite.setTitle(title);
             campsite.setLocation(location);
             campsite.setMapsLocation(mapsLocation);
-            campsite.setCompanyNIF(companyNIF);
             campsite.setAdultPrice(adultPrice);
             campsite.setChildPrice(childPrice);
             campsite.setBabyPrice(babyPrice);
@@ -446,7 +489,6 @@ public class JPAExample {
         }
     }
 
-
     public void deleteCampsiteImage(CampsiteImageKey imageKey) {
         try {
             entityManager.getTransaction().begin();
@@ -458,7 +500,7 @@ public class JPAExample {
             System.out.println("delete campsite images didn't work");
         }
     }
-    
+
     public CampsiteServices saveCampsiteService(Campsite campsite, ServicesActivities service) {
         CampsiteServices services = new CampsiteServices();
         System.out.println("new Favourite List");
@@ -493,7 +535,6 @@ public class JPAExample {
         }
     }
 
-    
     public void deleteCampsiteService(CampsiteServicesKey serviceKey) {
         try {
             entityManager.getTransaction().begin();
@@ -505,7 +546,7 @@ public class JPAExample {
             System.out.println("delete campsite services didn't work");
         }
     }
-    
+
     public ServicesActivities saveServicesActivities(int serviceID, String serviceDesc) {
         ServicesActivities services = new ServicesActivities();
         System.out.println("new Service or Activitie");
@@ -869,7 +910,7 @@ public class JPAExample {
             System.out.println("delete roulote pitch didn't work");
         }
     }
-    
+
     public FavouriteList saveFavouriteList(Camper camper, Campsite campsite) {
         FavouriteList favouriteList = new FavouriteList();
         System.out.println("new Favourite List");
@@ -904,7 +945,6 @@ public class JPAExample {
         }
     }
 
-    
     public void deleteFavouriteList(FavouriteListKey favouriteKey) {
         try {
             entityManager.getTransaction().begin();
@@ -916,5 +956,5 @@ public class JPAExample {
             System.out.println("delete favourite lit pitch didn't work");
         }
     }
-    
+
 }

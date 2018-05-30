@@ -1,16 +1,22 @@
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/CampsiteImages.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/tqs/homework/gocamping/SliderView.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/Camper.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/tqs/homework/gocamping/MyBean.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/FavouriteList.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/Campsite.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/TentPitch.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/Bungalow.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/JPAExample.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/Reservation.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/ServicesActivities.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/Manager.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/RoulotePitch.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/EntityManagerUtil.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/Accommodation.java
-/home/andreia/Documentos/TQS/gocamping andreia/goCamping/src/main/java/Persistencia/CampsiteServices.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/Campsite.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/RoulotePitch.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/TentPitch.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/Reservation.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/Accommodation.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/BackendBeans/LogInBean.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/Utilizador.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/tqs/homework/gocamping/SliderView.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/FavouriteListKey.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/Manager.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/GeneralStuff/Hash.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/CampsiteServices.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/CampsiteImageKey.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/tqs/homework/gocamping/MyBean.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/Camper.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/ServicesActivities.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/Bungalow.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/CampsiteImage.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/EntityManagerUtil.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/FavouriteList.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/CampsiteServicesKey.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/main/java/Persistencia/JPAExample.java

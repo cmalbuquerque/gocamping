@@ -30,16 +30,18 @@ public class Camper implements Serializable {
     private String fullName;
     @Column(name = "email")
     private String email;
-    @Column(name = "password")
-    private String password;
+
     @Column(name = "NIF")
     private int NIF;
     @Column(name = "campsiteCard")
     private int campsiteCard;
     @Column(name = "address")
     private String address;
-    
-    @OneToMany(targetEntity = Reservation.class, mappedBy="camper")
+
+    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "camper")
+    private Utilizador user;
+
+    @OneToMany(targetEntity = Reservation.class, mappedBy = "camper")
     @JoinColumn()
     private Set<Campsite> reservations;
 
@@ -57,10 +59,6 @@ public class Camper implements Serializable {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public int getNIF() {
@@ -87,10 +85,6 @@ public class Camper implements Serializable {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setNIF(int NIF) {
         this.NIF = NIF;
     }
@@ -101,6 +95,14 @@ public class Camper implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Utilizador getUser() {
+        return user;
+    }
+
+    public void setUser(Utilizador user) {
+        this.user = user;
     }
 
     @Override
@@ -130,8 +132,6 @@ public class Camper implements Serializable {
         }
         return true;
     }
-
-
 
     @Override
     public String toString() {
