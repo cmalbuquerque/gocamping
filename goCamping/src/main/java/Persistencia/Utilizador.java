@@ -99,16 +99,21 @@ public class Utilizador implements Serializable {
             return true;
         }
         if (obj == null) {
+            System.out.println("segundo é null");
             return false;
         }
         if (getClass() != obj.getClass()) {
+            System.out.println("classes diferentes");
             return false;
         }
         final Utilizador other = (Utilizador) obj;
         if (!Objects.equals(this.username, other.username)) {
+            System.out.println("nomes diferentes");
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
+            
+            System.out.println("passwords diferentes\n" + this.password + " != " + other.password);
             return false;
         }
         return true;
@@ -118,7 +123,7 @@ public class Utilizador implements Serializable {
 
     @Override
     public String toString() {
-        return "Utilizador{" + ", username=" + username + ", camper=" + camper + ", manager=" + manager + '}';
+        return "Utilizador com username " + username + ", camper=" + camper + ", manager=" + manager + '}';
     }
 
 }

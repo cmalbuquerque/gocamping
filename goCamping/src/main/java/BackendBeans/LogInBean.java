@@ -13,6 +13,8 @@ import GeneralStuff.Hash;
 import javax.annotation.PostConstruct;
 import Persistencia.JPAExample;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,8 +37,6 @@ public class LogInBean implements Serializable {
     @PostConstruct
     private void init() {
         user = new Utilizador();
-        username = "";
-        password = "";
     }
 
     public Utilizador getUser() {
@@ -60,8 +60,7 @@ public class LogInBean implements Serializable {
     }
 
     public void setPassword(String password) {
-        System.out.println("setting password " + password + " with hash " + Hash.getmd5Hash(password));
-        this.password = Hash.getmd5Hash(password);
+        this.password = password;
     }
 
     public String validate() {
@@ -69,7 +68,13 @@ public class LogInBean implements Serializable {
         user.setUsername(username);
         user.setPassword(password);
         Utilizador user1 = ex.searchUtilizador(user.getUsername());
+        System.out.println("inserted password: " + Hash.getmd5Hash(password));
+        System.out.println("database password: " + user1.getPassword());
         if (user1.equals(user)) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+            session.setAttribute("username", username);
+            System.out.println(session.getAttribute("username"));
             return "index.xhtml";
         }
         System.out.println("user is not right");

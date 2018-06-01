@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>GoCamping</title>
+
+    </h:head>
+    <h:body>
+        <h:form>
+            <b:navBar brand="goCamping" brandHref="#">
+                <b:navbarLinks>
+                    <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
+                    <b:navLink icon="signal" value="Ranking" outcome="/rankings.xhtml"></b:navLink>
+                    <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
+
+                    <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
+                    <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
+                
+                </b:navbarLinks>
+                <b:navbarLinks pull="right">
+                    <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
+                    <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
+                </b:navbarLinks>
+            </b:navBar>
+
+            <p:panel style="margin-left: 10%; margin-right: 10%">
+                <h3 align="center" style="color: #72b400"><b:iconAwesome name="heart" />  Favourite Campsites List </h3>
+
+                <p:dialog header="Campsite Costa Nova" widgetVar="dlg2" modal="true" height="100">
+                    <h:outputText value="This is a description of Campsite Costa Nova" />
+                    <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
+
+                </p:dialog>  
+                <p:dataGrid var="car" value="" columns="1" layout="grid"
+                            rows="12" paginator="true" id="cars"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="6,12,16" style=" background-color: white" >
+
+                    <p:panel>
+                        <h:panelGrid columns="1" style="width:100%">
+                            <p:graphicImage name="/resources/images/nature2.jpg"/> 
+
+                            <h:outputText value="Campsite Costa Nova" />
+
+                            <b:button onclick="PF('dlg2').show();" offset="9" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
+                            <!--<f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />-->
+                            <br></br>
+                            <b:button offset="9" value="Remove Campsite" iconAwesome="times" look="default"></b:button>
+
+                            <br></br>
+                            <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
+
+
+                        </h:panelGrid>
+                    </p:panel>
+                </p:dataGrid>
+                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:outputPanel id="carDetail">
+                        <p:panelGrid  columns="2" columnClasses="label,value">
+                            <f:facet name="header">
+                                <p:graphicImage name="/resources/images/nature2.jpg"/> 
+                            </f:facet>
+
+                            <h:outputText value="Id:" />
+                            <h:outputText value="83275391" />
+
+                            <h:outputText value="Year" />
+                            <h:outputText value="87250" />
+
+                            <h:outputText value="Color:" />
+                            <h:outputText value="ihgnlg"/>
+
+                            <h:outputText value="Price" />
+                            <h:outputText value="$920587" />
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+            </p:panel>
+
+        </h:form>
+    </h:body>
+</html>
+
