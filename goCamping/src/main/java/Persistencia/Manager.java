@@ -9,13 +9,14 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
+
 /**
  *
  * @author Andreia Patrocínio
  * @author Carolina Albuquerque
  * @author Diogo Jorge
  * @author Pedro Pires
- * 
+ *
  */
 @Entity
 @Table(name = "Manager")
@@ -25,28 +26,29 @@ public class Manager implements Serializable {
     @Id
     @Column(name = "username")
     private String username;
-    
+
     @Column(name = "fullname")
     private String fullName;
-    
+
     @Column(name = "email")
     private String email;
-    
-    @Column(name = "password")
-    private String password;
-    
+
+
+
     @Column(name = "NIF")
     private int NIF;
-    
+
     @Column(name = "address")
     private String address;
-    
-    @OneToMany(targetEntity = Campsite.class, mappedBy="manager")
+
+    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "manager")
+    private Utilizador user;
+
+    @OneToMany(targetEntity = Campsite.class, mappedBy = "manager")
     @JoinColumn()
     private Set<Campsite> campsites;
-    
 
-     public String getFullName() {
+    public String getFullName() {
         return fullName;
     }
 
@@ -58,9 +60,6 @@ public class Manager implements Serializable {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public int getNIF() {
         return NIF;
@@ -82,9 +81,6 @@ public class Manager implements Serializable {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public void setNIF(int NIF) {
         this.NIF = NIF;
@@ -93,7 +89,17 @@ public class Manager implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-   
+
+    public Utilizador getUser() {
+        return user;
+    }
+
+    public void setUser(Utilizador user) {
+        this.user = user;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -124,9 +130,7 @@ public class Manager implements Serializable {
 
     @Override
     public String toString() {
-        return "Manager{" + "username=" + username + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", NIF=" + NIF + ", address=" + address + '}';
+        return "Manager{" + "username=" + username + ", fullName=" + fullName + ", email=" + email + ", NIF=" + NIF + ", address=" + address + '}';
     }
 
-
-    
 }

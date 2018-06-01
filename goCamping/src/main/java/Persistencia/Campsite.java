@@ -15,55 +15,52 @@ import javax.persistence.*;
  * @author Carolina Albuquerque
  * @author Diogo Jorge
  * @author Pedro Pires
- * 
+ *
  */
 @Entity
-@Table(name = "Campsite")    
+@Table(name = "Campsite")
 public class Campsite implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    
+
     @Column(name = "title")
     private String title;
-    
+
     @Column(name = "location")
     private String location;
-    
-    @Column(name = "companyNIF")
-    private int companyNIF;
-    
+
     @Column(name = "adultPrice")
     private double adultPrice;
-    
+
     @Column(name = "childPrice")
     private double childPrice;
-    
+
     @Column(name = "babyPrice")
     private double babyPrice;
-    
+
     @Column(name = "contact")
     private String contact;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     //OPCIONAL
     @Column(name = "mapsLocation")
     private String mapsLocation;
-    
+
     //CHAVE ESTRANGEIRA
     @ManyToOne
-    @JoinColumn(name="manager")
+    @JoinColumn(name = "manager")
     private Manager manager;
-    
-    @OneToMany(targetEntity = Accommodation.class, mappedBy="campsite")
+
+    @OneToMany(targetEntity = Accommodation.class, mappedBy = "campsite")
     @JoinColumn()
     private Set<Accommodation> accommodations;
-    
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -82,10 +79,6 @@ public class Campsite implements Serializable {
 
     public String getMapsLocation() {
         return mapsLocation;
-    }
-
-    public int getCompanyNIF() {
-        return companyNIF;
     }
 
     public double getAdultPrice() {
@@ -113,9 +106,9 @@ public class Campsite implements Serializable {
     }
 
     public void setManager(Manager manager) {
-        this.manager= manager;
+        this.manager = manager;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
@@ -131,11 +124,6 @@ public class Campsite implements Serializable {
     public void setMapsLocation(String mapsLocation) {
         this.mapsLocation = mapsLocation;
     }
-
-    public void setCompanyNIF(int companyNIF) {
-        this.companyNIF = companyNIF;
-    }
-
 
     public void setAdultPrice(double adultPrice) {
         this.adultPrice = adultPrice;
@@ -156,9 +144,7 @@ public class Campsite implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -181,19 +167,13 @@ public class Campsite implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (this.companyNIF != other.companyNIF) {
-            return false;
-        }
+
         return true;
     }
 
     @Override
     public String toString() {
-        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", mapsLocation=" + mapsLocation + ", companyNIF=" + companyNIF + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + '}';
+        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", mapsLocation=" + mapsLocation + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + '}';
     }
 
-    
-
-    
-    
 }
