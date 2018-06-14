@@ -48,10 +48,6 @@ public class Campsite implements Serializable {
     @Column(name = "description")
     private String description;
 
-    //OPCIONAL
-    @Column(name = "mapsLocation")
-    private String mapsLocation;
-
     //CHAVE ESTRANGEIRA
     @ManyToOne
     @JoinColumn(name = "manager")
@@ -75,10 +71,6 @@ public class Campsite implements Serializable {
 
     public String getLocation() {
         return location;
-    }
-
-    public String getMapsLocation() {
-        return mapsLocation;
     }
 
     public double getAdultPrice() {
@@ -119,10 +111,6 @@ public class Campsite implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public void setMapsLocation(String mapsLocation) {
-        this.mapsLocation = mapsLocation;
     }
 
     public void setAdultPrice(double adultPrice) {
@@ -173,7 +161,7 @@ public class Campsite implements Serializable {
 
     @Override
     public String toString() {
-        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", mapsLocation=" + mapsLocation + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + '}';
+        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + '}';
     }
 
 }

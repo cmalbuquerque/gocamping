@@ -30,7 +30,12 @@ public class SearchBean implements Serializable{
     private String campsiteLocation;
     @ManagedProperty(value = "#{listaCampsites}")
     private List<Campsite> listaCampsites; 
-   
+    
+    @ManagedProperty(value = "#{checkin}")
+    private Date checkin;
+    
+   @ManagedProperty(value = "#{checkout}")
+    private Date checkout;
     
             
     JPAExample ex = new JPAExample();
@@ -52,14 +57,31 @@ public class SearchBean implements Serializable{
         this.listaCampsites = listaCampsites;
     }
 
+    public Date getCheckin() {
+        return checkin;
+    }
+
+    public void setCheckin(Date checkin) {
+        this.checkin = checkin;
+    }
+
+    public Date getCheckout() {
+        return checkout;
+    }
+
+    public void setCheckout(Date checkout) {
+        this.checkout = checkout;
+    }
+    
+    
+
  
-//    public String search(){
-//        listaCampsites = ex.listarCampsite();     
-//        return "results.xhtml";
-//    }
+    public String showAll(){
+        listaCampsites = ex.listarTodosCampsites();     
+        return "results.xhtml";
+    }
     
     public String search(){
-        System.out.println("CampsiteLocation** " +  campsiteLocation);
         listaCampsites = ex.listarCampsite(campsiteLocation); 
         return "results.xhtml";
     }

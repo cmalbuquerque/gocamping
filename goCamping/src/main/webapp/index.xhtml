@@ -34,25 +34,21 @@
             
             <p:panel style="background-image: url('resources/images/nature3.jpg'); width: 90%; height: 400px; background-repeat: no-repeat; margin-left: 5%">
                 <p style="margin-top: 13%">
-                    <b:inputText id= "searchLocation" required="true" placeholder="Campsite, region, city or country" col-md="4" value="${searchBean.campsiteLocation}">
+                    <b:inputText id= "searchLocation"  placeholder="Campsite, region, city or country" col-md="4" value="${searchBean.campsiteLocation}">
                         <f:facet name="prepend">
                             <b:iconAwesome name="search" />
                         </f:facet>
                     </b:inputText>
-                    <b:datepicker placeholder="Check-in" col-md="2" ></b:datepicker>
-                    <b:datepicker placeholder="Check-out" col-md="2" ></b:datepicker>
+                    <b:datepicker id ="checkin" placeholder="Check-in" col-md="2" value="${searchBean.checkin}"></b:datepicker>
+                    <b:datepicker id ="checkout" placeholder="Check-out" col-md="2"  value="${searchBean.checkout}"></b:datepicker>
                     <b:dropButton value="Type " col-md="1">
                         <b:navLink value="Tent Pitch" href="#"></b:navLink>
                         <b:navLink value="Roulote" href="#"></b:navLink>
                         <b:navLink value="Bungalow" href="#"></b:navLink>
                     </b:dropButton>
-                    <b:dropButton value="Pax " col-md="1">
-                        <b:navLink value="1" href="#"></b:navLink>
-                        <b:navLink value="2" href="#"></b:navLink>
-                        <b:navLink value="3" href="#"></b:navLink>
-                        <b:navLink value="4 or more" href="#"></b:navLink>
-                    </b:dropButton>
+                    
                     <b:commandButton value="View Campsites" col-md="2" icon="search" look="success"  action="${searchBean.search}"></b:commandButton>
+                    <b:commandButton value="Show All" col-md="2" icon="search" look="success"  action="${searchBean.showAll}"></b:commandButton>
                 </p>
             </p:panel>
         </h:form>
