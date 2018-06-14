@@ -20,7 +20,7 @@
 
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
                     <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
-                
+
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
@@ -31,16 +31,16 @@
             <br></br>
             <h1 align="center">goCamping</h1>
             <br></br>
-
+            
             <p:panel style="background-image: url('resources/images/nature3.jpg'); width: 90%; height: 400px; background-repeat: no-repeat; margin-left: 5%">
                 <p style="margin-top: 13%">
-                    <b:inputText required="true" placeholder="Campsite, region, city or country" col-md="4">
+                    <b:inputText id= "searchLocation" required="true" placeholder="Campsite, region, city or country" col-md="4" value="${searchBean.campsiteLocation}">
                         <f:facet name="prepend">
                             <b:iconAwesome name="search" />
                         </f:facet>
                     </b:inputText>
-                    <b:datepicker placeholder="Check-in" col-md="2"></b:datepicker>
-                    <b:datepicker placeholder="Check-out" col-md="2"></b:datepicker>
+                    <b:datepicker placeholder="Check-in" col-md="2" ></b:datepicker>
+                    <b:datepicker placeholder="Check-out" col-md="2" ></b:datepicker>
                     <b:dropButton value="Type " col-md="1">
                         <b:navLink value="Tent Pitch" href="#"></b:navLink>
                         <b:navLink value="Roulote" href="#"></b:navLink>
@@ -52,13 +52,9 @@
                         <b:navLink value="3" href="#"></b:navLink>
                         <b:navLink value="4 or more" href="#"></b:navLink>
                     </b:dropButton>
-                    <b:button value="View Campsites" col-md="2" icon="search" look="success" outcome="/results.xhtml"></b:button>
+                    <b:commandButton value="View Campsites" col-md="2" icon="search" look="success"  action="${searchBean.search}"></b:commandButton>
                 </p>
             </p:panel>
-
-
-
-
         </h:form>
     </h:body>
 </html>

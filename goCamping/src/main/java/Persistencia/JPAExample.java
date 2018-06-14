@@ -5,6 +5,7 @@
  */
 package Persistencia;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -533,6 +534,59 @@ public class JPAExample {
             entityManager.getTransaction().rollback();
             System.out.println("campsite services list listing didn't work");
         }
+    }
+    
+    public List<Campsite> listarCampsite() {
+        List<Campsite> campsites = new ArrayList<Campsite>();
+        List<Campsite> list = new ArrayList<Campsite>();
+
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Campsite c");
+            
+            campsites = query.getResultList();
+            System.out.println("QUERY*   "+campsites);
+            for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
+                System.out.println("primeira cena for");
+                Campsite campsite = (Campsite) iterator.next();
+                System.out.println("pre print das cenas");
+                System.out.println(campsite.getId() + " \t " + campsite.getTitle() + "\t" + campsite.getLocation());
+                list.add(campsite);
+            }
+
+            System.out.println("just before commit");
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("listar campsite didn't work");
+        }
+        return list;
+    }
+ 
+    public List<Campsite> listarCampsite(String location) {
+        List<Campsite> campsites = new ArrayList<Campsite>();
+        List<Campsite> list = new ArrayList<Campsite>();
+        try {
+            entityManager.getTransaction().begin();
+            System.out.println("pos begin");
+            Query query = entityManager.createQuery("select c from Campsite as c where c.location like :location");
+            System.out.println("pos query");
+            query.setParameter("location", "%" + location +"%");
+            System.out.println("pos set parametres");
+            campsites = query.getResultList();
+            System.out.println("pos get results");
+            for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
+                Campsite campsite = (Campsite) iterator.next();
+                System.out.println(campsite.getId() + " \t " + campsite.getTitle() + "\t" + campsite.getLocation());
+                list.add(campsite);
+            }
+            System.out.println("just before commit");
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("listar campsite didn't work");
+        }
+        return list;
     }
 
     public void deleteCampsiteService(CampsiteServicesKey serviceKey) {
