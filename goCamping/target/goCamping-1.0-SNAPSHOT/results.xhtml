@@ -26,13 +26,13 @@
 
             <div style="margin-left: 2%; margin-right: 2%; float:left; width: 30%">
                     <h3  style="color: #72b400">Search</h3>
-                    <b:inputText required="true" placeholder="Campsite, region, city or country" value="${searchBean.campsiteLocation}">
+                    <b:inputText  placeholder="Campsite, region, city or country" value="${searchBean.campsiteLocation}">
                         <f:facet name="prepend">
                             <b:iconAwesome name="search" />
                         </f:facet>
                     </b:inputText>
-                    <b:datepicker label="Check-in" placeholder="Check-in"  ></b:datepicker>
-                    <b:datepicker label="Check-out" placeholder="Check-out" ></b:datepicker>
+                    <b:datepicker id="checkin" label="Check-in" placeholder="Check-in" value="${searchBean.checkin}" ></b:datepicker>
+                    <b:datepicker id="checkout" label="Check-out" placeholder="Check-out" value="${searchBean.checkout}" ></b:datepicker>
 
                     <b:dropButton value="Type " span="4">
                         <b:navLink value="Tent Pitch" href="#"></b:navLink>
@@ -40,17 +40,16 @@
                         <b:navLink value="Bungalow" href="#"></b:navLink>
                     </b:dropButton>
                     
-                    <b:dropButton  value="Pax " span="4" offset="2">
-                        <b:navLink value="1" href="#"></b:navLink>
-                        <b:navLink value="2" href="#"></b:navLink>
-                        <b:navLink value="3" href="#"></b:navLink>
-                        <b:navLink value="4 or more" href="#"></b:navLink>
-                    </b:dropButton>
-<!--                    <b:slider min="0" max="200" value="#{sliderView.number}" label="Price" />-->
+
                     <br>&nbsp;</br>
                     <br>&nbsp;</br>
                     <div>
                     <b:commandButton span="9" value="View Campsites" icon="search" look="success" action="${searchBean.search}"></b:commandButton></div>
+                    <br>&nbsp;</br>
+                    <br>&nbsp;</br>
+                    <b:commandButton value="Show All" col-md="2" icon="search" look="success"  action="${searchBean.showAll}"></b:commandButton>
+                    
+            
             </div>
 
             <div style="float: left; width: 60%">
