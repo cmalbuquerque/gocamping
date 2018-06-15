@@ -26,13 +26,13 @@
 
             <div style="margin-left: 2%; margin-right: 2%; float:left; width: 30%">
                     <h3  style="color: #72b400">Search</h3>
-                    <b:inputText  placeholder="Campsite, region, city or country" value="${searchBean.campsiteLocation}">
+                    <b:inputText  placeholder="Campsite, region, city or country" value="${searchbean.campsiteLocation}">
                         <f:facet name="prepend">
                             <b:iconAwesome name="search" />
                         </f:facet>
                     </b:inputText>
-                    <b:datepicker id="checkin" label="Check-in" placeholder="Check-in" value="${searchBean.checkin}" ></b:datepicker>
-                    <b:datepicker id="checkout" label="Check-out" placeholder="Check-out" value="${searchBean.checkout}" ></b:datepicker>
+                    <b:datepicker id="checkin" label="Check-in" placeholder="Check-in" value="${searchbean.checkin}" ></b:datepicker>
+                    <b:datepicker id="checkout" label="Check-out" placeholder="Check-out" value="${searchbean.checkout}" ></b:datepicker>
 
                     <b:dropButton value="Type " span="4">
                         <b:navLink value="Tent Pitch" href="#"></b:navLink>
@@ -44,10 +44,10 @@
                     <br>&nbsp;</br>
                     <br>&nbsp;</br>
                     <div>
-                    <b:commandButton span="9" value="View Campsites" icon="search" look="success" action="${searchBean.search}"></b:commandButton></div>
+                    <b:commandButton span="9" value="View Campsites" icon="search" look="success" action="${searchbean.search}"></b:commandButton></div>
                     <br>&nbsp;</br>
                     <br>&nbsp;</br>
-                    <b:commandButton value="Show All" col-md="2" icon="search" look="success"  action="${searchBean.showAll}"></b:commandButton>
+                    <b:commandButton value="Show All" col-md="2" icon="search" look="success"  action="${searchbean.showAll}"></b:commandButton>
                     
             
             </div>
@@ -60,7 +60,7 @@
 
                     </p:dialog>  
 
-                    <p:dataGrid var="campsite" value="#{searchBean.listaCampsites}" columns="1" layout="grid"
+                    <p:dataGrid var="campsite" value="#{searchbean.listaCampsites}" columns="1" layout="grid"
                                 rows="4" paginator="true" id="campsites"
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                 rowsPerPageTemplate="4,8,12" >

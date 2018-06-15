@@ -29,8 +29,8 @@ public class JPAExample {
 
         System.out.println("CAMPER");
         System.out.println("After Sucessfully insertion ");
-        Camper camper1 = example.saveCamper("patrocinioandreia", "Andreia ", "patrocinioandreia@ua.pt", 123456789, 54321, "Rua do Estaleiro");
-        Camper camper2 = example.saveCamper("ptpires1", "Pedro ", "ptpires@ua.pt", 678901234, 98076, "Sabugal");
+        Camper camper1 = example.saveCamper("patrocinioandreia", "Andreia ", "patrocinioandreia@ua.pt", 123456789, 54321);
+        Camper camper2 = example.saveCamper("ptpires1", "Pedro ", "ptpires@ua.pt", 678901234, 98076);
         example.listCamper();
 
         System.out.println("After Sucessfully modification ");
@@ -45,9 +45,9 @@ public class JPAExample {
 
         System.out.println("MANAGER");
         System.out.println("After Sucessfully insertion ");
-        Manager manager1 = example.saveManager("cmalbuquerque", "Carolina", "camalbuquerque@ua.pt", 764386974, "Viseu");
-        Manager manager2 = example.saveManager("diogojorge", "Diogo", "dj97@ua.pt", 572853657, "Leiria");
-        Manager manager3 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", 237583456, "Amadora");
+        Manager manager1 = example.saveManager("cmalbuquerque", "Carolina", "camalbuquerque@ua.pt", 764386974);
+        Manager manager2 = example.saveManager("diogojorge", "Diogo", "dj97@ua.pt", 572853657);
+        Manager manager3 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", 237583456);
         example.listManager();
 
         System.out.println("After Sucessfully modification ");
@@ -191,7 +191,7 @@ public class JPAExample {
        
     }
 
-    public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard, String address) {
+    public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard) {
         Camper camper = new Camper();
         System.out.println("new camper");
         try {
@@ -202,7 +202,6 @@ public class JPAExample {
             camper.setEmail(email);
             camper.setNIF(NIF);
             camper.setCampsiteCard(campsiteCard);
-            camper.setAddress(address);
             entityManager.persist(camper);
             entityManager.getTransaction().commit();
             System.out.println("just after comit");
@@ -253,7 +252,7 @@ public class JPAExample {
         }
     }
 
-    public Manager saveManager(String username, String fullname, String email, int NIF, String address) {
+    public Manager saveManager(String username, String fullname, String email, int NIF) {
         Manager manager = new Manager();
         System.out.println("new manager");
         try {
@@ -263,7 +262,6 @@ public class JPAExample {
             manager.setFullName(fullname);
             manager.setEmail(email);
             manager.setNIF(NIF);
-            manager.setAddress(address);
             entityManager.persist(manager);
             entityManager.getTransaction().commit();
             //System.out.println("just after comit");

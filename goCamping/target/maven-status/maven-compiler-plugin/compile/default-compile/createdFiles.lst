@@ -1,7 +1,6 @@
 BackendBeans/LogInBean.class
 Persistencia/RoulotePitch.class
 Persistencia/JPAExample.class
-Persistencia/ServicesActivities.class
 Persistencia/Camper.class
 Persistencia/Bungalow.class
 GeneralStuff/Hash.class
@@ -9,6 +8,7 @@ Persistencia/Reservation.class
 Persistencia/Accommodation.class
 Persistencia/FavouriteList.class
 Persistencia/Campsite.class
+BackendBeans/SignUpBean.class
 Persistencia/Utilizador.class
 Persistencia/TentPitch.class
 Persistencia/CampsiteImage.class
@@ -17,7 +17,5 @@ Persistencia/CampsiteImageKey.class
 BackendBeans/SearchBean.class
 InterfaceBeans/CalendarManagedBean.class
 Persistencia/EntityManagerUtil.class
-Persistencia/CampsiteServicesKey.class
 Persistencia/Manager.class
-Persistencia/CampsiteServices.class
 Persistencia/FavouriteListKey.class

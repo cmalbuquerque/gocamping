@@ -35,8 +35,7 @@ public class Camper implements Serializable {
     private int NIF;
     @Column(name = "campsiteCard")
     private int campsiteCard;
-    @Column(name = "address")
-    private String address;
+    
 
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "camper")
     private Utilizador user;
@@ -69,10 +68,6 @@ public class Camper implements Serializable {
         return campsiteCard;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
@@ -91,10 +86,6 @@ public class Camper implements Serializable {
 
     public void setCampsiteCard(int campsiteCard) {
         this.campsiteCard = campsiteCard;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Utilizador getUser() {

@@ -33,13 +33,8 @@ public class Manager implements Serializable {
     @Column(name = "email")
     private String email;
 
-
-
     @Column(name = "NIF")
     private int NIF;
-
-    @Column(name = "address")
-    private String address;
 
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "manager")
     private Utilizador user;
@@ -65,9 +60,6 @@ public class Manager implements Serializable {
         return NIF;
     }
 
-    public String getAddress() {
-        return address;
-    }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
@@ -86,9 +78,6 @@ public class Manager implements Serializable {
         this.NIF = NIF;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public Utilizador getUser() {
         return user;
@@ -130,7 +119,7 @@ public class Manager implements Serializable {
 
     @Override
     public String toString() {
-        return "Manager{" + "username=" + username + ", fullName=" + fullName + ", email=" + email + ", NIF=" + NIF + ", address=" + address + '}';
+        return "Manager{" + "username=" + username + ", fullName=" + fullName + ", email=" + email + ", NIF=" + NIF + '}';
     }
 
 }

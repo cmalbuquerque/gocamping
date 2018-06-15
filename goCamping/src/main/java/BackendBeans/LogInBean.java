@@ -64,12 +64,12 @@ public class LogInBean implements Serializable {
     }
 
     public String validate() {
+        System.out.println("entrei na validate");
         JPAExample ex = new JPAExample();
         user.setUsername(username);
         user.setPassword(password);
         Utilizador user1 = ex.searchUtilizador(user.getUsername());
         System.out.println("inserted password: " + Hash.getmd5Hash(password));
-        System.out.println("database password: " + user1.getPassword());
         if (user1.equals(user)) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -80,5 +80,6 @@ public class LogInBean implements Serializable {
         System.out.println("user is not right");
         return "login.xhtml";
     }
-
+    
+    
 }
