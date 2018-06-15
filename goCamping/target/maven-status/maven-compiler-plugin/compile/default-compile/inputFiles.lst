@@ -4,7 +4,6 @@
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/RoulotePitch.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Utilizador.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/CampsiteImageKey.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/CampsiteServicesKey.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Camper.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/InterfaceBeans/CalendarManagedBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Manager.java
@@ -14,10 +13,9 @@
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/FavouriteList.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Reservation.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/EntityManagerUtil.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/CampsiteServices.java
+/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/SignUpBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/TentPitch.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/SearchBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/GeneralStuff/Hash.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/ServicesActivities.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Accommodation.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/LogInBean.java

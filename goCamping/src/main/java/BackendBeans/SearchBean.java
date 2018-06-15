@@ -22,7 +22,7 @@ import javax.faces.bean.SessionScoped;
  * @author Pedro Pires
  * 
  */
-@ManagedBean(name = "searchBean")
+@ManagedBean(name = "searchbean")
 @SessionScoped
 public class SearchBean implements Serializable{
     
@@ -72,9 +72,6 @@ public class SearchBean implements Serializable{
     public void setCheckout(Date checkout) {
         this.checkout = checkout;
     }
-    
-    
-
  
     public String showAll(){
         listaCampsites = ex.listarTodosCampsites();     

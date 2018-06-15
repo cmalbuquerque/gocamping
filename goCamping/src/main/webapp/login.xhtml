@@ -47,55 +47,14 @@
                             </b:inputSecret>
                             <br>&nbsp;</br>
                             <b:button span="4" value="Cancel"  outcome="/index.xhtml"  />
-                            <h:commandButton value="Login" action="#{loginbean.validate}" />
+                            <b:commandButton value="Login" icon="log-in" look="success"  action="#{loginbean.validate}"></b:commandButton>
+                            <b:button span="4" value="Sign Up" look="sucess"  outcome="/signUp.xhtml"  />
                             <br>&nbsp;</br>
                         </b:form>
                     </b:tab>
-                    <b:tab title="Sign Up">
-                        <br></br>
-                        <p><label>Entity</label>
-                            <b:selectBooleanCheckbox colMd="6" value="camper" caption="Common User" />
-                            <b:selectBooleanCheckbox colMd="6" value="manager" caption="Company Manager" />
-                        </p>
-                        <b:form horizontal="true" id="loginSignUp">
-                            <b:inputText required="true" value=" " placeholder="Full Name" colMd="12" labelColMd="2">
-                                <f:facet name="prepend">
-                                    <b:icon name="user" />
-                                </f:facet>
-                            </b:inputText>
-                            <b:inputText required="true" value=" " placeholder="Username" colMd="12" labelColMd="2">
-                                <f:facet name="prepend">
-                                    <b:icon name="user" />
-                                </f:facet>
-                            </b:inputText>
-                            <b:inputText required="true" value=" " placeholder="Email" colMd="12" labelColMd="2">
-                                <f:facet name="prepend">
-                                    <b:iconAwesome name="envelope-o" />
-                                </f:facet>
-                            </b:inputText>
-                            <b:inputSecret required="true" value=" " placeholder="Password" colMd="12" labelColMd="2">
-                                <f:facet name="prepend">
-                                    <b:iconAwesome name="key" />
-                                </f:facet>
-                            </b:inputSecret>
-
-                            <b:inputText placeholder="Camping Card" value=" " colMd="12" labelColMd="2">
-                                <f:facet name="prepend">
-                                    <b:iconAwesome name="id-card-o" />
-                                </f:facet>
-                            </b:inputText>
-
-                            <br>&nbsp;</br>
-                            <b:button span="4" value="Cancel"  outcome="/index.xhtml"  />
-                            <b:button span="4" value="Sign Up" outcome="/index.xhtml" look="success" />
-                            <br>&nbsp;</br>
-
-                        </b:form>
-                    </b:tab>
+         
                 </b:tabView>
                 <br></br>
-
-
             </p:panel>
         </h:form>
     </h:body>
