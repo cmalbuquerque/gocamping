@@ -11,6 +11,7 @@
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Campsite.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/FavouriteListKey.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/FavouriteList.java
+/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/AddCampsiteBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Reservation.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/EntityManagerUtil.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/SignUpBean.java

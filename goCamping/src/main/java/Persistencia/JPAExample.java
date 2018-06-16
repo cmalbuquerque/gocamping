@@ -26,7 +26,7 @@ public class JPAExample {
 
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
-
+        
         System.out.println("CAMPER");
         System.out.println("After Sucessfully insertion ");
         Camper camper1 = example.saveCamper("patrocinioandreia", "Andreia ", "patrocinioandreia@ua.pt", 123456789, 54321);
@@ -187,7 +187,7 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteFavouriteList(favKey);
         example.listCampsiteImage();
-
+        
        
     }
 
@@ -311,6 +311,8 @@ public class JPAExample {
             System.out.println("delete manager didn't work");
         }
     }
+    
+    
 
     public Utilizador saveUtilizador(Camper camper, Manager manager, String username, String password) {
         Utilizador user = new Utilizador();
@@ -355,6 +357,32 @@ public class JPAExample {
             System.out.println("utilizador search didn't work");
         }
         return user;
+    }
+    
+    public int getUtilizadorNIF(String name){
+        Utilizador user = new Utilizador();
+        int NIF=0;
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
+            query.setParameter("name", name);
+            List<Utilizador> utilizador = query.getResultList();
+            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
+                user = (Utilizador) iterator.next();
+                System.out.println(user.getUsername() + " \t" + user.getPassword());
+                if(user.getManager()==null){
+                     NIF= user.getCamper().getNIF();
+                }
+                else{
+                    NIF= user.getManager().getNIF();
+                }
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("get utilizador nif didn't work");
+        }
+        return NIF;
     }
 
     public Campsite saveCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager) {
