@@ -456,7 +456,6 @@ public class JPAExample {
             campsites = query.getResultList();
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
                 Campsite campsite = (Campsite) iterator.next();
-                System.out.println(campsite.getId() + " \t " + campsite.getTitle() + "\t" + campsite.getLocation());
                 list.add(campsite);
             }
             System.out.println("just before commit");
@@ -465,7 +464,6 @@ public class JPAExample {
             entityManager.getTransaction().rollback();
             System.out.println("listar campsite with manager didn't work");
         }
-         System.out.println("list" + list);
         return list;
     }
     

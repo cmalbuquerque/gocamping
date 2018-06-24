@@ -82,4 +82,9 @@ public class SearchBean implements Serializable{
         listaCampsites = ex.listarCampsite(campsiteLocation); 
         return "results.xhtml";
     }
+    
+    public String print(){
+        System.out.println("KKK");
+        return "myCampsites.xhtml";
+    }
 }
