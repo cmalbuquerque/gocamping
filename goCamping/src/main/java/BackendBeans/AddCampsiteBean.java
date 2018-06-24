@@ -5,12 +5,10 @@
  */
 package BackendBeans;
 
+import Persistencia.Campsite;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import Persistencia.Utilizador;
-import GeneralStuff.Hash;
-import javax.annotation.PostConstruct;
 import Persistencia.JPAExample;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
@@ -54,9 +52,6 @@ public class AddCampsiteBean implements Serializable {
     }
 
     public void setNIF(int NIF) {
-        //System.out.println("pst"+ ex.getUtilizadorNIF("joana"));
-        //session.getAttribute("joana")
-        System.out.println("123 " + ex.getUtilizadorNIF(session.getAttribute("username").toString()));
         this.NIF = ex.getUtilizadorNIF(session.getAttribute("username").toString());
     }
     
@@ -116,29 +111,8 @@ public class AddCampsiteBean implements Serializable {
         this.contacts = contacts;
     }
     
-    public String addCampsite(){
-       
-        
-        
-        return "addCampsite.xhtml";
-    }
-    //    private Utilizador user;
-//    public String validate() {
-//        System.out.println("entrei na validate");
-//        JPAExample ex = new JPAExample();
-//        user.setUsername(username);
-//        user.setPassword(password);
-//        Utilizador user1 = ex.searchUtilizador(user.getUsername());
-//        System.out.println("inserted password: " + Hash.getmd5Hash(password));
-//        if (user1.equals(user)) {
-//            FacesContext facesContext = FacesContext.getCurrentInstance();
-//            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-//            session.setAttribute("username", username);
-//            System.out.println(session.getAttribute("username"));
-//            return "index.xhtml";
-//        }
-//        System.out.println("user is not right");
-//        return "login.xhtml";
-//    }
-    
+    public String addCampsite(){       
+        Campsite campsite1 = ex.saveCampsite( title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, ex.searchManager(session.getAttribute("username").toString()));
+        return "myCampsites.xhtml";
+    }    
 }

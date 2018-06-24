@@ -29,27 +29,25 @@
 
             <p:panel style="margin-left: 10%; margin-right: 10%; height: 100%" >
                 <h3 style="color: #72b400"><b:iconAwesome name="plus-circle" />  Add a Campsite </h3>
-                <b:inputText col-lg="7" id="title" label="Title"></b:inputText>
+                <b:inputText col-lg="7" id="title" label="Title" value = "#{addcampsitebean.title}"></b:inputText>
                 <b:inputText col-lg="5" id="Nif" label="Company Fiscal Number" disabled="true" value = "#{addcampsitebean.NIF}"></b:inputText>
-                <b:inputText col-lg="12" id="location" label="Location"></b:inputText>
+                <b:inputText col-lg="12" id="location" label="Location"  value="#{addcampsitebean.location}"></b:inputText>
 
-                <b:inputTextarea col-lg="12" id="Description" label="Description"></b:inputTextarea>
+                <b:inputTextarea col-lg="12" id="Description" label="Description" value="#{addcampsitebean.desc}"></b:inputTextarea>
                 
 
                 <p><label>Prices</label></p>
                 <b:form horizontal="true" >
                     <b:formGroup>
-                        <b:inputText label="Adults" col-lg="8" ></b:inputText>
-                        <b:inputText col-lg="8" label="Childs (between 4 and 12 years)"></b:inputText>
-                        <b:inputText col-lg="8" label="Babies (between 0 and 3 years)"></b:inputText>
+                        <b:inputText label="Adults" col-lg="8" value="#{addcampsitebean.adultsPrice}"></b:inputText>
+                        <b:inputText col-lg="8" label="Childs (between 4 and 12 years)" value="#{addcampsitebean.childsPrice}"></b:inputText>
+                        <b:inputText col-lg="8" label="Babies (between 0 and 3 years)" value="#{addcampsitebean.babiesPrice}"></b:inputText>
 
                     </b:formGroup>
                 </b:form>
 
-                <b:inputText label="Contacts"></b:inputText>
-
-                <b:button offset="9" value="Add Campsite" iconAwesome="plus-circle" look="success" outcome="/addCampsite.xhtml"></b:button>
-
+                <b:inputText label="Contacts" value="#{addcampsitebean.contacts}"></b:inputText>
+                <b:commandButton  offset="9" value="Add Campsite"  icon="plus-circle" look="success"  action="#{addcampsitebean.addCampsite}"></b:commandButton>
             </p:panel>
 
         </h:form>
