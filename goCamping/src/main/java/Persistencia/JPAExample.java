@@ -26,7 +26,7 @@ public class JPAExample {
 
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
-
+        
         System.out.println("CAMPER");
         System.out.println("After Sucessfully insertion ");
         Camper camper1 = example.saveCamper("patrocinioandreia", "Andreia ", "patrocinioandreia@ua.pt", 123456789, 54321);
@@ -70,9 +70,9 @@ public class JPAExample {
 
         System.out.println("CAMPSITE");
         System.out.println("After Sucessfully insertion ");
-        Campsite campsite1 = example.saveCampsite(123, "Costa Nova Campsite", "Praia da Costa Nova", 30.0, 15.0, 5.0, "9347652781", "inserir descrição", manager1);
-        Campsite campsite2 = example.saveCampsite(124, "Barra Campsite", "Praia da Barra", 25.0, 10.0, 5.0, "9347652781", "inserir descrição", manager2);
-        Campsite campsite3 = example.saveCampsite(125, "Sol Nascente", "Macedo de Cavaleiros", 20.0, 10.0, 2.0, "9347652781", "inserir descrição", manager1);
+        Campsite campsite1 = example.saveCampsite( "Costa Nova Campsite", "Praia da Costa Nova", 30.0, 15.0, 5.0, "9347652781", "inserir descrição", manager1);
+        Campsite campsite2 = example.saveCampsite("Barra Campsite", "Praia da Barra", 25.0, 10.0, 5.0, "9347652781", "inserir descrição", manager2);
+        Campsite campsite3 = example.saveCampsite("Sol Nascente", "Macedo de Cavaleiros", 20.0, 10.0, 2.0, "9347652781", "inserir descrição", manager1);
         example.listCampsite();
 
         System.out.println("After Sucessfully modification ");
@@ -187,7 +187,7 @@ public class JPAExample {
         System.out.println("After Sucessfully deletion ");
         example.deleteFavouriteList(favKey);
         example.listCampsiteImage();
-
+        
        
     }
 
@@ -271,6 +271,25 @@ public class JPAExample {
         }
         return manager;
     }
+    
+    public Manager searchManager(String name) {
+        Manager manager = new Manager();
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Manager c where c.username = :name");
+            query.setParameter("name", name);
+            List<Manager> managers = query.getResultList();
+            for (Iterator<Manager> iterator = managers.iterator(); iterator.hasNext();) {
+                manager = (Manager) iterator.next();
+                System.out.println(manager.getUsername());
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("manager search didn't work");
+        }
+        return manager;
+    }
 
     public void listManager() {
         try {
@@ -311,6 +330,8 @@ public class JPAExample {
             System.out.println("delete manager didn't work");
         }
     }
+    
+    
 
     public Utilizador saveUtilizador(Camper camper, Manager manager, String username, String password) {
         Utilizador user = new Utilizador();
@@ -356,14 +377,39 @@ public class JPAExample {
         }
         return user;
     }
+    
+    public int getUtilizadorNIF(String name){
+        Utilizador user = new Utilizador();
+        int NIF=0;
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
+            query.setParameter("name", name);
+            List<Utilizador> utilizador = query.getResultList();
+            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
+                user = (Utilizador) iterator.next();
+                System.out.println(user.getUsername() + " \t" + user.getPassword());
+                if(user.getManager()==null){
+                     NIF= user.getCamper().getNIF();
+                }
+                else{
+                    NIF= user.getManager().getNIF();
+                }
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("get utilizador nif didn't work");
+        }
+        return NIF;
+    }
 
-    public Campsite saveCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager) {
+    public Campsite saveCampsite(String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager) {
         Campsite campsite = new Campsite();
         System.out.println("new campsite");
         try {
             entityManager.getTransaction().begin();
             //System.out.println("at the start of transaction");
-            campsite.setId(id);
             campsite.setTitle(title);
             campsite.setLocation(location);
             campsite.setAdultPrice(adultPrice);

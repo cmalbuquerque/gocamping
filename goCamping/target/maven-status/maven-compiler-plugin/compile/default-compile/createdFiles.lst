@@ -19,3 +19,4 @@ InterfaceBeans/CalendarManagedBean.class
 Persistencia/EntityManagerUtil.class
 Persistencia/Manager.class
 Persistencia/FavouriteListKey.class
+BackendBeans/AddCampsiteBean.class

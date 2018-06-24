@@ -64,17 +64,14 @@ public class LogInBean implements Serializable {
     }
 
     public String validate() {
-        System.out.println("entrei na validate");
         JPAExample ex = new JPAExample();
         user.setUsername(username);
         user.setPassword(password);
         Utilizador user1 = ex.searchUtilizador(user.getUsername());
-        System.out.println("inserted password: " + Hash.getmd5Hash(password));
         if (user1.equals(user)) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             session.setAttribute("username", username);
-            System.out.println(session.getAttribute("username"));
             return "index.xhtml";
         }
         System.out.println("user is not right");
