@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import Persistencia.JPAExample;
+import java.util.List;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -42,11 +43,21 @@ public class AddCampsiteBean implements Serializable {
     @ManagedProperty(value = "#{NIF}")
     private int NIF;
     
+    @ManagedProperty(value = "#{listaCampsites}")
+    private List<Campsite> listaCampsites; 
+    
     JPAExample ex = new JPAExample();
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-    
-    
+
+    public List<Campsite> getListaCampsites() {
+        return listaCampsites;
+    }
+
+    public void setListaCampsites(List<Campsite> listaCampsites) {
+        this.listaCampsites = ex.listarCampsite(ex.searchManager(session.getAttribute("username").toString()));
+    }
+           
     public int getNIF() {
         return NIF;
     }
@@ -114,5 +125,5 @@ public class AddCampsiteBean implements Serializable {
     public String addCampsite(){       
         Campsite campsite1 = ex.saveCampsite( title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, ex.searchManager(session.getAttribute("username").toString()));
         return "myCampsites.xhtml";
-    }    
+    }  
 }
