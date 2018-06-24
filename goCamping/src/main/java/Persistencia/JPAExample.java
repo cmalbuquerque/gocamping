@@ -445,6 +445,30 @@ public class JPAExample {
             System.out.println("campsite listing didn't work");
         }
     }
+    
+     public List<Campsite> listarCampsite(Manager manager) {
+        List<Campsite> campsites = new ArrayList<Campsite>();
+        List<Campsite> list = new ArrayList<Campsite>();
+        try {
+            entityManager.getTransaction().begin();         
+            Query query = entityManager.createQuery("select c from Campsite as c where c.manager = :manager");
+            query.setParameter("manager", manager);
+            campsites = query.getResultList();
+            for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
+                Campsite campsite = (Campsite) iterator.next();
+                System.out.println(campsite.getId() + " \t " + campsite.getTitle() + "\t" + campsite.getLocation());
+                list.add(campsite);
+            }
+            System.out.println("just before commit");
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("listar campsite with manager didn't work");
+        }
+         System.out.println("list" + list);
+        return list;
+    }
+    
     public List<Campsite> listarTodosCampsites() {
         List<Campsite> campsites = new ArrayList<Campsite>();
         List<Campsite> list = new ArrayList<Campsite>();

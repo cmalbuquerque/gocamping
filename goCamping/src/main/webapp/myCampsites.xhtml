@@ -124,43 +124,28 @@
 
 
                 <!-- Content-->
-                <p:dataGrid var="car" value="" columns="1" layout="grid"
-                            rows="12" paginator="true" id="cars"
+                <p:dataGrid var="campsite" value="#{addcampsitebean.listaCampsites}" columns="1" layout="grid"
+                            rows="12" paginator="true" id="campsites"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="6,12,16" style=" background-color: white" >
 
                     <p:panel>
                         <h:panelGrid columns="1" style="width:100%">
                             <p:graphicImage name="/resources/images/nature2.jpg"/> 
-
-                            <h:outputText value="Campsite Costa Nova" />
+                                <h:outputText value="Title:  #{campsite.title}" />
+                                <h:outputText value="Location:  #{campsite.location}" />
+                                <h:outputText value="Description:  #{campsite.description}" />
+                                <h:outputText value="Contact:  #{campsite.contact}" />
+                                <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
+                                <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
+                                <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
                             <br></br>
                             <b:button offset="9" value="Remove Campsite" iconAwesome="times" look="default"></b:button>
                             <b:button offset="9" value="Add Accomodation" iconAwesome="plus-circle" look="warning" onclick="PF('dlg3').show();"></b:button>
                         </h:panelGrid>
                     </p:panel>
                 </p:dataGrid>
-                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                    <p:outputPanel id="carDetail">
-                        <p:panelGrid  columns="2" columnClasses="label,value">
-                            <f:facet name="header">
-                                <p:graphicImage name="/resources/images/nature2.jpg"/> 
-                            </f:facet>
-
-                            <h:outputText value="Id:" />
-                            <h:outputText value="83275391" />
-
-                            <h:outputText value="Year" />
-                            <h:outputText value="87250" />
-
-                            <h:outputText value="Color:" />
-                            <h:outputText value="ihgnlg"/>
-
-                            <h:outputText value="Price" />
-                            <h:outputText value="$920587" />
-                        </p:panelGrid>
-                    </p:outputPanel>
-                </p:dialog>
+                
             </p:panel>
 
         </h:form>
