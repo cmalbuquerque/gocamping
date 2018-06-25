@@ -34,8 +34,8 @@ public class JPAExample {
         example.listCamper();
 
         System.out.println("After Sucessfully modification ");
-        example.updateCamper(camper1.getUsername(), "Andreia Patrocínio");
-        example.updateCamper(camper2.getUsername(), "Pedro Pires");
+//        example.updateCamper(camper1.getUsername(), "Andreia Patrocínio");
+//        example.updateCamper(camper2.getUsername(), "Pedro Pires");
         example.listCamper();
 
         System.out.println("After Sucessfully deletion ");
@@ -51,8 +51,8 @@ public class JPAExample {
         example.listManager();
 
         System.out.println("After Sucessfully modification ");
-        example.updateManager(manager1.getUsername(), "Carolina Albuquerque");
-        example.updateManager(manager2.getUsername(), "Diogo Jorge");
+//        example.updateManager(manager1.getUsername(), "Carolina Albuquerque");
+//        example.updateManager(manager2.getUsername(), "Diogo Jorge");
         example.listCamper();
 
         System.out.println("After Sucessfully deletion ");
@@ -228,16 +228,20 @@ public class JPAExample {
         }
     }
 
-    public void updateCamper(String username, String fullname) {
+    public Camper updateCamper(String username, String fullname, String email, int campingCard) {
+        Camper camper = new Camper();
         try {
             entityManager.getTransaction().begin();
-            Camper camper = (Camper) entityManager.find(Camper.class, username);
+            camper = (Camper) entityManager.find(Camper.class, username);
             camper.setFullName(fullname);
+            camper.setEmail(email);
+            camper.setCampsiteCard(campingCard);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("update camper didn't work");
         }
+        return camper;
     }
 
     public void deleteCamper(String username) {
@@ -307,17 +311,21 @@ public class JPAExample {
         }
     }
 
-    public void updateManager(String username, String fullname) {
+    public Manager updateManager(String username, String fullname, String email) {
+        Manager manager = new Manager ();
         try {
             entityManager.getTransaction().begin();
-            Manager manager = (Manager) entityManager.find(Manager.class, username);
+            manager = (Manager) entityManager.find(Manager.class, username);
             manager.setFullName(fullname);
+            manager.setEmail(email);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("update manager didn't work");
         }
+        return manager;
     }
+    
 
     public void deleteManager(String username) {
         try {
