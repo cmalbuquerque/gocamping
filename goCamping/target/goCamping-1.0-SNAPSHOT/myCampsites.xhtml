@@ -31,7 +31,7 @@
                 <h3 align="center" style="color: #72b400"><b:iconAwesome name="tent" />  My Campsites </h3>
 
                 <!-- Content-->
-                <p:dataGrid var="campsite" value="#{addcampsitebean.listaCampsites}" columns="1" layout="grid"
+                <p:dataGrid var="campsite" value="#{campsitebean.listaCampsites}" columns="1" layout="grid"
                             rows="12" paginator="true" id="campsitesID"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="6,12,16" style=" background-color: white" >
@@ -47,7 +47,7 @@
                                 <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
                                 <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
                             <br></br>
-                            <b:commandButton offset="9" value="Remove Campsite" iconAwesome="" look="default"  action="#{addcampsitebean.removeCampsite(campsite.id)}" update=":form:campsitesID" ></b:commandButton>
+                            <b:commandButton offset="9" value="Remove Campsite" iconAwesome="" look="default"  action="#{campsitebean.removeCampsite(campsite.id)}" update=":form:campsitesID" ></b:commandButton>
                             <b:button offset="9" value="Add Accomodation" iconAwesome="plus-circle" look="warning" outcome="/account.xhtml"></b:button>
                         </h:panelGrid>
                     </p:panel>
