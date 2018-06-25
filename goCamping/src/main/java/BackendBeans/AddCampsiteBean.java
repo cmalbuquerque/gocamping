@@ -42,14 +42,14 @@ public class AddCampsiteBean implements Serializable {
     private String contacts;
     @ManagedProperty(value = "#{NIF}")
     private int NIF;
-    
     @ManagedProperty(value = "#{listaCampsites}")
-    private List<Campsite> listaCampsites; 
-    
+    private List<Campsite> listaCampsites;
+        
     JPAExample ex = new JPAExample();
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
+               
     public List<Campsite> getListaCampsites() {
         return listaCampsites;
     }
@@ -124,6 +124,13 @@ public class AddCampsiteBean implements Serializable {
     
     public String addCampsite(){       
         Campsite campsite1 = ex.saveCampsite( title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, ex.searchManager(session.getAttribute("username").toString()));
+        listaCampsites = ex.listarCampsite(ex.searchManager(session.getAttribute("username").toString()));
         return "myCampsites.xhtml";
-    }  
+    }
+    
+    public String removeCampsite(int id){     
+        ex.deleteCampsite(id);
+        listaCampsites = ex.listarCampsite(ex.searchManager(session.getAttribute("username").toString()));
+        return "myCampsites.xhtml";
+    }
 }

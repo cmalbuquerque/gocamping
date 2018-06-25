@@ -11,7 +11,7 @@
 
     </h:head>
     <h:body>
-        <h:form>
+        <h:form id="form">
             <b:navBar brand="goCamping" brandHref="#">
                 <b:navbarLinks>
                     <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
@@ -31,104 +31,12 @@
             <p:panel style="margin-left: 10%; margin-right: 10%">
                 <h3 align="center" style="color: #72b400"><b:iconAwesome name="tent" />  My Campsites </h3>
 
-                <!-- Modal -->
-                <p:dialog header="Add Accomodations" widgetVar="dlg3" modal="true" height="500" width="600">
-                    <b:tabView id="tabViewLogin">
-                        <b:tab title="Tent Pitch">
-                            <br>&nbsp;</br>
-                            <b:form horizontal="true" id="loginForm">
-                                
-                                <b:inputText required="true" placeholder="Example: 6" colMd="12" labelColMd="2">
-                                    <f:facet name="prepend">
-                                        Area (m²)
-                                    </f:facet>
-                                </b:inputText>
-                                <b:inputText required="true" placeholder="Example: 37,50" colMd="12">
-                                    <f:facet name="prepend">
-                                        Price (€)
-                                    </f:facet>
-                                </b:inputText>
-                                <b:inputText required="true" placeholder="Example: 10" colMd="12" >
-                                    <f:facet name="prepend">
-                                        Camping Card Discount (%)
-                                    </f:facet>
-                                </b:inputText>
-                                <br>&nbsp;</br>
-
-                                <b:button offset="3" span="6" value="Save" icon="check" look="success" outcome="myCampsites.xhtml" />
-                                
-                            </b:form>
-                        </b:tab>
-                        <b:tab title="Roulotte Pitch">
-                            <br>&nbsp;</br>
-                            <b:form horizontal="true" id="loginForm">
-                  
-                                <b:inputText required="true" placeholder="Example: 6" colMd="12" labelColMd="2">
-                                    <f:facet name="prepend">
-                                        Area (m²)
-                                    </f:facet>
-                                </b:inputText>
-                                <b:inputText required="true" placeholder="Example: 37,50" colMd="12">
-                                    <f:facet name="prepend">
-                                        Price (€)
-                                    </f:facet>
-                                </b:inputText>
-                                <b:inputText required="true" placeholder="Example: 10" colMd="12" >
-                                    <f:facet name="prepend">
-                                        Camping Card Discount (%)
-                                    </f:facet>
-                                </b:inputText>
-                                <br>&nbsp;</br>
-
-                                <b:button offset="3" span="6" value="Save" icon="check" look="success" outcome="myCampsites.xhtml" />
-                                
-                            </b:form>
-                        </b:tab>
-                        <b:tab title="Bungalow">
-                            <br>&nbsp;</br>
-                            <b:form horizontal="true" id="loginForm">
-                                
-                                <b:inputText required="true" placeholder="Example: 6" colMd="12" labelColMd="2">
-                                    <f:facet name="prepend">
-                                        Area (m²)
-                                    </f:facet>
-                                </b:inputText>
-                                <b:inputText required="true" placeholder="Example: 37,50" colMd="12">
-                                    <f:facet name="prepend">
-                                        Price (€)
-                                    </f:facet>
-                                </b:inputText>
-                                <b:inputText required="true" placeholder="Example: 10" colMd="12" >
-                                    <f:facet name="prepend">
-                                        Camping Card Discount (%)
-                                    </f:facet>
-                                </b:inputText>
-                                <b:inputText required="true" placeholder="Example: 2" colMd="12" >
-                                    <f:facet name="prepend">
-                                        Bedrooms
-                                    </f:facet>
-                                </b:inputText>   
-                                <b:inputText required="true" placeholder="Example: 5" colMd="12" >
-                                    <f:facet name="prepend">
-                                        Capacity
-                                    </f:facet>
-                                </b:inputText>
-
-                                <b:button offset="3" span="6" value="Save" icon="check" look="success" outcome="myCampsites.xhtml" />
-                                
-                            </b:form>
-                        </b:tab>
-                    </b:tabView>
-                    <br></br>
-                </p:dialog>  
-
-
                 <!-- Content-->
                 <p:dataGrid var="campsite" value="#{addcampsitebean.listaCampsites}" columns="1" layout="grid"
-                            rows="12" paginator="true" id="campsites"
+                            rows="12" paginator="true" id="campsitesID"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="6,12,16" style=" background-color: white" >
-
+                    
                     <p:panel>
                         <h:panelGrid columns="1" style="width:100%">
                             <p:graphicImage name="/resources/images/nature2.jpg"/> 
@@ -140,14 +48,12 @@
                                 <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
                                 <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
                             <br></br>
-                            <b:button offset="9" value="Remove Campsite" iconAwesome="times" look="default"></b:button>
-                            <b:button offset="9" value="Add Accomodation" iconAwesome="plus-circle" look="warning" onclick="PF('dlg3').show();"></b:button>
+                            <b:commandButton offset="9" value="Remove Campsite" iconAwesome="" look="default"  action="#{addcampsitebean.removeCampsite(campsite.id)}" update=":form:campsitesID" ></b:commandButton>
+                            <b:button offset="9" value="Add Accomodation" iconAwesome="plus-circle" look="warning" outcome="/account.xhtml"></b:button>
                         </h:panelGrid>
                     </p:panel>
                 </p:dataGrid>
-                
             </p:panel>
-
         </h:form>
     </h:body>
 </html>
