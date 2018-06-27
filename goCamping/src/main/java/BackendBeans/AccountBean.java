@@ -5,13 +5,11 @@
  */
 package BackendBeans;
 
-import GeneralStuff.Hash;
 import Persistencia.Camper;
 import Persistencia.JPAExample;
 import Persistencia.Manager;
 import Persistencia.Utilizador;
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -31,7 +29,7 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class AccountBean implements Serializable{ 
     
-    private Utilizador user;
+
     private Manager manager;
     private Camper camper;
     
@@ -43,8 +41,6 @@ public class AccountBean implements Serializable{
     private String fullName;
     @ManagedProperty(value ="#{email}")
     private String email;
-    @ManagedProperty(value ="#{NIF}")
-    private int NIF;
     @ManagedProperty(value ="#{campsiteCard}")
     private int campsiteCard;
     @ManagedProperty(value = "#{newPassword}")
@@ -62,14 +58,6 @@ public class AccountBean implements Serializable{
         this.newPassword = newPassword;
     }
     
-    public Utilizador getUser() {
-        return user;
-    }
-
-    public void setUser(Utilizador user) {
-        this.user = user;
-    }
-
     public Manager getManager() {
         return manager;
     }
@@ -103,7 +91,7 @@ public class AccountBean implements Serializable{
     }
 
     public String getFullName() {
-        return fullName;
+        return ex.getUtilizadorFullName(session.getAttribute("username").toString());
     }
 
     public void setFullName(String fullName) {
@@ -111,23 +99,15 @@ public class AccountBean implements Serializable{
     }
 
     public String getEmail() {
-        return email;
+        return ex.getUtilizadorEmail(session.getAttribute("username").toString());
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public int getNIF() {
-        return NIF;
-    }
-
-    public void setNIF(int NIF) {
-        this.NIF = NIF;
-    }
-
     public int getCampsiteCard() {
-        return campsiteCard;
+        return ex.getUtilizadorCampingCard(session.getAttribute("username").toString());
     }
 
     public void setCampsiteCard(int campsiteCard) {
@@ -136,14 +116,10 @@ public class AccountBean implements Serializable{
 
     
     public String editPersonalInformation(){
-        System.out.println("DOMINO");
-        System.out.println("*" + fullName);
-        System.out.println("**" + email);
-        System.out.println("***" + campsiteCard);
         Camper camper1 = ex.updateCamper(session.getAttribute("username").toString(), fullName, email, campsiteCard);
-        return "account.xhtml";
-        
+        return "account.xhtml";  
     }
+    
     
     public String editLoginAccess(){
         return "";

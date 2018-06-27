@@ -230,7 +230,8 @@ public class JPAExample {
             System.out.println("update camper didn't work");
         }
         return camper;
-    }
+    }   
+    
 
     public void deleteCamper(String username) {
         try {
@@ -384,7 +385,6 @@ public class JPAExample {
             List<Utilizador> utilizador = query.getResultList();
             for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
                 user = (Utilizador) iterator.next();
-                System.out.println(user.getUsername() + " \t" + user.getPassword());
                 if(user.getManager()==null){
                      NIF= user.getCamper().getNIF();
                 }
@@ -398,6 +398,76 @@ public class JPAExample {
             System.out.println("get utilizador nif didn't work");
         }
         return NIF;
+    }
+    
+    public String getUtilizadorFullName(String name){
+        Utilizador user = new Utilizador();
+        String fullName="";
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
+            query.setParameter("name", name);
+            List<Utilizador> utilizador = query.getResultList();
+            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
+                user = (Utilizador) iterator.next();
+                if(user.getManager()==null){
+                    fullName= user.getCamper().getFullName();
+                }
+                else{
+                    fullName= user.getManager().getFullName();
+                }
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("get utilizador full name didn't work");
+        }
+        return fullName;
+    }
+    
+    public String getUtilizadorEmail(String name){
+        Utilizador user = new Utilizador();
+        String email="";
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
+            query.setParameter("name", name);
+            List<Utilizador> utilizador = query.getResultList();
+            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
+                user = (Utilizador) iterator.next();
+                if(user.getManager()==null){
+                    email= user.getCamper().getEmail();
+                }
+                else{
+                    email= user.getManager().getEmail();
+                }
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("get utilizador email didn't work");
+        }
+        return email;
+    }
+    
+    public int getUtilizadorCampingCard(String name){
+        Utilizador user = new Utilizador();
+        int card=0;
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
+            query.setParameter("name", name);
+            List<Utilizador> utilizador = query.getResultList();
+            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
+                user = (Utilizador) iterator.next();
+                card= user.getCamper().getCampsiteCard();     
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("get utilizador nif didn't work");
+        }
+        return card;
     }
 
     public Campsite saveCampsite(String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager) {
