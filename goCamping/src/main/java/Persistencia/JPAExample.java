@@ -425,7 +425,25 @@ public class JPAExample {
         }
         return campsite;
     }
-
+    
+    public Campsite searchCampsite(int id) {
+        Campsite campsite = new Campsite();
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Campsite c where c.id = :id");
+            query.setParameter("id", id);
+            List<Campsite> campsites = query.getResultList();
+            for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
+                campsite = (Campsite) iterator.next();   
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("utilizador search didn't work");
+        }
+        return campsite;
+    }
+    
     public void listCampsite() {
         try {
             entityManager.getTransaction().begin();
@@ -442,7 +460,7 @@ public class JPAExample {
         }
     }
     
-     public List<Campsite> listarCampsite(Manager manager) {
+    public List<Campsite> listarCampsite(Manager manager) {
         List<Campsite> campsites = new ArrayList<Campsite>();
         List<Campsite> list = new ArrayList<Campsite>();
         try {
@@ -450,6 +468,7 @@ public class JPAExample {
             Query query = entityManager.createQuery("select c from Campsite as c where c.manager = :manager");
             query.setParameter("manager", manager);
             campsites = query.getResultList();
+            System.out.println("elefante" + campsites);
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
                 Campsite campsite = (Campsite) iterator.next();
                 list.add(campsite);
@@ -907,10 +926,31 @@ public class JPAExample {
         return favouriteList;   
     }
     
+    public List<Integer> listarCampsitesFavList(String username) {
+        List<FavouriteList> favouriteLists = new ArrayList<FavouriteList>();
+        List<Integer> list = new ArrayList<Integer>();
+        try {
+            entityManager.getTransaction().begin();         
+            Query query = entityManager.createQuery("select c from FavouriteList as c where c.camperUsername = :username");
+            query.setParameter("username", username);
+            favouriteLists = query.getResultList();
+            for (Iterator<FavouriteList> iterator = favouriteLists.iterator(); iterator.hasNext();) {
+                Integer campsiteID = iterator.next().getCampsiteID();
+                list.add(campsiteID);
+            }
+            System.out.println("just before commit");
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("listar campsite with manager didn't work");
+        }
+        return list;
+    }
+        
     public void listFavouriteList() {
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from TentPitch c");
+            Query query = entityManager.createQuery("select c from FavouriteList c");
             List<FavouriteList> favouriteLists = query.getResultList();
             for (Iterator<FavouriteList> iterator = favouriteLists.iterator(); iterator.hasNext();) {
                 FavouriteList favouriteList = (FavouriteList) iterator.next();
@@ -934,5 +974,7 @@ public class JPAExample {
             System.out.println("delete favourite lit pitch didn't work");
         }
     }
+    
+    
 
 }

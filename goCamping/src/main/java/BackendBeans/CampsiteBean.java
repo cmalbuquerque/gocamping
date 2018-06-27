@@ -128,11 +128,6 @@ public class CampsiteBean implements Serializable {
         return "myCampsites.xhtml";
     }
     
-    public String teste() {
-        ex.saveCampsite( "Parque de campismo de Felgueiras", "Felgueiras", 25, 5, 0, "918055679", "Estamos abertor 24horas por dia, 7 dias por semana", ex.searchManager(session.getAttribute("username").toString()));
-        return "favList.xhtml";
-    }
-    
     public String removeCampsite(int id){     
         ex.deleteCampsite(id);
         listaCampsites = ex.listarCampsite(ex.searchManager(session.getAttribute("username").toString()));

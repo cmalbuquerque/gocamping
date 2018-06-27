@@ -9,6 +9,7 @@ import Persistencia.Camper;
 import Persistencia.Campsite;
 import Persistencia.JPAExample;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -29,7 +30,9 @@ import javax.servlet.http.HttpSession;
 public class FavouriteListBean implements Serializable{
     
     @ManagedProperty(value = "#{listCampsitesFav}")
-    private List<Campsite> listCampsitesFav; 
+    private List<Campsite> listCampsitesFav = new ArrayList<>(); 
+    @ManagedProperty(value = "#{listIntCampsites}")
+    private List<Integer> listIntCampsites;
     
     private Camper camper;
     JPAExample ex = new JPAExample();
@@ -41,10 +44,18 @@ public class FavouriteListBean implements Serializable{
     }
 
     public void setListCampsitesFav(List<Campsite> listCampsitesFav) {
-        //this.listCampsitesFav = ex.listarCampsitesFavList(session.getAttribute("username").toString());
-        this.listCampsitesFav=listCampsitesFav;
+        this.listCampsitesFav=convertIntToCampsite();
     }
 
+    public List<Integer> getListIntCampsites() {
+        return listIntCampsites;
+    }
+
+    public void setListIntCampsites(List<Integer> listIntCampsites) {
+        this.listIntCampsites =  ex.listarCampsitesFavList(session.getAttribute("username").toString());
+                
+    }
+    
     public Camper getCamper() {
         return camper;
     }
@@ -54,11 +65,19 @@ public class FavouriteListBean implements Serializable{
     }
         
     public String addFavouriteList(int campsiteID){
-        ex.saveFavouriteList(session.getAttribute("username").toString(), campsiteID);
-        //listCampsitesFav= ex.listarCampsitesFavList(session.getAttribute("username").toString());
+        ex.saveFavouriteList(session.getAttribute("username").toString(), campsiteID); 
         
         return "favList.xhtml" ;
-    } 
+    }
+    
+    
+    public List<Campsite> convertIntToCampsite(){
+        listIntCampsites= ex.listarCampsitesFavList(session.getAttribute("username").toString());
+        for (int elem: listIntCampsites){
+            listCampsitesFav.add(ex.searchCampsite(elem));
+        }
+        return listCampsitesFav;
+    }
     
     
 }
