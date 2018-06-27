@@ -26,61 +26,34 @@
                     <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
                 </b:navbarLinks>
             </b:navBar>
-
+            
+            
             <p:panel style="margin-left: 10%; margin-right: 10%">
                 <h3 align="center" style="color: #72b400"><b:iconAwesome name="heart" />  Favourite Campsites List </h3>
 
-                <p:dialog header="Campsite Costa Nova" widgetVar="dlg2" modal="true" height="100">
-                    <h:outputText value="This is a description of Campsite Costa Nova" />
-                    <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
-
-                </p:dialog>  
-                <p:dataGrid var="car" value="" columns="1" layout="grid"
-                            rows="12" paginator="true" id="cars"
+                <!-- Content-->
+                <p:dataGrid var="campsite" value="#{favouritelistbean.listCampsitesFav}" columns="1" layout="grid"
+                            rows="12" paginator="true" id="campsitesID"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="6,12,16" style=" background-color: white" >
-
+                    
                     <p:panel>
                         <h:panelGrid columns="1" style="width:100%">
                             <p:graphicImage name="/resources/images/nature2.jpg"/> 
-
-                            <h:outputText value="Campsite Costa Nova" />
-
-                            <b:button onclick="PF('dlg2').show();" offset="9" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
-                            <!--<f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />-->
-                            
-
+                                <h:outputText value="Title:  #{campsite.title}" />
+                                <h:outputText value="Location:  #{campsite.location}" />
+                                <h:outputText value="Description:  #{campsite.description}" />
+                                <h:outputText value="Contact:  #{campsite.contact}" />
+                                <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
+                                <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
+                                <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
                             <br></br>
+                            <b:button onclick="PF('dlg2').show();" offset="9" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
                             <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
-
-
                         </h:panelGrid>
                     </p:panel>
                 </p:dataGrid>
-                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                    <p:outputPanel id="carDetail">
-                        <p:panelGrid  columns="2" columnClasses="label,value">
-                            <f:facet name="header">
-                                <p:graphicImage name="/resources/images/nature2.jpg"/> 
-                            </f:facet>
-
-                            <h:outputText value="Id:" />
-                            <h:outputText value="83275391" />
-
-                            <h:outputText value="Year" />
-                            <h:outputText value="87250" />
-
-                            <h:outputText value="Color:" />
-                            <h:outputText value="ihgnlg"/>
-
-                            <h:outputText value="Price" />
-                            <h:outputText value="$920587" />
-                        </p:panelGrid>
-                    </p:outputPanel>
-                </p:dialog>
             </p:panel>
-
         </h:form>
     </h:body>
 </html>
-

@@ -73,37 +73,15 @@
                                 <h:outputText value="Contact:  #{campsite.contact}" />
                                 <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
                                 <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
-                                <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />                                
-                                <b:button offset="9" value="Add Favourite List" iconAwesome="heart" look="default" outcome="/results.xhtml"></b:button>
+                                <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
+                                <b:commandButton offset="9" value="Add Favourite List" iconAwesome="heart" look="default" action = "#{favouritelistbean.addFavouriteList(campsite.id)}"></b:commandButton>
                                 <br></br>
                                 <b:button onclick="PF('dlg2').show();" offset="9" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
                                 <br></br>
                                 <b:commandButton offset="9" value="Book" iconAwesome="calendar-check-o" look="warning"  action="${campsitebean.removeCampsite}"></b:commandButton>
                             </h:panelGrid>
-                       
                         </p:panel>
                     </p:dataGrid>
-<!--                    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                        <p:outputPanel id="carDetail">
-                            <p:panelGrid  columns="2" columnClasses="label,value">
-                                <f:facet name="header">
-                                    <p:graphicImage name="/resources/images/nature2.jpg"/> 
-                                </f:facet>
-
-                                <h:outputText value="Id:" />
-                                <h:outputText value="83275391" />
-
-                                <h:outputText value="Year" />
-                                <h:outputText value="87250" />
-
-                                <h:outputText value="Color:" />
-                                <h:outputText value="ihgnlg"/>
-
-                                <h:outputText value="Price" />
-                                <h:outputText value="$920587" />
-                            </p:panelGrid>
-                        </p:outputPanel>
-                    </p:dialog>-->
             </div>
         </h:form>
     </h:body>
