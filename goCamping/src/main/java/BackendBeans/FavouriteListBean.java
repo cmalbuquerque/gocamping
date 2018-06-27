@@ -44,7 +44,7 @@ public class FavouriteListBean implements Serializable{
     }
 
     public void setListCampsitesFav(List<Campsite> listCampsitesFav) {
-        this.listCampsitesFav=convertIntToCampsite();
+        this.listCampsitesFav= ex.listarCampsitesFavList(session.getAttribute("username").toString());
     }
 
     public List<Integer> getListIntCampsites() {
@@ -52,7 +52,7 @@ public class FavouriteListBean implements Serializable{
     }
 
     public void setListIntCampsites(List<Integer> listIntCampsites) {
-        this.listIntCampsites =  ex.listarCampsitesFavList(session.getAttribute("username").toString());
+        this.listIntCampsites = listIntCampsites;
                 
     }
     
@@ -65,19 +65,24 @@ public class FavouriteListBean implements Serializable{
     }
         
     public String addFavouriteList(int campsiteID){
-        ex.saveFavouriteList(session.getAttribute("username").toString(), campsiteID); 
-        
+        ex.saveFavouriteList(session.getAttribute("username").toString(), campsiteID);  
+        listCampsitesFav= ex.listarCampsitesFavList(session.getAttribute("username").toString());
         return "favList.xhtml" ;
     }
     
-    
-    public List<Campsite> convertIntToCampsite(){
-        listIntCampsites= ex.listarCampsitesFavList(session.getAttribute("username").toString());
-        for (int elem: listIntCampsites){
-            listCampsitesFav.add(ex.searchCampsite(elem));
-        }
-        return listCampsitesFav;
+    public String removeFavouriteList(int campsiteID){
+        ex.deleteFavouriteList(session.getAttribute("username").toString(), campsiteID);
+        listCampsitesFav= ex.listarCampsitesFavList(session.getAttribute("username").toString());
+        return "favList.xhtml" ;
     }
+            
+//    public List<Campsite> convertIntToCampsite(){
+//        listIntCampsites= ex.listarCampsitesFavList(session.getAttribute("username").toString());
+//        for (int elem: listIntCampsites){
+//            listCampsitesFav.add(ex.searchCampsite(elem));
+//        }
+//        return listCampsitesFav;
+//    }
     
     
 }

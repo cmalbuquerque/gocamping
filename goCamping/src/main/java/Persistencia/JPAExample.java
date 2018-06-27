@@ -926,9 +926,10 @@ public class JPAExample {
         return favouriteList;   
     }
     
-    public List<Integer> listarCampsitesFavList(String username) {
+    public List<Campsite> listarCampsitesFavList(String username) {
         List<FavouriteList> favouriteLists = new ArrayList<FavouriteList>();
         List<Integer> list = new ArrayList<Integer>();
+        List<Campsite> campsites = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();         
             Query query = entityManager.createQuery("select c from FavouriteList as c where c.camperUsername = :username");
@@ -944,7 +945,11 @@ public class JPAExample {
             entityManager.getTransaction().rollback();
             System.out.println("listar campsite with manager didn't work");
         }
-        return list;
+        for (int elem: list){
+            campsites.add(searchCampsite(elem));
+        }
+        
+        return campsites;
     }
         
     public void listFavouriteList() {
@@ -963,10 +968,11 @@ public class JPAExample {
         }
     }
 
-    public void deleteFavouriteList(FavouriteListKey favouriteKey) {
+    public void deleteFavouriteList(String camperUsername, int campsiteID) {
+        FavouriteListKey favKey = new FavouriteListKey(camperUsername, campsiteID);
         try {
             entityManager.getTransaction().begin();
-            FavouriteList favouriteList = (FavouriteList) entityManager.find(FavouriteList.class, favouriteKey);
+            FavouriteList favouriteList = (FavouriteList) entityManager.find(FavouriteList.class, favKey);
             entityManager.remove(favouriteList);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
