@@ -16,7 +16,6 @@
                 <b:navbarLinks>
                     <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
-
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
                     <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
 
@@ -29,8 +28,7 @@
 
             <p:panel style="margin-left: 10%; margin-right: 10%">
                 <h3 align="center" style="color: #72b400"><b:iconAwesome name="tent" />  My Campsites </h3>
-
-                <!-- Content-->
+                
                 <p:dataGrid var="campsite" value="#{campsitebean.listaCampsites}" columns="1" layout="grid"
                             rows="12" paginator="true" id="campsitesID"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -45,10 +43,11 @@
                                 <h:outputText value="Contact:  #{campsite.contact}" />
                                 <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
                                 <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
-                                <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
-                            <br></br>
-                            <b:commandButton offset="9" value="Remove Campsite" iconAwesome="" look="default"  action="#{campsitebean.removeCampsite(campsite.id)}"  ></b:commandButton>
-                            <b:button offset="9" value="Add Accomodation" iconAwesome="plus-circle" look="warning" outcome="/account.xhtml"></b:button>
+                                <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />
+                            <b:commandButton offset="9" value="Remove Campsite" iconAwesome="" look="default"  action="#{campsitebean.removeCampsite(campsite.id)}"  ></b:commandButton> 
+                            <br/>
+                            <b:commandButton offset="9" value="Edit Information" iconAwesome="" look="warning"  ></b:commandButton>
+                            
                         </h:panelGrid>
                     </p:panel>
                 </p:dataGrid>

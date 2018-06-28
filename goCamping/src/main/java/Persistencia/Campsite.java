@@ -47,15 +47,17 @@ public class Campsite implements Serializable {
 
     @Column(name = "description")
     private String description;
+    
+    @Column(name = "adultCapacity")
+    private int adultCapacity;
+
+    @Column(name = "childCapacity")
+    private int childCapacity;
 
     //CHAVE ESTRANGEIRA
     @ManyToOne
     @JoinColumn(name = "manager")
     private Manager manager;
-
-    @OneToMany(targetEntity = Accommodation.class, mappedBy = "campsite")
-    @JoinColumn()
-    private Set<Accommodation> accommodations;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -133,6 +135,23 @@ public class Campsite implements Serializable {
         this.description = description;
     }
 
+    public int getAdultCapacity() {
+        return adultCapacity;
+    }
+
+    public void setAdultCapacity(int adultCapacity) {
+        this.adultCapacity = adultCapacity;
+    }
+
+    public int getChildCapacity() {
+        return childCapacity;
+    }
+
+    public void setChildCapacity(int childCapacity) {
+        this.childCapacity = childCapacity;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -161,7 +180,7 @@ public class Campsite implements Serializable {
 
     @Override
     public String toString() {
-        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + '}';
+        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description +  ", adultCapacity=" + adultCapacity + ", childCapacity=" + childCapacity + '}';
     }
 
 }

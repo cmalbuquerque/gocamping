@@ -32,45 +32,33 @@
                     </b:inputText>
                     <b:datepicker id="checkin" label="Check-in" placeholder="Check-in" value="${searchbean.checkin}" ></b:datepicker>
                     <b:datepicker id="checkout" label="Check-out" placeholder="Check-out" value="${searchbean.checkout}" ></b:datepicker>
-
-                    <b:dropButton value="Type " span="4">
-                        <b:navLink value="Tent Pitch" href="#"></b:navLink>
-                        <b:navLink value="Roulote" href="#"></b:navLink>
-                        <b:navLink value="Bungalow" href="#"></b:navLink>
-                    </b:dropButton>
                     
-
+                    <b:commandButton  value="View Campsites" icon="search" look="success" action="${searchbean.search}"></b:commandButton>
                     <br>&nbsp;</br>
-                    <br>&nbsp;</br>
-                    <div>
-                    <b:commandButton span="9" value="View Campsites" icon="search" look="success" action="${searchbean.search}"></b:commandButton></div>
-                    <br>&nbsp;</br>
-                    <br>&nbsp;</br>
-                    <b:commandButton value="Show All" col-md="2" icon="search" look="success"  action="${searchbean.showAll}"></b:commandButton>
+                    <b:commandButton value="Show All" icon="search" look="success"  action="${searchbean.showAll}"></b:commandButton>
                     
             
             </div>
 
             <div style="float: left; width: 60%">
                     <h3  style="color: #72b400">Results</h3>
-                    <p:dialog header="Campsite Costa Nova" widgetVar="dlg2" modal="true" height="100">
-                        <h:outputText value="This is a description of Campsite Costa Nova" />
-                        <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
-
-                    </p:dialog>  
-
                     <p:dataGrid var="campsite" value="#{searchbean.listaCampsites}" columns="1" layout="grid"
                                 rows="12" paginator="true" id="campsites"
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                 rowsPerPageTemplate="4,8,12" >
+                        <p:dialog header="#{campsite.title}" widgetVar="dlg2" modal="true" height="200">
+                        <h:outputText value="Description:  #{campsite.description}" />
+                        <br/>
+                        <h:outputText value= "Responsável: #{campsite.manager.fullName}" />
+                        <br/>
+                        <h:outputText value="Contacts:  #{campsite.contact}" />
+                        <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
+                        </p:dialog> 
                         <p:panel>
-                          
                             <h:panelGrid columns="1" style="width:100%">
                                 <p:graphicImage name="/resources/images/nature2.jpg"/> 
                                 <h:outputText value="Title:  #{campsite.title}" />
                                 <h:outputText value="Location:  #{campsite.location}" />
-                                <h:outputText value="Description:  #{campsite.description}" />
-                                <h:outputText value="Contact:  #{campsite.contact}" />
                                 <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
                                 <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
                                 <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
@@ -78,7 +66,7 @@
                                 <br></br>
                                 <b:button onclick="PF('dlg2').show();" offset="9" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
                                 <br></br>
-                                <b:commandButton offset="9" value="Book" iconAwesome="calendar-check-o" look="warning"  action="${campsitebean.removeCampsite}"></b:commandButton>
+                                <b:commandButton offset="9" value="Book" iconAwesome="calendar-check-o" look="warning"  action="${bookingbean.view(campsite)}"></b:commandButton>
                             </h:panelGrid>
                         </p:panel>
                     </p:dataGrid>

@@ -39,13 +39,7 @@
                         </f:facet>
                     </b:inputText>
                     <b:datepicker id ="checkin" placeholder="Check-in" col-md="2" value="${searchbean.checkin}"></b:datepicker>
-                    <b:datepicker id ="checkout" placeholder="Check-out" col-md="2"  value="${searchbean.checkout}"></b:datepicker>
-                    <b:dropButton value="Type " col-md="1">
-                        <b:navLink value="Tent Pitch" href="#"></b:navLink>
-                        <b:navLink value="Roulote" href="#"></b:navLink>
-                        <b:navLink value="Bungalow" href="#"></b:navLink>
-                    </b:dropButton>
-                    
+                    <b:datepicker id ="checkout" placeholder="Check-out" col-md="2"  value="${searchbean.checkout}"></b:datepicker>                   
                     <b:commandButton value="View Campsites" col-md="2" icon="search" look="success"  action="${searchbean.search}"></b:commandButton>
                     <b:commandButton value="Show All" col-md="2" icon="search" look="success"  action="${searchbean.showAll}"></b:commandButton>
                 </p>

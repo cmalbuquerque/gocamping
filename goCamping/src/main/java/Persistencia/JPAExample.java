@@ -27,155 +27,14 @@ public class JPAExample {
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
         
-//        System.out.println("CAMPER");
-//        System.out.println("After Sucessfully insertion ");
-//        Camper camper1 = example.saveCamper("patrocinioandreia", "Andreia ", "patrocinioandreia@ua.pt", 123456789, 54321);
-//        Camper camper2 = example.saveCamper("ptpires1", "Pedro ", "ptpires@ua.pt", 678901234, 98076);
-//        example.listCamper();
-//
-//        System.out.println("After Sucessfully modification ");
-////        example.updateCamper(camper1.getUsername(), "Andreia Patrocínio");
-////        example.updateCamper(camper2.getUsername(), "Pedro Pires");
-//        example.listCamper();
-//
-//        System.out.println("After Sucessfully deletion ");
-//        example.deleteCamper(camper2.getUsername());
-//        example.listCamper();
-//        System.out.println("\n\n");
-//
-//        System.out.println("MANAGER");
-//        System.out.println("After Sucessfully insertion ");
-//        Manager manager1 = example.saveManager("cmalbuquerque", "Carolina", "camalbuquerque@ua.pt", 764386974);
-//        Manager manager2 = example.saveManager("diogojorge", "Diogo", "dj97@ua.pt", 572853657);
-//        Manager manager3 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", 237583456);
-//        example.listManager();
-//
-//        System.out.println("After Sucessfully modification ");
-////        example.updateManager(manager1.getUsername(), "Carolina Albuquerque");
-////        example.updateManager(manager2.getUsername(), "Diogo Jorge");
-//        example.listCamper();
-//
-//        System.out.println("After Sucessfully deletion ");
-//        example.deleteManager(manager3.getUsername());
-//        example.listManager();
-//        System.out.println("\n\n");
-//
-//        System.out.println("USER");
-//        Utilizador user1 = example.saveUtilizador(camper2, null, camper2.getUsername(), "testword");
-//        Utilizador user2 = example.saveUtilizador(null, manager3, manager3.getUsername(), "password");
-//        
-//        System.out.println("Listing users");
-//        example.searchUtilizador("joana");
-//        System.out.println("\n\n");
-//
-//        System.out.println("CAMPSITE");
-//        System.out.println("After Sucessfully insertion ");
-//        Campsite campsite1 = example.saveCampsite( "Costa Nova Campsite", "Praia da Costa Nova", 30.0, 15.0, 5.0, "9347652781", "inserir descrição", manager1);
-//        Campsite campsite2 = example.saveCampsite("Barra Campsite", "Praia da Barra", 25.0, 10.0, 5.0, "9347652781", "inserir descrição", manager2);
-//        Campsite campsite3 = example.saveCampsite("Sol Nascente", "Macedo de Cavaleiros", 20.0, 10.0, 2.0, "9347652781", "inserir descrição", manager1);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully modification ");
-//        example.updateCampsite(campsite1.getId(), "Praia da Costa Nova, Aveiro");
-//        example.updateCampsite(campsite2.getId(), "Praia da Barra, Aveiro");
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully deletion ");
-//        example.deleteCampsite(campsite3.getId());
-//        example.listCampsite();
-//
-//        System.out.println("ACCOMMODATION");
-//        System.out.println("After Sucessfully insertion ");
-//        Accommodation accommodation1 = example.saveAccommodation(71, "bungalow", campsite1);
-//        Accommodation accommodation5 = example.saveAccommodation(75, "bungalow", campsite1);
-//        Accommodation accommodation6 = example.saveAccommodation(76, "bungalow", campsite1);
-//        Accommodation accommodation2 = example.saveAccommodation(72, "tent", campsite1);
-//        Accommodation accommodation3 = example.saveAccommodation(73, "roulote", campsite1);
-//        Accommodation accommodation7 = example.saveAccommodation(77, "roulote", campsite1);
-//        Accommodation accommodation4 = example.saveAccommodation(74, "bungalow", campsite1);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully modification ");
-//        example.updateAccommodation(accommodation1.getId(), "tent");
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully deletion ");
-//        example.deleteAccommodation(accommodation4.getId());
-//        example.listCampsite();
-//
-//        System.out.println("BUNGALOW");
-//        System.out.println("After Sucessfully insertion ");
-//        Bungalow bungalow1 = example.saveBungalow(76, 40.0, 35.0, 10.0, 3, 4);
-//        Bungalow bungalow2 = example.saveBungalow(75, 20.0, 25.0, 10.0, 2, 2);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully modification ");
-//        example.updateBungalow(bungalow1.getAccommodationID(), 40.5, 36.0);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully deletion ");
-//        example.deleteBungalow(bungalow2.getAccommodationID());
-//        example.listCampsite();
-//
-//        System.out.println("TENT PITCH");
-//        System.out.println("After Sucessfully insertion ");
-//        TentPitch tent1 = example.saveTentPitch(71, 18.0, 20.0, 10.0);
-//        TentPitch tent2 = example.saveTentPitch(72, 18.0, 20.0, 10.0);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully modification ");
-//        example.updateTentPitch(tent1.getAccommodationID(), 21.0, 21.0);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully deletion ");
-//        example.deleteTentPitch(tent2.getAccommodationID());
-//        example.listCampsite();
-//
-//        System.out.println("ROULOTE PITCH");
-//        System.out.println("After Sucessfully insertion ");
-//        RoulotePitch roulote1 = example.saveRoulotePitch(73, 15.0, 18.0, 10.0);
-//        RoulotePitch roulote2 = example.saveRoulotePitch(77, 15.0, 18.0, 10.0);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully modification ");
-//        example.updateRoulotePitch(roulote1.getAccommodationID(), 16.0, 18.0);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully deletion ");
-//        example.deleteRoulotePitch(roulote2.getAccommodationID());
-//        example.listCampsite();
-//
-//        System.out.println("RESERVATION");
-//        System.out.println("After Sucessfully insertion ");
-//        Date date = new Date(2018, 05, 22);
-//        Date date1 = new Date(2018, 05, 25);
-//        Date date2 = new Date(2018, 05, 27);
-//        Reservation reservation1 = example.saveReservation(1000, date, date1, camper1, accommodation6);
-//        Reservation reservation2 = example.saveReservation(1001, date, date1, camper1, accommodation3);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully modification ");
-//        example.updateReservation(reservation1.getId(), date, date2);
-//        example.listCampsite();
-//
-//        System.out.println("After Sucessfully deletion ");
-//        example.deleteReservation(reservation2.getId());
-//        example.listCampsite();
-//
-//        System.out.println("CAMPSITE IMAGES");
-//        System.out.println("After Sucessfully insertion ");
-//        CampsiteImage image1 = example.saveCampsiteImage(campsite1, "foto1");
-//        CampsiteImage image2 = example.saveCampsiteImage(campsite1, "foto2");
-//        CampsiteImage image3 = example.saveCampsiteImage(campsite1, "foto3");
-//        CampsiteImageKey imageKey = new CampsiteImageKey(campsite1.getId(), "foto3");
-//
-//        example.listCampsiteImage();
-//
-//        System.out.println("After Sucessfully deletion ");
-//        example.deleteCampsiteImage(imageKey);
-//        example.listCampsiteImage();
-//       
-            example.saveFavouriteList("diogo97", 1);
+        Camper camper1 = example.saveCamper("kiko","Francisco Salvador", "kikinho@ua.pt", 123456789, 23456);
+        Manager manager1 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", 987654321);
+        Utilizador user1 = example.saveUtilizador(camper1, null, "kiko", "password");
+        Utilizador user2 = example.saveUtilizador(null, manager1, "joana", "password");
+        
+        Campsite campsite1= example.saveCampsite("Parque de Campismo da Fajã do Ouvidor", "São Jorge, Açores", 15, 5, 0, "9191919191", "A ilha ideal para umas férias perfeitas! Um parque muito adequado para crianças cheias de energia.", manager1);
+        Campsite campsite2 = example.saveCampsite("Garfe Parque", "Garfe, Póvoa de Lanhoso", 20, 10, 5, "934765273", "O lugar ideal para umas férias calmas.", manager1);
+        
 
     }
 
@@ -198,6 +57,24 @@ public class JPAExample {
             System.out.println("save didn't work on camper");
         }
         return camper;
+    }
+        
+     public Camper searchCamper(String name) {
+        Camper user = new Camper();
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select c from Camper c where c.username = :name");
+            query.setParameter("name", name);
+            List<Camper> utilizador = query.getResultList();
+            for (Iterator<Camper> iterator = utilizador.iterator(); iterator.hasNext();) {
+                user = (Camper) iterator.next();
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("camper search didn't work");
+        }
+        return user;
     }
 
     public void listCamper() {
@@ -365,7 +242,6 @@ public class JPAExample {
             List<Utilizador> utilizador = query.getResultList();
             for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
                 user = (Utilizador) iterator.next();
-                System.out.println(user.getUsername() + " \t" + user.getPassword());
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -373,101 +249,6 @@ public class JPAExample {
             System.out.println("utilizador search didn't work");
         }
         return user;
-    }
-    
-    public int getUtilizadorNIF(String name){
-        Utilizador user = new Utilizador();
-        int NIF=0;
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
-            query.setParameter("name", name);
-            List<Utilizador> utilizador = query.getResultList();
-            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
-                user = (Utilizador) iterator.next();
-                if(user.getManager()==null){
-                     NIF= user.getCamper().getNIF();
-                }
-                else{
-                    NIF= user.getManager().getNIF();
-                }
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("get utilizador nif didn't work");
-        }
-        return NIF;
-    }
-    
-    public String getUtilizadorFullName(String name){
-        Utilizador user = new Utilizador();
-        String fullName="";
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
-            query.setParameter("name", name);
-            List<Utilizador> utilizador = query.getResultList();
-            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
-                user = (Utilizador) iterator.next();
-                if(user.getManager()==null){
-                    fullName= user.getCamper().getFullName();
-                }
-                else{
-                    fullName= user.getManager().getFullName();
-                }
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("get utilizador full name didn't work");
-        }
-        return fullName;
-    }
-    
-    public String getUtilizadorEmail(String name){
-        Utilizador user = new Utilizador();
-        String email="";
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
-            query.setParameter("name", name);
-            List<Utilizador> utilizador = query.getResultList();
-            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
-                user = (Utilizador) iterator.next();
-                if(user.getManager()==null){
-                    email= user.getCamper().getEmail();
-                }
-                else{
-                    email= user.getManager().getEmail();
-                }
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("get utilizador email didn't work");
-        }
-        return email;
-    }
-    
-    public int getUtilizadorCampingCard(String name){
-        Utilizador user = new Utilizador();
-        int card=0;
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
-            query.setParameter("name", name);
-            List<Utilizador> utilizador = query.getResultList();
-            for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
-                user = (Utilizador) iterator.next();
-                card= user.getCamper().getCampsiteCard();     
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("get utilizador nif didn't work");
-        }
-        return card;
     }
 
     public Campsite saveCampsite(String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager) {
@@ -538,7 +319,6 @@ public class JPAExample {
             Query query = entityManager.createQuery("select c from Campsite as c where c.manager = :manager");
             query.setParameter("manager", manager);
             campsites = query.getResultList();
-            System.out.println("elefante" + campsites);
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
                 Campsite campsite = (Campsite) iterator.next();
                 list.add(campsite);
@@ -670,20 +450,24 @@ public class JPAExample {
   
  
 
-    public Reservation saveReservation(int id, Date startate, Date endDate, Camper camper, Accommodation accommodation) {
+    public Reservation saveReservation(Date startDate, Date endDate, Camper camper, Campsite campsite, int nrAdults, int nrChildren, int nrBabies, int cellphone, double totalPrice) {
         Reservation reservation = new Reservation();
         System.out.println("new Reservation");
         try {
             entityManager.getTransaction().begin();
-            //System.out.println("at the start of transaction");
-            reservation.setId(id);
-            reservation.setStartDate(startate);
+            System.out.println("at the start of transaction");
+            reservation.setStartDate(startDate);
             reservation.setEndDate(endDate);
             reservation.setCamper(camper);
-            reservation.setAccommodation(accommodation);
+            reservation.setCampsite(campsite);
+            reservation.setCellfone(cellphone);
+            reservation.setNrAdults(nrAdults);
+            reservation.setNrBabies(nrBabies);
+            reservation.setNrChildren(nrChildren);
+            reservation.setTotalPrice(totalPrice);
             entityManager.persist(reservation);
             entityManager.getTransaction().commit();
-            //System.out.println("just after comit");
+            System.out.println("just after comit");
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("save  didnt' work on reservation");
@@ -698,7 +482,6 @@ public class JPAExample {
             List<Reservation> reservations = query.getResultList();
             for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
                 Reservation reservation = (Reservation) iterator.next();
-                System.out.println(reservation.getId() + "\t" + reservation.getCamper() + "\t" + reservation.getAccommodation());
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -729,250 +512,6 @@ public class JPAExample {
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("delete reservation didn't work");
-        }
-    }
-
-    public Accommodation saveAccommodation(int id, String type, Campsite campsite) {
-        Accommodation accommodation = new Accommodation();
-        System.out.println("new Accommodation");
-        try {
-            entityManager.getTransaction().begin();
-            //System.out.println("at the start of transaction");
-            accommodation.setId(id);
-            accommodation.setType(type);
-            accommodation.setCampsite(campsite);
-            entityManager.persist(accommodation);
-            entityManager.getTransaction().commit();
-            //System.out.println("just after comit");
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("save  didnt' work on accommodation");
-        }
-        return accommodation;
-    }
-
-    public void listAccommodation() {
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Accommodation c");
-            List<Accommodation> accommodations = query.getResultList();
-            for (Iterator<Accommodation> iterator = accommodations.iterator(); iterator.hasNext();) {
-                Accommodation accommodation = (Accommodation) iterator.next();
-                System.out.println(accommodation.getId() + "\t" + accommodation.getCampsite());
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("accommodation listing didn't work");
-        }
-    }
-
-    public void updateAccommodation(int id, String type) {
-        try {
-            entityManager.getTransaction().begin();
-            Accommodation accommodation = (Accommodation) entityManager.find(Accommodation.class, id);
-            accommodation.setType(type);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("update accommodation didn't work");
-        }
-    }
-
-    public void deleteAccommodation(int id) {
-        try {
-            entityManager.getTransaction().begin();
-            Accommodation accommodation = (Accommodation) entityManager.find(Accommodation.class, id);
-            entityManager.remove(accommodation);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("delete accommodation didn't work");
-        }
-    }
-
-    public Bungalow saveBungalow(int accommodationID, double area, double price, double campingCardDiscount, int bedrooms, int capacity) {
-        Bungalow bungalow = new Bungalow();
-        System.out.println("new Bungalow");
-        try {
-            entityManager.getTransaction().begin();
-            //System.out.println("at the start of transaction");
-            bungalow.setAccommodationID(accommodationID);
-            bungalow.setArea(area);
-            bungalow.setPrice(price);
-            bungalow.setCampingCardDiscount(campingCardDiscount);
-            bungalow.setBedrooms(bedrooms);
-            bungalow.setCapacity(capacity);
-            entityManager.persist(bungalow);
-            entityManager.getTransaction().commit();
-            //System.out.println("just after comit");
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("save  didnt' work on bungalow");
-        }
-        return bungalow;
-    }
-
-    public void listBungalow() {
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Bungalow c");
-            List<Bungalow> bungalows = query.getResultList();
-            for (Iterator<Bungalow> iterator = bungalows.iterator(); iterator.hasNext();) {
-                Bungalow bungalow = (Bungalow) iterator.next();
-                System.out.println(bungalow.getAccommodationID() + "\t" + bungalow.getPrice());
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("bungalow listing didn't work");
-        }
-    }
-
-    public void updateBungalow(int accommodationID, double area, double price) {
-        try {
-            entityManager.getTransaction().begin();
-            Bungalow bungalow = (Bungalow) entityManager.find(Bungalow.class, accommodationID);
-            bungalow.setArea(area);
-            bungalow.setPrice(price);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("update bungalow didn't work");
-        }
-    }
-
-    public void deleteBungalow(int accommodationID) {
-        try {
-            entityManager.getTransaction().begin();
-            Bungalow bungalow = (Bungalow) entityManager.find(Bungalow.class, accommodationID);
-            entityManager.remove(bungalow);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("delete bungalow didn't work");
-        }
-    }
-
-    public TentPitch saveTentPitch(int accommodationID, double area, double price, double campingCardDiscount) {
-        TentPitch tent = new TentPitch();
-        System.out.println("new Tent Pitch");
-        try {
-            entityManager.getTransaction().begin();
-            //System.out.println("at the start of transaction");
-            tent.setAccommodationID(accommodationID);
-            tent.setArea(area);
-            tent.setPrice(price);
-            tent.setCampingCardDiscount(campingCardDiscount);
-            entityManager.persist(tent);
-            entityManager.getTransaction().commit();
-            //System.out.println("just after comit");
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("save  didnt' work on tent pitch");
-        }
-        return tent;
-    }
-
-    public void listTentPitch() {
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from TentPitch c");
-            List<TentPitch> tents = query.getResultList();
-            for (Iterator<TentPitch> iterator = tents.iterator(); iterator.hasNext();) {
-                TentPitch tent = (TentPitch) iterator.next();
-                System.out.println(tent.getAccommodationID() + "\t" + tent.getPrice());
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("tent pitch listing didn't work");
-        }
-    }
-
-    public void updateTentPitch(int accommodationID, double area, double price) {
-        try {
-            entityManager.getTransaction().begin();
-            TentPitch tent = (TentPitch) entityManager.find(TentPitch.class, accommodationID);
-            tent.setArea(area);
-            tent.setPrice(price);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("update tent pitch didn't work");
-        }
-    }
-
-    public void deleteTentPitch(int accommodationID) {
-        try {
-            entityManager.getTransaction().begin();
-            TentPitch tent = (TentPitch) entityManager.find(TentPitch.class, accommodationID);
-            entityManager.remove(tent);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("delete tent pitch didn't work");
-        }
-    }
-
-    public RoulotePitch saveRoulotePitch(int accommodationID, double area, double price, double campingCardDiscount) {
-        RoulotePitch roulote = new RoulotePitch();
-        System.out.println("new Roulote Pitch");
-        try {
-            entityManager.getTransaction().begin();
-            //System.out.println("at the start of transaction");
-            roulote.setAccommodationID(accommodationID);
-            roulote.setArea(area);
-            roulote.setPrice(price);
-            roulote.setCampingCardDiscount(campingCardDiscount);
-            entityManager.persist(roulote);
-            entityManager.getTransaction().commit();
-            //System.out.println("just after comit");
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("save  didnt' work on tent pitch");
-        }
-        return roulote;
-    }
-
-    public void listRoulotePitch() {
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from TentPitch c");
-            List<RoulotePitch> roulotes = query.getResultList();
-            for (Iterator<RoulotePitch> iterator = roulotes.iterator(); iterator.hasNext();) {
-                RoulotePitch roulote = (RoulotePitch) iterator.next();
-                System.out.println(roulote.getAccommodationID() + "\t" + roulote.getPrice());
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("roulote pitch listing didn't work");
-        }
-    }
-
-    public void updateRoulotePitch(int accommodationID, double area, double price) {
-        try {
-            entityManager.getTransaction().begin();
-            RoulotePitch roulote = (RoulotePitch) entityManager.find(RoulotePitch.class, accommodationID);
-            roulote.setArea(area);
-            roulote.setPrice(price);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("update roulote pitch didn't work");
-        }
-    }
-
-    public void deleteRoulotePitch(int accommodationID) {
-        try {
-            entityManager.getTransaction().begin();
-            RoulotePitch roulote = (RoulotePitch) entityManager.find(RoulotePitch.class, accommodationID);
-            entityManager.remove(roulote);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("delete roulote pitch didn't work");
         }
     }
 

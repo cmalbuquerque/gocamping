@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import static javax.persistence.TemporalType.DATE;
 
@@ -44,18 +43,72 @@ public class Reservation implements Serializable {
     @Column(name = "endDate")
     private Date endDate;
     
-        //chaves estrangeiras
-
+    @Column (name = "cellfone")
+    private int cellfone;
+    
+    @Column (name="nrAdults")
+    private int nrAdults;
+    
+    @Column (name="nrChildren")
+    private int nrChildren;
+    
+    @Column (name="nrBabies")
+    private int nrBabies;
+    
+    @Column (name="totalPrice")
+    private double totalPrice;
+    
+    
+    //chaves estrangeiras
     @ManyToOne
     @JoinColumn(name = "camper")
     private Camper camper;
     
     @ManyToOne
-    @JoinColumn(name = "accommodation")
-    private Accommodation accommodation;
+    @JoinColumn(name = "campsite")
+    private Campsite campsite;
+
+    public int getNrBabies() {
+        return nrBabies;
+    }
+
+    public void setNrBabies(int nrBabies) {
+        this.nrBabies = nrBabies;
+    }
+    
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public int getCellfone() {
+        return cellfone;
+    }
+
+    public void setCellfone(int cellfone) {
+        this.cellfone = cellfone;
+    }
+
+    public int getNrAdults() {
+        return nrAdults;
+    }
+
+    public void setNrAdults(int nrAdults) {
+        this.nrAdults = nrAdults;
+    }
+
+    public int getNrChildren() {
+        return nrChildren;
+    }
+
+    public void setNrChildren(int nrChildren) {
+        this.nrChildren = nrChildren;
+    }
    
-    
-    
+      
 
     public int getId() {
         return id;
@@ -73,13 +126,14 @@ public class Reservation implements Serializable {
         this.camper = camper;
     }
 
-    public Accommodation getAccommodation() {
-        return accommodation;
+    public Campsite getCampsite() {
+        return campsite;
     }
 
-    public void setAccommodation(Accommodation accommodation) {
-        this.accommodation = accommodation;
+    public void setCampsite(Campsite campsite) {
+        this.campsite = campsite;
     }
+
 
     public Date getStartDate() {
         return startDate;
@@ -121,7 +175,7 @@ public class Reservation implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (this.accommodation  != other.accommodation) {
+        if (this.campsite  != other.campsite) {
             return false;
         }
         
@@ -133,8 +187,10 @@ public class Reservation implements Serializable {
 
     @Override
     public String toString() {
-        return "Reservation{" + "id=" + id + ", camper=" + camper + ", accommodation=" + accommodation  + ", startDate=" + startDate + ", endDate=" + endDate + '}';
+        return "Reservation{" + "id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", cellfone=" + cellfone + ", nrAdults=" + nrAdults + ", nrChildren=" + nrChildren + ", nrBabies=" + nrBabies + ", totalPrice=" + totalPrice + ", camper=" + camper + ", campsite=" + campsite + '}';
     }
+
+   
     
     
 
