@@ -18,6 +18,7 @@
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
                     <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
+                    <b:navLink icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
@@ -48,15 +49,15 @@
 
                     <b:row>
                         <b:column span="2">
-                            <b:inputText label="Number of Adults" placeholder="Number of Adults" value="#{bookingbean.nrAdults}">
+                            <b:inputText label="Nr of Adults" placeholder="Number of Adults" value="#{bookingbean.nrAdults}">
                                 <f:facet name="prepend">
                                     <b:icon name="user" />
                                 </f:facet>
                             </b:inputText>
                         </b:column>
 
-                        <b:column span="3">
-                            <b:inputText label="Number of children" placeholder="Number of Children" value="#{bookingbean.nrChildren}">
+                        <b:column span="2">
+                            <b:inputText label="Nr of children" placeholder="Number of Children" value="#{bookingbean.nrChildren}">
                                 <f:facet name="prepend">
                                     <b:icon name="user" />
                                 </f:facet>
@@ -64,13 +65,13 @@
                         </b:column>
                         
                         <b:column span="2">
-                            <b:inputText label="Number of Babies" placeholder="Number of Babies" value="#{bookingbean.nrBabies}">
+                            <b:inputText label="Nr of Babies" placeholder="Number of Babies" value="#{bookingbean.nrBabies}">
                                 <f:facet name="prepend">
                                     <b:icon name="user" />
                                 </f:facet>
                             </b:inputText>
                         </b:column>
-                        <b:column span="5">
+                        <b:column span="6">
                             <b:inputText placeholder="Fiscal Number" label="Fiscal Number" value="#{bookingbean.NIF}">
                                 <f:facet name="prepend">
                                     <b:iconAwesome name="address-card-o" />
@@ -107,8 +108,10 @@
                             </b:inputText>
                         </b:column>
                     </b:row>
-                    <b:commandButton offset="9" value="Confirm Reservation" iconAwesome="" look="success" action = "#{bookingbean.booking(searchbean.checkin,searchbean.checkout)}"></b:commandButton>
-                    <br>&nbsp;</br>
+                    <b:row>
+                        <b:column span="9"></b:column>
+                        <b:commandButton span="3" value="Confirm Reservation" iconAwesome="check" look="success" action = "#{bookingbean.booking(searchbean.checkin,searchbean.checkout)}"></b:commandButton>
+                    </b:row>
                 </b:form>           
             </p:panel>
 

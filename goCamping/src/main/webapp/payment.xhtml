@@ -18,6 +18,7 @@
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
                     <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
+                    <b:navLink icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
@@ -31,7 +32,7 @@
                 
                 <br>&nbsp;</br>
                 <b:form horizontal="true" id="payment">
-
+                    <b:inputText disabled="true"  value = "Your reservation ID is: #{bookingbean.reservation.id} €"></b:inputText>
                     <b:inputText disabled="true" placeholder="Total" label="Total" value = "#{bookingbean.totalPrice} €">
                     </b:inputText>
 

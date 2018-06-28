@@ -474,7 +474,28 @@ public class JPAExample {
         }
         return reservation;
     }
-
+    
+     public List<Reservation> listarReservations(Camper camper) {
+        List<Reservation> reservations = new ArrayList<Reservation>();
+        List<Reservation> list = new ArrayList<Reservation>();
+        try {
+            entityManager.getTransaction().begin();         
+            Query query = entityManager.createQuery("select c from Reservation as c where c.camper = :camper");
+            query.setParameter("camper", camper);
+            reservations = query.getResultList();
+            for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
+                Reservation reservation = (Reservation) iterator.next();
+                list.add(reservation);
+            }
+            System.out.println("just before commit");
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("listar reservation with camper didn't work");
+        }
+        return list;
+    }
+    
     public void listReservation() {
         try {
             entityManager.getTransaction().begin();

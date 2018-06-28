@@ -18,7 +18,7 @@
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
                     <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
-
+                    <b:navLink icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
@@ -37,13 +37,13 @@
                     <p:panel>
                         <h:panelGrid columns="1" style="width:100%">
                             <p:graphicImage name="/resources/images/nature2.jpg"/> 
-                                <h:outputText value="Title:  #{campsite.title}" />
-                                <h:outputText value="Location:  #{campsite.location}" />
-                                <h:outputText value="Description:  #{campsite.description}" />
-                                <h:outputText value="Contact:  #{campsite.contact}" />
-                                <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
-                                <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
-                                <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />
+                            <h:outputText value="Title:  #{campsite.title}" />
+                            <h:outputText value="Location:  #{campsite.location}" />
+                            <h:outputText value="Description:  #{campsite.description}" />
+                            <h:outputText value="Contact:  #{campsite.contact}" />
+                            <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
+                            <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
+                            <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />
                             <b:commandButton offset="9" value="Remove Campsite" iconAwesome="" look="default"  action="#{campsitebean.removeCampsite(campsite.id)}"  ></b:commandButton> 
                             <br/>
                             <b:commandButton offset="9" value="Edit Information" iconAwesome="" look="warning"  ></b:commandButton>

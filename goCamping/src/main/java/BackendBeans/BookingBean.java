@@ -11,6 +11,7 @@ import Persistencia.JPAExample;
 import Persistencia.Reservation;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -48,11 +49,13 @@ public class BookingBean implements Serializable{
     private int campingCard;
     @ManagedProperty (value = "#{totalPrice}")
     private double totalPrice;
-    
+    @ManagedProperty (value="#{listBooks}")
+    private List<Reservation> listBooks;
     
     private Date checkin;
     private Date checkout;
     
+    private Reservation reservation;
     private Campsite campsite;
     private Camper camper;
     private SearchBean searchBean;
@@ -60,6 +63,22 @@ public class BookingBean implements Serializable{
     JPAExample ex = new JPAExample(); 
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+   
+    public List<Reservation> getListBooks() {
+        return listBooks;
+    }
+
+    public void setListBooks(List<Reservation> listBooks) {
+        this.listBooks = ex.listarReservations(ex.searchCamper(session.getAttribute("username").toString()));
+    }
     
     public int getNrBabies() {
         return nrBabies;
@@ -161,6 +180,7 @@ public class BookingBean implements Serializable{
         calculatePrice();
         Reservation reservation = ex.saveReservation(checkin, checkout, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
         calculatePrice();
+        listBooks=ex.listarReservations(ex.searchCamper(session.getAttribute("username").toString()));
         return "payment.xhtml";
     }
     

@@ -16,6 +16,7 @@
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
                     <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
+                    <b:navLink icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
@@ -32,10 +33,11 @@
                     </b:inputText>
                     <b:datepicker id="checkin" label="Check-in" placeholder="Check-in" value="${searchbean.checkin}" ></b:datepicker>
                     <b:datepicker id="checkout" label="Check-out" placeholder="Check-out" value="${searchbean.checkout}" ></b:datepicker>
+                    <b:row>
+                        <b:commandButton span="6" value="View Campsites" icon="search" look="success" action="${searchbean.search}"></b:commandButton>
+                        <b:commandButton span="6" value="Show All" icon="search" look="success"  action="${searchbean.showAll}"></b:commandButton>
+                    </b:row>
                     
-                    <b:commandButton  value="View Campsites" icon="search" look="success" action="${searchbean.search}"></b:commandButton>
-                    <br>&nbsp;</br>
-                    <b:commandButton value="Show All" icon="search" look="success"  action="${searchbean.showAll}"></b:commandButton>
                     
             
             </div>
@@ -62,11 +64,14 @@
                                 <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
                                 <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
                                 <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
-                                <b:commandButton offset="9" value="Add Favourite List" iconAwesome="heart" look="default" action = "#{favouritelistbean.addFavouriteList(campsite.id)}"></b:commandButton>
-                                <br></br>
-                                <b:button onclick="PF('dlg2').show();" offset="9" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
-                                <br></br>
-                                <b:commandButton offset="9" value="Book" iconAwesome="calendar-check-o" look="warning"  action="${bookingbean.view(campsite)}"></b:commandButton>
+                                <br/>
+                                <b:row>
+                                    <b:column span="3"></b:column>
+                                    <b:commandButton span ="3" value="Add Favourite" iconAwesome="heart" look="default" action = "#{favouritelistbean.addFavouriteList(campsite.id)}"></b:commandButton>
+                                    <b:button onclick="PF('dlg2').show();" span="3" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
+                                    <b:commandButton span="3" value="Book" iconAwesome="calendar-check-o" look="warning"  action="${bookingbean.view(campsite)}"></b:commandButton>
+                                </b:row> 
+                               
                             </h:panelGrid>
                         </p:panel>
                     </p:dataGrid>
