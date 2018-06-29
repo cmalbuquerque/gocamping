@@ -27,12 +27,11 @@
             </b:navBar>
 
             
-            
-            <p:panel style="margin-left: 10%; margin-right: 10%; width: 80%;">
-                <h3 style="color: #72b400"><b:iconAwesome name="cogs" /> Account Settings<br>&nbsp;</br></h3>
-                <h4 style="color: ">Personal Information</h4>
-                        <br>&nbsp;</br>
-                        <h:panelGrid>
+            <h3 style="color: #72b400; margin-left: 10%; margin-top:5%"><b:iconAwesome name="cogs" /> Account Settings<br>&nbsp;</br></h3>
+                
+            <p:panel style="margin-left: 10%; margin-right: 5%; width: 35%; float: left">
+                <h4 style="text-align: center">Personal Information</h4>
+                        <h:panelGrid style="margin-left: 15%; margin-top: 7%">
                             <b:inputText placeholder="Full Name" label="Full Name" value = "#{accountbean.fullName}">
                                 <f:facet name="prepend">
                                     <b:icon name="user" />
@@ -47,16 +46,15 @@
                                 <f:facet name="prepend">
                                     <b:iconAwesome name="address-card-o" />
                                 </f:facet>
-                            </b:inputText>
+                            </b:inputText><br>&nbsp;</br>
                             <b:commandButton value="Save" iconAwesome="check" look="success"  action="#{accountbean.editPersonalInformation}"></b:commandButton>
                         </h:panelGrid>
             </p:panel>
             
             
-            <p:panel style="margin-left: 10%; margin-right: 10%; width: 80%;">   
-                <h4 style="color: ">Login Access</h4>
-                <br>&nbsp;</br>
-                <h:panelGrid>
+            <p:panel style="margin-right: 10%; width: 35%; float: left; ">   
+                <h4 style="text-align: center">Login Access</h4>
+                <h:panelGrid style="margin-left: 15%; margin-top: 7%">
                     <b:inputSecret placeholder="Old Password" label="Old Password" value="#{accountbean.password}">
                         <f:facet name="prepend">
                             <b:iconAwesome name="key" />
@@ -71,8 +69,8 @@
                         <f:facet name="prepend">
                             <b:iconAwesome name="key" />
                         </f:facet>
-                    </b:inputSecret>
-                    <b:commandButton value="Save"  iconAwesome="check" look="success"  action="#{accountbean.editLoginAccess}"></b:commandButton>
+                    </b:inputSecret><br>&nbsp;</br>
+                    <b:commandButton offset="1"  value="Save"  iconAwesome="check" look="success"  action="#{accountbean.editLoginAccess}"></b:commandButton>
                 </h:panelGrid>
             </p:panel>
 
