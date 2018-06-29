@@ -32,7 +32,7 @@
                 
                 <br>&nbsp;</br>
                 <b:form horizontal="true" id="payment">
-                    <b:inputText disabled="true"  value = "Your reservation ID is: #{bookingbean.reservation.id} €"></b:inputText>
+                    <b:inputText disabled="true"  value = "Your reservation ID is: "></b:inputText>
                     <b:inputText disabled="true" placeholder="Total" label="Total" value = "#{bookingbean.totalPrice} €">
                     </b:inputText>
 
@@ -50,7 +50,7 @@
 
                     <br>&nbsp;</br>
                     <b:button span ="2" value="Back" look="default" outcome="/booking.xhtml" />
-                    <b:button span ="2" value="Finish" look="success" outcome="/index.xhtml" />
+                    <b:button span ="2" value="Finish" look="success" outcome="/myReservations.xhtml" />
                     <br>&nbsp;</br>
                 </b:form>
             </p:panel>

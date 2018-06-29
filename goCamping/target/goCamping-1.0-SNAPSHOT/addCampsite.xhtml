@@ -29,22 +29,15 @@
                 <h3 style="color: #72b400"><b:iconAwesome name="plus-circle" />  Add a Campsite </h3>
                 <b:inputText col-lg="7" id="title" label="Title" value = "#{campsitebean.title}"></b:inputText>
                 <b:inputText col-lg="5" id="Nif" label="Company Fiscal Number" disabled="true" value = "#{campsitebean.NIF}"></b:inputText>
-                <b:inputText col-lg="12" id="location" label="Location"  value="#{campsitebean.location}"></b:inputText>
-
+                <b:inputText col-lg="7" id="location" label="Location"  value="#{campsitebean.location}"></b:inputText>
+                <b:inputText col-lg="5" label="Contacts" value="#{campsitebean.contacts}"></b:inputText>
                 <b:inputTextarea col-lg="12" id="Description" label="Description" value="#{campsitebean.desc}"></b:inputTextarea>
-                
-
-                <p><label>Prices</label></p>
-                <b:form horizontal="true" >
-                    <b:formGroup>
-                        <b:inputText label="Adults" col-lg="8" value="#{campsitebean.adultsPrice}"></b:inputText>
-                        <b:inputText col-lg="8" label="Children (between 4 and 12 years)" value="#{campsitebean.childsPrice}"></b:inputText>
-                        <b:inputText col-lg="8" label="Babies (between 0 and 3 years)" value="#{campsitebean.babiesPrice}"></b:inputText>
-
-                    </b:formGroup>
-                </b:form>
-
-                <b:inputText label="Contacts" value="#{campsitebean.contacts}"></b:inputText>
+                <p><label>Prices</label></p>                
+                <b:row>
+                    <b:inputText  col-lg="4" label="Adults" value="#{campsitebean.adultsPrice}"></b:inputText>
+                    <b:inputText col-lg="4" label="Children (4-12 years)" value="#{campsitebean.childsPrice}"></b:inputText>
+                    <b:inputText col-lg="4" label="Babies (0-3 years)" value="#{campsitebean.babiesPrice}"></b:inputText>
+                </b:row>
                 <b:row>
                     <b:column span="10"></b:column>
                     <b:commandButton  span = "2" value="Add"  iconAwesome="plus-circle" look="success"  action="#{campsitebean.addCampsite}"></b:commandButton>

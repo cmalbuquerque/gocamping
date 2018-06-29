@@ -25,9 +25,11 @@
                     <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
                 </b:navbarLinks>
             </b:navBar>
-
+           
             <p:panel style="margin-left: 10%; margin-right: 10%">
                 <h3 align="center" style="color: #72b400"><b:iconAwesome name="tent" />  My Reservations </h3>
+                
+                
                 
                 <p:dataGrid var="reservation" value="#{bookingbean.listBooks}" columns="1" layout="grid"
                             rows="12" paginator="true" id="campsitesID"
@@ -43,8 +45,14 @@
                                 <h:outputText value="Check-out:  #{reservation.endDate}" />
                                 <h:outputText value="Total Price:  #{reservation.totalPrice} €" />
                                 <h:outputText value="Contacts:  #{reservation.campsite.contact}" />
+                                <b:row>
+                                    <b:column span="10"></b:column>
+                                    <b:commandButton span="2" value="Cancel" iconAwesome="times" look="default" action="#{bookingbean.cancelReservation(reservation.id, reservation.startDate)}"></b:commandButton>                                   
+                                  </b:row>
                         </h:panelGrid>
                     </p:panel>
+                    
+                     
                 </p:dataGrid>
             </p:panel>
         </h:form>

@@ -49,12 +49,16 @@
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                 rowsPerPageTemplate="4,8,12" >
                         <p:dialog header="#{campsite.title}" widgetVar="dlg2" modal="true" height="200">
-                        <h:outputText value="Description:  #{campsite.description}" />
-                        <br/>
-                        <h:outputText value= "Responsável: #{campsite.manager.fullName}" />
-                        <br/>
-                        <h:outputText value="Contacts:  #{campsite.contact}" />
-                        <b:button offset="9" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
+                            <h:outputText value="Description:  #{campsite.description}" />
+                            <br/>
+                            <h:outputText value= "Manager: #{campsite.manager.fullName}" />
+                            <br/>
+                            <h:outputText value="Contacts:  #{campsite.contact}" />
+                            <br/>
+                            <br/>
+                            <b:column span="9"></b:column>
+                            <b:commandButton span="3" value="Book" iconAwesome="calendar-check-o" look="warning"  action="${bookingbean.view(campsite)}"></b:commandButton>
+                            
                         </p:dialog> 
                         <p:panel>
                             <h:panelGrid columns="1" style="width:100%">
