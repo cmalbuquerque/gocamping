@@ -377,11 +377,17 @@ public class JPAExample {
         return list;
     }
     
-    public void updateCampsite(int id, String location) {
+    public void updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc)  {
         try {
             entityManager.getTransaction().begin();
             Campsite campsite = (Campsite) entityManager.find(Campsite.class, id);
+            campsite.setTitle(title);
             campsite.setLocation(location);
+            campsite.setAdultPrice(adultPrice);
+            campsite.setChildPrice(childPrice);
+            campsite.setBabyPrice(babyPrice);
+            campsite.setContact(contact);
+            campsite.setDescription(desc);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
