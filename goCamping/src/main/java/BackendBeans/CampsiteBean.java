@@ -46,12 +46,88 @@ public class CampsiteBean implements Serializable {
     @ManagedProperty(value = "#{listaCampsites}")
     private List<Campsite> listaCampsites;
     
-    private DataModel model;
+    @ManagedProperty(value = "#{titleEdit}")
+    private String titleEdit; 
+    @ManagedProperty(value = "#{locationEdit}")
+    private String locationEdit;
+    @ManagedProperty(value = "#{descEdit}")
+    private String descEdit;
+    @ManagedProperty(value = "#{adultsPriceEdit}")
+    private double adultsPriceEdit;
+    @ManagedProperty(value = "#{childsPriceEdit}")
+    private double childsPriceEdit;
+    @ManagedProperty(value = "#{babiesPriceEdit}")
+    private double babiesPriceEdit;
+    @ManagedProperty(value = "#{contactsEdit}")
+    private String contactsEdit;
+    
+    
     private Campsite campsite;
     JPAExample ex = new JPAExample();
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
+    public String getContactsEdit() {
+        return campsite.getContact();
+    }
+
+    public void setContactsEdit(String contactsEdit) {
+        this.contactsEdit = contactsEdit;
+    }
+    
+    
+    public String getTitleEdit() {
+        return campsite.getTitle();
+    }
+
+    public String getLocationEdit() {
+        return campsite.getLocation();
+    }
+
+    public String getDescEdit() {
+        return campsite.getDescription();
+    }
+
+    public double getAdultsPriceEdit() {
+        return campsite.getAdultPrice();
+    }
+
+    public double getChildsPriceEdit() {
+        return campsite.getChildPrice();
+    }
+
+    public double getBabiesPriceEdit() {
+        return campsite.getBabyPrice();
+    }
+
+    public void setTitleEdit(String titleEdit) {
+        this.titleEdit = titleEdit;
+    }
+
+    public void setLocationEdit(String locationEdit) {
+        this.locationEdit = locationEdit;
+    }
+
+    public void setDescEdit(String descEdit) {
+        this.descEdit = descEdit;
+    }
+
+    public void setAdultsPriceEdit(double adultsPriceEdit) {
+        this.adultsPriceEdit = adultsPriceEdit;
+    }
+
+    public void setChildsPriceEdit(double childsPriceEdit) {
+        this.childsPriceEdit = childsPriceEdit;
+    }
+
+    public void setBabiesPriceEdit(double babiesPriceEdit) {
+        this.babiesPriceEdit = babiesPriceEdit;
+    }
+
+    public void setCampsite(Campsite campsite) {
+        this.campsite = campsite;
+    }
+    
                
     public List<Campsite> getListaCampsites() {
         return listaCampsites;
@@ -66,7 +142,7 @@ public class CampsiteBean implements Serializable {
     }
 
     public void setNIF(int NIF) {
-        this.NIF = ex.searchCamper(session.getAttribute("username").toString()).getNIF();
+        this.NIF = ex.searchManager(session.getAttribute("username").toString()).getNIF();
     }
     
     public String getTitle() {
@@ -131,7 +207,7 @@ public class CampsiteBean implements Serializable {
     
     public String view(Campsite campsiteOutro){
         this.campsite=campsiteOutro;
-        return "addAccommodation.xhtml";
+        return "editCampsite.xhtml";
     }
     
     public String addCampsite(){       
@@ -143,6 +219,11 @@ public class CampsiteBean implements Serializable {
     public String removeCampsite(int id){     
         ex.deleteCampsite(id);
         listaCampsites = ex.listarCampsite(ex.searchManager(session.getAttribute("username").toString()));
+        return "myCampsites.xhtml";
+    }
+    
+    public String editCampsite(){
+        ex.updateCampsite(campsite.getId(), titleEdit, locationEdit, adultsPriceEdit, childsPriceEdit, babiesPriceEdit, contactsEdit, descEdit);
         return "myCampsites.xhtml";
     }
 }
