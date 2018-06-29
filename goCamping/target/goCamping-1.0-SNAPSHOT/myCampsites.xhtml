@@ -44,9 +44,12 @@
                             <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
                             <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
                             <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />
-                            <b:commandButton offset="9" value="Remove Campsite" iconAwesome="" look="default"  action="#{campsitebean.removeCampsite(campsite.id)}"  ></b:commandButton> 
-                            <br/>
-                            <b:commandButton offset="9" value="Edit Information" iconAwesome="" look="warning"  ></b:commandButton>
+                            <b:row>
+                                <b:column span="8"></b:column>
+                                <b:commandButton span="2" value="Remove" iconAwesome="times" look="default"  action="#{campsitebean.removeCampsite(campsite.id)}"  ></b:commandButton> 
+                                <b:commandButton span="2" value="Edit" iconAwesome="edit" look="warning"  ></b:commandButton>
+                            </b:row>
+                            
                             
                         </h:panelGrid>
                     </p:panel>

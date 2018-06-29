@@ -45,7 +45,11 @@
                 </b:form>
 
                 <b:inputText label="Contacts" value="#{campsitebean.contacts}"></b:inputText>
-                <b:commandButton  offset="9" value="Add Campsite"  icon="plus-circle" look="success"  action="#{campsitebean.addCampsite}"></b:commandButton>
+                <b:row>
+                    <b:column span="10"></b:column>
+                    <b:commandButton  span = "2" value="Add"  iconAwesome="plus-circle" look="success"  action="#{campsitebean.addCampsite}"></b:commandButton>
+                </b:row>
+                
             </p:panel>
         </h:form>
     </h:body>
