@@ -8,7 +8,6 @@ package BackendBeans;
 import Persistencia.Camper;
 import Persistencia.JPAExample;
 import Persistencia.Manager;
-import Persistencia.Utilizador;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -30,8 +29,6 @@ import javax.servlet.http.HttpSession;
 public class AccountBean implements Serializable{ 
     
 
-    private Manager manager;
-    private Camper camper;
     
     @ManagedProperty(value = "#{username}")
     private String username;
@@ -46,6 +43,8 @@ public class AccountBean implements Serializable{
     @ManagedProperty(value = "#{newPassword}")
     private String newPassword;
     
+    private Manager manager;
+    private Camper camper;
     JPAExample ex = new JPAExample(); 
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -91,7 +90,7 @@ public class AccountBean implements Serializable{
     }
 
     public String getFullName() {
-        return ex.getUtilizadorFullName(session.getAttribute("username").toString());
+        return ex.searchCamper(session.getAttribute("username").toString()).getFullName();
     }
 
     public void setFullName(String fullName) {
@@ -99,7 +98,7 @@ public class AccountBean implements Serializable{
     }
 
     public String getEmail() {
-        return ex.getUtilizadorEmail(session.getAttribute("username").toString());
+        return ex.searchCamper(session.getAttribute("username").toString()).getEmail();
     }
 
     public void setEmail(String email) {
@@ -107,7 +106,7 @@ public class AccountBean implements Serializable{
     }
 
     public int getCampsiteCard() {
-        return ex.getUtilizadorCampingCard(session.getAttribute("username").toString());
+        return ex.searchCamper(session.getAttribute("username").toString()).getCampsiteCard();
     }
 
     public void setCampsiteCard(int campsiteCard) {

@@ -16,10 +16,9 @@
                 <b:navbarLinks>
                     <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
                     <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
-
                     <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
                     <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
-                
+                    <b:navLink icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
@@ -30,102 +29,90 @@
 
             <p:panel style="margin-left: 10%; margin-right: 10%">
                 <h3 style="color: #72b400"><b:iconAwesome name="calendar-check-o" />  Booking </h3>
-                <b:tabView id="tabPanel" tabPosition="left" activeIndex="#{myBean.activeIndex}">
-                    <b:tab title="Details">
-                        <br>&nbsp;</br>
-                        <b:form horizontal="true" id="loginForm">
+                
+                <br>&nbsp;</br>
+                <b:form horizontal="true" id="loginForm">
+                    <b:inputText label="Campsite Name" placeholder="Campsite Name" value="#{bookingbean.campsite.title}">
+                        <f:facet name="prepend">
+                            <b:icon name="user" />
+                        </f:facet>
+                    </b:inputText>
+                    <b:row>
+                        <b:column span="6">
+                            <b:datepicker placeholder="Check-in" label="Check-in" value="#{searchbean.checkin}"></b:datepicker >
+                        </b:column>
 
-                            <b:inputText label="Book Number ID" disabled="true" placeholder="1287412">
-                            </b:inputText>
+                        <b:column span="6">
+                             <b:datepicker placeholder="Check-out" label="Chek-out" value="#{searchbean.checkout}"></b:datepicker>
+                        </b:column>
+                    </b:row>
 
-                            <b:datepicker placeholder="Check-in" label="Check-in"></b:datepicker>
-                            <b:datepicker placeholder="Check-out" label="Chek-out"></b:datepicker>
-
-                            <b:dropButton value="Type" span="2">
-                                <b:navLink value="Tent Pitch" href="#"></b:navLink>
-                                <b:navLink value="Roulote" href="#"></b:navLink>
-                                <b:navLink value="Bungalow" href="#"></b:navLink>
-                            </b:dropButton>
-
-                            <b:dropButton value="People" span="2">
-                                <b:navLink value="1" href="#"></b:navLink>
-                                <b:navLink value="2" href="#"></b:navLink>
-                                <b:navLink value="3" href="#"></b:navLink>
-                                <b:navLink value="4 or more" href="#"></b:navLink>
-
-                            </b:dropButton>
-
-
-                            <br>&nbsp;</br>
-                            <b:button offset="4" span="4" value="Next" look="default" onclick="PF('tabPanel').select(1);return false;" />
-                            <br>&nbsp;</br>
-                        </b:form>
-                    </b:tab>
-                    <b:tab title="Contact Informations">
-                        <br></br>
-
-                        <b:form horizontal="true" id="personalInfo">
-                            <b:inputText label="Full Name" placeholder="Full Name">
+                    <b:row>
+                        <b:column span="2">
+                            <b:inputText label="Nr of Adults" placeholder="Number of Adults" value="#{bookingbean.nrAdults}">
                                 <f:facet name="prepend">
                                     <b:icon name="user" />
                                 </f:facet>
                             </b:inputText>
+                        </b:column>
 
-                            <b:inputText placeholder="Address" label="Address">
+                        <b:column span="2">
+                            <b:inputText label="Nr of children" placeholder="Number of Children" value="#{bookingbean.nrChildren}">
                                 <f:facet name="prepend">
-                                    <b:iconAwesome name="map-marker" />
+                                    <b:icon name="user" />
                                 </f:facet>
                             </b:inputText>
-                            <b:inputText placeholder="Fiscal Number" label="Fiscal Number">
+                        </b:column>
+                        
+                        <b:column span="2">
+                            <b:inputText label="Nr of Babies" placeholder="Number of Babies" value="#{bookingbean.nrBabies}">
+                                <f:facet name="prepend">
+                                    <b:icon name="user" />
+                                </f:facet>
+                            </b:inputText>
+                        </b:column>
+                        <b:column span="6">
+                            <b:inputText placeholder="Fiscal Number" label="Fiscal Number" value="#{bookingbean.NIF}">
                                 <f:facet name="prepend">
                                     <b:iconAwesome name="address-card-o" />
                                 </f:facet>
                             </b:inputText>
+                        </b:column>
+                    </b:row>
+                    <b:inputText label="Full Name" placeholder="Full Name" value="#{bookingbean.fullName}">
+                        <f:facet name="prepend">
+                            <b:icon name="user" />
+                        </f:facet>
+                    </b:inputText>
 
-                            <b:inputText label="Email" placeholder="Email">
+                    <b:inputText label="Email" placeholder="Email" value="#{bookingbean.email}">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="envelope-o" />
+                        </f:facet>
+                    </b:inputText>
+
+                    <b:row>
+                         <b:column span="6">
+                            <b:inputText label="Camping Card" placeholder="Camping card" value="#{bookingbean.campingCard}">
                                 <f:facet name="prepend">
-                                    <b:iconAwesome name="envelope-o" />
+                                    <b:icon name="user" />
                                 </f:facet>
                             </b:inputText>
+                        </b:column>
 
-                            <b:inputText placeholder="Cellphone" label="Cellphone">
+                        <b:column span="6">
+                            <b:inputText placeholder="Cellphone" label="Cellphone" value="#{bookingbean.cellphone}">
                                 <f:facet name="prepend">
                                     <b:iconAwesome name="phone" />
                                 </f:facet>
                             </b:inputText>
-
-                            <br>&nbsp;</br>
-                            <b:button offset="4" span="4" value="Next" look="default" outcome="/index.xhtml" />
-                            <br>&nbsp;</br>
-
-                        </b:form>
-                    </b:tab>
-                    <b:tab title="Payment">
-                        <br>&nbsp;</br>
-                        <b:form horizontal="true" id="payment">
-                            
-                            <b:inputText disabled="true" placeholder="303,32€" label="Total">
-                            </b:inputText>
-                            
-                            <b:inputText placeholder="Example: 3600 **** ***** **** 8271" label="Credit Card Number">
-                                <f:facet name="prepend">
-                                    <b:iconAwesome name="credit-card-alt" />
-                                </f:facet>
-                            </b:inputText>
-                            
-                            <b:inputSecret placeholder="Example: 000" label="Security Number">
-                                <f:facet name="prepend">
-                                    <b:iconAwesome name="lock" />
-                                </f:facet>
-                            </b:inputSecret>
-
-                            <br>&nbsp;</br>
-                            <b:button offset="4" span="4" value="Finish" look="success" outcome="/index.xhtml" />
-                            <br>&nbsp;</br>
-                        </b:form>
-                    </b:tab>
-
-                </b:tabView>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="9"></b:column>
+                        <b:commandButton span="3" value="Confirm Reservation" iconAwesome="check" look="success" action = "#{bookingbean.booking(searchbean.checkin,searchbean.checkout)}"></b:commandButton>
+                    </b:row>
+                </b:form>           
             </p:panel>
 
         </h:form>

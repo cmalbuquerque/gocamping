@@ -75,14 +75,5 @@ public class FavouriteListBean implements Serializable{
         listCampsitesFav= ex.listarCampsitesFavList(session.getAttribute("username").toString());
         return "favList.xhtml" ;
     }
-            
-//    public List<Campsite> convertIntToCampsite(){
-//        listIntCampsites= ex.listarCampsitesFavList(session.getAttribute("username").toString());
-//        for (int elem: listIntCampsites){
-//            listCampsitesFav.add(ex.searchCampsite(elem));
-//        }
-//        return listCampsitesFav;
-//    }
-    
     
 }

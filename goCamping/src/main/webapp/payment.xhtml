@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>GoCamping</title>
+
+    </h:head>
+    <h:body>
+        <h:form>
+            <b:navBar brand="goCamping" brandHref="#">
+                <b:navbarLinks>
+                    <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
+                    <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
+                    <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
+                    <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
+                    <b:navLink icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
+                </b:navbarLinks>
+                <b:navbarLinks pull="right">
+                    <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
+                    <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
+                </b:navbarLinks>
+            </b:navBar>
+
+
+            <p:panel style="margin-left: 10%; margin-right: 10%">
+                <h3 style="color: #72b400"><b:iconAwesome name="calendar-check-o" />  Booking </h3>
+                
+                <br>&nbsp;</br>
+                <b:form horizontal="true" id="payment">
+                    <b:inputText disabled="true"  value = "Your reservation ID is: #{bookingbean.reservation.id} €"></b:inputText>
+                    <b:inputText disabled="true" placeholder="Total" label="Total" value = "#{bookingbean.totalPrice} €">
+                    </b:inputText>
+
+                    <b:inputText placeholder="Example: 3600 **** ***** **** 8271" label="Credit Card Number">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="credit-card-alt" />
+                        </f:facet>
+                    </b:inputText>
+
+                    <b:inputSecret placeholder="Example: 000" label="Security Number">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="lock" />
+                        </f:facet>
+                    </b:inputSecret>
+
+                    <br>&nbsp;</br>
+                    <b:button span ="2" value="Back" look="default" outcome="/booking.xhtml" />
+                    <b:button span ="2" value="Finish" look="success" outcome="/index.xhtml" />
+                    <br>&nbsp;</br>
+                </b:form>
+            </p:panel>
+
+        </h:form>
+    </h:body>
+</html>
+

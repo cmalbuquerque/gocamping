@@ -2,13 +2,11 @@
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/InterfaceBeans/MyBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/CampsiteImage.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/JPAExample.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/RoulotePitch.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Utilizador.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/CampsiteImageKey.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Camper.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/InterfaceBeans/CalendarManagedBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Manager.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Bungalow.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Campsite.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/FavouriteListKey.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/FavouriteList.java
@@ -17,8 +15,7 @@
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/AccountBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/CampsiteBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/SignUpBean.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/TentPitch.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/SearchBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/GeneralStuff/Hash.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/Persistencia/Accommodation.java
+/home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/BookingBean.java
 /home/andreia/Documentos/TQS/GoCamping/goCamping/src/main/java/BackendBeans/LogInBean.java
