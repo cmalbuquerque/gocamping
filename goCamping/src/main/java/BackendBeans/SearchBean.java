@@ -13,6 +13,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,7 +41,7 @@ public class SearchBean implements Serializable{
     
             
     JPAExample ex = new JPAExample();
-        
+    
     public String getCampsiteLocation() {
         return campsiteLocation;
     }
@@ -83,8 +85,5 @@ public class SearchBean implements Serializable{
         return "results.xhtml";
     }
     
-    public String print(){
-        System.out.println("KKK");
-        return "myCampsites.xhtml";
-    }
+   
 }

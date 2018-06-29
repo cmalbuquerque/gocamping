@@ -10,6 +10,8 @@ import Persistencia.Campsite;
 import Persistencia.JPAExample;
 import Persistencia.Reservation;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -51,10 +53,11 @@ public class BookingBean implements Serializable{
     private double totalPrice;
     @ManagedProperty (value="#{listBooks}")
     private List<Reservation> listBooks;
+   
     
     private Date checkin;
     private Date checkout;
-    
+    private long tresdias = 259200;
     private Reservation reservation;
     private Campsite campsite;
     private Camper camper;
@@ -64,6 +67,7 @@ public class BookingBean implements Serializable{
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
+    
     public Reservation getReservation() {
         return reservation;
     }
@@ -187,6 +191,21 @@ public class BookingBean implements Serializable{
     public double calculatePrice(){
         totalPrice = (nrAdults*campsite.getAdultPrice())+(nrChildren*campsite.getChildPrice())+(nrBabies+campsite.getBabyPrice());
         return totalPrice;
+    }
+    
+    public String cancelReservation(int id, Date startDate){
+        LocalDate localDate= LocalDate.now();
+        long secsCheckIn=(startDate.getTime()/1000);
+        ZoneId zoneId = ZoneId.systemDefault();
+        long secsAtual = localDate.atStartOfDay(zoneId).toEpochSecond();
+        //so cancela a reserva se for feita 3 dias antes
+        long difSecs= secsCheckIn-secsAtual;
+        if (difSecs>tresdias){
+            ex.deleteReservation(id);
+            listBooks=ex.listarReservations(ex.searchCamper(session.getAttribute("username").toString()));
+            return "myReservations.xhtml";
+        }
+        return "myReservations.xhtml";
     }
     
 }
