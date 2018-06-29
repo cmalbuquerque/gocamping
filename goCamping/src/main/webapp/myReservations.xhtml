@@ -25,14 +25,25 @@
                     <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
                 </b:navbarLinks>
             </b:navBar>
-
+           
             <p:panel style="margin-left: 10%; margin-right: 10%">
                 <h3 align="center" style="color: #72b400"><b:iconAwesome name="tent" />  My Reservations </h3>
+                
+                
                 
                 <p:dataGrid var="reservation" value="#{bookingbean.listBooks}" columns="1" layout="grid"
                             rows="12" paginator="true" id="campsitesID"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="6,12,16" style=" background-color: white" >
+                    
+                    <p:dialog header="Cancel reservation" widgetVar="dlg2" modal="true" width="400">
+                        <h:outputText value="Are you sure you want to cancel the #{reservation.id} reservation?" ></h:outputText>
+                        <br/>
+                        <br></br>
+                        <b:column span="2"></b:column>
+                        <b:commandButton span="4" value="Yes" iconAwesome="" look="success" action="#{bookingbean.cancelReservation(reservation.id)}"></b:commandButton>
+                        <b:button span="4" value="No" iconAwesome="" look="warning" outcome="/myReservations.xhtml"></b:button>
+                    </p:dialog> 
                     
                     <p:panel>
                         <h:panelGrid columns="1" style="width:100%">
@@ -43,8 +54,15 @@
                                 <h:outputText value="Check-out:  #{reservation.endDate}" />
                                 <h:outputText value="Total Price:  #{reservation.totalPrice} €" />
                                 <h:outputText value="Contacts:  #{reservation.campsite.contact}" />
+                                <b:row>
+                                    <b:column span="8"></b:column>
+                                    <b:commandButton span="2" value="Cancel" iconAwesome="times" look="default" action="#{bookingbean.cancelReservation(reservation.id)}"></b:commandButton>                                   
+                                    <b:commandButton span="2" value="Edit" iconAwesome="edit" look="warning"  action="#{campsitebean.view(campsite)}"></b:commandButton>
+                                </b:row>
                         </h:panelGrid>
                     </p:panel>
+                    
+                     
                 </p:dataGrid>
             </p:panel>
         </h:form>

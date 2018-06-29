@@ -51,6 +51,7 @@ public class BookingBean implements Serializable{
     private double totalPrice;
     @ManagedProperty (value="#{listBooks}")
     private List<Reservation> listBooks;
+   
     
     private Date checkin;
     private Date checkout;
@@ -64,6 +65,7 @@ public class BookingBean implements Serializable{
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
+    
     public Reservation getReservation() {
         return reservation;
     }
@@ -187,6 +189,12 @@ public class BookingBean implements Serializable{
     public double calculatePrice(){
         totalPrice = (nrAdults*campsite.getAdultPrice())+(nrChildren*campsite.getChildPrice())+(nrBabies+campsite.getBabyPrice());
         return totalPrice;
+    }
+    
+    public String cancelReservation(int id){
+        ex.deleteReservation(id);
+        listBooks=ex.listarReservations(ex.searchCamper(session.getAttribute("username").toString()));
+        return "myReservations.xhtml";
     }
     
 }

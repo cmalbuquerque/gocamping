@@ -31,25 +31,25 @@
             <p:panel style="margin-left: 10%; margin-right: 10%; width: 80%;">
                 <h3 style="color: #72b400"><b:iconAwesome name="cogs" /> Account Settings<br>&nbsp;</br></h3>
                 <h4 style="color: ">Personal Information</h4>
-                        <br>&nbsp;</br>
-                        <h:panelGrid>
-                            <b:inputText placeholder="Full Name" label="Full Name" value = "#{accountbean.fullName}">
-                                <f:facet name="prepend">
-                                    <b:icon name="user" />
-                                </f:facet>
-                            </b:inputText>
-                            <b:inputText placeholder="E-mail" label="E-mail" value = "#{accountbean.email}">
-                                <f:facet name="prepend">
-                                    <b:iconAwesome name="envelope-o" />
-                                </f:facet>
-                            </b:inputText>
-                            <b:inputText placeholder="Camping Card" label="Camping Card" value = "#{accountbean.campsiteCard}">
-                                <f:facet name="prepend">
-                                    <b:iconAwesome name="address-card-o" />
-                                </f:facet>
-                            </b:inputText>
-                            <b:commandButton value="Save" iconAwesome="check" look="success"  action="#{accountbean.editPersonalInformation}"></b:commandButton>
-                        </h:panelGrid>
+                    <br>&nbsp;</br>
+                    <h:panelGrid>
+                        <b:inputText placeholder="Full Name" label="Full Name" value = "#{accountbean.fullName}">
+                            <f:facet name="prepend">
+                                <b:icon name="user" />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText placeholder="E-mail" label="E-mail" value = "#{accountbean.email}">
+                            <f:facet name="prepend">
+                                <b:iconAwesome name="envelope-o" />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText placeholder="Camping Card" label="Camping Card" value = "#{accountbean.campsiteCard}">
+                            <f:facet name="prepend">
+                                <b:iconAwesome name="address-card-o" />
+                            </f:facet>
+                        </b:inputText>
+                        <b:commandButton value="Save" iconAwesome="check" look="success"  action="#{accountbean.editPersonalInformation}"></b:commandButton>
+                    </h:panelGrid>
             </p:panel>
             
             
