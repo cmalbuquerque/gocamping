@@ -27,6 +27,7 @@ public class JPAExampleTest {
     private JPAExample instance;
     private Camper camper;
     private Manager manager;
+    private Utilizador user;
     
     public JPAExampleTest() {
     }
@@ -44,6 +45,7 @@ public class JPAExampleTest {
         this.instance = new JPAExample();
         this.camper = new Camper();
         this.manager = new Manager();
+        this.user = new Utilizador();
     }
     
     @After
@@ -153,19 +155,7 @@ public class JPAExampleTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//
-//    /**
-//     * Test of listManager method, of class JPAExample.
-//     */
-//    @Test
-//    public void testListManager() {
-//        System.out.println("listManager");
-//        JPAExample instance = new JPAExample();
-//        instance.listManager();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+    
 //    /**
 //     * Test of updateManager method, of class JPAExample.
 //     */
@@ -200,24 +190,32 @@ public class JPAExampleTest {
         instance.deleteManager(username);
     }
 
-//    /**
-//     * Test of saveUtilizador method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSaveUtilizador() {
-//        System.out.println("saveUtilizador");
-//        Camper camper = null;
-//        Manager manager = null;
-//        String username = "";
-//        String password = "";
-//        JPAExample instance = new JPAExample();
-//        Utilizador expResult = null;
-//        Utilizador result = instance.saveUtilizador(camper, manager, username, password);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+    /**
+     * Test of saveUtilizador method, of class JPAExample.
+     */
+    @Test
+    public void testSaveUtilizador() {
+        System.out.println("Testing saveUtilizador");
+        Camper camper = new Camper();
+        camper.setCampsiteCard(0);
+        camper.setUsername("diogof");
+        camper.setFullName("Diogo Filipe");
+        camper.setEmail("diogof@mail.com");
+        camper.setNIF(0);
+        Manager manager = null;
+        String username = "diogof";
+        String password = "fff";
+        user.setCamper(camper);
+        user.setManager(manager);
+        user.setPassword(password);
+        user.setUsername(username);
+        Utilizador expResult = user;
+        Utilizador result = instance.saveUtilizador(camper, manager, username, password);
+        assertEquals(expResult, result);
+        instance.deleteUtilizador(username);
+        
+    }
+
 //    /**
 //     * Test of searchUtilizador method, of class JPAExample.
 //     */
@@ -269,19 +267,7 @@ public class JPAExampleTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//
-//    /**
-//     * Test of listCampsite method, of class JPAExample.
-//     */
-//    @Test
-//    public void testListCampsite() {
-//        System.out.println("listCampsite");
-//        JPAExample instance = new JPAExample();
-//        instance.listCampsite();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+
 //    /**
 //     * Test of listarCampsite method, of class JPAExample.
 //     */

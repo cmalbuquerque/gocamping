@@ -236,6 +236,21 @@ public class JPAExample {
         }
         return user;
     }
+    
+    public boolean deleteUtilizador(String username) {
+        try {
+            entityManager.getTransaction().begin();
+            Utilizador utilizador = (Utilizador) entityManager.find(Utilizador.class, username);
+            entityManager.remove(utilizador);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("delete utilizador didn't work");
+            return false;
+        }
+    }
+     
 
     public Utilizador searchUtilizador(String name) {
         Utilizador user = new Utilizador();
@@ -297,22 +312,6 @@ public class JPAExample {
             System.out.println("utilizador search didn't work");
         }
         return campsite;
-    }
-    
-    public void listCampsite() {
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Campsite c");
-            List<Campsite> Campsites = query.getResultList();
-            for (Iterator<Campsite> iterator = Campsites.iterator(); iterator.hasNext();) {
-                Campsite campsite = (Campsite) iterator.next();
-                System.out.println(campsite.getManager() + "\t" + campsite.getId() + " \t " + campsite.getTitle());
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("campsite listing didn't work");
-        }
     }
     
     public List<Campsite> listarCampsite(Manager manager) {
@@ -505,21 +504,6 @@ public class JPAExample {
         }
         return list;
     }
-    
-    public void listReservation() {
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Reservation c");
-            List<Reservation> reservations = query.getResultList();
-            for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
-                Reservation reservation = (Reservation) iterator.next();
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("reservation listing didn't work");
-        }
-    }
 
     public void updateReservation(int id, Date startDate, Date endDate) {
         try {
@@ -592,21 +576,6 @@ public class JPAExample {
         return campsites;
     }
         
-    public void listFavouriteList() {
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from FavouriteList c");
-            List<FavouriteList> favouriteLists = query.getResultList();
-            for (Iterator<FavouriteList> iterator = favouriteLists.iterator(); iterator.hasNext();) {
-                FavouriteList favouriteList = (FavouriteList) iterator.next();
-                System.out.println(favouriteList.getCamperUsername() + "\t" + favouriteList.getCampsiteID());
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("favourite list listing didn't work");
-        }
-    }
 
     public void deleteFavouriteList(String camperUsername, int campsiteID) {
         FavouriteListKey favKey = new FavouriteListKey(camperUsername, campsiteID);
