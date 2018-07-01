@@ -182,20 +182,20 @@ public class JPAExampleTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//
-//    /**
-//     * Test of deleteManager method, of class JPAExample.
-//     */
-//    @Test
-//    public void testDeleteManager() {
-//        System.out.println("deleteManager");
-//        String username = "";
-//        JPAExample instance = new JPAExample();
-//        instance.deleteManager(username);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+
+    /**
+     * Test of deleteManager method, of class JPAExample.
+     */
+    @Test
+    public void testDeleteManager() {
+        System.out.println("deleteManager");
+        String username = "";
+        JPAExample instance = new JPAExample();
+        instance.deleteManager(username);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 //    /**
 //     * Test of saveUtilizador method, of class JPAExample.
 //     */
