@@ -56,9 +56,9 @@ public class JPAExampleTest {
     @Test
     public void testSaveCamper() {
         System.out.println("Testing saveCamper");
-        String username = "janota";
-        String fullname = "João Pais";
-        String email = "pais@mail.com";
+        String username = "jota";
+        String fullname = "João T Pais";
+        String email = "jpais@mail.com";
         int NIF = 2318473;
         int campsiteCard = 34;
         camper.setCampsiteCard(campsiteCard);
@@ -108,14 +108,14 @@ public class JPAExampleTest {
     @Test
     public void testDeleteCamper() {
         System.out.println("Testing deleteCamper");
-        String username = "janota";
-        String fullname = "João Pais";
-        String email = "pais@mail.com";
+        String username = "jota";
+        String fullname = "João J Pais";
+        String email = "jpais@mail.com";
         boolean expResult = true;
         instance.saveCamper(username, fullname, email, 0, 0);
         boolean result = instance.deleteCamper(username);
         assertEquals(result, expResult);
-        instance.deleteManager(username);
+        instance.deleteCamper(username);
     }
 
     /**
@@ -188,12 +188,16 @@ public class JPAExampleTest {
      */
     @Test
     public void testDeleteManager() {
-        System.out.println("deleteManager");
-        String username = "";
-        JPAExample instance = new JPAExample();
+        System.out.println("Testing deleteManager");
+        String username = "gongas";
+        String fullname = "Goncalo Marques";
+        String email = "gongas@gmail.com";
+        int NIF = 123;
+        boolean expResult = true;
+        instance.saveManager(username, fullname, email, NIF);
+        boolean result = instance.deleteManager(username);
+        assertEquals(result, expResult);
         instance.deleteManager(username);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 //    /**

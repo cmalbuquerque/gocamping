@@ -195,15 +195,17 @@ public class JPAExample {
     }
     
 
-    public void deleteManager(String username) {
+    public boolean deleteManager(String username) {
         try {
             entityManager.getTransaction().begin();
             Manager manager = (Manager) entityManager.find(Manager.class, username);
             entityManager.remove(manager);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("delete manager didn't work");
+            return false;
         }
     }
     
