@@ -23,29 +23,29 @@ import static org.junit.Assert.*;
  *
  */
 public class JPAExampleTest {
-
+    
     private JPAExample instance;
     private Camper camper;
     private Manager manager;
-
+    
     public JPAExampleTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
         this.instance = new JPAExample();
         this.camper = new Camper();
         this.manager = new Manager();
     }
-
+    
     @After
     public void tearDown() {
     }
@@ -115,27 +115,30 @@ public class JPAExampleTest {
         instance.saveCamper(username, fullname, email, 0, 0);
         boolean result = instance.deleteCamper(username);
         assertEquals(result, expResult);
+        instance.deleteManager(username);
+    }
+
+    /**
+     * Test of saveManager method, of class JPAExample.
+     */
+    @Test
+    public void testSaveManager() {
+        System.out.println("Testing saveManager");
+        String username = "gongas";
+        String fullname = "Goncalo Marques";
+        String email = "gongas@gmail.com";
+        int NIF = 123;
+        manager.setEmail(email);
+        manager.setFullName(fullname);
+        manager.setUsername(username);
+        manager.setNIF(NIF);
+        Manager expResult = manager;
+        Manager result = instance.saveManager(username, fullname, email, NIF);
+        assertEquals(expResult, result);
+        instance.deleteManager(username);
         
     }
-//
-//    /**
-//     * Test of saveManager method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSaveManager() {
-//        System.out.println("saveManager");
-//        String username = "";
-//        String fullname = "";
-//        String email = "";
-//        int NIF = 0;
-//        JPAExample instance = new JPAExample();
-//        Manager expResult = null;
-//        Manager result = instance.saveManager(username, fullname, email, NIF);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+
 //    /**
 //     * Test of searchManager method, of class JPAExample.
 //     */
@@ -289,7 +292,6 @@ public class JPAExampleTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-
 //    /**
 //     * Test of listarTodosCampsites method, of class JPAExample.
 //     */
