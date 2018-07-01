@@ -110,15 +110,17 @@ public class JPAExample {
     }   
     
 
-    public void deleteCamper(String username) {
+    public boolean deleteCamper(String username) {
         try {
             entityManager.getTransaction().begin();
             Camper camper = (Camper) entityManager.find(Camper.class, username);
             entityManager.remove(camper);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("delete camper didn't work");
+            return false;
         }
     }
 
