@@ -277,6 +277,7 @@ public class JPAExampleTest {
         String fullname = "Helder Marques";
         String email = "h@gmail.com";
         int NIF = 231;
+        double campingCardDiscount = 10; 
         Manager m = new Manager();
         m = (Manager) instance.saveManager(username, fullname, email, NIF);
         campsite.setManager(m);
@@ -287,8 +288,9 @@ public class JPAExampleTest {
         campsite.setDescription(desc);
         campsite.setLocation(location);
         campsite.setTitle(title);
+        campsite.setCampingCardDiscount(campingCardDiscount);
         Campsite expResult = campsite;
-        Campsite result = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        Campsite result = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m, campingCardDiscount);
         assertEquals(expResult, result);
         instance.deleteCampsite(result.getId());
         instance.deleteManager(username);
@@ -311,9 +313,10 @@ public class JPAExampleTest {
         String fullname = "Helder Marques";
         String email = "h@gmail.com";
         int NIF = 231;
+        double campingCardDiscount=10;
         Manager m = new Manager();
         m = (Manager) instance.saveManager(username, fullname, email, NIF);
-        Campsite expResult = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        Campsite expResult = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m, campingCardDiscount);
         Campsite result = instance.searchCampsite(expResult.getId());
         assertEquals(expResult, result);
         instance.deleteCampsite(expResult.getId());
@@ -401,6 +404,7 @@ public class JPAExampleTest {
         String fullname = "Nadia Marques";
         String email = "nadia@gmail.com";
         int NIF = 231;
+        double campingCardDiscount=10;
         Manager m = new Manager();
         m = (Manager) instance.saveManager(username, fullname, email, NIF);
         campsite.setManager(m);
@@ -411,7 +415,8 @@ public class JPAExampleTest {
         campsite.setDescription(desc);
         campsite.setLocation(location);
         campsite.setTitle(title);
-        Campsite camp = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        campsite.setCampingCardDiscount(campingCardDiscount);
+        Campsite camp = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m, campingCardDiscount);
         boolean expResult = true;
         boolean result = instance.deleteCampsite(camp.getId());
         assertEquals(result, expResult);
@@ -475,9 +480,10 @@ public class JPAExampleTest {
         String contact = "923111222";
         String desc = "Agradável para umas férias tranquilas em família";
         Manager m = new Manager();
+        double campingCardDiscount = 10;
         m = (Manager) instance.saveManager("helio", "Helio Marques", "h@gmail.com", 231);      
         Camper camper = instance.saveCamper("vasquinho", "Vasco Inho", "v@mail.com", 1232, 123754);
-        Campsite campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        Campsite campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m, campingCardDiscount);
         Date startDate = new Date(2018,07,01);
         Date endDate = new Date(2018,07,15);
         int nrAdults = 2; int nrChildren = 1; int nrBabies=0; int cellphone = 234123123;

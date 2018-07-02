@@ -29,9 +29,10 @@
                 <h3 style="color: #72b400"><b:iconAwesome name="plus-circle" />  Add a Campsite </h3>
                 <b:inputText col-lg="7" id="title" label="Title" value = "#{campsitebean.title}"></b:inputText>
                 <b:inputText col-lg="5" id="Nif" label="Company Fiscal Number" disabled="true" value = "#{campsitebean.NIF}"></b:inputText>
-                <b:inputText col-lg="7" id="location" label="Location"  value="#{campsitebean.location}"></b:inputText>
-                <b:inputText col-lg="5" label="Contacts" value="#{campsitebean.contacts}"></b:inputText>
+                <b:inputText col-lg="12" id="location" label="Location"  value="#{campsitebean.location}"></b:inputText>
                 <b:inputTextarea col-lg="12" id="Description" label="Description" value="#{campsitebean.desc}"></b:inputTextarea>
+                <b:inputText col-lg="7" id="contacts" label="Contacts"  value="#{campsitebean.contacts}"></b:inputText>
+                <b:inputText col-lg="5" label="Camping Card Discount (%)" value="#{campsitebean.campingCardDiscount}"></b:inputText>
                 <p><label>Prices</label></p>                
                 <b:row>
                     <b:inputText  col-lg="4" label="Adults" value="#{campsitebean.adultsPrice}"></b:inputText>

@@ -189,7 +189,8 @@ public class BookingBean implements Serializable{
     }
     
     public double calculatePrice(){
-        totalPrice = (nrAdults*campsite.getAdultPrice())+(nrChildren*campsite.getChildPrice())+(nrBabies+campsite.getBabyPrice());
+        double discount = (campsite.getAdultPrice()*(campsite.getCampingCardDiscount()))/100;
+        totalPrice = (nrAdults*campsite.getAdultPrice())+(nrChildren*campsite.getChildPrice())+(nrBabies+campsite.getBabyPrice())-discount;
         return totalPrice;
     }
     
