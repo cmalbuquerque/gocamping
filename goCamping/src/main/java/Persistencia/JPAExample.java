@@ -47,8 +47,8 @@ public class JPAExample {
 //        System.out.println(c1);
 //        example.deleteCampsite(c1.getId());
 //        
-//        Campsite campsite1 = example.saveCampsite("Parque de Campismo da Fajã do Ouvidor", "São Jorge, Açores", 15, 5, 0, "9191919191", "A ilha ideal para umas férias perfeitas! Um parque muito adequado para crianças cheias de energia.", manager1);
-//        Campsite campsite2 = example.saveCampsite("Garfe Parque", "Garfe, Póvoa de Lanhoso", 20, 10, 5, "934765273", "O lugar ideal para umas férias calmas.", manager1);
+//        Campsite campsite1 = example.saveCampsite("Parque de Campismo da Fajã do Ouvidor", "São Jorge, Açores", 15, 5, 0, "9191919191", "A ilha ideal para umas férias perfeitas! Um parque muito adequado para crianças cheias de energia.", manager1, 10);
+//        Campsite campsite2 = example.saveCampsite("Garfe Parque", "Garfe, Póvoa de Lanhoso", 20, 10, 5, "934765273", "O lugar ideal para umas férias calmas.", manager1, 10);
 
     }
 
@@ -282,7 +282,7 @@ public class JPAExample {
         return user;
     }
 
-    public Campsite saveCampsite(String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager) {
+    public Campsite saveCampsite(String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager, double campingCardDiscount) {
         Campsite campsite = new Campsite();
         System.out.println("new campsite");
         try {
@@ -296,7 +296,7 @@ public class JPAExample {
             campsite.setContact(contact);
             campsite.setDescription(desc);
             campsite.setManager(manager);
-
+            campsite.setCampingCardDiscount(campingCardDiscount);
             entityManager.persist(campsite);
 
             entityManager.getTransaction().commit();
@@ -392,7 +392,7 @@ public class JPAExample {
         return list;
     }
 
-    public void updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc) {
+    public void updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, double campingCardDiscount) {
         try {
             entityManager.getTransaction().begin();
             Campsite campsite = (Campsite) entityManager.find(Campsite.class, id);
@@ -403,6 +403,7 @@ public class JPAExample {
             campsite.setBabyPrice(babyPrice);
             campsite.setContact(contact);
             campsite.setDescription(desc);
+            campsite.setCampingCardDiscount(campingCardDiscount);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();

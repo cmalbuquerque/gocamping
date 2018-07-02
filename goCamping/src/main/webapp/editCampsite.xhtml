@@ -29,16 +29,15 @@
                 <h3 style="color: #72b400">  Edit a Campsite </h3>
                 <b:inputText col-lg="7" id="title" label="Title" value = "#{campsitebean.titleEdit}"></b:inputText>
                 <b:inputText col-lg="5" id="Nif" label="Company Fiscal Number" disabled="true" value = "#{campsitebean.NIF}"></b:inputText>
-                <b:inputText col-lg="7" id="location" label="Location"  value="#{campsitebean.locationEdit}"></b:inputText>
-                <b:inputText col-lg="5" label="Contacts" value="#{campsitebean.contactsEdit}"></b:inputText>
+                <b:inputText col-lg="12" id="location" label="Location"  value="#{campsitebean.locationEdit}"></b:inputText>
                 <b:inputTextarea col-lg="12" id="Description" label="Description" value="#{campsitebean.descEdit}"></b:inputTextarea>
-                
-
+                <b:inputText col-lg="7" id="contacts" label="Contacts"  value="#{campsitebean.contactsEdit}"></b:inputText>
+                <b:inputText col-lg="5" label="Camping Card Discount (%)" value="#{campsitebean.campingCardDiscountEdit}"></b:inputText>                
                 <p><label>Prices</label></p>
                 <b:row>
-                    <b:inputText col-lg="4" label="Adults"  value="#{campsitebean.adultsPriceEdit} €"></b:inputText>
-                    <b:inputText col-lg="4" label="Children (4-12 years)" value="#{campsitebean.childsPriceEdit} €"></b:inputText>
-                    <b:inputText col-lg="4" label="Babies (0-3 years)" value="#{campsitebean.babiesPriceEdit} €"></b:inputText>
+                    <b:inputText col-lg="4" label="Adults"  value="#{campsitebean.adultsPriceEdit}"></b:inputText>
+                    <b:inputText col-lg="4" label="Children (4-12 years)" value="#{campsitebean.childsPriceEdit}"></b:inputText>
+                    <b:inputText col-lg="4" label="Babies (0-3 years)" value="#{campsitebean.babiesPriceEdit}"></b:inputText>
                 </b:row>
                 <b:row>
                     <b:column span="10"></b:column>

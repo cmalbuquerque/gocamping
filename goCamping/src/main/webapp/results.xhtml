@@ -48,31 +48,22 @@
                                 rows="12" paginator="true" id="campsites"
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                 rowsPerPageTemplate="4,8,12" >
-                        <p:dialog header="#{campsite.title}" widgetVar="dlg2" modal="true" height="200">
-                            <h:outputText value="Description:  #{campsite.description}" />
-                            <br/>
-                            <h:outputText value= "Manager: #{campsite.manager.fullName}" />
-                            <br/>
-                            <h:outputText value="Contacts:  #{campsite.contact}" />
-                            <br/>
-                            <br/>
-                            <b:column span="9"></b:column>
-                            <b:commandButton span="3" value="Book" iconAwesome="calendar-check-o" look="warning"  action="${bookingbean.view(campsite)}"></b:commandButton>
-                            
-                        </p:dialog> 
+                        
                         <p:panel>
                             <h:panelGrid columns="1" style="width:100%">
                                 <p:graphicImage name="/resources/images/nature2.jpg"/> 
                                 <h:outputText value="Title:  #{campsite.title}" />
                                 <h:outputText value="Location:  #{campsite.location}" />
+                                <h:outputText value="Description:  #{campsite.description}" />
+                                <h:outputText value="Contacts:  #{campsite.contact}" />
                                 <h:outputText value="Adult Price:  #{campsite.adultPrice} €" />
                                 <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
                                 <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
+                                <h:outputText value="Camping Card Discount  #{campsite.campingCardDiscount} %" />
                                 <br/>
                                 <b:row>
-                                    <b:column span="3"></b:column>
+                                    <b:column span="6"></b:column>
                                     <b:commandButton span ="3" value="Add Favourite" iconAwesome="heart" look="default" action = "#{favouritelistbean.addFavouriteList(campsite.id)}"></b:commandButton>
-                                    <b:button onclick="PF('dlg2').show();" span="3" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
                                     <b:commandButton span="3" value="Book" iconAwesome="calendar-check-o" look="warning"  action="${bookingbean.view(campsite)}"></b:commandButton>
                                 </b:row> 
                                

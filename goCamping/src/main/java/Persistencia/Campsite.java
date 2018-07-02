@@ -49,6 +49,8 @@ public class Campsite implements Serializable {
     @Column(name = "description")
     private String description;
     
+    @Column(name = "campingCardDiscount")
+    private double campingCardDiscount;
 
     //CHAVE ESTRANGEIRA
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -134,7 +136,16 @@ public class Campsite implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
- 
+
+    public double getCampingCardDiscount() {
+        return campingCardDiscount;
+    }
+
+    public void setCampingCardDiscount(double campingCardDiscount) {
+        this.campingCardDiscount = campingCardDiscount;
+    }
+    
+    
     
     @Override
     public int hashCode() {
@@ -188,7 +199,7 @@ public class Campsite implements Serializable {
 
     @Override
     public String toString() {
-        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + ", manager=" + manager + '}';
+        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + ", manager=" + manager +  "campingCardDiscount"+ campingCardDiscount + '}';
     }
 
 }

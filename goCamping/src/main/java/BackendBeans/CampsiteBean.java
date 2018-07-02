@@ -45,6 +45,8 @@ public class CampsiteBean implements Serializable {
     private int NIF;
     @ManagedProperty(value = "#{listaCampsites}")
     private List<Campsite> listaCampsites;
+    @ManagedProperty(value ="#{campingCardDiscount}")
+    private double campingCardDiscount;
     
     @ManagedProperty(value = "#{titleEdit}")
     private String titleEdit; 
@@ -60,6 +62,8 @@ public class CampsiteBean implements Serializable {
     private double babiesPriceEdit;
     @ManagedProperty(value = "#{contactsEdit}")
     private String contactsEdit;
+    @ManagedProperty(value ="#{campingCardDiscountEdit}")
+    private double campingCardDiscountEdit;
     
     
     private Campsite campsite;
@@ -67,6 +71,22 @@ public class CampsiteBean implements Serializable {
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
+    public double getCampingCardDiscount() {
+        return campingCardDiscount;
+    }
+
+    public void setCampingCardDiscount(double campingCardDiscount) {
+        this.campingCardDiscount = campingCardDiscount;
+    }
+
+    public double getCampingCardDiscountEdit() {
+        return campsite.getCampingCardDiscount();
+    }
+
+    public void setCampingCardDiscountEdit(double campingCardDiscountEdit) {
+        this.campingCardDiscountEdit = campingCardDiscountEdit;
+    }
+    
     public String getContactsEdit() {
         return campsite.getContact();
     }
@@ -74,7 +94,6 @@ public class CampsiteBean implements Serializable {
     public void setContactsEdit(String contactsEdit) {
         this.contactsEdit = contactsEdit;
     }
-    
     
     public String getTitleEdit() {
         return campsite.getTitle();
@@ -211,7 +230,7 @@ public class CampsiteBean implements Serializable {
     }
     
     public String addCampsite(){       
-        Campsite campsite1 = ex.saveCampsite( title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, ex.searchManager(session.getAttribute("username").toString()));
+        Campsite campsite1 = ex.saveCampsite( title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, ex.searchManager(session.getAttribute("username").toString()),campingCardDiscount);
         listaCampsites = ex.listarCampsite(ex.searchManager(session.getAttribute("username").toString()));
         return "myCampsites.xhtml";
     }
@@ -223,7 +242,7 @@ public class CampsiteBean implements Serializable {
     }
     
     public String editCampsite(){
-        ex.updateCampsite(campsite.getId(), titleEdit, locationEdit, adultsPriceEdit, childsPriceEdit, babiesPriceEdit, contactsEdit, descEdit);
+        ex.updateCampsite(campsite.getId(), titleEdit, locationEdit, adultsPriceEdit, childsPriceEdit, babiesPriceEdit, contactsEdit, descEdit, campingCardDiscountEdit);
         return "myCampsites.xhtml";
     }
 }
