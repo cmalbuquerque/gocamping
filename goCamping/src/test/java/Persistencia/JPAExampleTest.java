@@ -292,20 +292,32 @@ public class JPAExampleTest {
         instance.deleteManager(username);
     }
 
-//    /**
-//     * Test of searchCampsite method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSearchCampsite() {
-//        System.out.println("searchCampsite");
-//        int id = 0;
-//        JPAExample instance = new JPAExample();
-//        Campsite expResult = null;
-//        Campsite result = instance.searchCampsite(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of searchCampsite method, of class JPAExample.
+     */
+    @Test
+    public void testSearchCampsite() {
+        System.out.println("Testing searchCampsite");
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0;
+        double childPrice = 7.0;
+        double babyPrice = 0.0;
+        String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        String username = "helder";
+        String fullname = "Helder Marques";
+        String email = "h@gmail.com";
+        int NIF = 231;
+        Manager m = new Manager();
+        m = (Manager) instance.saveManager(username, fullname, email, NIF);
+        Campsite expResult = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        Campsite result = instance.searchCampsite(expResult.getId());
+        assertEquals(expResult, result);
+        instance.deleteCampsite(expResult.getId());
+        instance.deleteManager(username);
+        
+    }
 
 //    /**
 //     * Test of listarCampsite method, of class JPAExample.
