@@ -76,20 +76,27 @@ public class JPAExampleTest {
         instance.deleteCamper(username);
     }
 
-//    /**
-//     * Test of searchCamper method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSearchCamper() {
-//        System.out.println("searchCamper");
-//        String name = "";
-//        JPAExample instance = new JPAExample();
-//        Camper expResult = null;
-//        Camper result = instance.searchCamper(name);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of searchCamper method, of class JPAExample.
+     */
+    @Test
+    public void testSearchCamper() {
+        System.out.println("Testing searchCamper");
+        String name = "jota";
+         String fullname = "João T Pais";
+        String email = "jpais@mail.com";
+        int NIF = 2318473;
+        int campsiteCard = 34;
+        camper.setCampsiteCard(campsiteCard);
+        camper.setFullName(fullname);
+        camper.setUsername(name);
+        camper.setEmail(email);
+        camper.setNIF(NIF);
+        Camper expResult = instance.saveCamper(name,fullname, email, NIF, campsiteCard);
+        Camper result = instance.searchCamper(name);
+        assertEquals(expResult, result);
+        instance.deleteCamper(name);
+    }
 //    /**
 //     * Test of updateCamper method, of class JPAExample.
 //     */
