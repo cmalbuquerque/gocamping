@@ -83,7 +83,7 @@ public class JPAExampleTest {
     public void testSearchCamper() {
         System.out.println("Testing searchCamper");
         String name = "jota";
-         String fullname = "João T Pais";
+        String fullname = "João T Pais";
         String email = "jpais@mail.com";
         int NIF = 2318473;
         int campsiteCard = 34;
@@ -150,20 +150,25 @@ public class JPAExampleTest {
         
     }
 
-//    /**
-//     * Test of searchManager method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSearchManager() {
-//        System.out.println("searchManager");
-//        String name = "";
-//        JPAExample instance = new JPAExample();
-//        Manager expResult = null;
-//        Manager result = instance.searchManager(name);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of searchManager method, of class JPAExample.
+     */
+    @Test
+    public void testSearchManager() {
+        System.out.println("Testing searchManager");
+        String username = "gongas";
+        String fullname = "Goncalo Marques";
+        String email = "gongas@gmail.com";
+        int NIF = 123;
+        manager.setEmail(email);
+        manager.setFullName(fullname);
+        manager.setUsername(username);
+        manager.setNIF(NIF);
+        Manager expResult = instance.saveManager(username, fullname, email, NIF);
+        Manager result = instance.searchManager(username);
+        assertEquals(expResult, result);
+        instance.deleteManager(username);
+    }
     
 //    /**
 //     * Test of updateManager method, of class JPAExample.
@@ -262,9 +267,7 @@ public class JPAExampleTest {
         int NIF = 231;
         Manager m = new Manager();
         m = (Manager) instance.saveManager(username, fullname, email, NIF);
-        
         campsite.setManager(m);
-        System.out.println(campsite);
         campsite.setAdultPrice(adultPrice);
         campsite.setBabyPrice(babyPrice);
         campsite.setChildPrice(childPrice);
@@ -272,11 +275,8 @@ public class JPAExampleTest {
         campsite.setDescription(desc);
         campsite.setLocation(location);
         campsite.setTitle(title);
-        System.out.println(campsite);
         Campsite expResult = campsite;
-        System.out.println("EXP RESULT: " + expResult);
         Campsite result = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
-        System.out.println("RESULT: " + result);
         assertEquals(expResult, result);
         instance.deleteCampsite(result.getId());
         instance.deleteManager(username);
@@ -366,7 +366,6 @@ public class JPAExampleTest {
     @Test
     public void testDeleteCampsite() {
         System.out.println("Testing deleteCampsite");
-        int id = 0;
         String title = "Parque Campismo Praia da Vagueira";
         String location = "Vagueira, Aveiro";
         double adultPrice = 12.0;
@@ -380,7 +379,6 @@ public class JPAExampleTest {
         int NIF = 231;
         Manager m = new Manager();
         m = (Manager) instance.saveManager(username, fullname, email, NIF);
-        
         campsite.setManager(m);
         campsite.setAdultPrice(adultPrice);
         campsite.setBabyPrice(babyPrice);
