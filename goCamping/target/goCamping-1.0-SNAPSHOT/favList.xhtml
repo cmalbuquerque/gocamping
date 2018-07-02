@@ -47,9 +47,8 @@
                             <h:outputText value="Child Price (4-12 years):  #{campsite.childPrice} €" />
                             <h:outputText value="Baby Price (0-3 years):  #{campsite.babyPrice} €" />  
                             <b:row>
-                                <b:column span="6"></b:column>
+                                <b:column span="8"></b:column>
                                 <b:commandButton  span="2" value="Remove" iconAwesome="times" look="default"  action="#{favouritelistbean.removeFavouriteList(campsite.id)}" ></b:commandButton>    
-                                <b:button  span="2" onclick="PF('dlg2').show();" value="View Details" iconAwesome="plus-circle" look="success"></b:button>
                                 <b:button  span ="2" value="Book" iconAwesome="calendar-check-o" look="warning" outcome="/booking.xhtml"></b:button>
                             </b:row>    
                             

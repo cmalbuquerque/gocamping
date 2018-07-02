@@ -27,8 +27,11 @@ public class JPAExample {
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
         
-        example.deleteUtilizador("babs");
-        example.deleteCamper("babs");
+
+        example.deleteReservation(2502);
+        example.deleteCampsite(2501);
+        example.deleteCamper("vasquinho");
+        example.deleteManager("helio");
         
         
         

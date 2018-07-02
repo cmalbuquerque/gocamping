@@ -29,6 +29,7 @@ public class JPAExampleTest {
     private Manager manager;
     private Utilizador user;
     private Campsite campsite;
+    private Reservation reservation;
     
     public JPAExampleTest() {
     }
@@ -48,6 +49,7 @@ public class JPAExampleTest {
         this.manager = new Manager();
         this.user = new Utilizador();
         this.campsite = new Campsite();
+        this.reservation = new Reservation();
     }
     
     @After
@@ -459,29 +461,46 @@ public class JPAExampleTest {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of saveReservation method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSaveReservation() {
-//        System.out.println("saveReservation");
-//        Date startDate = null;
-//        Date endDate = null;
-//        Camper camper = null;
-//        Campsite campsite = null;
-//        int nrAdults = 0;
-//        int nrChildren = 0;
-//        int nrBabies = 0;
-//        int cellphone = 0;
-//        double totalPrice = 0.0;
-//        JPAExample instance = new JPAExample();
-//        Reservation expResult = null;
-//        Reservation result = instance.saveReservation(startDate, endDate, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+    /**
+     * Test of saveReservation method, of class JPAExample.
+     */
+    @Test
+    public void testSaveReservation() {
+        System.out.println("Testing saveReservation");
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0;
+        double childPrice = 7.0;
+        double babyPrice = 0.0;
+        String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        Manager m = new Manager();
+        m = (Manager) instance.saveManager("helio", "Helio Marques", "h@gmail.com", 231);      
+        Camper camper = instance.saveCamper("vasquinho", "Vasco Inho", "v@mail.com", 1232, 123754);
+        Campsite campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        Date startDate = new Date(2018,07,01);
+        Date endDate = new Date(2018,07,15);
+        int nrAdults = 2; int nrChildren = 1; int nrBabies=0; int cellphone = 234123123;
+        double totalPrice = 40.0;
+        reservation.setCamper(camper);
+        reservation.setCampsite(campsite);
+        reservation.setEndDate(startDate);
+        reservation.setStartDate(endDate);
+        reservation.setNrAdults(nrAdults);
+        reservation.setNrChildren(nrChildren);
+        reservation.setNrBabies(nrBabies);
+        reservation.setCellfone(cellphone);
+        reservation.setTotalPrice(totalPrice);
+        Reservation expResult = reservation;
+        Reservation result = instance.saveReservation(startDate, endDate, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
+        assertEquals(expResult, result);
+        instance.deleteReservation(result.getId());
+        instance.deleteCampsite(campsite.getId());
+        instance.deleteManager("helio");
+        instance.deleteCamper("vasquinho");
+        
+    }
+
 //    /**
 //     * Test of listarReservations method, of class JPAExample.
 //     */
