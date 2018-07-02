@@ -6,6 +6,7 @@
 package Persistencia;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -50,9 +51,13 @@ public class Campsite implements Serializable {
     
 
     //CHAVE ESTRANGEIRA
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "manager")
     private Manager manager;
+    
+    @OneToMany(cascade = CascadeType.PERSIST, targetEntity = Reservation.class, mappedBy = "campsite")
+    @JoinColumn()
+    private Set<Campsite> reservations;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -144,22 +149,46 @@ public class Campsite implements Serializable {
             return true;
         }
         if (obj == null) {
+            System.out.println("Object Null");
             return false;
         }
         if (getClass() != obj.getClass()) {
+            System.out.println("Object Different Class");
             return false;
         }
         final Campsite other = (Campsite) obj;
-        if (this.id != other.id) {
+        if (Double.doubleToLongBits(this.adultPrice) != Double.doubleToLongBits(other.adultPrice)) {
+            System.out.println("Object Different adult Price");
             return false;
         }
-
+        if (Double.doubleToLongBits(this.childPrice) != Double.doubleToLongBits(other.childPrice)) {
+            System.out.println("Object Different child Price");
+            return false;
+        }
+        if (Double.doubleToLongBits(this.babyPrice) != Double.doubleToLongBits(other.babyPrice)) {
+            System.out.println("Object Different baby Price");
+            return false;
+        }
+        if (!Objects.equals(this.title, other.title)) {
+            System.out.println("Object Different title");
+            return false;
+        }
+        if (!Objects.equals(this.location, other.location)) {
+            System.out.println("Object Different location");
+            return false;
+        }
+        if (!Objects.equals(this.contact, other.contact)) {
+            System.out.println("Object Different contact");
+            return false;
+        }
         return true;
     }
 
+
+
     @Override
     public String toString() {
-        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description +'}';
+        return "Campsite{" + "id=" + id + ", title=" + title + ", location=" + location + ", adultPrice=" + adultPrice + ", childPrice=" + childPrice + ", babyPrice=" + babyPrice + ", contact=" + contact + ", description=" + description + ", manager=" + manager + '}';
     }
 
 }

@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -60,11 +61,11 @@ public class Reservation implements Serializable {
     
     
     //chaves estrangeiras
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "camper")
     private Camper camper;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "campsite")
     private Campsite campsite;
 
@@ -172,18 +173,31 @@ public class Reservation implements Serializable {
             return false;
         }
         final Reservation other = (Reservation) obj;
-        if (this.id != other.id) {
+        if (this.cellfone != other.cellfone) {
             return false;
         }
-        if (this.campsite  != other.campsite) {
+        if (this.nrAdults != other.nrAdults) {
             return false;
         }
-        
+        if (this.nrChildren != other.nrChildren) {
+            return false;
+        }
+        if (this.nrBabies != other.nrBabies) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.totalPrice) != Double.doubleToLongBits(other.totalPrice)) {
+            return false;
+        }
         if (!Objects.equals(this.camper, other.camper)) {
+            return false;
+        }
+        if (!Objects.equals(this.campsite, other.campsite)) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

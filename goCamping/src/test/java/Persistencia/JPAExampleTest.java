@@ -28,6 +28,8 @@ public class JPAExampleTest {
     private Camper camper;
     private Manager manager;
     private Utilizador user;
+    private Campsite campsite;
+    private Reservation reservation;
     
     public JPAExampleTest() {
     }
@@ -46,6 +48,8 @@ public class JPAExampleTest {
         this.camper = new Camper();
         this.manager = new Manager();
         this.user = new Utilizador();
+        this.campsite = new Campsite();
+        this.reservation = new Reservation();
     }
     
     @After
@@ -74,20 +78,27 @@ public class JPAExampleTest {
         instance.deleteCamper(username);
     }
 
-//    /**
-//     * Test of searchCamper method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSearchCamper() {
-//        System.out.println("searchCamper");
-//        String name = "";
-//        JPAExample instance = new JPAExample();
-//        Camper expResult = null;
-//        Camper result = instance.searchCamper(name);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of searchCamper method, of class JPAExample.
+     */
+    @Test
+    public void testSearchCamper() {
+        System.out.println("Testing searchCamper");
+        String name = "jota";
+        String fullname = "João T Pais";
+        String email = "jpais@mail.com";
+        int NIF = 2318473;
+        int campsiteCard = 34;
+        camper.setCampsiteCard(campsiteCard);
+        camper.setFullName(fullname);
+        camper.setUsername(name);
+        camper.setEmail(email);
+        camper.setNIF(NIF);
+        Camper expResult = instance.saveCamper(name,fullname, email, NIF, campsiteCard);
+        Camper result = instance.searchCamper(name);
+        assertEquals(expResult, result);
+        instance.deleteCamper(name);
+    }
 //    /**
 //     * Test of updateCamper method, of class JPAExample.
 //     */
@@ -141,20 +152,25 @@ public class JPAExampleTest {
         
     }
 
-//    /**
-//     * Test of searchManager method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSearchManager() {
-//        System.out.println("searchManager");
-//        String name = "";
-//        JPAExample instance = new JPAExample();
-//        Manager expResult = null;
-//        Manager result = instance.searchManager(name);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of searchManager method, of class JPAExample.
+     */
+    @Test
+    public void testSearchManager() {
+        System.out.println("Testing searchManager");
+        String username = "gongas";
+        String fullname = "Goncalo Marques";
+        String email = "gongas@gmail.com";
+        int NIF = 123;
+        manager.setEmail(email);
+        manager.setFullName(fullname);
+        manager.setUsername(username);
+        manager.setNIF(NIF);
+        Manager expResult = instance.saveManager(username, fullname, email, NIF);
+        Manager result = instance.searchManager(username);
+        assertEquals(expResult, result);
+        instance.deleteManager(username);
+    }
     
 //    /**
 //     * Test of updateManager method, of class JPAExample.
@@ -190,83 +206,120 @@ public class JPAExampleTest {
         instance.deleteManager(username);
     }
 
-//    /**
-//     * Test of saveUtilizador method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSaveUtilizador() {
-//        System.out.println("Testing saveUtilizador");
-//        Camper camper = new Camper();
-//        camper.setCampsiteCard(0);
-//        camper.setUsername("diogof");
-//        camper.setFullName("Diogo Filipe");
-//        camper.setEmail("diogof@mail.com");
-//        camper.setNIF(0);
-//        Manager manager = null;
-//        String username = "diogof";
-//        String password = "fff";
-//        user.setCamper(camper);
-//        user.setManager(manager);
-//        user.setPassword(password);
-//        user.setUsername(username);
-//        Utilizador expResult = user;
-//        Utilizador result = instance.saveUtilizador(camper, manager, username, password);
-//        assertEquals(expResult, result);
-//        instance.deleteUtilizador(username);
-//        
-//    }
+    /**
+     * Test of saveUtilizador method, of class JPAExample.
+     */
+    @Test
+    public void testSaveUtilizador() {
+        System.out.println("Testing saveUtilizador");
+        Camper c1 = new Camper();
+        int NIF = 28473;
+        int campsiteCard = 4;
+        String username= "babs";
+        String fullname = "Bárbara Brito";
+        String email = "bb@mail.com";
+        camper.setNIF(0);
+        Camper c = new Camper(); 
+        c = (Camper) instance.saveCamper(username, fullname, email, 0, 0);
+        Manager manager = null;
+        String password = "fff";
+        user.setCamper(c);
+        user.setManager(manager);
+        user.setPassword(password);
+        user.setUsername(username);
+        Utilizador expResult = user;
+        Utilizador result = instance.saveUtilizador(c, manager, username, password);
+        assertEquals(expResult, result);
+        instance.deleteUtilizador(username);
+        instance.deleteCamper(username);
+        
+    }
 
-//    /**
-//     * Test of searchUtilizador method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSearchUtilizador() {
-//        System.out.println("searchUtilizador");
-//        String name = "";
-//        JPAExample instance = new JPAExample();
-//        Utilizador expResult = null;
-//        Utilizador result = instance.searchUtilizador(name);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of saveCampsite method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSaveCampsite() {
-//        System.out.println("saveCampsite");
-//        String title = "";
-//        String location = "";
-//        double adultPrice = 0.0;
-//        double childPrice = 0.0;
-//        double babyPrice = 0.0;
-//        String contact = "";
-//        String desc = "";
-//        Manager manager = null;
-//        JPAExample instance = new JPAExample();
-//        Campsite expResult = null;
-//        Campsite result = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of searchCampsite method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSearchCampsite() {
-//        System.out.println("searchCampsite");
-//        int id = 0;
-//        JPAExample instance = new JPAExample();
-//        Campsite expResult = null;
-//        Campsite result = instance.searchCampsite(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of searchUtilizador method, of class JPAExample.
+     */
+    @Test
+    public void testSearchUtilizador() {
+        System.out.println("Testing searchUtilizador");
+        String username = "gongas";
+        String fullname = "Goncalo Marques";
+        String email = "gongas@gmail.com";
+        int NIF = 123;
+        manager.setEmail(email);
+        manager.setFullName(fullname);
+        manager.setUsername(username);
+        manager.setNIF(NIF);
+        Camper camper = null;
+        String password = "fff";
+        Manager m = new Manager();
+        m = instance.saveManager(username, fullname, email, NIF);
+        Utilizador expResult = instance.saveUtilizador(camper, m, username, password);
+        Utilizador result = instance.searchUtilizador(username);
+        assertEquals(expResult, result);
+        instance.deleteUtilizador(username);
+        instance.deleteManager(username);
+    }
+
+    /**
+     * Test of saveCampsite method, of class JPAExample.
+     */
+    @Test
+    public void testSaveCampsite() {
+        System.out.println("Testing saveCampsite");
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0;
+        double childPrice = 7.0;
+        double babyPrice = 0.0;
+        String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        String username = "helder";
+        String fullname = "Helder Marques";
+        String email = "h@gmail.com";
+        int NIF = 231;
+        Manager m = new Manager();
+        m = (Manager) instance.saveManager(username, fullname, email, NIF);
+        campsite.setManager(m);
+        campsite.setAdultPrice(adultPrice);
+        campsite.setBabyPrice(babyPrice);
+        campsite.setChildPrice(childPrice);
+        campsite.setContact(contact);
+        campsite.setDescription(desc);
+        campsite.setLocation(location);
+        campsite.setTitle(title);
+        Campsite expResult = campsite;
+        Campsite result = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        assertEquals(expResult, result);
+        instance.deleteCampsite(result.getId());
+        instance.deleteManager(username);
+    }
+
+    /**
+     * Test of searchCampsite method, of class JPAExample.
+     */
+    @Test
+    public void testSearchCampsite() {
+        System.out.println("Testing searchCampsite");
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0;
+        double childPrice = 7.0;
+        double babyPrice = 0.0;
+        String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        String username = "helder";
+        String fullname = "Helder Marques";
+        String email = "h@gmail.com";
+        int NIF = 231;
+        Manager m = new Manager();
+        m = (Manager) instance.saveManager(username, fullname, email, NIF);
+        Campsite expResult = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        Campsite result = instance.searchCampsite(expResult.getId());
+        assertEquals(expResult, result);
+        instance.deleteCampsite(expResult.getId());
+        instance.deleteManager(username);
+        
+    }
 
 //    /**
 //     * Test of listarCampsite method, of class JPAExample.
@@ -330,20 +383,43 @@ public class JPAExampleTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//
-//    /**
-//     * Test of deleteCampsite method, of class JPAExample.
-//     */
-//    @Test
-//    public void testDeleteCampsite() {
-//        System.out.println("deleteCampsite");
-//        int id = 0;
-//        JPAExample instance = new JPAExample();
-//        instance.deleteCampsite(id);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+
+    /**
+     * Test of deleteCampsite method, of class JPAExample.
+     */
+    @Test
+    public void testDeleteCampsite() {
+        System.out.println("Testing deleteCampsite");
+        String title = "Parque Campismo Praia da Vagueira";
+        String location = "Vagueira, Aveiro";
+        double adultPrice = 12.0;
+        double childPrice = 6.0;
+        double babyPrice = 1.0;
+        String contact = "342777521";
+        String desc = "Proximo da praia, bom ambiente.";
+        String username = "nadia";
+        String fullname = "Nadia Marques";
+        String email = "nadia@gmail.com";
+        int NIF = 231;
+        Manager m = new Manager();
+        m = (Manager) instance.saveManager(username, fullname, email, NIF);
+        campsite.setManager(m);
+        campsite.setAdultPrice(adultPrice);
+        campsite.setBabyPrice(babyPrice);
+        campsite.setChildPrice(childPrice);
+        campsite.setContact(contact);
+        campsite.setDescription(desc);
+        campsite.setLocation(location);
+        campsite.setTitle(title);
+        Campsite camp = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        boolean expResult = true;
+        boolean result = instance.deleteCampsite(camp.getId());
+        assertEquals(result, expResult);
+        instance.deleteCampsite(camp.getId());
+        instance.deleteManager(username);
+        
+    }
+
 //    /**
 //     * Test of saveCampsiteImage method, of class JPAExample.
 //     */
@@ -385,29 +461,46 @@ public class JPAExampleTest {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of saveReservation method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSaveReservation() {
-//        System.out.println("saveReservation");
-//        Date startDate = null;
-//        Date endDate = null;
-//        Camper camper = null;
-//        Campsite campsite = null;
-//        int nrAdults = 0;
-//        int nrChildren = 0;
-//        int nrBabies = 0;
-//        int cellphone = 0;
-//        double totalPrice = 0.0;
-//        JPAExample instance = new JPAExample();
-//        Reservation expResult = null;
-//        Reservation result = instance.saveReservation(startDate, endDate, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+    /**
+     * Test of saveReservation method, of class JPAExample.
+     */
+    @Test
+    public void testSaveReservation() {
+        System.out.println("Testing saveReservation");
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0;
+        double childPrice = 7.0;
+        double babyPrice = 0.0;
+        String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        Manager m = new Manager();
+        m = (Manager) instance.saveManager("helio", "Helio Marques", "h@gmail.com", 231);      
+        Camper camper = instance.saveCamper("vasquinho", "Vasco Inho", "v@mail.com", 1232, 123754);
+        Campsite campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        Date startDate = new Date(2018,07,01);
+        Date endDate = new Date(2018,07,15);
+        int nrAdults = 2; int nrChildren = 1; int nrBabies=0; int cellphone = 234123123;
+        double totalPrice = 40.0;
+        reservation.setCamper(camper);
+        reservation.setCampsite(campsite);
+        reservation.setEndDate(startDate);
+        reservation.setStartDate(endDate);
+        reservation.setNrAdults(nrAdults);
+        reservation.setNrChildren(nrChildren);
+        reservation.setNrBabies(nrBabies);
+        reservation.setCellfone(cellphone);
+        reservation.setTotalPrice(totalPrice);
+        Reservation expResult = reservation;
+        Reservation result = instance.saveReservation(startDate, endDate, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
+        assertEquals(expResult, result);
+        instance.deleteReservation(result.getId());
+        instance.deleteCampsite(campsite.getId());
+        instance.deleteManager("helio");
+        instance.deleteCamper("vasquinho");
+        
+    }
+
 //    /**
 //     * Test of listarReservations method, of class JPAExample.
 //     */
