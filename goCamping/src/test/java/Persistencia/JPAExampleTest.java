@@ -192,31 +192,34 @@ public class JPAExampleTest {
         instance.deleteManager(username);
     }
 
-//    /**
-//     * Test of saveUtilizador method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSaveUtilizador() {
-//        System.out.println("Testing saveUtilizador");
-//        Camper camper = new Camper();
-//        camper.setCampsiteCard(0);
-//        camper.setUsername("carlos");
-//        camper.setFullName("Carlos Vasco");
-//        camper.setEmail("cv@mail.com");
-//        camper.setNIF(0);
-//        Manager manager = null;
-//        String username = "carlos";
-//        String password = "fff";
-//        user.setCamper(camper);
-//        user.setManager(manager);
-//        user.setPassword(password);
-//        user.setUsername(username);
-//        Utilizador expResult = user;
-//        Utilizador result = instance.saveUtilizador(camper, manager, username, password);
-//        assertEquals(expResult, result);
-//        instance.deleteUtilizador(username);
-//        
-//    }
+    /**
+     * Test of saveUtilizador method, of class JPAExample.
+     */
+    @Test
+    public void testSaveUtilizador() {
+        System.out.println("Testing saveUtilizador");
+        Camper c1 = new Camper();
+        int NIF = 28473;
+        int campsiteCard = 4;
+        String username= "babs";
+        String fullname = "Bárbara Brito";
+        String email = "bb@mail.com";
+        camper.setNIF(0);
+        Camper c = new Camper(); 
+        c = (Camper) instance.saveCamper(username, fullname, email, 0, 0);
+        Manager manager = null;
+        String password = "fff";
+        user.setCamper(c);
+        user.setManager(manager);
+        user.setPassword(password);
+        user.setUsername(username);
+        Utilizador expResult = user;
+        Utilizador result = instance.saveUtilizador(c, manager, username, password);
+        assertEquals(expResult, result);
+        instance.deleteUtilizador(username);
+        instance.deleteCamper(username);
+        
+    }
 
 //    /**
 //     * Test of searchUtilizador method, of class JPAExample.
@@ -267,7 +270,7 @@ public class JPAExampleTest {
         System.out.println("EXP RESULT: " + expResult);
         Campsite result = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
         System.out.println("RESULT: " + result);
-        //assertEquals(expResult, result);
+        assertEquals(expResult, result);
         instance.deleteCampsite(result.getId());
         instance.deleteManager(username);
     }

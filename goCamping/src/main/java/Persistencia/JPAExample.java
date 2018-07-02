@@ -26,7 +26,10 @@ public class JPAExample {
 
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
-
+        
+        example.deleteUtilizador("babs");
+        example.deleteCamper("babs");
+        
         
         
 //        Camper camper1 = example.saveCamper("kiko", "Francisco Salvador", "kikinho@ua.pt", 123456789, 23456);
@@ -247,14 +250,8 @@ public class JPAExample {
             Utilizador utilizador = (Utilizador) entityManager.find(Utilizador.class, username);
             Camper c = utilizador.getCamper();
             Manager m = utilizador.getManager();
-            System.out.println(c);
-            System.out.println(m);
-            System.out.println(utilizador);
             entityManager.getTransaction().commit();
-            if (c != null)
-                deleteCamper(c.getUsername());
-            if (m != null)
-                deleteManager(m.getUsername());
+            
             entityManager.remove(utilizador);
             return true;
         } catch (Exception e) {
