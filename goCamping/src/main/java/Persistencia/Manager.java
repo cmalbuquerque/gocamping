@@ -39,7 +39,7 @@ public class Manager implements Serializable {
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "manager")
     private Utilizador user;
 
-    @OneToMany(targetEntity = Campsite.class, mappedBy = "manager")
+    @OneToMany(cascade = CascadeType.PERSIST, targetEntity = Campsite.class, mappedBy = "manager")
     @JoinColumn()
     private Set<Campsite> campsites;
 

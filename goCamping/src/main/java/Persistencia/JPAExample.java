@@ -26,15 +26,23 @@ public class JPAExample {
 
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
+
         
-        Camper camper1 = example.saveCamper("kiko","Francisco Salvador", "kikinho@ua.pt", 123456789, 23456);
-        Manager manager1 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", 987654321);
-        Utilizador user1 = example.saveUtilizador(camper1, null, "kiko", "password");
-        Utilizador user2 = example.saveUtilizador(null, manager1, "joana", "password");
         
-        Campsite campsite1= example.saveCampsite("Parque de Campismo da Fajã do Ouvidor", "São Jorge, Açores", 15, 5, 0, "9191919191", "A ilha ideal para umas férias perfeitas! Um parque muito adequado para crianças cheias de energia.", manager1);
-        Campsite campsite2 = example.saveCampsite("Garfe Parque", "Garfe, Póvoa de Lanhoso", 20, 10, 5, "934765273", "O lugar ideal para umas férias calmas.", manager1);
-        
+//        Camper camper1 = example.saveCamper("kiko", "Francisco Salvador", "kikinho@ua.pt", 123456789, 23456);
+//        Manager manager1 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", 987654321);
+//        Utilizador user1 = example.saveUtilizador(camper1, null, "kiko", "password");
+//        Utilizador user2 = example.saveUtilizador(null, manager1, "joana", "password");
+
+//        Manager m1 = example.saveManager("teste", "Teste 1", "teste@mail.com", 22222);
+//        Utilizador u1 = example.saveUtilizador(null, m1, "teste", "pass");
+//        
+//        Campsite c1 = example.saveCampsite("Campsite Teste", "No meio do nada", 20, 10, 5, "14432312", "20", m1);
+//        System.out.println(c1);
+//        example.deleteCampsite(c1.getId());
+//        
+//        Campsite campsite1 = example.saveCampsite("Parque de Campismo da Fajã do Ouvidor", "São Jorge, Açores", 15, 5, 0, "9191919191", "A ilha ideal para umas férias perfeitas! Um parque muito adequado para crianças cheias de energia.", manager1);
+//        Campsite campsite2 = example.saveCampsite("Garfe Parque", "Garfe, Póvoa de Lanhoso", 20, 10, 5, "934765273", "O lugar ideal para umas férias calmas.", manager1);
 
     }
 
@@ -58,8 +66,8 @@ public class JPAExample {
         }
         return camper;
     }
-        
-     public Camper searchCamper(String name) {
+
+    public Camper searchCamper(String name) {
         Camper user = new Camper();
         try {
             entityManager.getTransaction().begin();
@@ -107,8 +115,7 @@ public class JPAExample {
             System.out.println("update camper didn't work");
         }
         return camper;
-    }   
-    
+    }
 
     public boolean deleteCamper(String username) {
         try {
@@ -143,7 +150,7 @@ public class JPAExample {
         }
         return manager;
     }
-    
+
     public Manager searchManager(String name) {
         Manager manager = new Manager();
         try {
@@ -180,7 +187,7 @@ public class JPAExample {
     }
 
     public Manager updateManager(String username, String fullname, String email) {
-        Manager manager = new Manager ();
+        Manager manager = new Manager();
         try {
             entityManager.getTransaction().begin();
             manager = (Manager) entityManager.find(Manager.class, username);
@@ -193,7 +200,6 @@ public class JPAExample {
         }
         return manager;
     }
-    
 
     public boolean deleteManager(String username) {
         try {
@@ -208,8 +214,6 @@ public class JPAExample {
             return false;
         }
     }
-    
-    
 
     public Utilizador saveUtilizador(Camper camper, Manager manager, String username, String password) {
         Utilizador user = new Utilizador();
@@ -236,13 +240,22 @@ public class JPAExample {
         }
         return user;
     }
-    
+
     public boolean deleteUtilizador(String username) {
         try {
             entityManager.getTransaction().begin();
             Utilizador utilizador = (Utilizador) entityManager.find(Utilizador.class, username);
-            entityManager.remove(utilizador);
+            Camper c = utilizador.getCamper();
+            Manager m = utilizador.getManager();
+            System.out.println(c);
+            System.out.println(m);
+            System.out.println(utilizador);
             entityManager.getTransaction().commit();
+            if (c != null)
+                deleteCamper(c.getUsername());
+            if (m != null)
+                deleteManager(m.getUsername());
+            entityManager.remove(utilizador);
             return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -250,7 +263,6 @@ public class JPAExample {
             return false;
         }
     }
-     
 
     public Utilizador searchUtilizador(String name) {
         Utilizador user = new Utilizador();
@@ -295,7 +307,7 @@ public class JPAExample {
         }
         return campsite;
     }
-    
+
     public Campsite searchCampsite(int id) {
         Campsite campsite = new Campsite();
         try {
@@ -304,7 +316,7 @@ public class JPAExample {
             query.setParameter("id", id);
             List<Campsite> campsites = query.getResultList();
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
-                campsite = (Campsite) iterator.next();   
+                campsite = (Campsite) iterator.next();
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -313,12 +325,12 @@ public class JPAExample {
         }
         return campsite;
     }
-    
+
     public List<Campsite> listarCampsite(Manager manager) {
         List<Campsite> campsites = new ArrayList<Campsite>();
         List<Campsite> list = new ArrayList<Campsite>();
         try {
-            entityManager.getTransaction().begin();         
+            entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Campsite as c where c.manager = :manager");
             query.setParameter("manager", manager);
             campsites = query.getResultList();
@@ -334,7 +346,7 @@ public class JPAExample {
         }
         return list;
     }
-    
+
     public List<Campsite> listarTodosCampsites() {
         List<Campsite> campsites = new ArrayList<Campsite>();
         List<Campsite> list = new ArrayList<Campsite>();
@@ -342,7 +354,7 @@ public class JPAExample {
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Campsite c");
-            
+
             campsites = query.getResultList();
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
                 Campsite campsite = (Campsite) iterator.next();
@@ -357,14 +369,14 @@ public class JPAExample {
         }
         return list;
     }
- 
+
     public List<Campsite> listarCampsite(String location) {
         List<Campsite> campsites = new ArrayList<Campsite>();
         List<Campsite> list = new ArrayList<Campsite>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Campsite as c where c.location like :location");
-            query.setParameter("location", "%" + location +"%");
+            query.setParameter("location", "%" + location + "%");
             campsites = query.getResultList();
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
                 Campsite campsite = (Campsite) iterator.next();
@@ -379,8 +391,8 @@ public class JPAExample {
         }
         return list;
     }
-    
-    public void updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc)  {
+
+    public void updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc) {
         try {
             entityManager.getTransaction().begin();
             Campsite campsite = (Campsite) entityManager.find(Campsite.class, id);
@@ -456,8 +468,6 @@ public class JPAExample {
             System.out.println("delete campsite images didn't work");
         }
     }
-  
- 
 
     public Reservation saveReservation(Date startDate, Date endDate, Camper camper, Campsite campsite, int nrAdults, int nrChildren, int nrBabies, int cellphone, double totalPrice) {
         Reservation reservation = new Reservation();
@@ -483,12 +493,12 @@ public class JPAExample {
         }
         return reservation;
     }
-    
-     public List<Reservation> listarReservations(Camper camper) {
+
+    public List<Reservation> listarReservations(Camper camper) {
         List<Reservation> reservations = new ArrayList<Reservation>();
         List<Reservation> list = new ArrayList<Reservation>();
         try {
-            entityManager.getTransaction().begin();         
+            entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Reservation as c where c.camper = :camper");
             query.setParameter("camper", camper);
             reservations = query.getResultList();
@@ -538,7 +548,7 @@ public class JPAExample {
             System.out.println("at the start of transaction");
             favouriteList.setCamperUsername(camperUsername);
             favouriteList.setCampsiteID(campsiteID);
-            
+
             entityManager.persist(favouriteList);
 
             entityManager.getTransaction().commit();
@@ -547,15 +557,15 @@ public class JPAExample {
             entityManager.getTransaction().rollback();
             System.out.println("save didnt' work on campsite");
         }
-        return favouriteList;   
+        return favouriteList;
     }
-    
+
     public List<Campsite> listarCampsitesFavList(String username) {
         List<FavouriteList> favouriteLists = new ArrayList<FavouriteList>();
         List<Integer> list = new ArrayList<Integer>();
         List<Campsite> campsites = new ArrayList<>();
         try {
-            entityManager.getTransaction().begin();         
+            entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from FavouriteList as c where c.camperUsername = :username");
             query.setParameter("username", username);
             favouriteLists = query.getResultList();
@@ -569,13 +579,12 @@ public class JPAExample {
             entityManager.getTransaction().rollback();
             System.out.println("listar campsite with manager didn't work");
         }
-        for (int elem: list){
+        for (int elem : list) {
             campsites.add(searchCampsite(elem));
         }
-        
+
         return campsites;
     }
-        
 
     public void deleteFavouriteList(String camperUsername, int campsiteID) {
         FavouriteListKey favKey = new FavouriteListKey(camperUsername, campsiteID);
@@ -589,7 +598,5 @@ public class JPAExample {
             System.out.println("delete favourite lit pitch didn't work");
         }
     }
-    
-    
 
 }
