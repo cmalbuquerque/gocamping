@@ -233,20 +233,30 @@ public class JPAExampleTest {
         
     }
 
-//    /**
-//     * Test of searchUtilizador method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSearchUtilizador() {
-//        System.out.println("searchUtilizador");
-//        String name = "";
-//        JPAExample instance = new JPAExample();
-//        Utilizador expResult = null;
-//        Utilizador result = instance.searchUtilizador(name);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of searchUtilizador method, of class JPAExample.
+     */
+    @Test
+    public void testSearchUtilizador() {
+        System.out.println("Testing searchUtilizador");
+        String username = "gongas";
+        String fullname = "Goncalo Marques";
+        String email = "gongas@gmail.com";
+        int NIF = 123;
+        manager.setEmail(email);
+        manager.setFullName(fullname);
+        manager.setUsername(username);
+        manager.setNIF(NIF);
+        Camper camper = null;
+        String password = "fff";
+        Manager m = new Manager();
+        m = instance.saveManager(username, fullname, email, NIF);
+        Utilizador expResult = instance.saveUtilizador(camper, m, username, password);
+        Utilizador result = instance.searchUtilizador(username);
+        assertEquals(expResult, result);
+        instance.deleteUtilizador(username);
+        instance.deleteManager(username);
+    }
 
     /**
      * Test of saveCampsite method, of class JPAExample.
