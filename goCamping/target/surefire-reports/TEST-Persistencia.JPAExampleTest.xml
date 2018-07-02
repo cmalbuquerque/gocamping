@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="Persistencia.JPAExampleTest" time="2.311" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="Persistencia.JPAExampleTest" time="6.096" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64"/>
@@ -61,10 +61,11 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="Persistencia.JPAExampleTest" name="testDeleteManager" time="1.788"/>
-  <testcase classname="Persistencia.JPAExampleTest" name="testSaveUtilizador" time="0.076"/>
-  <testcase classname="Persistencia.JPAExampleTest" name="testDeleteCamper" time="0.051"/>
-  <testcase classname="Persistencia.JPAExampleTest" name="testSaveCamper" time="0.038"/>
-  <testcase classname="Persistencia.JPAExampleTest" name="testSaveCampsite" time="0.132"/>
+  <testcase classname="Persistencia.JPAExampleTest" name="testDeleteManager" time="5.419"/>
+  <testcase classname="Persistencia.JPAExampleTest" name="testSaveUtilizador" time="0.096"/>
+  <testcase classname="Persistencia.JPAExampleTest" name="testDeleteCamper" time="0.054"/>
+  <testcase classname="Persistencia.JPAExampleTest" name="testSaveCamper" time="0.034"/>
+  <testcase classname="Persistencia.JPAExampleTest" name="testSaveCampsite" time="0.105"/>
+  <testcase classname="Persistencia.JPAExampleTest" name="testDeleteCampsite" time="0.14"/>
   <testcase classname="Persistencia.JPAExampleTest" name="testSaveManager" time="0.025"/>
 </testsuite>

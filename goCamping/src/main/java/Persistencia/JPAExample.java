@@ -407,15 +407,17 @@ public class JPAExample {
         }
     }
 
-    public void deleteCampsite(int id) {
+    public boolean deleteCampsite(int id) {
         try {
             entityManager.getTransaction().begin();
             Campsite campsite = (Campsite) entityManager.find(Campsite.class, id);
             entityManager.remove(campsite);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("delete campsite didn't work");
+            return false;
         }
     }
 

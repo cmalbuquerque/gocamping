@@ -352,20 +352,45 @@ public class JPAExampleTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//
-//    /**
-//     * Test of deleteCampsite method, of class JPAExample.
-//     */
-//    @Test
-//    public void testDeleteCampsite() {
-//        System.out.println("deleteCampsite");
-//        int id = 0;
-//        JPAExample instance = new JPAExample();
-//        instance.deleteCampsite(id);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+
+    /**
+     * Test of deleteCampsite method, of class JPAExample.
+     */
+    @Test
+    public void testDeleteCampsite() {
+        System.out.println("Testing deleteCampsite");
+        int id = 0;
+        String title = "Parque Campismo Praia da Vagueira";
+        String location = "Vagueira, Aveiro";
+        double adultPrice = 12.0;
+        double childPrice = 6.0;
+        double babyPrice = 1.0;
+        String contact = "342777521";
+        String desc = "Proximo da praia, bom ambiente.";
+        String username = "nadia";
+        String fullname = "Nadia Marques";
+        String email = "nadia@gmail.com";
+        int NIF = 231;
+        Manager m = new Manager();
+        m = (Manager) instance.saveManager(username, fullname, email, NIF);
+        
+        campsite.setManager(m);
+        campsite.setAdultPrice(adultPrice);
+        campsite.setBabyPrice(babyPrice);
+        campsite.setChildPrice(childPrice);
+        campsite.setContact(contact);
+        campsite.setDescription(desc);
+        campsite.setLocation(location);
+        campsite.setTitle(title);
+        Campsite camp = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m);
+        boolean expResult = true;
+        boolean result = instance.deleteCampsite(camp.getId());
+        assertEquals(result, expResult);
+        instance.deleteCampsite(camp.getId());
+        instance.deleteManager(username);
+        
+    }
+
 //    /**
 //     * Test of saveCampsiteImage method, of class JPAExample.
 //     */
