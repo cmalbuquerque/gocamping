@@ -309,11 +309,11 @@ public class JPAExampleTest {
         double babyPrice = 0.0;
         String contact = "923111222";
         String desc = "Agradável para umas férias tranquilas em família";
+        double campingCardDiscount=10;
         String username = "helder";
         String fullname = "Helder Marques";
         String email = "h@gmail.com";
         int NIF = 231;
-        double campingCardDiscount=10;
         Manager m = new Manager();
         m = (Manager) instance.saveManager(username, fullname, email, NIF);
         Campsite expResult = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m, campingCardDiscount);
@@ -324,20 +324,32 @@ public class JPAExampleTest {
         
     }
 
-//    /**
-//     * Test of listarCampsite method, of class JPAExample.
-//     */
-//    @Test
-//    public void testListarCampsite_Manager() {
-//        System.out.println("listarCampsite");
-//        Manager manager = null;
-//        JPAExample instance = new JPAExample();
-//        List<Campsite> expResult = null;
-//        List<Campsite> result = instance.listarCampsite(manager);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of listarCampsite method, of class JPAExample.
+     */
+    @Test
+    public void testListarCampsite_Manager() {
+        System.out.println("Testing listarCampsite_Manager");
+        String username = "helder";
+        String fullname = "Helder Marques";
+        String email = "h@gmail.com";
+        int NIF = 231;
+        manager = instance.saveManager(username, fullname, email, NIF);
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0;
+        double childPrice = 7.0;
+        double babyPrice = 0.0;
+        String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        double campingCardDiscount=10;
+        Campsite myCampsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
+        List<Campsite> result = instance.listarCampsite(manager);
+        assertTrue(result.contains(myCampsite));
+        instance.deleteCampsite(myCampsite.getId());
+        instance.deleteManager(username);
+    }
+    
 //    /**
 //     * Test of listarTodosCampsites method, of class JPAExample.
 //     */
@@ -352,20 +364,32 @@ public class JPAExampleTest {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of listarCampsite method, of class JPAExample.
-//     */
-//    @Test
-//    public void testListarCampsite_String() {
-//        System.out.println("listarCampsite");
-//        String location = "";
-//        JPAExample instance = new JPAExample();
-//        List<Campsite> expResult = null;
-//        List<Campsite> result = instance.listarCampsite(location);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of listarCampsite method, of class JPAExample.
+     */
+    @Test
+    public void testListarCampsite_Location() {
+        System.out.println("Testing listarCampsite_Manager");
+        String username = "helder";
+        String fullname = "Helder Marques";
+        String email = "h@gmail.com";
+        int NIF = 231;
+        manager = instance.saveManager(username, fullname, email, NIF);
+        System.out.println("testar listarCampsite_Location");
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0;
+        double childPrice = 7.0;
+        double babyPrice = 0.0;
+        String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        double campingCardDiscount=10;
+        Campsite myCampsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
+        List<Campsite> result = instance.listarCampsite("Marinha Grande");
+        assertTrue(result.contains(myCampsite));
+        instance.deleteCampsite(myCampsite.getId());
+        instance.deleteManager(username);
+    }
 //
 //    /**
 //     * Test of updateCampsite method, of class JPAExample.
