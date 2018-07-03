@@ -7,6 +7,7 @@ package Persistencia;
 
 import java.util.Date;
 import java.util.List;
+import javax.print.DocFlavor;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -101,22 +102,32 @@ public class JPAExampleTest {
         assertEquals(expResult, result);
         instance.deleteCamper(name);
     }
-//    /**
-//     * Test of updateCamper method, of class JPAExample.
-//     */
-//    @Test
-//    public void testUpdateCamper() {
-//        System.out.println("Testing updateCamper");
-//        String username = "kiko";
-//        String fullname = "Francisco Salvador";
-//        String email = "kikinho@mail.com";
-//        int NIF = 2318473;
-//        int campingCard = 34;
-//        camper.setEmail(email);
-//        Camper expResult = camper;
-//        Camper result = instance.updateCamper(username, fullname, email, campingCard);
-//        assertEquals(expResult, result);
-//    }
+    
+    
+    /**
+     * Test of updateCamper method, of class JPAExample.
+     */
+    @Test
+    public void testUpdateCamper() {
+        System.out.println("Testing updateCamper");
+        System.out.println("Testing searchCamper");
+        String name = "jota";
+        String fullname = "João";
+        String newFullname = "João T Pais";
+        String email = "jpais@mail.com";
+        int NIF = 2318473;
+        int campsiteCard = 34;
+        Camper camper1 = instance.saveCamper(name,fullname, email, NIF, campsiteCard);
+        Camper expResult = instance.updateCamper(name, newFullname, email, campsiteCard);
+        camper.setCampsiteCard(campsiteCard);
+        camper.setFullName(newFullname);
+        camper.setUsername(name);
+        camper.setEmail(email);
+        camper.setNIF(NIF);
+        Camper result = instance.searchCamper(name);
+        assertEquals(expResult, result);
+        instance.deleteCamper(name);
+    }
     
     /**
      * Test of deleteCamper method, of class JPAExample.
