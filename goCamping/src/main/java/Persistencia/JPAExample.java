@@ -610,16 +610,18 @@ public class JPAExample {
         return campsites;
     }
 
-    public void deleteFavouriteList(String camperUsername, int campsiteID) {
+    public boolean deleteFavouriteList(String camperUsername, int campsiteID) {
         FavouriteListKey favKey = new FavouriteListKey(camperUsername, campsiteID);
         try {
             entityManager.getTransaction().begin();
             FavouriteList favouriteList = (FavouriteList) entityManager.find(FavouriteList.class, favKey);
             entityManager.remove(favouriteList);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("delete favourite lit pitch didn't work");
+            return false;
         }
     }
 

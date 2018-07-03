@@ -51,6 +51,7 @@ public class JPAExampleTest {
         this.user = new Utilizador();
         this.campsite = new Campsite();
         this.reservation = new Reservation();
+        this.favouriteList = new FavouriteList();
     }
     
     @After
@@ -601,7 +602,6 @@ public class JPAExampleTest {
      */
     @Test
     public void testSaveFavouriteList() {
-        favouriteList = new FavouriteList();
         System.out.println(" Testing saveFavouriteList");     
         manager =  instance.saveManager("Marques", "Helio Marques", "h@gmail.com", 231);
         camper = instance.saveCamper("Ramos", "Vasco Ramos", "v@mail.com", 1232, 123754);
@@ -650,19 +650,31 @@ public class JPAExampleTest {
     
 
     
-//
-//
-//    /**
-//     * Test of deleteFavouriteList method, of class JPAExample.
-//     */
-//    @Test
-//    public void testDeleteFavouriteList() {
-//        System.out.println("deleteFavouriteList");
-//        String camperUsername = "";
-//        int campsiteID = 0;
-//        JPAExample instance = new JPAExample();
-//        instance.deleteFavouriteList(camperUsername, campsiteID);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
+
+    /**
+     * Test of deleteFavouriteList method, of class JPAExample.
+     */
+    @Test
+    public void testDeleteFavouriteList() {
+        System.out.println(" Testing deleteFavouriteList");
+        System.out.println("Testing listarCampsitesFavList");
+        camper = instance.saveCamper("leonor", "Leonor Oliveira", "lei@ua.pt", 123233456, 987654);
+        manager =  instance.saveManager("helioM", "Helio Marques", "h@gmail.com", 231);
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0; double childPrice = 7.0; double babyPrice = 0.0; String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        double campingCardDiscount = 10;
+        campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
+        boolean expResult = true;
+        favouriteList = instance.saveFavouriteList(camper.getUsername(), campsite.getId());
+        boolean result = instance.deleteFavouriteList(camper.getUsername(), campsite.getId());
+        assertEquals(result, expResult);
+        instance.deleteCamper(camper.getUsername());
+        instance.deleteCampsite(campsite.getId());
+        instance.deleteManager(manager.getUsername());
+    
+    }
+    
 }
