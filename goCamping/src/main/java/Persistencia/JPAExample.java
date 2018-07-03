@@ -410,10 +410,11 @@ public class JPAExample {
         return list;
     }
 
-    public void updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, double campingCardDiscount) {
+    public Campsite updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, double campingCardDiscount) {
+        Campsite campsite = new Campsite();
         try {
             entityManager.getTransaction().begin();
-            Campsite campsite = (Campsite) entityManager.find(Campsite.class, id);
+            campsite = entityManager.find(Campsite.class, id);
             campsite.setTitle(title);
             campsite.setLocation(location);
             campsite.setAdultPrice(adultPrice);
@@ -427,6 +428,7 @@ public class JPAExample {
             entityManager.getTransaction().rollback();
             System.out.println("update campsite didn't work");
         }
+        return  campsite;
     }
 
     public boolean deleteCampsite(int id) {

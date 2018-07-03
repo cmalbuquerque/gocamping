@@ -400,26 +400,28 @@ public class JPAExampleTest {
         instance.deleteCampsite(myCampsite.getId());
         instance.deleteManager(manager.getUsername());
     }
-//
-//    /**
-//     * Test of updateCampsite method, of class JPAExample.
-//     */
-//    @Test
-//    public void testUpdateCampsite() {
-//        System.out.println("updateCampsite");
-//        int id = 0;
-//        String title = "";
-//        String location = "";
-//        double adultPrice = 0.0;
-//        double childPrice = 0.0;
-//        double babyPrice = 0.0;
-//        String contact = "";
-//        String desc = "";
-//        JPAExample instance = new JPAExample();
-//        instance.updateCampsite(id, title, location, adultPrice, childPrice, babyPrice, contact, desc);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
+    /**
+     * Test of updateCampsite method, of class JPAExample.
+     */
+    @Test
+    public void testUpdateCampsite() {
+        System.out.println("Testing updateCampsite");
+        manager = instance.saveManager("helder", "Helder Marques", "h@gmail.com", 231);
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0; double childPrice = 7.0; double babyPrice = 0.0; String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        double campingCardDiscount = 10;
+        Campsite campsite1 = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
+        double newAdultPrice = 15.0; double newChildPrice = 9.0;  double newCampingCardDiscount = 20;
+        Campsite expResult = instance.updateCampsite(campsite1.getId(), title, location, newAdultPrice, newChildPrice, babyPrice, contact, desc, newCampingCardDiscount);
+        Campsite result = instance.searchCampsite(campsite1.getId());
+        assertEquals(expResult, result);
+        instance.deleteCampsite(campsite1.getId());
+        instance.deleteManager(manager.getUsername());
+    }
+    
 
     /**
      * Test of deleteCampsite method, of class JPAExample.
