@@ -30,6 +30,8 @@ public class JPAExampleTest {
     private Utilizador user;
     private Campsite campsite;
     private Reservation reservation;
+    private FavouriteList favouriteList;
+    private FavouriteListKey favouriteListKey;
     
     public JPAExampleTest() {
     }
@@ -497,8 +499,8 @@ public class JPAExampleTest {
         String desc = "Agradável para umas férias tranquilas em família";
         double campingCardDiscount = 10;
         manager =  instance.saveManager("helio", "Helio Marques", "h@gmail.com", 231);      
-        Camper camper = instance.saveCamper("vasquinho", "Vasco Inho", "v@mail.com", 1232, 123754);
-        Campsite campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
+        camper = instance.saveCamper("vasquinho", "Vasco Inho", "v@mail.com", 1232, 123754);
+        campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
         Date startDate = new Date(2018,07,01);
         Date endDate = new Date(2018,07,15);
         int nrAdults = 2; int nrChildren = 1; int nrBabies=0; int cellphone = 234123123;
@@ -528,17 +530,27 @@ public class JPAExampleTest {
     @Test
     public void testListarReservations() {
         System.out.println("Testing listarReservations");
+        manager =  instance.saveManager("helioM", "Helio Marques", "h@gmail.com", 231);
         camper = instance.saveCamper("leonor", "Leonor Oliveira", "lei@ua.pt", 123233456, 987654);
         Date startDate = new Date(2018,07,01);
         Date endDate = new Date(2018,07,15);
         int nrAdults = 2; int nrChildren = 1; int nrBabies=0; int cellphone = 234123123;
         double totalPrice = 40.0;
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0; double childPrice = 7.0; double babyPrice = 0.0; String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        double campingCardDiscount = 10;
+        campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
         reservation = instance.saveReservation(startDate, endDate, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
         List<Reservation> result = instance.listarReservations(camper);
         assertTrue(result.contains(reservation));
         instance.deleteReservation(reservation.getId());
         instance.deleteCamper(camper.getUsername());
+        instance.deleteCampsite(campsite.getId());
+        instance.deleteManager(manager.getUsername());
     }
+    
     
     
     
@@ -557,23 +569,33 @@ public class JPAExampleTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//
+
     /**
      * Test of deleteReservation method, of class JPAExample.
      */
     @Test
     public void testDeleteReservation() {
         System.out.println(" Testing deleteReservation");
-       camper = instance.saveCamper("leonor", "Leonor Oliveira", "lei@ua.pt", 123233456, 987654);
+        manager =  instance.saveManager("helioM", "Helio Marques", "h@gmail.com", 231);
+        camper = instance.saveCamper("leonor", "Leonor Oliveira", "lei@ua.pt", 123233456, 987654);
         Date startDate = new Date(2018,07,01);
         Date endDate = new Date(2018,07,15);
         int nrAdults = 2; int nrChildren = 1; int nrBabies=0; int cellphone = 234123123;
         double totalPrice = 40.0;
+        
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0; double childPrice = 7.0; double babyPrice = 0.0; String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        double campingCardDiscount = 10;
+        campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
         boolean expResult = true;
         reservation = instance.saveReservation(startDate, endDate, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
         boolean result = instance.deleteReservation(reservation.getId());
         assertEquals(result, expResult);
         instance.deleteCamper(camper.getUsername());
+        instance.deleteCampsite(campsite.getId());
+        instance.deleteManager(manager.getUsername());
     }
     
  
@@ -583,17 +605,27 @@ public class JPAExampleTest {
 //     */
 //    @Test
 //    public void testSaveFavouriteList() {
-//        System.out.println("saveFavouriteList");
-//        String camperUsername = "";
-//        int campsiteID = 0;
-//        JPAExample instance = new JPAExample();
-//        FavouriteList expResult = null;
-//        FavouriteList result = instance.saveFavouriteList(camperUsername, campsiteID);
+//        System.out.println(" Testing saveFavouriteList");     
+//        manager =  instance.saveManager("Helio", "Helio Marques", "h@gmail.com", 231);
+//        camper = instance.saveCamper("vasco", "Vasco Inho", "v@mail.com", 1232, 123754);
+//        String title = "Parque Campismo Marinha Grande";
+//        String location = "Marinha Grande, Leiria";
+//        double adultPrice = 14.0; double childPrice = 7.0; double babyPrice = 0.0; String contact = "923111222";
+//        String desc = "Agradável para umas férias tranquilas em família";
+//        double campingCardDiscount = 10;
+//        campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
+//        favouriteList.setCamperUsername(camper.getUsername());
+//        favouriteList.setCampsiteID(campsite.getId());
+//        FavouriteList expResult = favouriteList;
+//        FavouriteList result = instance.saveFavouriteList(camper.getUsername(), campsite.getId());
 //        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        instance.deleteFavouriteList(camper.getUsername(),campsite.getId());
+//        instance.deleteCamper(camper.getUsername());
+//        instance.deleteCampsite(campsite.getId());
+//        instance.deleteManager(manager.getUsername());
 //    }
-//
+//   
+
 //    /**
 //     * Test of listarCampsitesFavList method, of class JPAExample.
 //     */
@@ -610,17 +642,6 @@ public class JPAExampleTest {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of listFavouriteList method, of class JPAExample.
-//     */
-//    @Test
-//    public void testListFavouriteList() {
-//        System.out.println("listFavouriteList");
-//        JPAExample instance = new JPAExample();
-//        instance.listFavouriteList();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
 //
 //    /**
 //     * Test of deleteFavouriteList method, of class JPAExample.

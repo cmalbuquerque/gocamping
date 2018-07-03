@@ -26,11 +26,15 @@ public class JPAExample {
 
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
-       
-        example.deleteCamper("leono");
-        example.deleteCamper("leonor");
-        
 
+
+        example.deleteCampsite(1802);
+        example.deleteCamper("vasquinho");
+        example.deleteManager("helio");
+        
+        example.deleteManager("helioM");
+        
+        
 //        Camper camper1 = example.saveCamper("kiko", "Francisco Salvador", "kikinho@ua.pt", 123456789, 23456);
 //        Manager manager1 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", 987654321);
 //        Utilizador user1 = example.saveUtilizador(camper1, null, "kiko", "password");
