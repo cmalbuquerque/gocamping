@@ -110,7 +110,6 @@ public class JPAExampleTest {
     @Test
     public void testUpdateCamper() {
         System.out.println("Testing updateCamper");
-        System.out.println("Testing searchCamper");
         String name = "jota";
         String fullname = "João";
         String newFullname = "João T Pais";
@@ -186,22 +185,28 @@ public class JPAExampleTest {
         instance.deleteManager(username);
     }
     
-//    /**
-//     * Test of updateManager method, of class JPAExample.
-//     */
-//    @Test
-//    public void testUpdateManager() {
-//        System.out.println("updateManager");
-//        String username = "";
-//        String fullname = "";
-//        String email = "";
-//        JPAExample instance = new JPAExample();
-//        Manager expResult = null;
-//        Manager result = instance.updateManager(username, fullname, email);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of updateManager method, of class JPAExample.
+     */
+    @Test
+    public void testUpdateManager() {
+        System.out.println("Testing searchManager");
+        String username = "gongas";
+        String fullname = "Goncalo Marques";
+        String newFullname = "Gonçalo Oliveira Marques";
+        String email = "gongas@gmail.com";
+        int NIF = 123;
+        Manager manager1 = instance.saveManager(username, fullname, email, NIF);
+        Manager expResult = instance.updateManager(username, newFullname, email);
+        manager.setEmail(email);
+        manager.setFullName(newFullname);
+        manager.setUsername(username);
+        manager.setNIF(NIF);
+        Manager result = instance.searchManager(username);
+        assertEquals(expResult, result);
+        instance.deleteManager(username);
+    }
+   
 
     /**
      * Test of deleteManager method, of class JPAExample.
