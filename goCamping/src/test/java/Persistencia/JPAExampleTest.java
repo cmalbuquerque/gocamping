@@ -528,7 +528,7 @@ public class JPAExampleTest {
     @Test
     public void testListarReservations() {
         System.out.println("Testing listarReservations");
-        camper = instance.saveCamper("leono", "Leonor Oliveira", "lei@ua.pt", 123233456, 987654);
+        camper = instance.saveCamper("leonor", "Leonor Oliveira", "lei@ua.pt", 123233456, 987654);
         Date startDate = new Date(2018,07,01);
         Date endDate = new Date(2018,07,15);
         int nrAdults = 2; int nrChildren = 1; int nrBabies=0; int cellphone = 234123123;
@@ -558,19 +558,26 @@ public class JPAExampleTest {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of deleteReservation method, of class JPAExample.
-//     */
-//    @Test
-//    public void testDeleteReservation() {
-//        System.out.println("deleteReservation");
-//        int id = 0;
-//        JPAExample instance = new JPAExample();
-//        instance.deleteReservation(id);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+    /**
+     * Test of deleteReservation method, of class JPAExample.
+     */
+    @Test
+    public void testDeleteReservation() {
+        System.out.println(" Testing deleteReservation");
+       camper = instance.saveCamper("leonor", "Leonor Oliveira", "lei@ua.pt", 123233456, 987654);
+        Date startDate = new Date(2018,07,01);
+        Date endDate = new Date(2018,07,15);
+        int nrAdults = 2; int nrChildren = 1; int nrBabies=0; int cellphone = 234123123;
+        double totalPrice = 40.0;
+        boolean expResult = true;
+        reservation = instance.saveReservation(startDate, endDate, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
+        boolean result = instance.deleteReservation(reservation.getId());
+        assertEquals(result, expResult);
+        instance.deleteCamper(camper.getUsername());
+    }
+    
+ 
+
 //    /**
 //     * Test of saveFavouriteList method, of class JPAExample.
 //     */

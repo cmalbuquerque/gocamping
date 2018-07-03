@@ -26,15 +26,11 @@ public class JPAExample {
 
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
+       
+        example.deleteCamper("leono");
+        example.deleteCamper("leonor");
         
 
-        example.deleteReservation(2502);
-        example.deleteCampsite(2501);
-        example.deleteCamper("vasquinho");
-        example.deleteManager("helio");
-        
-        
-        
 //        Camper camper1 = example.saveCamper("kiko", "Francisco Salvador", "kikinho@ua.pt", 123456789, 23456);
 //        Manager manager1 = example.saveManager("joana", "Joana Maria", "joana@ua.pt", 987654321);
 //        Utilizador user1 = example.saveUtilizador(camper1, null, "kiko", "password");
@@ -531,18 +527,21 @@ public class JPAExample {
         }
     }
 
-    public void deleteReservation(int id) {
+    public boolean deleteReservation(int id) {
         try {
             entityManager.getTransaction().begin();
             Reservation reservation = (Reservation) entityManager.find(Reservation.class, id);
             entityManager.remove(reservation);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("delete reservation didn't work");
+            return false;
         }
     }
-
+    
+ 
     public FavouriteList saveFavouriteList(String camperUsername, int campsiteID) {
         FavouriteList favouriteList = new FavouriteList();
         System.out.println("new fav list");
