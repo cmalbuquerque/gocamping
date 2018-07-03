@@ -26,13 +26,31 @@ public class JPAExample {
 
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
-        
-
-        example.deleteReservation(2502);
-        example.deleteCampsite(2501);
-        example.deleteCamper("vasquinho");
-        example.deleteManager("helio");
-        
+           
+//        Manager manager =  example.saveManager("Marques", "Helio Marques", "h@gmail.com", 231);
+//        Camper camper = example.saveCamper("Ramos", "Vasco Ramos", "v@mail.com", 1232, 123754);
+//        String title = "Parque Campismo Marinha Grande";
+//        String location = "Marinha Grande, Leiria";
+//        double adultPrice = 14.0; double childPrice = 7.0; double babyPrice = 0.0; String contact = "923111222";
+//        String desc = "Agradável para umas férias tranquilas em família";
+//        double campingCardDiscount = 10;
+//        Campsite campsite = example.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
+//        System.out.println("OKAPA");
+//        FavouriteList favouriteList = new FavouriteList();
+//        favouriteList.setCamperUsername("Ramos");
+//        System.out.println("POS RAMOS");
+//        favouriteList.setCampsiteID(campsite.getId());
+//        System.out.println("PRE EXPERADO");
+//        FavouriteList expResult = favouriteList;
+//        System.out.println("POS EXPERADO");
+//        FavouriteList result = example.saveFavouriteList(camper.getUsername(), campsite.getId());
+//        System.out.println("EXP RESULT" + expResult);
+//        System.out.println("RESULT" + result);
+    
+//        example.deleteFavouriteList("Ramos", 2651);
+//        example.deleteCampsite(2651);
+//        example.deleteCamper("Ramos");
+//        example.deleteManager("Marques");
         
         
 //        Camper camper1 = example.saveCamper("kiko", "Francisco Salvador", "kikinho@ua.pt", 123456789, 23456);
@@ -392,10 +410,11 @@ public class JPAExample {
         return list;
     }
 
-    public void updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, double campingCardDiscount) {
+    public Campsite updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, double campingCardDiscount) {
+        Campsite campsite = new Campsite();
         try {
             entityManager.getTransaction().begin();
-            Campsite campsite = (Campsite) entityManager.find(Campsite.class, id);
+            campsite = entityManager.find(Campsite.class, id);
             campsite.setTitle(title);
             campsite.setLocation(location);
             campsite.setAdultPrice(adultPrice);
@@ -409,6 +428,7 @@ public class JPAExample {
             entityManager.getTransaction().rollback();
             System.out.println("update campsite didn't work");
         }
+        return  campsite;
     }
 
     public boolean deleteCampsite(int id) {
@@ -531,18 +551,21 @@ public class JPAExample {
         }
     }
 
-    public void deleteReservation(int id) {
+    public boolean deleteReservation(int id) {
         try {
             entityManager.getTransaction().begin();
             Reservation reservation = (Reservation) entityManager.find(Reservation.class, id);
             entityManager.remove(reservation);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("delete reservation didn't work");
+            return false;
         }
     }
-
+    
+ 
     public FavouriteList saveFavouriteList(String camperUsername, int campsiteID) {
         FavouriteList favouriteList = new FavouriteList();
         System.out.println("new fav list");
@@ -589,16 +612,18 @@ public class JPAExample {
         return campsites;
     }
 
-    public void deleteFavouriteList(String camperUsername, int campsiteID) {
+    public boolean deleteFavouriteList(String camperUsername, int campsiteID) {
         FavouriteListKey favKey = new FavouriteListKey(camperUsername, campsiteID);
         try {
             entityManager.getTransaction().begin();
             FavouriteList favouriteList = (FavouriteList) entityManager.find(FavouriteList.class, favKey);
             entityManager.remove(favouriteList);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println("delete favourite lit pitch didn't work");
+            return false;
         }
     }
 
