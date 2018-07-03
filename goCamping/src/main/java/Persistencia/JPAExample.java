@@ -26,13 +26,31 @@ public class JPAExample {
 
     public static void main(String[] args) {
         JPAExample example = new JPAExample();
-
-
-        example.deleteCampsite(1802);
-        example.deleteCamper("vasquinho");
-        example.deleteManager("helio");
-        
-        example.deleteManager("helioM");
+           
+//        Manager manager =  example.saveManager("Marques", "Helio Marques", "h@gmail.com", 231);
+//        Camper camper = example.saveCamper("Ramos", "Vasco Ramos", "v@mail.com", 1232, 123754);
+//        String title = "Parque Campismo Marinha Grande";
+//        String location = "Marinha Grande, Leiria";
+//        double adultPrice = 14.0; double childPrice = 7.0; double babyPrice = 0.0; String contact = "923111222";
+//        String desc = "Agradável para umas férias tranquilas em família";
+//        double campingCardDiscount = 10;
+//        Campsite campsite = example.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
+//        System.out.println("OKAPA");
+//        FavouriteList favouriteList = new FavouriteList();
+//        favouriteList.setCamperUsername("Ramos");
+//        System.out.println("POS RAMOS");
+//        favouriteList.setCampsiteID(campsite.getId());
+//        System.out.println("PRE EXPERADO");
+//        FavouriteList expResult = favouriteList;
+//        System.out.println("POS EXPERADO");
+//        FavouriteList result = example.saveFavouriteList(camper.getUsername(), campsite.getId());
+//        System.out.println("EXP RESULT" + expResult);
+//        System.out.println("RESULT" + result);
+    
+//        example.deleteFavouriteList("Ramos", 2651);
+//        example.deleteCampsite(2651);
+//        example.deleteCamper("Ramos");
+//        example.deleteManager("Marques");
         
         
 //        Camper camper1 = example.saveCamper("kiko", "Francisco Salvador", "kikinho@ua.pt", 123456789, 23456);

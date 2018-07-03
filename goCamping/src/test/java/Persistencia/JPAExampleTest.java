@@ -31,7 +31,6 @@ public class JPAExampleTest {
     private Campsite campsite;
     private Reservation reservation;
     private FavouriteList favouriteList;
-    private FavouriteListKey favouriteListKey;
     
     public JPAExampleTest() {
     }
@@ -600,31 +599,32 @@ public class JPAExampleTest {
     
  
 
-//    /**
-//     * Test of saveFavouriteList method, of class JPAExample.
-//     */
-//    @Test
-//    public void testSaveFavouriteList() {
-//        System.out.println(" Testing saveFavouriteList");     
-//        manager =  instance.saveManager("Helio", "Helio Marques", "h@gmail.com", 231);
-//        camper = instance.saveCamper("vasco", "Vasco Inho", "v@mail.com", 1232, 123754);
-//        String title = "Parque Campismo Marinha Grande";
-//        String location = "Marinha Grande, Leiria";
-//        double adultPrice = 14.0; double childPrice = 7.0; double babyPrice = 0.0; String contact = "923111222";
-//        String desc = "Agradável para umas férias tranquilas em família";
-//        double campingCardDiscount = 10;
-//        campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
-//        favouriteList.setCamperUsername(camper.getUsername());
-//        favouriteList.setCampsiteID(campsite.getId());
-//        FavouriteList expResult = favouriteList;
-//        FavouriteList result = instance.saveFavouriteList(camper.getUsername(), campsite.getId());
-//        assertEquals(expResult, result);
-//        instance.deleteFavouriteList(camper.getUsername(),campsite.getId());
-//        instance.deleteCamper(camper.getUsername());
-//        instance.deleteCampsite(campsite.getId());
-//        instance.deleteManager(manager.getUsername());
-//    }
-//   
+    /**
+     * Test of saveFavouriteList method, of class JPAExample.
+     */
+    @Test
+    public void testSaveFavouriteList() {
+        favouriteList = new FavouriteList();
+        System.out.println(" Testing saveFavouriteList");     
+        manager =  instance.saveManager("Marques", "Helio Marques", "h@gmail.com", 231);
+        camper = instance.saveCamper("Ramos", "Vasco Ramos", "v@mail.com", 1232, 123754);
+        String title = "Parque Campismo Marinha Grande";
+        String location = "Marinha Grande, Leiria";
+        double adultPrice = 14.0; double childPrice = 7.0; double babyPrice = 0.0; String contact = "923111222";
+        String desc = "Agradável para umas férias tranquilas em família";
+        double campingCardDiscount = 10;
+        campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
+        favouriteList.setCamperUsername("Ramos");
+        favouriteList.setCampsiteID(campsite.getId());
+        FavouriteList expResult = favouriteList;
+        FavouriteList result = instance.saveFavouriteList(camper.getUsername(), campsite.getId());
+        assertEquals(expResult, result);
+        instance.deleteFavouriteList(camper.getUsername(),campsite.getId());
+        instance.deleteCamper(camper.getUsername());
+        instance.deleteCampsite(campsite.getId());
+        instance.deleteManager(manager.getUsername());
+    }
+   
 
 //    /**
 //     * Test of listarCampsitesFavList method, of class JPAExample.
