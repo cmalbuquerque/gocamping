@@ -26,6 +26,7 @@
                 <b:navbarLinks pull="right">
                     <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
                     <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
+                    <b:commandButton icon="log-out" value="Log out" action="#{authenticationbean.logOut}"></b:commandButton>>
                 </b:navbarLinks>
             </b:navBar>
             <p:panel style="width: 40%; margin-left: 30%; background: white">
@@ -33,19 +34,19 @@
                     <b:tab title="Login">
                         <br>&nbsp;</br>
                         <b:form horizontal="true" id="loginForm">
-                            <b:inputText required="true" value="#{loginbean.username}" placeholder="Username or email" colMd="12" labelColMd="2">
+                            <b:inputText required="true" value="#{authenticationbean.username}" placeholder="Username or email" colMd="12" labelColMd="2">
                                 <f:facet name="prepend">
                                     <b:icon name="user" />
                                 </f:facet>
                             </b:inputText>
-                            <b:inputSecret required="true" value="#{loginbean.password}" placeholder="Password" colMd="12" labelColMd="2">
+                            <b:inputSecret required="true" value="#{authenticationbean.password}" placeholder="Password" colMd="12" labelColMd="2">
                                 <f:facet name="prepend">
                                     <b:iconAwesome name="key" />
                                 </f:facet>
                             </b:inputSecret>
                             <br>&nbsp;</br>
                             <b:button span="4" value="Cancel"  outcome="/index.xhtml"  />
-                            <b:commandButton span ="4" value="Login" icon="log-in" look="success"  action="#{loginbean.validate}"></b:commandButton>
+                            <b:commandButton span ="4" value="Login" icon="log-in" look="success"  action="#{authenticationbean.validate}"></b:commandButton>
                             <b:button span="4" value="Sign Up" look="sucess"  outcome="/signUp.xhtml"  />
                             <br>&nbsp;</br>
                         </b:form>

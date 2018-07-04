@@ -224,6 +224,7 @@ public class JPAExample {
         }
         return manager;
     }
+    
 
     public boolean deleteManager(String username) {
         try {
@@ -264,6 +265,21 @@ public class JPAExample {
         }
         return user;
     }
+    
+        public Utilizador updateUtilizador(String username, String newPassword) {
+        Utilizador user = new Utilizador();
+        try {
+            entityManager.getTransaction().begin();
+            user = (Utilizador) entityManager.find(Utilizador.class, username);
+            user.setUsername(username);
+            user.setPassword(newPassword);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            System.out.println("update utilizador didn't work");
+        }
+        return user;
+    }
 
     public boolean deleteUtilizador(String username) {
         try {
@@ -283,11 +299,13 @@ public class JPAExample {
     }
 
     public Utilizador searchUtilizador(String name) {
+        System.out.println("In JPA name is: " + name);
         Utilizador user = new Utilizador();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Utilizador c where c.username = :name");
             query.setParameter("name", name);
+            System.out.println(query);
             List<Utilizador> utilizador = query.getResultList();
             for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
                 user = (Utilizador) iterator.next();
