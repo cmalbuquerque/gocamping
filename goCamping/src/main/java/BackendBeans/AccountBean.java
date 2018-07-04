@@ -5,9 +5,11 @@
  */
 package BackendBeans;
 
+import GeneralStuff.Hash;
 import Persistencia.Camper;
 import Persistencia.JPAExample;
 import Persistencia.Manager;
+import Persistencia.Utilizador;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -21,33 +23,41 @@ import javax.servlet.http.HttpSession;
  * @author Carolina Albuquerque
  * @author Diogo Jorge
  * @author Pedro Pires
- * 
+ *
  */
-
 @ManagedBean(name = "accountbean")
 @SessionScoped
-public class AccountBean implements Serializable{ 
-    
+public class AccountBean implements Serializable {
 
-    
     @ManagedProperty(value = "#{username}")
     private String username;
     @ManagedProperty(value = "#{password}")
     private String password;
-    @ManagedProperty(value ="#{fullName}")
+    @ManagedProperty(value = "#{fullName}")
     private String fullName;
-    @ManagedProperty(value ="#{email}")
+    @ManagedProperty(value = "#{email}")
     private String email;
-    @ManagedProperty(value ="#{campsiteCard}")
+    @ManagedProperty(value = "#{campsiteCard}")
     private int campsiteCard;
     @ManagedProperty(value = "#{newPassword}")
     private String newPassword;
-    
+    @ManagedProperty(value = "#{confirmationPassword}")
+    private String confirmationPassword;
+
     private Manager manager;
     private Camper camper;
-    JPAExample ex = new JPAExample(); 
+    private String sessionGetUser = "username";
+    JPAExample ex = new JPAExample();
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+
+    public String getConfirmationPassword() {
+        return confirmationPassword;
+    }
+
+    public void setConfirmationPassword(String confirmationPassword) {
+        this.confirmationPassword = confirmationPassword;
+    }
 
     public String getNewPassword() {
         return newPassword;
@@ -56,7 +66,7 @@ public class AccountBean implements Serializable{
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
-    
+
     public Manager getManager() {
         return manager;
     }
@@ -90,7 +100,7 @@ public class AccountBean implements Serializable{
     }
 
     public String getFullName() {
-        return ex.searchCamper(session.getAttribute("username").toString()).getFullName();
+        return ex.searchCamper(session.getAttribute(sessionGetUser).toString()).getFullName();
     }
 
     public void setFullName(String fullName) {
@@ -98,7 +108,7 @@ public class AccountBean implements Serializable{
     }
 
     public String getEmail() {
-        return ex.searchCamper(session.getAttribute("username").toString()).getEmail();
+        return ex.searchCamper(session.getAttribute(sessionGetUser).toString()).getEmail();
     }
 
     public void setEmail(String email) {
@@ -106,21 +116,29 @@ public class AccountBean implements Serializable{
     }
 
     public int getCampsiteCard() {
-        return ex.searchCamper(session.getAttribute("username").toString()).getCampsiteCard();
+        return ex.searchCamper(session.getAttribute(sessionGetUser).toString()).getCampsiteCard();
     }
 
     public void setCampsiteCard(int campsiteCard) {
         this.campsiteCard = campsiteCard;
     }
 
-    
-    public String editPersonalInformation(){
-        Camper camper1 = ex.updateCamper(session.getAttribute("username").toString(), fullName, email, campsiteCard);
-        return "account.xhtml";  
+    public String editPersonalInformation() {
+        Camper camper1 = ex.updateCamper(session.getAttribute(sessionGetUser).toString(), fullName, email, campsiteCard);
+        return "account.xhtml";
     }
-    
-    
-    public String editLoginAccess(){
-        return "";
-    }    
+
+    public String editLoginAccess() {
+        Utilizador user = ex.searchUtilizador(session.getAttribute(sessionGetUser).toString());
+
+        if (user.getPassword().equals(Hash.getmd5Hash(password))) {
+            if (newPassword.equals(confirmationPassword)) {
+                ex.updateUtilizador(session.getAttribute(sessionGetUser).toString(), newPassword);
+                System.out.println("user pass updated, from " + password + "to" + newPassword);
+                return "account.xhtml";
+            }
+        }
+        System.out.println("didn't update user pass");
+        return "account.xhtml";
+    }
 }

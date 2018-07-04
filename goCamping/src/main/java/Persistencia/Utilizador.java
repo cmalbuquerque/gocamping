@@ -108,7 +108,7 @@ public class Utilizador implements Serializable {
         }
         final Utilizador other = (Utilizador) obj;
         if (!Objects.equals(this.username, other.username)) {
-            System.out.println("nomes diferentes");
+            System.out.println("nomes diferentes: " + this.username + "  " + other.username);
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
