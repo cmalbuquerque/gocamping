@@ -137,10 +137,9 @@ public class JPAExampleTest {
         String username = "jota";
         String fullname = "João J Pais";
         String email = "jpais@mail.com";
-        boolean expResult = true;
         instance.saveCamper(username, fullname, email, 0, 0);
         boolean result = instance.deleteCamper(username);
-        assertEquals(result, expResult);
+        assertTrue(result);
         instance.deleteCamper(username);
     }
 
@@ -218,10 +217,9 @@ public class JPAExampleTest {
         String fullname = "Goncalo Marques";
         String email = "gongas@gmail.com";
         int NIF = 123;
-        boolean expResult = true;
         instance.saveManager(username, fullname, email, NIF);
         boolean result = instance.deleteManager(username);
-        assertEquals(result, expResult);
+        assertTrue(result);
         instance.deleteManager(username);
     }
 
@@ -453,9 +451,8 @@ public class JPAExampleTest {
         campsite.setTitle(title);
         campsite.setCampingCardDiscount(campingCardDiscount);
         Campsite camp = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m, campingCardDiscount);
-        boolean expResult = true;
         boolean result = instance.deleteCampsite(camp.getId());
-        assertEquals(result, expResult);
+        assertTrue(result);
         instance.deleteCampsite(camp.getId());
         instance.deleteManager(username);
         
@@ -604,10 +601,9 @@ public class JPAExampleTest {
         String desc = "Agradável para umas férias tranquilas em família";
         double campingCardDiscount = 10;
         campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
-        boolean expResult = true;
         reservation = instance.saveReservation(startDate, endDate, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
         boolean result = instance.deleteReservation(reservation.getId());
-        assertEquals(result, expResult);
+        assertTrue(result);
         instance.deleteCamper(camper.getUsername());
         instance.deleteCampsite(campsite.getId());
         instance.deleteManager(manager.getUsername());
@@ -665,10 +661,6 @@ public class JPAExampleTest {
         instance.deleteManager(manager.getUsername());
     }
     
-    
-
-    
-
 
     /**
      * Test of deleteFavouriteList method, of class JPAExample.
@@ -685,10 +677,9 @@ public class JPAExampleTest {
         String desc = "Agradável para umas férias tranquilas em família";
         double campingCardDiscount = 10;
         campsite = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, manager, campingCardDiscount);
-        boolean expResult = true;
         favouriteList = instance.saveFavouriteList(camper.getUsername(), campsite.getId());
         boolean result = instance.deleteFavouriteList(camper.getUsername(), campsite.getId());
-        assertEquals(result, expResult);
+        assertTrue(result);
         instance.deleteCamper(camper.getUsername());
         instance.deleteCampsite(campsite.getId());
         instance.deleteManager(manager.getUsername());
