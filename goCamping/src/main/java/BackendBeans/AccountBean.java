@@ -43,6 +43,10 @@ public class AccountBean implements Serializable {
     private String newPassword;
     @ManagedProperty(value = "#{confirmationPassword}")
     private String confirmationPassword;
+    @ManagedProperty(value = "#{fullNameManager}")
+    private String fullNameManager;
+    @ManagedProperty(value = "#{emailManager}")
+    private String emailManager;
 
     private Manager manager;
     private Camper camper;
@@ -123,14 +127,36 @@ public class AccountBean implements Serializable {
         this.campsiteCard = campsiteCard;
     }
 
+    public String getFullNameManager() {
+        return ex.searchManager(session.getAttribute(sessionGetUser).toString()).getFullName();
+    }
+
+    public void setFullNameManager(String fullNameManager) {
+        this.fullNameManager = fullNameManager;
+    }
+
+    public String getEmailManager() {
+        return ex.searchManager(session.getAttribute(sessionGetUser).toString()).getEmail();
+    }
+
+    public void setEmailManager(String emailManager) {
+        this.emailManager = emailManager;
+    }
+    
+    
+
     public String editPersonalInformation() {
-        Camper camper1 = ex.updateCamper(session.getAttribute(sessionGetUser).toString(), fullName, email, campsiteCard);
+        camper = ex.updateCamper(session.getAttribute(sessionGetUser).toString(), fullName, email, campsiteCard);
+        return "account.xhtml";
+    }
+    
+    public String editPersonalInformationManager() {
+        manager = ex.updateManager(session.getAttribute(sessionGetUser).toString(), fullName, email);
         return "account.xhtml";
     }
 
     public String editLoginAccess() {
         Utilizador user = ex.searchUtilizador(session.getAttribute(sessionGetUser).toString());
-
         if (user.getPassword().equals(Hash.getmd5Hash(password))) {
             if (newPassword.equals(confirmationPassword)) {
                 ex.updateUtilizador(session.getAttribute(sessionGetUser).toString(), newPassword);
