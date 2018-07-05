@@ -12,17 +12,18 @@
     </h:head>
     <h:body>
         <h:form>
-            <b:navBar brand="goCamping" brandHref="#">
+             <b:navBar brand="goCamping" brandHref="#">
                 <b:navbarLinks>
                     <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
-                    <b:navLink icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
-                    <b:navLink icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
-                    <b:navLink icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
-                    <b:navLink icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
+                    <b:navLink rendered="#{not empty isCamper}" icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
+                    <b:navLink rendered="#{not empty username}" icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
+                    <b:navLink rendered="#{not empty isManager}" icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
+                    <b:navLink rendered="#{not empty isCamper}" icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
-                    <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
-                    <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
+                    <b:navLink rendered="#{not empty isManager}" iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
+                    <b:navLink rendered="#{empty username}" icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
+                    <b:commandButton rendered="#{not empty username}" icon="log-out" value="Log out" action="#{authenticationbean.logOut}"></b:commandButton>>
                 </b:navbarLinks>
             </b:navBar>
 
@@ -46,7 +47,12 @@
                                     <b:iconAwesome name="address-card-o" />
                                 </f:facet>
                             </b:inputText><br>&nbsp;</br>
-                            <b:commandButton value="Save" iconAwesome="check" look="success"  action="#{accountbean.editPersonalInformation}"></b:commandButton>
+                            <b:row>
+                                <b:column span="3"></b:column>
+                                <b:commandButton span="6" value="Save" iconAwesome="check" look="success"  action="#{accountbean.editPersonalInformation}"></b:commandButton>
+                                <b:column span="3"></b:column>
+                            </b:row>
+                            
                         </h:panelGrid>
 
             </p:panel>
@@ -70,7 +76,12 @@
                             <b:iconAwesome name="key" />
                         </f:facet>
                     </b:inputSecret><br>&nbsp;</br>
-                    <b:commandButton offset="1"  value="Save"  iconAwesome="check" look="success"  action="#{accountbean.editLoginAccess}"></b:commandButton>
+                    <b:row>
+                        <b:column span="3"></b:column>
+                        <b:commandButton span = "6" value="Save" iconAwesome="check" look="success"  action="#{accountbean.editLoginAccess}"></b:commandButton>
+                        <b:column span="3"></b:column>
+                    </b:row>
+                    
                 </h:panelGrid>
             </p:panel>
 
