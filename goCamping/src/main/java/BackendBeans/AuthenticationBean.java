@@ -73,6 +73,13 @@ public class AuthenticationBean implements Serializable {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             session.setAttribute("username", username);
+            if (user1.getCamper() != null ){
+            session.setAttribute("isCamper", true);
+            }
+            else if(user1.getManager() != null){
+                session.setAttribute("isManager", true);
+            }
+            else {System.out.println("an error ocurred");}
             return "index.xhtml";
         }
         System.out.println("user is not right");

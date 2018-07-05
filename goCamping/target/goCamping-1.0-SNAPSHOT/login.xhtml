@@ -24,13 +24,13 @@
                     <b:navLink icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
                 </b:navbarLinks>
                 <b:navbarLinks pull="right">
-                    <b:navLink iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
-                    <b:navLink icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
-                    <b:commandButton icon="log-out" value="Log out" action="#{authenticationbean.logOut}"></b:commandButton>>
+                    <b:navLink rendered="#{not empty isManager}" iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
+                    <b:navLink rendered="#{empty username}" icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
+                    <b:commandButton rendered="#{not empty username}" icon="log-out" value="Log out" action="#{authenticationbean.logOut}"></b:commandButton>>
                 </b:navbarLinks>
             </b:navBar>
             <p:panel style="width: 40%; margin-left: 30%; background: white">
-                <b:tabView id="tabViewLogin">
+                <b:tabView id="tabViewLogin"> 
                     <b:tab title="Login">
                         <br>&nbsp;</br>
                         <b:form horizontal="true" id="loginForm">
@@ -51,7 +51,7 @@
                             <br>&nbsp;</br>
                         </b:form>
                     </b:tab>
-         
+
                 </b:tabView>
                 <br></br>
             </p:panel>
