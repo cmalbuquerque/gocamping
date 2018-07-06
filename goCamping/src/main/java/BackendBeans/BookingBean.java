@@ -7,18 +7,29 @@ package BackendBeans;
 
 import Persistencia.Camper;
 import Persistencia.Campsite;
-import Persistencia.JPAExample;
 import Persistencia.Reservation;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -54,16 +65,20 @@ public class BookingBean implements Serializable{
     @ManagedProperty (value="#{listBooks}")
     private List<Reservation> listBooks;
    
+    @Resource
+    UserTransaction utx;
+
+    @PersistenceContext(unitName = "PUnit")
+    private EntityManager em;
     
-    private Date checkin;
-    private Date checkout;
-    private long tresdias = 259200;
+    private final String sessionGetUser = "username";
+    private final long tresdias = 259200;
     private Reservation reservation;
     private Campsite campsite;
     private Camper camper;
-    private SearchBean searchBean;
+   
     
-    JPAExample ex = new JPAExample(); 
+    
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
@@ -81,7 +96,7 @@ public class BookingBean implements Serializable{
     }
 
     public void setListBooks(List<Reservation> listBooks) {
-        this.listBooks = ex.listarReservations(ex.searchCamper(session.getAttribute("username").toString()));
+        this.listBooks = listBooks;
     }
     
     public int getNrBabies() {
@@ -102,7 +117,7 @@ public class BookingBean implements Serializable{
     
        
     public int getCampingCard() {
-        return ex.searchCamper(session.getAttribute("username").toString()).getCampsiteCard();
+        return campingCard;
     }
 
     public void setCampingCard(int campingCard) {
@@ -110,7 +125,7 @@ public class BookingBean implements Serializable{
     }
       
     public String getFullName() {
-        return ex.searchCamper(session.getAttribute("username").toString()).getFullName();
+        return fullName;
     }
 
     public void setFullName(String fullName) {
@@ -119,8 +134,9 @@ public class BookingBean implements Serializable{
 
 
     public String getEmail() {
-        return ex.searchCamper(session.getAttribute("username").toString()).getEmail();
+        return email;
     }
+    
 
     public void setEmail(String email) {
         this.email = email;
@@ -142,10 +158,10 @@ public class BookingBean implements Serializable{
         this.nrChildren = nrChildren;
     }
 
-    public int getNIF() {
-        return ex.searchCamper(session.getAttribute("username").toString()).getNIF();
+     public int getNIF(){
+        return NIF;
     }
-
+     
     public void setNIF(int NIF) {
         this.NIF = NIF;
     }
@@ -173,18 +189,94 @@ public class BookingBean implements Serializable{
     public void setCamper(Camper camper) {
         this.camper = camper;
     }
+    
+    public Camper searchCamper(String name) {
+        Camper user = new Camper();
+        try {
+            utx.begin();
+            Query query = getEntityManager().createQuery("select c from Camper c where c.username = :name");
+            query.setParameter("name", name);
+            List<Camper> utilizador = query.getResultList();
+            for (Iterator<Camper> iterator = utilizador.iterator(); iterator.hasNext();) {
+                user = (Camper) iterator.next();
+            }
+            utx.commit();
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
+            System.out.println("camper search didn't work");
+        }
+        return user;
+    }
+    
+      public Reservation saveReservation(Date startDate, Date endDate, Camper camper, Campsite campsite, int nrAdults, int nrChildren, int nrBabies, int cellphone, double totalPrice) {
+        Reservation reservation = new Reservation();
+        System.out.println("new Reservation");
+        try {
+            utx.begin();
+            System.out.println("at the start of transaction");
+            reservation.setStartDate(startDate);
+            reservation.setEndDate(endDate);
+            reservation.setCamper(camper);
+            reservation.setCampsite(campsite);
+            reservation.setCellfone(cellphone);
+            reservation.setNrAdults(nrAdults);
+            reservation.setNrBabies(nrBabies);
+            reservation.setNrChildren(nrChildren);
+            reservation.setTotalPrice(totalPrice);
+            getEntityManager().persist(reservation);
+            utx.commit();
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
+            System.out.println("save  didnt' work on reservation");
+        }
+        return reservation;
+    }
+
+    public List<Reservation> listarReservations(Camper camper) {
+        List<Reservation> reservations = new ArrayList<Reservation>();
+        List<Reservation> list = new ArrayList<Reservation>();
+        try {
+            utx.begin();
+            Query query = getEntityManager().createQuery("select c from Reservation as c where c.camper = :camper");
+            query.setParameter("camper", camper);
+            reservations = query.getResultList();
+            for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
+                Reservation reservation = (Reservation) iterator.next();
+                list.add(reservation);
+            }
+            utx.commit();
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
+            System.out.println("listar reservation with camper didn't work");
+        }
+        return list;
+    }
+
+    public boolean deleteReservation(int id) {
+        try {
+            utx.begin();
+            Reservation reservation = (Reservation) getEntityManager().find(Reservation.class, id);
+            getEntityManager().remove(reservation);
+            utx.commit();
+            return true;
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
+            System.out.println("delete reservation didn't work");
+            return false;
+        }
+    }
    
     public String view(Campsite campsiteOutro){
         this.campsite=campsiteOutro;
+        Camper c = searchCamper(session.getAttribute(sessionGetUser).toString());
+        this.campingCard=c.getCampsiteCard();
+        this.fullName=c.getFullName();
+        this.email=c.getEmail();
+        this.NIF=c.getNIF();
         return "booking.xhtml";
     }
     
     public String booking (Date checkin, Date checkout){
-        camper = ex.searchCamper(session.getAttribute("username").toString());
+        camper = searchCamper(session.getAttribute(sessionGetUser).toString());
         calculatePrice();
-        Reservation reservation = ex.saveReservation(checkin, checkout, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
-        calculatePrice();
-        listBooks=ex.listarReservations(ex.searchCamper(session.getAttribute("username").toString()));
+        reservation = saveReservation(checkin, checkout, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);
+        listBooks=listarReservations(searchCamper(session.getAttribute(sessionGetUser).toString()));
         return "payment.xhtml";
     }
     
@@ -202,11 +294,15 @@ public class BookingBean implements Serializable{
         //so cancela a reserva se for feita 3 dias antes
         long difSecs= secsCheckIn-secsAtual;
         if (difSecs>tresdias){
-            ex.deleteReservation(id);
-            listBooks=ex.listarReservations(ex.searchCamper(session.getAttribute("username").toString()));
+            deleteReservation(id);
+            listBooks=listarReservations(searchCamper(session.getAttribute(sessionGetUser).toString()));
             return "myReservations.xhtml";
         }
         return "myReservations.xhtml";
     }
     
+    
+    protected EntityManager getEntityManager() {
+        return em;
+    }
 }

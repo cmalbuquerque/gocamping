@@ -43,11 +43,11 @@ public class Utilizador implements Serializable {
     private String password;
 
     @JoinColumn(name = "camper")
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.EAGER)
     private Camper camper;
 
     @JoinColumn(name = "manager")
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.EAGER)
     private Manager manager;
 
     public Camper getCamper() {
