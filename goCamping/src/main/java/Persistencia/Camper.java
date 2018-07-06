@@ -40,7 +40,7 @@ public class Camper implements Serializable {
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "camper")
     private Utilizador user;
 
-    @OneToMany(cascade = CascadeType.PERSIST, targetEntity = Reservation.class, mappedBy = "camper")
+    @OneToMany(targetEntity = Reservation.class, mappedBy = "camper")
     @JoinColumn()
     private Set<Campsite> reservations;
 
