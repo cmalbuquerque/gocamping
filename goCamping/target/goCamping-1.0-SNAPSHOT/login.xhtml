@@ -29,7 +29,9 @@
                     <b:commandButton rendered="#{not empty username}" icon="log-out" value="Log out" action="#{authenticationbean.logOut}"></b:commandButton>>
                 </b:navbarLinks>
             </b:navBar>
-            <p:panel style="width: 40%; margin-left: 30%; background: white">
+            <p:panel style="width: 40%; margin-left: 30%; background: white; margin-top: 7%">  
+                <br>&nbsp;</br>
+                <b:button style="float:right; background-color: transparent; border: none" icon="chevron-left" value="Return" look="sucess"  outcome="/index.xhtml"  />
                 <b:tabView id="tabViewLogin"> 
                     <b:tab title="Login">
                         <br>&nbsp;</br>
@@ -45,9 +47,12 @@
                                 </f:facet>
                             </b:inputSecret>
                             <br>&nbsp;</br>
-                            <b:button span="4" value="Cancel"  outcome="/index.xhtml"  />
-                            <b:commandButton span ="4" value="Login" icon="log-in" look="success"  action="#{authenticationbean.validate}"></b:commandButton>
-                            <b:button span="4" value="Sign Up" look="sucess"  outcome="/signUp.xhtml"  />
+                            <b:row>
+                                <b:column span="2"></b:column>
+                                <b:button span="4" value="Register" outcome="/signUp.xhtml"  />
+                                <b:commandButton span ="4" value="Login" look="success"  action="#{authenticationbean.validate}"></b:commandButton>
+                                <b:column span="2"></b:column>
+                            </b:row>
                             <br>&nbsp;</br>
                         </b:form>
                     </b:tab>
