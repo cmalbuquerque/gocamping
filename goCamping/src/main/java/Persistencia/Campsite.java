@@ -53,13 +53,10 @@ public class Campsite implements Serializable {
     private double campingCardDiscount;
 
     //CHAVE ESTRANGEIRA
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     @JoinColumn(name = "manager")
     private Manager manager;
-    
-    @OneToMany(cascade = CascadeType.PERSIST, targetEntity = Reservation.class, mappedBy = "campsite")
-    @JoinColumn()
-    private Set<Campsite> reservations;
+
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
