@@ -556,19 +556,6 @@ public class JPAExample {
         return list;
     }
 
-    public void updateReservation(int id, Date startDate, Date endDate) {
-        try {
-            entityManager.getTransaction().begin();
-            Reservation reservation = (Reservation) entityManager.find(Reservation.class, id);
-            reservation.setStartDate(startDate);
-            reservation.setEndDate(endDate);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            System.out.println("update reservation didn't work");
-        }
-    }
-
     public boolean deleteReservation(int id) {
         try {
             entityManager.getTransaction().begin();

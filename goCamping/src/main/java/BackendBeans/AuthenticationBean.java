@@ -5,15 +5,26 @@
  */
 package BackendBeans;
 
+import Persistencia.Campsite;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import Persistencia.Utilizador;
 import javax.annotation.PostConstruct;
-import Persistencia.JPAExample;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -32,6 +43,12 @@ public class AuthenticationBean implements Serializable {
     private String username;
     @ManagedProperty(value = "#{password}")
     private String password;
+
+    @Resource
+    UserTransaction utx;
+
+    @PersistenceContext(unitName = "PUnit")
+    private EntityManager em;
 
     @PostConstruct
     private void init() {
@@ -62,33 +79,71 @@ public class AuthenticationBean implements Serializable {
         this.password = password;
     }
 
+    public Utilizador SearchUtilizador(String name) {
+        Utilizador user1 = new Utilizador();
+        try {
+            utx.begin();
+
+            user1 = getEntityManager().find(Utilizador.class, name);
+            System.out.println(user1);
+            utx.commit();
+
+        } catch (SecurityException | IllegalStateException ex1) {
+            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (NotSupportedException ex1) {
+            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (SystemException ex1) {
+            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (RollbackException ex1) {
+            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (HeuristicMixedException ex1) {
+            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (HeuristicRollbackException ex1) {
+            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+        return user1;
+    }
+
     public String validate() {
-        JPAExample ex = new JPAExample();
         user.setUsername(username);
         user.setPassword(password);
         System.out.println("user " + user);
         System.out.println("username " + user.getUsername());
-        Utilizador user1 = ex.searchUtilizador(user.getUsername());
+
+        Utilizador user1 = SearchUtilizador(user.getUsername());
+
+        if (user1 == null) {
+            return "login.xhtml";
+        }
+
         if (user1.equals(user)) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             session.setAttribute("username", username);
-            if (user1.getCamper() != null ){
-            session.setAttribute("isCamper", true);
+            Campsite campsite = new Campsite();
+            if (user1.getCamper() != null) {
+                session.setAttribute("isCamper", true);
+                return "index.xhtml";
+            } else if (user1.getManager() != null) {
+                try {
+                    session.setAttribute("isManager", true);
+                    return "index.xhtml";
+                } catch (SecurityException | IllegalStateException ex) {
+                    Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                System.out.println("an error ocurred");
             }
-            else if(user1.getManager() != null){
-                session.setAttribute("isManager", true);
-            }
-            else {System.out.println("an error ocurred");}
-            return "index.xhtml";
+            return "login.xhtml";
+        } else {
+            System.out.println("user is not right");
         }
-        System.out.println("user is not right");
         return "login.xhtml";
     }
 
     public String logOut() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
         if (null != session) {
             System.out.println("invalidating a session");
             session.invalidate();
@@ -96,4 +151,7 @@ public class AuthenticationBean implements Serializable {
         return "index.xhtml";
     }
 
+    protected EntityManager getEntityManager() {
+        return em;
+    }
 }

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utilizador.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">Persistencia</a> &gt; <span class="el_source">Utilizador.java</span></div><h1>Utilizador.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Persistencia;
+
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author Andreia Patrocínio
+ * @author Carolina Albuquerque
+ * @author Diogo Jorge
+ * @author Pedro Pires
+ *
+ */
+@Entity
+@Table(name = &quot;Utilizador&quot;)
+public class Utilizador implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+<span class="nc" id="L35">    public Utilizador() {</span>
+<span class="nc" id="L36">    }</span>
+
+    @Id
+    @Column(name = &quot;username&quot;)
+    private String username;
+
+    @Column(name = &quot;password&quot;)
+    private String password;
+
+    @JoinColumn(name = &quot;camper&quot;)
+    @OneToOne(fetch = FetchType.EAGER)
+    private Camper camper;
+
+    @JoinColumn(name = &quot;manager&quot;)
+    @OneToOne(fetch = FetchType.EAGER)
+    private Manager manager;
+
+    public Camper getCamper() {
+<span class="nc" id="L54">        return camper;</span>
+    }
+
+    public void setCamper(Camper camper) {
+<span class="nc" id="L58">        this.camper = camper;</span>
+<span class="nc" id="L59">    }</span>
+
+    public Manager getManager() {
+<span class="nc" id="L62">        return manager;</span>
+    }
+
+    public void setManager(Manager manager) {
+<span class="nc" id="L66">        this.manager = manager;</span>
+<span class="nc" id="L67">    }</span>
+
+    public String getUsername() {
+<span class="nc" id="L70">        return username;</span>
+    }
+
+    public void setUsername(String username) {
+<span class="nc" id="L74">        this.username = username;</span>
+<span class="nc" id="L75">    }</span>
+
+    public String getPassword() {
+<span class="nc" id="L78">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="nc" id="L82">        this.password = GeneralStuff.Hash.getmd5Hash(password);</span>
+<span class="nc" id="L83">    }</span>
+    
+    
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L89">        int hash = 7;</span>
+<span class="nc" id="L90">        hash = 53 * hash + Objects.hashCode(this.username);</span>
+<span class="nc" id="L91">        hash = 53 * hash + Objects.hashCode(this.camper);</span>
+<span class="nc" id="L92">        hash = 53 * hash + Objects.hashCode(this.manager);</span>
+<span class="nc" id="L93">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L99">            return true;</span>
+        }
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L102">            System.out.println(&quot;segundo é null&quot;);</span>
+<span class="nc" id="L103">            return false;</span>
+        }
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L106">            System.out.println(&quot;classes diferentes&quot;);</span>
+<span class="nc" id="L107">            return false;</span>
+        }
+<span class="nc" id="L109">        final Utilizador other = (Utilizador) obj;</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (!Objects.equals(this.username, other.username)) {</span>
+<span class="nc" id="L111">            System.out.println(&quot;nomes diferentes: &quot; + this.username + &quot;  &quot; + other.username);</span>
+<span class="nc" id="L112">            return false;</span>
+        }
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (!Objects.equals(this.password, other.password)) {</span>
+            
+<span class="nc" id="L116">            System.out.println(&quot;passwords diferentes\n&quot; + this.password + &quot; != &quot; + other.password);</span>
+<span class="nc" id="L117">            return false;</span>
+        }
+<span class="nc" id="L119">        return true;</span>
+    }
+
+
+
+    @Override
+    public String toString() {
+<span class="nc" id="L126">        return &quot;Utilizador com username &quot; + username + &quot;, camper=&quot; + camper + &quot;, manager=&quot; + manager + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

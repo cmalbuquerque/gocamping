@@ -22,7 +22,7 @@
                 <b:navbarLinks pull="right">
                     <b:navLink rendered="#{not empty isManager}" iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
                     <b:navLink rendered="#{empty username}" icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
-                    <b:commandButton rendered="#{not empty username}" style="margin-top:5%" icon="log-out" value="Log out" action="#{authenticationbean.logOut}"></b:commandButton>>
+                    <b:commandButton rendered="#{not empty username}" style="margin-top:5%" icon="log-out" value="Log out" action="#{authenticationbean.logOut}"></b:commandButton>
                 </b:navbarLinks>
             </b:navBar>
 
