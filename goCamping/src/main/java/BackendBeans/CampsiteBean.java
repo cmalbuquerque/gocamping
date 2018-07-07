@@ -245,14 +245,14 @@ public class CampsiteBean implements Serializable {
     
     public String view(Campsite campsiteOutro){
         this.campsite=campsiteOutro;
-        this.titleEdit=title;
-        this.locationEdit=location;
-        this.adultsPriceEdit=adultsPrice;
-        this.childsPriceEdit=childsPrice;
-        this.babiesPriceEdit=babiesPrice;
-        this.contactsEdit=contacts;
-        this.descEdit=desc;
-        this.campingCardDiscountEdit=campingCardDiscount;
+        this.titleEdit=campsiteOutro.getTitle();
+        this.locationEdit=campsiteOutro.getLocation();
+        this.adultsPriceEdit=campsiteOutro.getAdultPrice();
+        this.childsPriceEdit=campsiteOutro.getChildPrice();
+        this.babiesPriceEdit=campsiteOutro.getBabyPrice();
+        this.contactsEdit=campsiteOutro.getContact();
+        this.descEdit=campsiteOutro.getDescription();
+        this.campingCardDiscountEdit=campsiteOutro.getCampingCardDiscount();
         return "editCampsite.xhtml";
     }
     

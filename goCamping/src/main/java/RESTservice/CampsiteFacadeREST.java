@@ -22,7 +22,11 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author pirex
+ * @author Andreia Patrocínio
+ * @author Carolina Albuquerque
+ * @author Diogo Jorge
+ * @author Pedro Pires
+ *
  */
 @Stateless
 @Path("campsite")
