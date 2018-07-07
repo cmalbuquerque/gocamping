@@ -1,5 +1,6 @@
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleIT.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/BackendBeans/BackendBeansIT.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/BackendBeans/AuthenticationBeanTest.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/BackendBeans/SignUpBeanIT.java
-/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleTest.java
+/home/carolina/Desktop/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleTest.java
+/home/carolina/Desktop/GoCamping/goCamping/src/test/java/BackendBeans/AuthenticationBeanTest.java
+/home/carolina/Desktop/GoCamping/goCamping/src/test/java/Selenium/ManagerSideTest.java
+/home/carolina/Desktop/GoCamping/goCamping/src/test/java/BackendBeans/BackendBeansIT.java
+/home/carolina/Desktop/GoCamping/goCamping/src/test/java/BackendBeans/SignUpBeanIT.java
+/home/carolina/Desktop/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleIT.java

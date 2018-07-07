@@ -45,8 +45,6 @@ public class AuthenticationBean implements Serializable {
     @ManagedProperty(value = "#{password}")
     private String password;
     
-    @EJB
-    SignUpBean signUpBean;
     
     @Resource
     UserTransaction utx;
