@@ -7,10 +7,13 @@ package RESTservice;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
-
 /**
  *
- * @author pirex
+ * @author Andreia Patrocínio
+ * @author Carolina Albuquerque
+ * @author Diogo Jorge
+ * @author Pedro Pires
+ *
  */
 @javax.ws.rs.ApplicationPath("rest")
 public class ApplicationConfig extends Application {

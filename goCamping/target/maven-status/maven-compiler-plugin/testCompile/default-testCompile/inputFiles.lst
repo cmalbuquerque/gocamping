@@ -1,2 +1,5 @@
-/home/pirex/NetBeansProjects/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleTest.java
-/home/pirex/NetBeansProjects/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleIT.java
+/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleIT.java
+/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/BackendBeans/BackendBeansIT.java
+/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/BackendBeans/AuthenticationBeanTest.java
+/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/BackendBeans/SignUpBeanIT.java
+/home/andreia/Documentos/TQS/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleTest.java

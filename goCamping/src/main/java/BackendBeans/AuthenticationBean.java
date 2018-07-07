@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -43,7 +44,10 @@ public class AuthenticationBean implements Serializable {
     private String username;
     @ManagedProperty(value = "#{password}")
     private String password;
-
+    
+    @EJB
+    SignUpBean signUpBean;
+    
     @Resource
     UserTransaction utx;
 
@@ -153,5 +157,9 @@ public class AuthenticationBean implements Serializable {
 
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    public String teste(){
+        return "index.xhtml";
     }
 }

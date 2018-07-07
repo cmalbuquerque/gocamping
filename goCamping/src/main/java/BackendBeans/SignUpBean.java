@@ -170,7 +170,7 @@ public class SignUpBean implements Serializable {
             utx.begin();
             getEntityManager().persist(camperino);
             utx.commit();
-        } catch (Exception e) {
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
             System.out.println("save camper did't work");
         }
         return camperino;
@@ -192,7 +192,7 @@ public class SignUpBean implements Serializable {
 
             getEntityManager().merge(user);
             utx.commit();
-        } catch (Exception e) {
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
             System.out.println("save didn't work on user");
         }
         return user;
@@ -208,13 +208,13 @@ public class SignUpBean implements Serializable {
             manager.setNIF(NIF);
             getEntityManager().persist(manager);
             utx.commit();
-        } catch (Exception e) {
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
             System.out.println("save didn't work on manager");
         }
         return manager;
     }
 
-    public Utilizador SearchUser(String name) {
+    public Utilizador SearchUtilizador(String name) {
         Utilizador user1 = new Utilizador();
         try {
             utx.begin();
