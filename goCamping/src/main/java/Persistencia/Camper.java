@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -20,6 +22,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "Camper")
+@XmlRootElement
 public class Camper implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -88,6 +91,7 @@ public class Camper implements Serializable {
         this.campsiteCard = campsiteCard;
     }
 
+    @XmlTransient
     public Utilizador getUser() {
         return user;
     }

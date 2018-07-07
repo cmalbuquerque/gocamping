@@ -17,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,6 +30,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Utilizador")
+@XmlRootElement
 public class Utilizador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,10 +49,12 @@ public class Utilizador implements Serializable {
     @OneToOne(fetch = FetchType.EAGER)
     private Camper camper;
 
+    
     @JoinColumn(name = "manager")
     @OneToOne(fetch = FetchType.EAGER)
     private Manager manager;
 
+    @XmlTransient
     public Camper getCamper() {
         return camper;
     }
@@ -57,7 +62,8 @@ public class Utilizador implements Serializable {
     public void setCamper(Camper camper) {
         this.camper = camper;
     }
-
+    
+    @XmlTransient
     public Manager getManager() {
         return manager;
     }
