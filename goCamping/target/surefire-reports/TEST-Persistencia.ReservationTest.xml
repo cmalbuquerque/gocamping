@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Persistencia.ReservationTest" time="0.031" tests="13" errors="0" skipped="0" failures="0">
+<testsuite name="Persistencia.ReservationTest" time="0.026" tests="13" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
@@ -14,7 +14,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/andreia/Documentos/TQS/GoCamping/goCamping"/>
+    <property name="user.dir" value="/home/andreia/Documentos/GoCamping/goCamping"/>
     <property name="java.runtime.version" value="1.8.0_171-8u171-b11-0ubuntu0.18.04.1-b11"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/endorsed"/>
@@ -59,16 +59,16 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testEndDate" classname="Persistencia.ReservationTest" time="0.014"/>
+  <testcase name="testEndDate" classname="Persistencia.ReservationTest" time="0.012"/>
   <testcase name="fieldAnnotations" classname="Persistencia.ReservationTest" time="0"/>
   <testcase name="testStartDate" classname="Persistencia.ReservationTest" time="0"/>
-  <testcase name="testTotalPrice" classname="Persistencia.ReservationTest" time="0.008"/>
-  <testcase name="entity" classname="Persistencia.ReservationTest" time="0.006"/>
-  <testcase name="testNrAdults" classname="Persistencia.ReservationTest" time="0.001"/>
-  <testcase name="testNrBabies" classname="Persistencia.ReservationTest" time="0.001"/>
+  <testcase name="testTotalPrice" classname="Persistencia.ReservationTest" time="0.001"/>
+  <testcase name="entity" classname="Persistencia.ReservationTest" time="0.009"/>
+  <testcase name="testNrAdults" classname="Persistencia.ReservationTest" time="0"/>
+  <testcase name="testNrBabies" classname="Persistencia.ReservationTest" time="0"/>
   <testcase name="testCellfone" classname="Persistencia.ReservationTest" time="0"/>
   <testcase name="typeAnnotations" classname="Persistencia.ReservationTest" time="0.001"/>
-  <testcase name="testCampsite" classname="Persistencia.ReservationTest" time="0"/>
+  <testcase name="testCampsite" classname="Persistencia.ReservationTest" time="0.003"/>
   <testcase name="testNrChildren" classname="Persistencia.ReservationTest" time="0"/>
   <testcase name="testCamper" classname="Persistencia.ReservationTest" time="0"/>
   <testcase name="methodAnnotations" classname="Persistencia.ReservationTest" time="0"/>

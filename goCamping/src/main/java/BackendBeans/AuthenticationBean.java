@@ -5,7 +5,6 @@
  */
 package BackendBeans;
 
-import Persistencia.Camper;
 import Persistencia.Campsite;
 import Persistencia.Manager;
 import java.io.Serializable;
@@ -16,6 +15,7 @@ import javax.annotation.PostConstruct;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -45,18 +45,18 @@ public class AuthenticationBean implements Serializable {
     private String username;
     @ManagedProperty(value = "#{password}")
     private String password;
-    
-    
-    @Resource
-    UserTransaction utx;
 
-    @PersistenceContext(unitName = "PUnit")
-    private EntityManager em;
+    @EJB
+    NewSessionBean newSessionBean;
 
     @PostConstruct
     private void init() {
         user = new Utilizador();
     }
+
+    public AuthenticationBean() {
+    }
+    
 
     public Utilizador getUser() {
         return user;
@@ -82,39 +82,6 @@ public class AuthenticationBean implements Serializable {
         this.password = password;
     }
 
-    public Utilizador SearchUtilizador(String name) {
-        Utilizador user1 = new Utilizador();
-        try {
-            utx.begin();
-
-            user1 = getEntityManager().find(Utilizador.class, name);
-            System.out.println(user1);
-            utx.commit();
-
-        } catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        }
-        return user1;
-    }
-    
-    public Manager saveManager(String username, String fullName, String email, int NIF) {
-        Manager manager = new Manager();
-        try {
-            System.out.println("Username: " +  username + "FullName" +  "email: " + email +  "NIF: " + NIF);
-            utx.begin();
-            System.out.println("O BEGIN COMEÇOU ");
-            manager.setUsername(username);
-            manager.setFullName(fullName);
-            manager.setEmail(email);
-            manager.setNIF(NIF);
-            System.out.println("OLA SOU O MANAGER: " + manager);
-            getEntityManager().persist(manager);
-            utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
-            System.out.println("save didn't work on manager");
-        }
-        return manager;
-    }
 
     public String validate() {
         user.setUsername(username);
@@ -122,7 +89,7 @@ public class AuthenticationBean implements Serializable {
         System.out.println("user " + user);
         System.out.println("username " + user.getUsername());
 
-        Utilizador user1 = SearchUtilizador(user.getUsername());
+        Utilizador user1 = newSessionBean.searchUtilizador(user.getUsername());
 
         if (user1 == null) {
             return "login.xhtml";
@@ -162,13 +129,4 @@ public class AuthenticationBean implements Serializable {
         }
         return "index.xhtml";
     }
-
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-    
-    public String teste(){
-        return "index.xhtml";
-    }
-    
 }
