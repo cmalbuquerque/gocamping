@@ -178,7 +178,7 @@ public class SignUpBean implements Serializable {
     }
 
     public Utilizador saveUtilizador(Camper camp, Manager man, String nome, String password) {
-        Utilizador user = new Utilizador();
+        user = new Utilizador();
 
         try {
             utx.begin();
@@ -200,7 +200,7 @@ public class SignUpBean implements Serializable {
     }
 
     private Manager saveManager(String username, String fullName, String email, int NIF) {
-        Manager manager = new Manager();
+        manager = new Manager();
         try {
             utx.begin();
             manager.setUsername(username);
@@ -224,17 +224,7 @@ public class SignUpBean implements Serializable {
             System.out.println(user1);
             utx.commit();
 
-        } catch (SecurityException | IllegalStateException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (NotSupportedException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (SystemException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (RollbackException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (HeuristicMixedException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (HeuristicRollbackException ex1) {
+        } catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException ex1) {
             Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
         }
         return user1;

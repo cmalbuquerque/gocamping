@@ -190,10 +190,7 @@ public class Reservation implements Serializable {
         if (!Objects.equals(this.camper, other.camper)) {
             return false;
         }
-        if (!Objects.equals(this.campsite, other.campsite)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.campsite, other.campsite);
     }
 
     

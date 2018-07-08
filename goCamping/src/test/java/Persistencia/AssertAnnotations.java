@@ -21,20 +21,6 @@ public class AssertAnnotations {
           , annotationClasses.size(), annotations.size()
       ));
     }
-// exists
-//    annotationClasses.forEach(
-//      ac -> {
-//        long cnt
-//          = annotations.stream()
-//            .filter(a -> a.annotationType().isAssignableFrom(ac))
-//            .count();
-//        if (cnt == 0) {
-//          throw new AssertionError(
-//            String.format("No annotation of type %s found", ac.getName())
-//          );
-//        }
-//      }
-//    );
   }
 
   public static void assertType(Class c, Class... annotationClasses) {

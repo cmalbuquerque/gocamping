@@ -141,19 +141,4 @@ public class CamperTest {
         assertEquals(expResult, result);
     }
     
-    
-
-    /**
-//     * Test of getSerialVersionUID method, of class Camper.
-//     */
-//    @Test
-//    public void testGetSerialVersionUID() {
-//        System.out.println("getSerialVersionUID");
-//        long expResult = 0L;
-//        long result = Camper.getSerialVersionUID();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-
 }

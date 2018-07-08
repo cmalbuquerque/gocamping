@@ -7,9 +7,7 @@ package InterfaceBeans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
-import net.bootsfaces.component.tabView.TabView;
 
 /**
  *

@@ -75,10 +75,7 @@ public class CampsiteImage implements Serializable {
         if (!Objects.equals(this.imageName, other.imageName)) {
             return false;
         }
-        if (!Objects.equals(this.campsiteID, other.campsiteID)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.campsiteID, other.campsiteID);
     }
 
     @Override

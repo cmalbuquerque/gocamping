@@ -7,7 +7,6 @@ package Persistencia;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Embeddable;
 
 /**
  *
@@ -66,10 +65,7 @@ public class CampsiteImageKey implements Serializable{
         if (!Objects.equals(this.imageName, other.imageName)) {
             return false;
         }
-        if (!Objects.equals(this.campsiteID, other.campsiteID)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.campsiteID, other.campsiteID);
     }
 
     @Override
