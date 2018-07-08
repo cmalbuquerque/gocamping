@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: BackendBeans.AuthenticationBeanTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.798 sec - in BackendBeans.AuthenticationBeanTest

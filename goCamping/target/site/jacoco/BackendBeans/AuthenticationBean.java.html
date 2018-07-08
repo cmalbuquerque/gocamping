@@ -5,7 +5,6 @@
  */
 package BackendBeans;
 
-import Persistencia.Camper;
 import Persistencia.Campsite;
 import Persistencia.Manager;
 import java.io.Serializable;
@@ -16,6 +15,7 @@ import javax.annotation.PostConstruct;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -38,25 +38,25 @@ import javax.transaction.UserTransaction;
  */
 @ManagedBean(name = &quot;authenticationbean&quot;)
 @SessionScoped
-<span class="fc" id="L41">public class AuthenticationBean implements Serializable {</span>
+public class AuthenticationBean implements Serializable {
 
     private Utilizador user;
     @ManagedProperty(value = &quot;#{username}&quot;)
     private String username;
     @ManagedProperty(value = &quot;#{password}&quot;)
     private String password;
-    
-    
-    @Resource
-    UserTransaction utx;
 
-    @PersistenceContext(unitName = &quot;PUnit&quot;)
-    private EntityManager em;
+    @EJB
+    NewSessionBean newSessionBean;
 
     @PostConstruct
     private void init() {
-<span class="nc" id="L58">        user = new Utilizador();</span>
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L54">        user = new Utilizador();</span>
+<span class="nc" id="L55">    }</span>
+
+<span class="nc" id="L57">    public AuthenticationBean() {</span>
+<span class="nc" id="L58">    }</span>
+    
 
     public Utilizador getUser() {
 <span class="nc" id="L62">        return user;</span>
@@ -82,94 +82,52 @@ import javax.transaction.UserTransaction;
 <span class="nc" id="L82">        this.password = password;</span>
 <span class="nc" id="L83">    }</span>
 
-    public Utilizador SearchUtilizador(String name) {
-<span class="nc" id="L86">        Utilizador user1 = new Utilizador();</span>
-        try {
-<span class="nc" id="L88">            utx.begin();</span>
-
-<span class="nc" id="L90">            user1 = getEntityManager().find(Utilizador.class, name);</span>
-<span class="nc" id="L91">            System.out.println(user1);</span>
-<span class="nc" id="L92">            utx.commit();</span>
-
-<span class="nc" id="L94">        } catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException ex1) {</span>
-<span class="nc" id="L95">            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);</span>
-<span class="nc" id="L96">        }</span>
-<span class="nc" id="L97">        return user1;</span>
-    }
-    
-    public Manager saveManager(String username, String fullName, String email, int NIF) {
-<span class="nc" id="L101">        Manager manager = new Manager();</span>
-        try {
-<span class="nc" id="L103">            System.out.println(&quot;Username: &quot; +  username + &quot;FullName&quot; +  &quot;email: &quot; + email +  &quot;NIF: &quot; + NIF);</span>
-<span class="nc" id="L104">            utx.begin();</span>
-<span class="nc" id="L105">            System.out.println(&quot;O BEGIN COMEÇOU &quot;);</span>
-<span class="nc" id="L106">            manager.setUsername(username);</span>
-<span class="nc" id="L107">            manager.setFullName(fullName);</span>
-<span class="nc" id="L108">            manager.setEmail(email);</span>
-<span class="nc" id="L109">            manager.setNIF(NIF);</span>
-<span class="nc" id="L110">            System.out.println(&quot;OLA SOU O MANAGER: &quot; + manager);</span>
-<span class="nc" id="L111">            getEntityManager().persist(manager);</span>
-<span class="nc" id="L112">            utx.commit();</span>
-<span class="nc" id="L113">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L114">            System.out.println(&quot;save didn't work on manager&quot;);</span>
-<span class="nc" id="L115">        }</span>
-<span class="nc" id="L116">        return manager;</span>
-    }
 
     public String validate() {
-<span class="nc" id="L120">        user.setUsername(username);</span>
-<span class="nc" id="L121">        user.setPassword(password);</span>
-<span class="nc" id="L122">        System.out.println(&quot;user &quot; + user);</span>
-<span class="nc" id="L123">        System.out.println(&quot;username &quot; + user.getUsername());</span>
+<span class="nc" id="L87">        user.setUsername(username);</span>
+<span class="nc" id="L88">        user.setPassword(password);</span>
+<span class="nc" id="L89">        System.out.println(&quot;user &quot; + user);</span>
+<span class="nc" id="L90">        System.out.println(&quot;username &quot; + user.getUsername());</span>
 
-<span class="nc" id="L125">        Utilizador user1 = SearchUtilizador(user.getUsername());</span>
+<span class="nc" id="L92">        Utilizador user1 = newSessionBean.searchUtilizador(user.getUsername());</span>
 
-<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (user1 == null) {</span>
-<span class="nc" id="L128">            return &quot;login.xhtml&quot;;</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (user1 == null) {</span>
+<span class="nc" id="L95">            return &quot;login.xhtml&quot;;</span>
         }
 
-<span class="nc bnc" id="L131" title="All 2 branches missed.">        if (user1.equals(user)) {</span>
-<span class="nc" id="L132">            FacesContext facesContext = FacesContext.getCurrentInstance();</span>
-<span class="nc" id="L133">            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
-<span class="nc" id="L134">            session.setAttribute(&quot;username&quot;, username);</span>
-<span class="nc" id="L135">            Campsite campsite = new Campsite();</span>
-<span class="nc bnc" id="L136" title="All 2 branches missed.">            if (user1.getCamper() != null) {</span>
-<span class="nc" id="L137">                session.setAttribute(&quot;isCamper&quot;, true);</span>
-<span class="nc" id="L138">                return &quot;index.xhtml&quot;;</span>
-<span class="nc bnc" id="L139" title="All 2 branches missed.">            } else if (user1.getManager() != null) {</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (user1.equals(user)) {</span>
+<span class="nc" id="L99">            FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L100">            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
+<span class="nc" id="L101">            session.setAttribute(&quot;username&quot;, username);</span>
+<span class="nc" id="L102">            Campsite campsite = new Campsite();</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            if (user1.getCamper() != null) {</span>
+<span class="nc" id="L104">                session.setAttribute(&quot;isCamper&quot;, true);</span>
+<span class="nc" id="L105">                return &quot;index.xhtml&quot;;</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            } else if (user1.getManager() != null) {</span>
                 try {
-<span class="nc" id="L141">                    session.setAttribute(&quot;isManager&quot;, true);</span>
-<span class="nc" id="L142">                    return &quot;index.xhtml&quot;;</span>
-<span class="nc" id="L143">                } catch (SecurityException | IllegalStateException ex) {</span>
-<span class="nc" id="L144">                    Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex);</span>
-<span class="nc" id="L145">                }</span>
+<span class="nc" id="L108">                    session.setAttribute(&quot;isManager&quot;, true);</span>
+<span class="nc" id="L109">                    return &quot;index.xhtml&quot;;</span>
+<span class="nc" id="L110">                } catch (SecurityException | IllegalStateException ex) {</span>
+<span class="nc" id="L111">                    Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L112">                }</span>
             } else {
-<span class="nc" id="L147">                System.out.println(&quot;an error ocurred&quot;);</span>
+<span class="nc" id="L114">                System.out.println(&quot;an error ocurred&quot;);</span>
             }
-<span class="nc" id="L149">            return &quot;login.xhtml&quot;;</span>
+<span class="nc" id="L116">            return &quot;login.xhtml&quot;;</span>
         } else {
-<span class="nc" id="L151">            System.out.println(&quot;user is not right&quot;);</span>
+<span class="nc" id="L118">            System.out.println(&quot;user is not right&quot;);</span>
         }
-<span class="nc" id="L153">        return &quot;login.xhtml&quot;;</span>
+<span class="nc" id="L120">        return &quot;login.xhtml&quot;;</span>
     }
 
     public String logOut() {
-<span class="nc" id="L157">        FacesContext facesContext = FacesContext.getCurrentInstance();</span>
-<span class="nc" id="L158">        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);</span>
-<span class="nc bnc" id="L159" title="All 2 branches missed.">        if (null != session) {</span>
-<span class="nc" id="L160">            System.out.println(&quot;invalidating a session&quot;);</span>
-<span class="nc" id="L161">            session.invalidate();</span>
+<span class="nc" id="L124">        FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L125">        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">        if (null != session) {</span>
+<span class="nc" id="L127">            System.out.println(&quot;invalidating a session&quot;);</span>
+<span class="nc" id="L128">            session.invalidate();</span>
         }
-<span class="nc" id="L163">        return &quot;index.xhtml&quot;;</span>
+<span class="nc" id="L130">        return &quot;index.xhtml&quot;;</span>
     }
-
-    protected EntityManager getEntityManager() {
-<span class="nc" id="L167">        return em;</span>
-    }
-    
-    public String teste(){
-<span class="nc" id="L171">        return &quot;index.xhtml&quot;;</span>
-    }
-    
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>
