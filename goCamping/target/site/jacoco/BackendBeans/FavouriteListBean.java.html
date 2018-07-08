@@ -7,27 +7,15 @@ package BackendBeans;
 
 import Persistencia.Camper;
 import Persistencia.Campsite;
-import Persistencia.FavouriteList;
-import Persistencia.FavouriteListKey;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 
 /**
  *
@@ -39,138 +27,56 @@ import javax.transaction.UserTransaction;
  */
 @ManagedBean(name = &quot;favouritelistbean&quot;)
 @SessionScoped
-<span class="nc" id="L42">public class FavouriteListBean implements Serializable{</span>
+<span class="nc" id="L30">public class FavouriteListBean implements Serializable{</span>
     
-<span class="nc" id="L44">    @ManagedProperty(value = &quot;#{listCampsitesFav}&quot;)</span>
+<span class="nc" id="L32">    @ManagedProperty(value = &quot;#{listCampsitesFav}&quot;)</span>
     private List&lt;Campsite&gt; listCampsitesFav = new ArrayList&lt;&gt;(); 
     @ManagedProperty(value = &quot;#{listIntCampsites}&quot;)
     private List&lt;Integer&gt; listIntCampsites;
     
-             
-    @Resource
-    UserTransaction utx;
-
-    @PersistenceContext(unitName = &quot;PUnit&quot;)
-    private EntityManager em;
-     
-<span class="nc" id="L56">    private final String sessionGetUser = &quot;username&quot;;</span>
+    @EJB
+    NewSessionBean newSessionBean;
+    
+<span class="nc" id="L40">    private final String sessionGetUser = &quot;username&quot;;</span>
     private Camper camper;
-<span class="nc" id="L58">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
-<span class="nc" id="L59">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
+<span class="nc" id="L42">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L43">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
     
     public List&lt;Campsite&gt; getListCampsitesFav() {
-<span class="nc" id="L62">        return listCampsitesFav;</span>
+<span class="nc" id="L46">        return listCampsitesFav;</span>
     }
 
     public void setListCampsitesFav(List&lt;Campsite&gt; listCampsitesFav) {
-<span class="nc" id="L66">        this.listCampsitesFav= listarCampsitesFavList(session.getAttribute(sessionGetUser).toString());</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L50">        this.listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(sessionGetUser).toString());</span>
+<span class="nc" id="L51">    }</span>
 
     public List&lt;Integer&gt; getListIntCampsites() {
-<span class="nc" id="L70">        return listIntCampsites;</span>
+<span class="nc" id="L54">        return listIntCampsites;</span>
     }
 
     public void setListIntCampsites(List&lt;Integer&gt; listIntCampsites) {
-<span class="nc" id="L74">        this.listIntCampsites = listIntCampsites;</span>
+<span class="nc" id="L58">        this.listIntCampsites = listIntCampsites;</span>
                 
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L60">    }</span>
     
     public Camper getCamper() {
-<span class="nc" id="L79">        return camper;</span>
+<span class="nc" id="L63">        return camper;</span>
     }
 
     public void setCamper(Camper camper) {
-<span class="nc" id="L83">        this.camper = camper;</span>
-<span class="nc" id="L84">    }</span>
-    
-    public FavouriteList saveFavouriteList(String camperUsername, int campsiteID) {
-<span class="nc" id="L87">        FavouriteList favouriteList = new FavouriteList();</span>
-<span class="nc" id="L88">        System.out.println(&quot;new fav list&quot;);</span>
-        try {
-<span class="nc" id="L90">            utx.begin();</span>
-<span class="nc" id="L91">            System.out.println(&quot;at the start of transaction&quot;);</span>
-<span class="nc" id="L92">            favouriteList.setCamperUsername(camperUsername);</span>
-<span class="nc" id="L93">            favouriteList.setCampsiteID(campsiteID);</span>
-<span class="nc" id="L94">            getEntityManager().persist(favouriteList);</span>
-<span class="nc" id="L95">            utx.commit();</span>
-<span class="nc" id="L96">            System.out.println(&quot;just after comit&quot;);</span>
-<span class="nc" id="L97">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L98">            System.out.println(&quot;save didnt' work on campsite&quot;);</span>
-<span class="nc" id="L99">        }</span>
-<span class="nc" id="L100">        return favouriteList;</span>
-    }
-    
-    public Campsite searchCampsite(int id) {
-<span class="nc" id="L104">        Campsite campsite = new Campsite();</span>
-        try {
-<span class="nc" id="L106">            utx.begin();</span>
-<span class="nc" id="L107">            Query query = getEntityManager().createQuery(&quot;select c from Campsite c where c.id = :id&quot;);</span>
-<span class="nc" id="L108">            query.setParameter(&quot;id&quot;, id);</span>
-<span class="nc" id="L109">            List&lt;Campsite&gt; campsites = query.getResultList();</span>
-<span class="nc bnc" id="L110" title="All 2 branches missed.">            for (Iterator&lt;Campsite&gt; iterator = campsites.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L111">                campsite = (Campsite) iterator.next();</span>
-            }
-<span class="nc" id="L113">            utx.commit();</span>
-<span class="nc" id="L114">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L115">            System.out.println(&quot;utilizador search didn't work&quot;);</span>
-<span class="nc" id="L116">        }</span>
-<span class="nc" id="L117">        return campsite;</span>
-    }
-
-    
-    public List&lt;Campsite&gt; listarCampsitesFavList(String username) {
-<span class="nc" id="L122">        List&lt;FavouriteList&gt; favouriteLists = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L123">        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L124">        List&lt;Campsite&gt; campsites = new ArrayList&lt;&gt;();</span>
-        try {
-<span class="nc" id="L126">            utx.begin();</span>
-<span class="nc" id="L127">            Query query = getEntityManager().createQuery(&quot;select c from FavouriteList as c where c.camperUsername = :username&quot;);</span>
-<span class="nc" id="L128">            query.setParameter(&quot;username&quot;, username);</span>
-<span class="nc" id="L129">            favouriteLists = query.getResultList();</span>
-<span class="nc bnc" id="L130" title="All 2 branches missed.">            for (Iterator&lt;FavouriteList&gt; iterator = favouriteLists.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L131">                Integer campsiteID = iterator.next().getCampsiteID();</span>
-<span class="nc" id="L132">                list.add(campsiteID);</span>
-<span class="nc" id="L133">            }</span>
-<span class="nc" id="L134">            System.out.println(&quot;just before commit&quot;);</span>
-<span class="nc" id="L135">            utx.commit();</span>
-<span class="nc" id="L136">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L137">            System.out.println(&quot;listar campsite with manager didn't work&quot;);</span>
-<span class="nc" id="L138">        }</span>
-<span class="nc bnc" id="L139" title="All 2 branches missed.">        for (int elem : list) {</span>
-<span class="nc" id="L140">            campsites.add(searchCampsite(elem));</span>
-<span class="nc" id="L141">        }</span>
-
-<span class="nc" id="L143">        return campsites;</span>
-    }
-
-    public boolean deleteFavouriteList(String camperUsername, int campsiteID) {
-<span class="nc" id="L147">        FavouriteListKey favKey = new FavouriteListKey(camperUsername, campsiteID);</span>
-        try {
-<span class="nc" id="L149">            utx.begin();</span>
-<span class="nc" id="L150">            FavouriteList favouriteList = (FavouriteList) getEntityManager().find(FavouriteList.class, favKey);</span>
-<span class="nc" id="L151">            getEntityManager().remove(favouriteList);</span>
-<span class="nc" id="L152">            utx.commit();</span>
-<span class="nc" id="L153">            return true;</span>
-<span class="nc" id="L154">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L155">            System.out.println(&quot;delete favourite lit pitch didn't work&quot;);</span>
-<span class="nc" id="L156">            return false;</span>
-        }
-    }
+<span class="nc" id="L67">        this.camper = camper;</span>
+<span class="nc" id="L68">    }</span>
         
     public String addFavouriteList(int campsiteID){
-<span class="nc" id="L161">        saveFavouriteList(session.getAttribute(sessionGetUser).toString(), campsiteID);  </span>
-<span class="nc" id="L162">        listCampsitesFav= listarCampsitesFavList(session.getAttribute(sessionGetUser).toString());</span>
-<span class="nc" id="L163">        return &quot;favList.xhtml&quot; ;</span>
+<span class="nc" id="L71">        newSessionBean.saveFavouriteList(session.getAttribute(sessionGetUser).toString(), campsiteID);  </span>
+<span class="nc" id="L72">        listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(sessionGetUser).toString());</span>
+<span class="nc" id="L73">        return &quot;favList.xhtml&quot; ;</span>
     }
     
     public String removeFavouriteList(int campsiteID){
-<span class="nc" id="L167">        deleteFavouriteList(session.getAttribute(sessionGetUser).toString(), campsiteID);</span>
-<span class="nc" id="L168">        listCampsitesFav= listarCampsitesFavList(session.getAttribute(sessionGetUser).toString());</span>
-<span class="nc" id="L169">        return &quot;favList.xhtml&quot; ;</span>
-    }
-    
-    protected EntityManager getEntityManager() {
-<span class="nc" id="L173">        return em;</span>
+<span class="nc" id="L77">        newSessionBean.deleteFavouriteList(session.getAttribute(sessionGetUser).toString(), campsiteID);</span>
+<span class="nc" id="L78">        listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(sessionGetUser).toString());</span>
+<span class="nc" id="L79">        return &quot;favList.xhtml&quot; ;</span>
     }
     
 }

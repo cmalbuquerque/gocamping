@@ -9,21 +9,11 @@ import Persistencia.Camper;
 import Persistencia.Manager;
 import Persistencia.Utilizador;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 
 /**
  *
@@ -59,12 +49,10 @@ public class SignUpBean implements Serializable {
 
     @ManagedProperty(value = "#{flagManager}")
     private boolean flagManager;
-
-    @Resource
-    UserTransaction utx;
-
-    @PersistenceContext(unitName = "PUnit")
-    private EntityManager em;
+    
+    @EJB
+    NewSessionBean newSessionBean ;
+    
 
     @PostConstruct
     private void init() {
@@ -159,93 +147,21 @@ public class SignUpBean implements Serializable {
         this.flagManager = flagManager;
     }
 
-    public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard) {
-        Camper camper1 = new Camper();
-        System.out.println("new camper");
-        try {
-            utx.begin();
-            camper1.setUsername(username);
-            camper1.setFullName(fullname);
-            camper1.setEmail(email);
-            camper1.setNIF(NIF);
-            camper1.setCampsiteCard(campsiteCard);
-            getEntityManager().persist(camper1);
-            utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
-            System.out.println("save didn't work on camper");
-        }
-        return camper1;
-    }
-
-    public Utilizador saveUtilizador(Camper camp, Manager man, String nome, String password) {
-        user = new Utilizador();
-
-        try {
-            utx.begin();
-            user.setUsername(nome);
-            user.setPassword(password);
-            if (camp != null) {
-                user.setCamper(camp);
-            } else {
-                System.out.println("setting manager");
-                user.setManager(man);//getEntityManager().find(Manager.class, man.getUsername()));
-            }
-
-            getEntityManager().merge(user);
-            utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
-            System.out.println("save didn't work on user");
-        }
-        return user;
-    }
-
-    private Manager saveManager(String username, String fullName, String email, int NIF) {
-        manager = new Manager();
-        try {
-            utx.begin();
-            manager.setUsername(username);
-            manager.setFullName(fullName);
-            manager.setEmail(email);
-            manager.setNIF(NIF);
-            getEntityManager().persist(manager);
-            utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
-            System.out.println("save didn't work on manager");
-        }
-        return manager;
-    }
-
-    public Utilizador SearchUtilizador(String name) {
-        Utilizador user1 = new Utilizador();
-        try {
-            utx.begin();
-
-            user1 = getEntityManager().find(Utilizador.class, name);
-            System.out.println(user1);
-            utx.commit();
-
-        } catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        }
-        return user1;
-    }
+    
 
     public String register() {
         if (flagCamper == true && flagManager == false) {
-            Camper camper1 = saveCamper(username, fullName, email, NIF, campsiteCard);
-            Utilizador user1 = saveUtilizador(camper1, null, username, password);
+            Camper camper1 = newSessionBean.saveCamper(username, fullName, email, NIF, campsiteCard);
+            Utilizador user1 = newSessionBean.saveUtilizador(camper1, null, username, password);
             return "login.xhtml";
         }
         if (flagManager == true && flagCamper == false) {
-            Manager manager1 = saveManager(username, fullName, email, NIF);
-            Utilizador user2 = saveUtilizador(null, manager1, username, password);
+            Manager manager1 = newSessionBean.saveManager(username, fullName, email, NIF);
+            Utilizador user2 = newSessionBean.saveUtilizador(null, manager1, username, password);
             return "login.xhtml";
         }
         return "signup.xhtml";
     }
 
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
 }

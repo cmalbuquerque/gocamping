@@ -10,25 +10,13 @@ import Persistencia.Camper;
 import Persistencia.Manager;
 import Persistencia.Utilizador;
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
-
 /**
  *
  * @author Andreia Patrocínio
@@ -39,7 +27,7 @@ import javax.transaction.UserTransaction;
  */
 @ManagedBean(name = &quot;accountbean&quot;)
 @SessionScoped
-<span class="nc" id="L42">public class AccountBean implements Serializable {</span>
+<span class="nc" id="L30">public class AccountBean implements Serializable {</span>
 
     @ManagedProperty(value = &quot;#{username}&quot;)
     private String username;
@@ -60,245 +48,143 @@ import javax.transaction.UserTransaction;
     @ManagedProperty(value = &quot;#{emailManager}&quot;)
     private String emailManager;
     
-    @Resource
-    UserTransaction utx;
-
-    @PersistenceContext(unitName = &quot;PUnit&quot;)
-    private EntityManager em;
+    @EJB
+    NewSessionBean newSessionBean;
     
     @PostConstruct
     private void init() {
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        if(session.getAttribute(&quot;isCamper&quot;) != null){</span>
-<span class="nc" id="L72">            Camper c = searchCamper(session.getAttribute(sessionGetUser).toString());</span>
-<span class="nc" id="L73">            this.fullName = c.getFullName();</span>
-<span class="nc" id="L74">            this.email = c.getEmail();</span>
-<span class="nc" id="L75">            this.campsiteCard = c.getCampsiteCard();</span>
-<span class="nc" id="L76">        } </span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if(session.getAttribute(&quot;isCamper&quot;) != null){</span>
+<span class="nc" id="L57">            Camper c = newSessionBean.searchCamper(session.getAttribute(sessionGetUser).toString());</span>
+<span class="nc" id="L58">            this.fullName = c.getFullName();</span>
+<span class="nc" id="L59">            this.email = c.getEmail();</span>
+<span class="nc" id="L60">            this.campsiteCard = c.getCampsiteCard();</span>
+<span class="nc" id="L61">        } </span>
         else{
-<span class="nc" id="L78">            Manager m = searchManager(session.getAttribute(sessionGetUser).toString());</span>
-<span class="nc" id="L79">            this.fullNameManager = m.getFullName();</span>
-<span class="nc" id="L80">            this.emailManager = m.getEmail();</span>
+<span class="nc" id="L63">            Manager m = newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString());</span>
+<span class="nc" id="L64">            this.fullNameManager = m.getFullName();</span>
+<span class="nc" id="L65">            this.emailManager = m.getEmail();</span>
             
         }
-<span class="nc" id="L83">    }</span>
+<span class="nc" id="L68">    }</span>
     
     private Manager manager;
     private Camper camper;
-<span class="nc" id="L87">    private final String sessionGetUser = &quot;username&quot;;</span>
-<span class="nc" id="L88">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
-<span class="nc" id="L89">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
+<span class="nc" id="L72">    private final String sessionGetUser = &quot;username&quot;;</span>
+    
+<span class="nc" id="L74">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L75">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
 
     public String getConfirmationPassword() {
-<span class="nc" id="L92">        return confirmationPassword;</span>
+<span class="nc" id="L78">        return confirmationPassword;</span>
     }
 
     public void setConfirmationPassword(String confirmationPassword) {
-<span class="nc" id="L96">        this.confirmationPassword = confirmationPassword;</span>
-<span class="nc" id="L97">    }</span>
+<span class="nc" id="L82">        this.confirmationPassword = confirmationPassword;</span>
+<span class="nc" id="L83">    }</span>
 
     public String getNewPassword() {
-<span class="nc" id="L100">        return newPassword;</span>
+<span class="nc" id="L86">        return newPassword;</span>
     }
 
     public void setNewPassword(String newPassword) {
-<span class="nc" id="L104">        this.newPassword = newPassword;</span>
-<span class="nc" id="L105">    }</span>
+<span class="nc" id="L90">        this.newPassword = newPassword;</span>
+<span class="nc" id="L91">    }</span>
 
     public Manager getManager() {
-<span class="nc" id="L108">        return manager;</span>
+<span class="nc" id="L94">        return manager;</span>
     }
 
     public void setManager(Manager manager) {
-<span class="nc" id="L112">        this.manager = manager;</span>
-<span class="nc" id="L113">    }</span>
+<span class="nc" id="L98">        this.manager = manager;</span>
+<span class="nc" id="L99">    }</span>
 
     public Camper getCamper() {
-<span class="nc" id="L116">        return camper;</span>
+<span class="nc" id="L102">        return camper;</span>
     }
 
     public void setCamper(Camper camper) {
-<span class="nc" id="L120">        this.camper = camper;</span>
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L106">        this.camper = camper;</span>
+<span class="nc" id="L107">    }</span>
 
     public String getUsername() {
-<span class="nc" id="L124">        return username;</span>
+<span class="nc" id="L110">        return username;</span>
     }
 
     public void setUsername(String username) {
-<span class="nc" id="L128">        this.username = username;</span>
-<span class="nc" id="L129">    }</span>
+<span class="nc" id="L114">        this.username = username;</span>
+<span class="nc" id="L115">    }</span>
 
     public String getPassword() {
-<span class="nc" id="L132">        return password;</span>
+<span class="nc" id="L118">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="nc" id="L136">        this.password = password;</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L122">        this.password = password;</span>
+<span class="nc" id="L123">    }</span>
 
     public String getFullName() {
-<span class="nc" id="L140">        return fullName;</span>
+<span class="nc" id="L126">        return fullName;</span>
     }
 
     public void setFullName(String fullName) {
-<span class="nc" id="L144">        this.fullName = fullName;</span>
-<span class="nc" id="L145">    }</span>
+<span class="nc" id="L130">        this.fullName = fullName;</span>
+<span class="nc" id="L131">    }</span>
 
     public String getEmail() {
-<span class="nc" id="L148">        return email;</span>
+<span class="nc" id="L134">        return email;</span>
     }
 
     public void setEmail(String email) {
-<span class="nc" id="L152">        this.email = email;</span>
-<span class="nc" id="L153">    }</span>
+<span class="nc" id="L138">        this.email = email;</span>
+<span class="nc" id="L139">    }</span>
 
     public int getCampsiteCard() {
-<span class="nc" id="L156">        return campsiteCard;</span>
+<span class="nc" id="L142">        return campsiteCard;</span>
     }
 
     public void setCampsiteCard(int campsiteCard) {
-<span class="nc" id="L160">        this.campsiteCard = campsiteCard;</span>
-<span class="nc" id="L161">    }</span>
+<span class="nc" id="L146">        this.campsiteCard = campsiteCard;</span>
+<span class="nc" id="L147">    }</span>
 
     public String getFullNameManager() {
-<span class="nc" id="L164">        return fullNameManager;</span>
+<span class="nc" id="L150">        return fullNameManager;</span>
     }
 
     public void setFullNameManager(String fullNameManager) {
-<span class="nc" id="L168">        this.fullNameManager = fullNameManager;</span>
-<span class="nc" id="L169">    }</span>
+<span class="nc" id="L154">        this.fullNameManager = fullNameManager;</span>
+<span class="nc" id="L155">    }</span>
 
     public String getEmailManager() {
-<span class="nc" id="L172">        return emailManager;</span>
+<span class="nc" id="L158">        return emailManager;</span>
     }
 
     public void setEmailManager(String emailManager) {
-<span class="nc" id="L176">        this.emailManager = emailManager;</span>
-<span class="nc" id="L177">    }</span>
+<span class="nc" id="L162">        this.emailManager = emailManager;</span>
+<span class="nc" id="L163">    }</span>
     
-    public Manager searchManager(String name) {
-<span class="nc" id="L180">        Manager manager1 = new Manager();</span>
-        try {
-<span class="nc" id="L182">            utx.begin();</span>
-<span class="nc" id="L183">            Query query = getEntityManager().createQuery(&quot;select c from Manager c where c.username = :name&quot;);</span>
-<span class="nc" id="L184">            query.setParameter(&quot;name&quot;, name);</span>
-<span class="nc" id="L185">            List&lt;Manager&gt; managers = query.getResultList();</span>
-<span class="nc bnc" id="L186" title="All 2 branches missed.">            for (Iterator&lt;Manager&gt; iterator = managers.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L187">                manager1 = (Manager) iterator.next();</span>
-<span class="nc" id="L188">                System.out.println(manager1.getUsername());</span>
-            }
-<span class="nc" id="L190">            utx.commit();</span>
-<span class="nc" id="L191">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L192">            System.out.println(&quot;manager search didn't work&quot;);</span>
-<span class="nc" id="L193">        }</span>
-<span class="nc" id="L194">        return manager1;</span>
-    }
-    
-    public Camper searchCamper(String name) {
-<span class="nc" id="L198">        Camper user = new Camper();</span>
-        try {
-<span class="nc" id="L200">            utx.begin();</span>
-<span class="nc" id="L201">            Query query = getEntityManager().createQuery(&quot;select c from Camper c where c.username = :name&quot;);</span>
-<span class="nc" id="L202">            query.setParameter(&quot;name&quot;, name);</span>
-<span class="nc" id="L203">            List&lt;Camper&gt; utilizador = query.getResultList();</span>
-<span class="nc bnc" id="L204" title="All 2 branches missed.">            for (Iterator&lt;Camper&gt; iterator = utilizador.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L205">                user = (Camper) iterator.next();</span>
-            }
-<span class="nc" id="L207">            utx.commit();</span>
-<span class="nc" id="L208">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L209">            System.out.println(&quot;camper search didn't work&quot;);</span>
-<span class="nc" id="L210">        }</span>
-<span class="nc" id="L211">        return user;</span>
-    }
-    
-    public Utilizador searchUtilizador(String name) {
-<span class="nc" id="L215">        Utilizador user1 = new Utilizador();</span>
-        try {
-<span class="nc" id="L217">            utx.begin();</span>
-
-<span class="nc" id="L219">            user1 = getEntityManager().find(Utilizador.class, name);</span>
-<span class="nc" id="L220">            System.out.println(user1);</span>
-<span class="nc" id="L221">            utx.commit();</span>
-
-<span class="nc" id="L223">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L224">            System.out.println(&quot;camper search didn't work&quot;);</span>
-<span class="nc" id="L225">        }   </span>
-<span class="nc" id="L226">        return user1;</span>
-    } 
-    
-    public Utilizador updateUtilizador(String username, String newPassword) {
-<span class="nc" id="L230">        Utilizador user = new Utilizador();</span>
-        try {
-<span class="nc" id="L232">            utx.begin();</span>
-<span class="nc" id="L233">            user = (Utilizador) getEntityManager().find(Utilizador.class, username);</span>
-<span class="nc" id="L234">            user.setUsername(username);</span>
-<span class="nc" id="L235">            user.setPassword(newPassword);</span>
-<span class="nc" id="L236">            getEntityManager().merge(user);</span>
-<span class="nc" id="L237">            utx.commit();</span>
-<span class="nc" id="L238">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L239">            System.out.println(&quot;update utilizador didn't work&quot;);</span>
-<span class="nc" id="L240">        }</span>
-<span class="nc" id="L241">        return user;</span>
-    }
-    
-    public Camper updateCamper(String username, String fullname, String email, int campingCard) {
-<span class="nc" id="L245">        camper = new Camper();</span>
-        try {
-<span class="nc" id="L247">            utx.begin();</span>
-<span class="nc" id="L248">            camper = (Camper) getEntityManager().find(Camper.class, username);</span>
-<span class="nc" id="L249">            camper.setFullName(fullname);</span>
-<span class="nc" id="L250">            camper.setEmail(email);</span>
-<span class="nc" id="L251">            camper.setCampsiteCard(campingCard);</span>
-<span class="nc" id="L252">            getEntityManager().merge(camper);</span>
-<span class="nc" id="L253">            utx.commit();</span>
-<span class="nc" id="L254">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L255">            System.out.println(&quot;update camper didn't work&quot;);</span>
-<span class="nc" id="L256">        }</span>
-<span class="nc" id="L257">        return camper;</span>
-    }
-    
-    public Manager updateManager(String username, String fullname, String email) {
-<span class="nc" id="L261">        manager = new Manager();</span>
-        try {
-<span class="nc" id="L263">            utx.begin();</span>
-<span class="nc" id="L264">            manager = (Manager) getEntityManager().find(Manager.class, username);</span>
-<span class="nc" id="L265">            manager.setFullName(fullname);</span>
-<span class="nc" id="L266">            manager.setEmail(email);</span>
-<span class="nc" id="L267">            System.out.println(&quot;pst&quot; + manager);</span>
-<span class="nc" id="L268">            getEntityManager().merge(manager);</span>
-<span class="nc" id="L269">            utx.commit();</span>
-<span class="nc" id="L270">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L271">            System.out.println(&quot;update manager didn't work&quot;);</span>
-<span class="nc" id="L272">        }</span>
-<span class="nc" id="L273">        return manager;</span>
-    }
-    
+   
     public String editPersonalInformation() {
-<span class="nc" id="L277">        camper = updateCamper(session.getAttribute(sessionGetUser).toString(), fullName, email, campsiteCard);</span>
-<span class="nc" id="L278">        return &quot;account.xhtml&quot;;</span>
+<span class="nc" id="L167">        camper = newSessionBean.updateCamper(session.getAttribute(sessionGetUser).toString(), fullName, email, campsiteCard);</span>
+<span class="nc" id="L168">        return &quot;account.xhtml&quot;;</span>
     }
     
     public String editPersonalInformationManager() {
-<span class="nc" id="L282">        manager = updateManager(session.getAttribute(sessionGetUser).toString(), fullNameManager, emailManager);</span>
-<span class="nc" id="L283">        return &quot;account.xhtml&quot;;</span>
+<span class="nc" id="L172">        manager = newSessionBean.updateManager(session.getAttribute(sessionGetUser).toString(), fullNameManager, emailManager);</span>
+<span class="nc" id="L173">        return &quot;account.xhtml&quot;;</span>
     }
 
     public String editLoginAccess() {
-<span class="nc" id="L287">        Utilizador user = searchUtilizador(session.getAttribute(sessionGetUser).toString());</span>
-<span class="nc bnc" id="L288" title="All 2 branches missed.">        if (user.getPassword().equals(Hash.getmd5Hash(password))) {</span>
-<span class="nc bnc" id="L289" title="All 2 branches missed.">            if (newPassword.equals(confirmationPassword)) {</span>
-<span class="nc" id="L290">                updateUtilizador(session.getAttribute(sessionGetUser).toString(), newPassword);</span>
-<span class="nc" id="L291">                System.out.println(&quot;user pass updated, from &quot; + password + &quot;to&quot; + newPassword);</span>
-<span class="nc" id="L292">                return &quot;account.xhtml&quot;;</span>
+<span class="nc" id="L177">        Utilizador user = newSessionBean.searchUtilizador(session.getAttribute(sessionGetUser).toString());</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">        if (user.getPassword().equals(Hash.getmd5Hash(password))) {</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            if (newPassword.equals(confirmationPassword)) {</span>
+<span class="nc" id="L180">                newSessionBean.updateUtilizador(session.getAttribute(sessionGetUser).toString(), newPassword);</span>
+<span class="nc" id="L181">                System.out.println(&quot;user pass updated, from &quot; + password + &quot;to&quot; + newPassword);</span>
+<span class="nc" id="L182">                return &quot;account.xhtml&quot;;</span>
             }
         }
-<span class="nc" id="L295">        System.out.println(&quot;didn't update user pass&quot;);</span>
-<span class="nc" id="L296">        return &quot;account.xhtml&quot;;</span>
+<span class="nc" id="L185">        System.out.println(&quot;didn't update user pass&quot;);</span>
+<span class="nc" id="L186">        return &quot;account.xhtml&quot;;</span>
     }
     
-   
-     protected EntityManager getEntityManager() {
-<span class="nc" id="L301">        return em;</span>
-    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

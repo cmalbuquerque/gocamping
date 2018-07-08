@@ -9,21 +9,11 @@ import Persistencia.Camper;
 import Persistencia.Manager;
 import Persistencia.Utilizador;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 
 /**
  *
@@ -35,7 +25,7 @@ import javax.transaction.UserTransaction;
  */
 @ManagedBean(name = &quot;signupbean&quot;)
 @SessionScoped
-<span class="nc" id="L38">public class SignUpBean implements Serializable {</span>
+<span class="nc" id="L28">public class SignUpBean implements Serializable {</span>
 
     private Utilizador user;
     private Manager manager;
@@ -59,194 +49,120 @@ import javax.transaction.UserTransaction;
 
     @ManagedProperty(value = &quot;#{flagManager}&quot;)
     private boolean flagManager;
-
-    @Resource
-    UserTransaction utx;
-
-    @PersistenceContext(unitName = &quot;PUnit&quot;)
-    private EntityManager em;
+    
+    @EJB
+    NewSessionBean newSessionBean ;
+    
 
     @PostConstruct
     private void init() {
-<span class="nc" id="L71">        user = new Utilizador();</span>
-<span class="nc" id="L72">    }</span>
+<span class="nc" id="L59">        user = new Utilizador();</span>
+<span class="nc" id="L60">    }</span>
 
     public Utilizador getUser() {
-<span class="nc" id="L75">        return user;</span>
+<span class="nc" id="L63">        return user;</span>
     }
 
     public void setUser(Utilizador user) {
-<span class="nc" id="L79">        this.user = user;</span>
-<span class="nc" id="L80">    }</span>
+<span class="nc" id="L67">        this.user = user;</span>
+<span class="nc" id="L68">    }</span>
 
     public Manager getManager() {
-<span class="nc" id="L83">        return manager;</span>
+<span class="nc" id="L71">        return manager;</span>
     }
 
     public void setManager(Manager manager) {
-<span class="nc" id="L87">        this.manager = manager;</span>
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L75">        this.manager = manager;</span>
+<span class="nc" id="L76">    }</span>
 
     public Camper getCamper() {
-<span class="nc" id="L91">        return camper;</span>
+<span class="nc" id="L79">        return camper;</span>
     }
 
     public void setCamper(Camper camper) {
-<span class="nc" id="L95">        this.camper = camper;</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L83">        this.camper = camper;</span>
+<span class="nc" id="L84">    }</span>
 
     public String getUsername() {
-<span class="nc" id="L99">        return username;</span>
+<span class="nc" id="L87">        return username;</span>
     }
 
     public void setUsername(String username) {
-<span class="nc" id="L103">        this.username = username;</span>
-<span class="nc" id="L104">    }</span>
+<span class="nc" id="L91">        this.username = username;</span>
+<span class="nc" id="L92">    }</span>
 
     public String getPassword() {
-<span class="nc" id="L107">        return password;</span>
+<span class="nc" id="L95">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="nc" id="L111">        this.password = password;</span>
-<span class="nc" id="L112">    }</span>
+<span class="nc" id="L99">        this.password = password;</span>
+<span class="nc" id="L100">    }</span>
 
     public String getFullName() {
-<span class="nc" id="L115">        return fullName;</span>
+<span class="nc" id="L103">        return fullName;</span>
     }
 
     public void setFullName(String fullName) {
-<span class="nc" id="L119">        this.fullName = fullName;</span>
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L107">        this.fullName = fullName;</span>
+<span class="nc" id="L108">    }</span>
 
     public String getEmail() {
-<span class="nc" id="L123">        return email;</span>
+<span class="nc" id="L111">        return email;</span>
     }
 
     public void setEmail(String email) {
-<span class="nc" id="L127">        this.email = email;</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L115">        this.email = email;</span>
+<span class="nc" id="L116">    }</span>
 
     public int getNIF() {
-<span class="nc" id="L131">        return NIF;</span>
+<span class="nc" id="L119">        return NIF;</span>
     }
 
     public void setNIF(int NIF) {
-<span class="nc" id="L135">        this.NIF = NIF;</span>
-<span class="nc" id="L136">    }</span>
+<span class="nc" id="L123">        this.NIF = NIF;</span>
+<span class="nc" id="L124">    }</span>
 
     public int getCampsiteCard() {
-<span class="nc" id="L139">        return campsiteCard;</span>
+<span class="nc" id="L127">        return campsiteCard;</span>
     }
 
     public void setCampsiteCard(int campsiteCard) {
-<span class="nc" id="L143">        this.campsiteCard = campsiteCard;</span>
-<span class="nc" id="L144">    }</span>
+<span class="nc" id="L131">        this.campsiteCard = campsiteCard;</span>
+<span class="nc" id="L132">    }</span>
 
     public boolean isFlagCamper() {
-<span class="nc" id="L147">        return flagCamper;</span>
+<span class="nc" id="L135">        return flagCamper;</span>
     }
 
     public void setFlagCamper(boolean flagCamper) {
-<span class="nc" id="L151">        this.flagCamper = flagCamper;</span>
-<span class="nc" id="L152">    }</span>
+<span class="nc" id="L139">        this.flagCamper = flagCamper;</span>
+<span class="nc" id="L140">    }</span>
 
     public boolean isFlagManager() {
-<span class="nc" id="L155">        return flagManager;</span>
+<span class="nc" id="L143">        return flagManager;</span>
     }
 
     public void setFlagManager(boolean flagManager) {
-<span class="nc" id="L159">        this.flagManager = flagManager;</span>
-<span class="nc" id="L160">    }</span>
+<span class="nc" id="L147">        this.flagManager = flagManager;</span>
+<span class="nc" id="L148">    }</span>
 
-    public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard) {
-<span class="nc" id="L163">        Camper camper1 = new Camper();</span>
-<span class="nc" id="L164">        System.out.println(&quot;new camper&quot;);</span>
-        try {
-<span class="nc" id="L166">            utx.begin();</span>
-<span class="nc" id="L167">            camper1.setUsername(username);</span>
-<span class="nc" id="L168">            camper1.setFullName(fullname);</span>
-<span class="nc" id="L169">            camper1.setEmail(email);</span>
-<span class="nc" id="L170">            camper1.setNIF(NIF);</span>
-<span class="nc" id="L171">            camper1.setCampsiteCard(campsiteCard);</span>
-<span class="nc" id="L172">            getEntityManager().persist(camper1);</span>
-<span class="nc" id="L173">            utx.commit();</span>
-<span class="nc" id="L174">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L175">            System.out.println(&quot;save didn't work on camper&quot;);</span>
-<span class="nc" id="L176">        }</span>
-<span class="nc" id="L177">        return camper1;</span>
-    }
-
-    public Utilizador saveUtilizador(Camper camp, Manager man, String nome, String password) {
-<span class="nc" id="L181">        user = new Utilizador();</span>
-
-        try {
-<span class="nc" id="L184">            utx.begin();</span>
-<span class="nc" id="L185">            user.setUsername(nome);</span>
-<span class="nc" id="L186">            user.setPassword(password);</span>
-<span class="nc bnc" id="L187" title="All 2 branches missed.">            if (camp != null) {</span>
-<span class="nc" id="L188">                user.setCamper(camp);</span>
-            } else {
-<span class="nc" id="L190">                System.out.println(&quot;setting manager&quot;);</span>
-<span class="nc" id="L191">                user.setManager(man);//getEntityManager().find(Manager.class, man.getUsername()));</span>
-            }
-
-<span class="nc" id="L194">            getEntityManager().merge(user);</span>
-<span class="nc" id="L195">            utx.commit();</span>
-<span class="nc" id="L196">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L197">            System.out.println(&quot;save didn't work on user&quot;);</span>
-<span class="nc" id="L198">        }</span>
-<span class="nc" id="L199">        return user;</span>
-    }
-
-    private Manager saveManager(String username, String fullName, String email, int NIF) {
-<span class="nc" id="L203">        manager = new Manager();</span>
-        try {
-<span class="nc" id="L205">            utx.begin();</span>
-<span class="nc" id="L206">            manager.setUsername(username);</span>
-<span class="nc" id="L207">            manager.setFullName(fullName);</span>
-<span class="nc" id="L208">            manager.setEmail(email);</span>
-<span class="nc" id="L209">            manager.setNIF(NIF);</span>
-<span class="nc" id="L210">            getEntityManager().persist(manager);</span>
-<span class="nc" id="L211">            utx.commit();</span>
-<span class="nc" id="L212">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
-<span class="nc" id="L213">            System.out.println(&quot;save didn't work on manager&quot;);</span>
-<span class="nc" id="L214">        }</span>
-<span class="nc" id="L215">        return manager;</span>
-    }
-
-    public Utilizador SearchUtilizador(String name) {
-<span class="nc" id="L219">        Utilizador user1 = new Utilizador();</span>
-        try {
-<span class="nc" id="L221">            utx.begin();</span>
-
-<span class="nc" id="L223">            user1 = getEntityManager().find(Utilizador.class, name);</span>
-<span class="nc" id="L224">            System.out.println(user1);</span>
-<span class="nc" id="L225">            utx.commit();</span>
-
-<span class="nc" id="L227">        } catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException ex1) {</span>
-<span class="nc" id="L228">            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);</span>
-<span class="nc" id="L229">        }</span>
-<span class="nc" id="L230">        return user1;</span>
-    }
+    
 
     public String register() {
-<span class="nc bnc" id="L234" title="All 4 branches missed.">        if (flagCamper == true &amp;&amp; flagManager == false) {</span>
-<span class="nc" id="L235">            Camper camper1 = saveCamper(username, fullName, email, NIF, campsiteCard);</span>
-<span class="nc" id="L236">            Utilizador user1 = saveUtilizador(camper1, null, username, password);</span>
-<span class="nc" id="L237">            return &quot;login.xhtml&quot;;</span>
+<span class="nc bnc" id="L153" title="All 4 branches missed.">        if (flagCamper == true &amp;&amp; flagManager == false) {</span>
+<span class="nc" id="L154">            Camper camper1 = newSessionBean.saveCamper(username, fullName, email, NIF, campsiteCard);</span>
+<span class="nc" id="L155">            Utilizador user1 = newSessionBean.saveUtilizador(camper1, null, username, password);</span>
+<span class="nc" id="L156">            return &quot;login.xhtml&quot;;</span>
         }
-<span class="nc bnc" id="L239" title="All 4 branches missed.">        if (flagManager == true &amp;&amp; flagCamper == false) {</span>
-<span class="nc" id="L240">            Manager manager1 = saveManager(username, fullName, email, NIF);</span>
-<span class="nc" id="L241">            Utilizador user2 = saveUtilizador(null, manager1, username, password);</span>
-<span class="nc" id="L242">            return &quot;login.xhtml&quot;;</span>
+<span class="nc bnc" id="L158" title="All 4 branches missed.">        if (flagManager == true &amp;&amp; flagCamper == false) {</span>
+<span class="nc" id="L159">            Manager manager1 = newSessionBean.saveManager(username, fullName, email, NIF);</span>
+<span class="nc" id="L160">            Utilizador user2 = newSessionBean.saveUtilizador(null, manager1, username, password);</span>
+<span class="nc" id="L161">            return &quot;login.xhtml&quot;;</span>
         }
-<span class="nc" id="L244">        return &quot;signup.xhtml&quot;;</span>
+<span class="nc" id="L163">        return &quot;signup.xhtml&quot;;</span>
     }
 
-    protected EntityManager getEntityManager() {
-<span class="nc" id="L248">        return em;</span>
-    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>
