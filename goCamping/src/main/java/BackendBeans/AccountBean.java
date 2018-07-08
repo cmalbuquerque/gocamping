@@ -242,7 +242,7 @@ public class AccountBean implements Serializable {
     }
     
     public Camper updateCamper(String username, String fullname, String email, int campingCard) {
-        Camper camper = new Camper();
+        camper = new Camper();
         try {
             utx.begin();
             camper = (Camper) getEntityManager().find(Camper.class, username);
@@ -258,7 +258,7 @@ public class AccountBean implements Serializable {
     }
     
     public Manager updateManager(String username, String fullname, String email) {
-        Manager manager = new Manager();
+        manager = new Manager();
         try {
             utx.begin();
             manager = (Manager) getEntityManager().find(Manager.class, username);

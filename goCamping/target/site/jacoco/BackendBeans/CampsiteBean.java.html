@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CampsiteBean.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">BackendBeans</a> &gt; <span class="el_source">CampsiteBean.java</span></div><h1>CampsiteBean.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package BackendBeans;
+
+import Persistencia.Campsite;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import Persistencia.Manager;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
+
+/**
+ *
+ * @author Andreia Patrocínio
+ * @author Carolina Albuquerque
+ * @author Diogo Jorge
+ * @author Pedro Pires
+ *
+ */
+@ManagedBean(name = &quot;campsitebean&quot;)
+@SessionScoped
+<span class="nc" id="L40">public class CampsiteBean implements Serializable {</span>
+    @ManagedProperty(value = &quot;#{title}&quot;)
+    private String title;
+    @ManagedProperty(value = &quot;#{location}&quot;)
+    private String location;
+    @ManagedProperty(value = &quot;#{desc}&quot;)
+    private String desc;
+    @ManagedProperty(value = &quot;#{adultsPrice}&quot;)
+    private double adultsPrice;
+    @ManagedProperty(value = &quot;#{childsPrice}&quot;)
+    private double childsPrice;
+    @ManagedProperty(value = &quot;#{babiesPrice}&quot;)
+    private double babiesPrice;
+    @ManagedProperty(value = &quot;#{contacts}&quot;)
+    private String contacts;
+    @ManagedProperty(value = &quot;#{NIF}&quot;)
+    private int NIF;
+    @ManagedProperty(value = &quot;#{listaCampsites}&quot;)
+    private List&lt;Campsite&gt; listaCampsites;
+    @ManagedProperty(value =&quot;#{campingCardDiscount}&quot;)
+    private double campingCardDiscount;
+    
+    @ManagedProperty(value = &quot;#{titleEdit}&quot;)
+    private String titleEdit; 
+    @ManagedProperty(value = &quot;#{locationEdit}&quot;)
+    private String locationEdit;
+    @ManagedProperty(value = &quot;#{descEdit}&quot;)
+    private String descEdit;
+    @ManagedProperty(value = &quot;#{adultsPriceEdit}&quot;)
+    private double adultsPriceEdit;
+    @ManagedProperty(value = &quot;#{childsPriceEdit}&quot;)
+    private double childsPriceEdit;
+    @ManagedProperty(value = &quot;#{babiesPriceEdit}&quot;)
+    private double babiesPriceEdit;
+    @ManagedProperty(value = &quot;#{contactsEdit}&quot;)
+    private String contactsEdit;
+    @ManagedProperty(value =&quot;#{campingCardDiscountEdit}&quot;)
+    private double campingCardDiscountEdit;
+    
+    @Resource
+    UserTransaction utx;
+
+    @PersistenceContext(unitName = &quot;PUnit&quot;)
+    private EntityManager em;
+    
+<span class="nc" id="L85">    private final String sessionGetUser = &quot;username&quot;;</span>
+    private Campsite campsite;
+<span class="nc" id="L87">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L88">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
+
+    public double getCampingCardDiscount() {
+<span class="nc" id="L91">        return campingCardDiscount;</span>
+    }
+
+    public void setCampingCardDiscount(double campingCardDiscount) {
+<span class="nc" id="L95">        this.campingCardDiscount = campingCardDiscount;</span>
+<span class="nc" id="L96">    }</span>
+
+    public double getCampingCardDiscountEdit() {
+<span class="nc" id="L99">        return campingCardDiscountEdit;</span>
+    }
+
+    public void setCampingCardDiscountEdit(double campingCardDiscountEdit) {
+<span class="nc" id="L103">        this.campingCardDiscountEdit = campingCardDiscountEdit;</span>
+<span class="nc" id="L104">    }</span>
+    
+    public String getContactsEdit() {
+<span class="nc" id="L107">        return contactsEdit;</span>
+    }
+
+    public void setContactsEdit(String contactsEdit) {
+<span class="nc" id="L111">        this.contactsEdit = contactsEdit;</span>
+<span class="nc" id="L112">    }</span>
+    
+    public String getTitleEdit() {
+<span class="nc" id="L115">        return titleEdit;</span>
+    }
+
+    public String getLocationEdit() {
+<span class="nc" id="L119">        return locationEdit;</span>
+    }
+
+    public String getDescEdit() {
+<span class="nc" id="L123">        return descEdit;</span>
+    }
+
+    public double getAdultsPriceEdit() {
+<span class="nc" id="L127">        return adultsPriceEdit;</span>
+    }
+
+    public double getChildsPriceEdit() {
+<span class="nc" id="L131">        return childsPriceEdit;</span>
+    }
+
+    public double getBabiesPriceEdit() {
+<span class="nc" id="L135">        return babiesPriceEdit;</span>
+    }
+
+    public void setTitleEdit(String titleEdit) {
+<span class="nc" id="L139">        this.titleEdit = titleEdit;</span>
+<span class="nc" id="L140">    }</span>
+
+    public void setLocationEdit(String locationEdit) {
+<span class="nc" id="L143">        this.locationEdit = locationEdit;</span>
+<span class="nc" id="L144">    }</span>
+
+    public void setDescEdit(String descEdit) {
+<span class="nc" id="L147">        this.descEdit = descEdit;</span>
+<span class="nc" id="L148">    }</span>
+
+    public void setAdultsPriceEdit(double adultsPriceEdit) {
+<span class="nc" id="L151">        this.adultsPriceEdit = adultsPriceEdit;</span>
+<span class="nc" id="L152">    }</span>
+
+    public void setChildsPriceEdit(double childsPriceEdit) {
+<span class="nc" id="L155">        this.childsPriceEdit = childsPriceEdit;</span>
+<span class="nc" id="L156">    }</span>
+
+    public void setBabiesPriceEdit(double babiesPriceEdit) {
+<span class="nc" id="L159">        this.babiesPriceEdit = babiesPriceEdit;</span>
+<span class="nc" id="L160">    }</span>
+
+    public void setCampsite(Campsite campsite) {
+<span class="nc" id="L163">        this.campsite = campsite;</span>
+<span class="nc" id="L164">    }</span>
+    
+               
+    public List&lt;Campsite&gt; getListaCampsites() {
+<span class="nc" id="L168">        return listaCampsites;</span>
+    }
+
+    public void setListaCampsites(List&lt;Campsite&gt; listaCampsites) {
+<span class="nc" id="L172">        this.listaCampsites = listarCampsite(searchManager(session.getAttribute(&quot;username&quot;).toString()));</span>
+<span class="nc" id="L173">    }</span>
+           
+    public int getNIF() {
+<span class="nc" id="L176">        return NIF;</span>
+    }
+
+    public void setNIF(int NIF) {
+<span class="nc" id="L180">        this.NIF = searchManager(session.getAttribute(&quot;username&quot;).toString()).getNIF();</span>
+<span class="nc" id="L181">    }</span>
+    
+    public String getTitle() {
+<span class="nc" id="L184">        return title;</span>
+    }
+
+    public void setTitle(String title) {
+<span class="nc" id="L188">        this.title = title;</span>
+<span class="nc" id="L189">    }</span>
+
+    public String getLocation() {
+<span class="nc" id="L192">        return location;</span>
+    }
+
+    public void setLocation(String location) {
+<span class="nc" id="L196">        this.location = location;</span>
+<span class="nc" id="L197">    }</span>
+
+    public String getDesc() {
+<span class="nc" id="L200">        return desc;</span>
+    }
+
+    public void setDesc(String desc) {
+<span class="nc" id="L204">        this.desc = desc;</span>
+<span class="nc" id="L205">    }</span>
+
+    public double getAdultsPrice() {
+<span class="nc" id="L208">        return adultsPrice;</span>
+    }
+
+    public void setAdultsPrice(double adultsPrice) {
+<span class="nc" id="L212">        this.adultsPrice = adultsPrice;</span>
+<span class="nc" id="L213">    }</span>
+
+    public double getChildsPrice() {
+<span class="nc" id="L216">        return childsPrice;</span>
+    }
+
+    public void setChildsPrice(double childsPrice) {
+<span class="nc" id="L220">        this.childsPrice = childsPrice;</span>
+<span class="nc" id="L221">    }</span>
+
+    public double getBabiesPrice() {
+<span class="nc" id="L224">        return babiesPrice;</span>
+    }
+
+    public void setBabiesPrice(double babiesPrice) {
+<span class="nc" id="L228">        this.babiesPrice = babiesPrice;</span>
+<span class="nc" id="L229">    }</span>
+
+    public String getContacts() {
+<span class="nc" id="L232">        return contacts;</span>
+    }
+
+    public void setContacts(String contacts) {
+<span class="nc" id="L236">        this.contacts = contacts;</span>
+<span class="nc" id="L237">    }</span>
+
+    public Campsite getCampsite() {
+<span class="nc" id="L240">        return campsite;</span>
+    }
+    
+    public String view(Campsite campsiteOutro){
+<span class="nc" id="L244">        this.campsite=campsiteOutro;</span>
+<span class="nc" id="L245">        this.titleEdit=campsiteOutro.getTitle();</span>
+<span class="nc" id="L246">        this.locationEdit=campsiteOutro.getLocation();</span>
+<span class="nc" id="L247">        this.adultsPriceEdit=campsiteOutro.getAdultPrice();</span>
+<span class="nc" id="L248">        this.childsPriceEdit=campsiteOutro.getChildPrice();</span>
+<span class="nc" id="L249">        this.babiesPriceEdit=campsiteOutro.getBabyPrice();</span>
+<span class="nc" id="L250">        this.contactsEdit=campsiteOutro.getContact();</span>
+<span class="nc" id="L251">        this.descEdit=campsiteOutro.getDescription();</span>
+<span class="nc" id="L252">        this.campingCardDiscountEdit=campsiteOutro.getCampingCardDiscount();</span>
+<span class="nc" id="L253">        return &quot;editCampsite.xhtml&quot;;</span>
+    }
+    
+    public Campsite saveCampsite(String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager, double campingCardDiscount) {
+<span class="nc" id="L257">        Campsite campsite1 = new Campsite();</span>
+        try {
+<span class="nc" id="L259">            utx.begin();</span>
+<span class="nc" id="L260">            campsite1.setTitle(title);</span>
+<span class="nc" id="L261">            campsite1.setLocation(location);</span>
+<span class="nc" id="L262">            campsite1.setAdultPrice(adultPrice);</span>
+<span class="nc" id="L263">            campsite1.setChildPrice(childPrice);</span>
+<span class="nc" id="L264">            campsite1.setBabyPrice(babyPrice);</span>
+<span class="nc" id="L265">            campsite1.setContact(contact);</span>
+<span class="nc" id="L266">            campsite1.setDescription(desc);</span>
+<span class="nc" id="L267">            campsite1.setManager(manager);</span>
+<span class="nc" id="L268">            campsite1.setCampingCardDiscount(campingCardDiscount);</span>
+            
+<span class="nc" id="L270">            getEntityManager().persist(campsite1);</span>
+<span class="nc" id="L271">            utx.commit();</span>
+<span class="nc" id="L272">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
+<span class="nc" id="L273">            System.out.println(&quot;save didnt' work on campsite&quot;);</span>
+<span class="nc" id="L274">        }</span>
+<span class="nc" id="L275">        return campsite1;</span>
+    }
+    
+    public Campsite updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, double campingCardDiscount) {
+<span class="nc" id="L279">        Campsite campsite2 = new Campsite();</span>
+        try {
+<span class="nc" id="L281">            utx.begin();</span>
+<span class="nc" id="L282">            campsite2 = getEntityManager().find(Campsite.class, id);</span>
+<span class="nc" id="L283">            campsite2.setTitle(title);</span>
+<span class="nc" id="L284">            campsite2.setLocation(location);</span>
+<span class="nc" id="L285">            campsite2.setAdultPrice(adultPrice);</span>
+<span class="nc" id="L286">            campsite2.setChildPrice(childPrice);</span>
+<span class="nc" id="L287">            campsite2.setBabyPrice(babyPrice);</span>
+<span class="nc" id="L288">            campsite2.setContact(contact);</span>
+<span class="nc" id="L289">            campsite2.setDescription(desc);</span>
+<span class="nc" id="L290">            campsite2.setCampingCardDiscount(campingCardDiscount);</span>
+<span class="nc" id="L291">            getEntityManager().merge(campsite2);</span>
+<span class="nc" id="L292">            utx.commit();</span>
+<span class="nc" id="L293">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
+<span class="nc" id="L294">            System.out.println(&quot;update campsite didn't work&quot;);</span>
+<span class="nc" id="L295">        }</span>
+<span class="nc" id="L296">        return  campsite;</span>
+    }
+
+    public boolean deleteCampsite(int id) {
+        try {
+<span class="nc" id="L301">            utx.begin();</span>
+<span class="nc" id="L302">            Campsite campsite1 = getEntityManager().find(Campsite.class, id);</span>
+<span class="nc" id="L303">            getEntityManager().remove(campsite1);</span>
+<span class="nc" id="L304">            utx.commit();</span>
+<span class="nc" id="L305">            return true;</span>
+<span class="nc" id="L306">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
+<span class="nc" id="L307">            System.out.println(&quot;delete campsite didn't work&quot;);</span>
+<span class="nc" id="L308">            return false;</span>
+        }
+    }
+    
+    public Manager searchManager(String name) {
+<span class="nc" id="L313">        Manager manager1 = new Manager();</span>
+        try {
+<span class="nc" id="L315">            utx.begin();</span>
+<span class="nc" id="L316">            Query query = getEntityManager().createQuery(&quot;select c from Manager c where c.username = :name&quot;);</span>
+<span class="nc" id="L317">            query.setParameter(&quot;name&quot;, name);</span>
+<span class="nc" id="L318">            List&lt;Manager&gt; managers = query.getResultList();</span>
+<span class="nc bnc" id="L319" title="All 2 branches missed.">            for (Iterator&lt;Manager&gt; iterator = managers.iterator(); iterator.hasNext();) {</span>
+<span class="nc" id="L320">                manager1 = (Manager) iterator.next();</span>
+<span class="nc" id="L321">                System.out.println(manager1.getUsername());</span>
+            }
+<span class="nc" id="L323">            utx.commit();</span>
+<span class="nc" id="L324">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
+<span class="nc" id="L325">            System.out.println(&quot;manager search didn't work&quot;);</span>
+<span class="nc" id="L326">        }</span>
+<span class="nc" id="L327">        return manager1;</span>
+    }
+    
+    public List&lt;Campsite&gt; listarCampsite(Manager manager) {
+<span class="nc" id="L331">        List&lt;Campsite&gt; campsites = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L332">        List&lt;Campsite&gt; list = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L334">            utx.begin();</span>
+<span class="nc" id="L335">            Query query = getEntityManager().createQuery(&quot;select c from Campsite as c where c.manager = :manager&quot;);</span>
+<span class="nc" id="L336">            query.setParameter(&quot;manager&quot;, manager);</span>
+<span class="nc" id="L337">            campsites = query.getResultList();</span>
+<span class="nc bnc" id="L338" title="All 2 branches missed.">            for (Iterator&lt;Campsite&gt; iterator = campsites.iterator(); iterator.hasNext();) {</span>
+<span class="nc" id="L339">                Campsite campsite = (Campsite) iterator.next();</span>
+<span class="nc" id="L340">                list.add(campsite);</span>
+<span class="nc" id="L341">            }</span>
+<span class="nc" id="L342">            utx.commit();</span>
+<span class="nc" id="L343">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
+<span class="nc" id="L344">            System.out.println(&quot;listar campsite with manager didn't work&quot;);</span>
+<span class="nc" id="L345">        }</span>
+<span class="nc" id="L346">        return list;</span>
+    }
+    
+    public String addCampsite(){       
+<span class="nc" id="L350">        Campsite campsite1 = saveCampsite( title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, searchManager(session.getAttribute(sessionGetUser).toString()),campingCardDiscount);</span>
+<span class="nc" id="L351">        listaCampsites = listarCampsite(searchManager(session.getAttribute(sessionGetUser).toString()));</span>
+<span class="nc" id="L352">        return &quot;myCampsites.xhtml&quot;;</span>
+    }
+    
+    public String removeCampsite(int id){     
+<span class="nc" id="L356">        deleteCampsite(id);</span>
+<span class="nc" id="L357">        listaCampsites = listarCampsite(searchManager(session.getAttribute(sessionGetUser).toString()));</span>
+<span class="nc" id="L358">        return &quot;myCampsites.xhtml&quot;;</span>
+    }
+    
+    public String editCampsite(){
+<span class="nc" id="L362">        updateCampsite(campsite.getId(), titleEdit, locationEdit, adultsPriceEdit, childsPriceEdit, babiesPriceEdit, contactsEdit, descEdit, campingCardDiscountEdit);</span>
+<span class="nc" id="L363">        listaCampsites = listarCampsite(searchManager(session.getAttribute(sessionGetUser).toString()));</span>
+<span class="nc" id="L364">        return &quot;myCampsites.xhtml&quot;;</span>
+    }
+    
+    protected EntityManager getEntityManager() {
+<span class="nc" id="L368">        return em;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

@@ -71,9 +71,13 @@
                             </b:inputSecret>
 
                             <br>&nbsp;</br>
+                            <b:row>
+                                <b:column span="2"></b:column>
                             <b:button span="4" value="Cancel"  outcome="/index.xhtml"/>
-                            <b:commandButton value="Sign Up"  icon="log-in" look="success"  action="#{signupbean.register}"></b:commandButton> 
-                            <br>&nbsp;</br>
+                            <b:commandButton span="4" value="Sign Up" look="success"  action="#{signupbean.register}"></b:commandButton> 
+                            
+                            <b:column span="2"></b:column>
+                            </b:row><br>&nbsp;</br>
                         </b:form>
                     </b:tab>
                 </b:tabView>

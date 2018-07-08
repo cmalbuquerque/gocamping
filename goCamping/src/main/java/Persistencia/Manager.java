@@ -114,10 +114,7 @@ public class Manager implements Serializable {
         if (this.NIF != other.NIF) {
             return false;
         }
-        if (!Objects.equals(this.username, other.username)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.username, other.username);
     }
 
     @Override

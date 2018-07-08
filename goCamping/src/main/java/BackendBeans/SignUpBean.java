@@ -159,25 +159,26 @@ public class SignUpBean implements Serializable {
         this.flagManager = flagManager;
     }
 
-    public Camper saveCamper(String Uname, String fulname, String mail, int nif, int campsitecard) {
-        Camper camperino = new Camper();
+    public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard) {
+        Camper camper1 = new Camper();
+        System.out.println("new camper");
         try {
-            camperino.setUsername(Uname);
-            camperino.setFullName(fulname);
-            camperino.setEmail(mail);
-            camperino.setNIF(nif);
-            camperino.setCampsiteCard(campsitecard);
             utx.begin();
-            getEntityManager().persist(camperino);
+            camper1.setUsername(username);
+            camper1.setFullName(fullname);
+            camper1.setEmail(email);
+            camper1.setNIF(NIF);
+            camper1.setCampsiteCard(campsiteCard);
+            getEntityManager().persist(camper1);
             utx.commit();
         } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
-            System.out.println("save camper did't work");
+            System.out.println("save didn't work on camper");
         }
-        return camperino;
+        return camper1;
     }
 
     public Utilizador saveUtilizador(Camper camp, Manager man, String nome, String password) {
-        Utilizador user = new Utilizador();
+        user = new Utilizador();
 
         try {
             utx.begin();
@@ -199,7 +200,7 @@ public class SignUpBean implements Serializable {
     }
 
     private Manager saveManager(String username, String fullName, String email, int NIF) {
-        Manager manager = new Manager();
+        manager = new Manager();
         try {
             utx.begin();
             manager.setUsername(username);
@@ -223,17 +224,7 @@ public class SignUpBean implements Serializable {
             System.out.println(user1);
             utx.commit();
 
-        } catch (SecurityException | IllegalStateException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (NotSupportedException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (SystemException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (RollbackException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (HeuristicMixedException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (HeuristicRollbackException ex1) {
+        } catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException ex1) {
             Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
         }
         return user1;

@@ -49,10 +49,7 @@ public class FavouriteListKey implements Serializable{
         if (this.campsiteID != other.campsiteID) {
             return false;
         }
-        if (!Objects.equals(this.camperUsername, other.camperUsername)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.camperUsername, other.camperUsername);
     }
 
     public String getCamperUsername() {

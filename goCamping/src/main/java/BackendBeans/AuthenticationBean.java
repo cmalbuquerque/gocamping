@@ -14,7 +14,6 @@ import javax.annotation.PostConstruct;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -45,8 +44,6 @@ public class AuthenticationBean implements Serializable {
     @ManagedProperty(value = "#{password}")
     private String password;
     
-    @EJB
-    SignUpBean signUpBean;
     
     @Resource
     UserTransaction utx;
@@ -92,17 +89,7 @@ public class AuthenticationBean implements Serializable {
             System.out.println(user1);
             utx.commit();
 
-        } catch (SecurityException | IllegalStateException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (NotSupportedException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (SystemException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (RollbackException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (HeuristicMixedException ex1) {
-            Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
-        } catch (HeuristicRollbackException ex1) {
+        } catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException ex1) {
             Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex1);
         }
         return user1;

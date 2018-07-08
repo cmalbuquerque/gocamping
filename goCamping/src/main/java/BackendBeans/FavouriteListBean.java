@@ -9,7 +9,6 @@ import Persistencia.Camper;
 import Persistencia.Campsite;
 import Persistencia.FavouriteList;
 import Persistencia.FavouriteListKey;
-import Persistencia.JPAExample;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -120,8 +119,8 @@ public class FavouriteListBean implements Serializable{
 
     
     public List<Campsite> listarCampsitesFavList(String username) {
-        List<FavouriteList> favouriteLists = new ArrayList<FavouriteList>();
-        List<Integer> list = new ArrayList<Integer>();
+        List<FavouriteList> favouriteLists = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         List<Campsite> campsites = new ArrayList<>();
         try {
             utx.begin();

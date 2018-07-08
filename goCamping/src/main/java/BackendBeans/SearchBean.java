@@ -6,7 +6,6 @@
 package BackendBeans;
 
 import Persistencia.Campsite;
-import Persistencia.JPAExample;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -91,8 +90,8 @@ public class SearchBean implements Serializable{
     }
     
     public List<Campsite> listarTodosCampsites() {
-        List<Campsite> campsites = new ArrayList<Campsite>();
-        List<Campsite> list = new ArrayList<Campsite>();
+        List<Campsite> campsites = new ArrayList<>();
+        List<Campsite> list = new ArrayList<>();
         try {
             utx.begin();
             Query query = getEntityManager().createQuery("select c from Campsite c");
@@ -110,8 +109,8 @@ public class SearchBean implements Serializable{
     }
 
     public List<Campsite> listarCampsite(String location) {
-        List<Campsite> campsites = new ArrayList<Campsite>();
-        List<Campsite> list = new ArrayList<Campsite>();
+        List<Campsite> campsites = new ArrayList<>();
+        List<Campsite> list = new ArrayList<>();
         try {
             utx.begin();
             Query query = getEntityManager().createQuery("select c from Campsite as c where c.location like :location");

@@ -9,16 +9,13 @@ import Persistencia.Campsite;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import Persistencia.JPAExample;
 import Persistencia.Manager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
-import javax.faces.model.DataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -279,19 +276,19 @@ public class CampsiteBean implements Serializable {
     }
     
     public Campsite updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, double campingCardDiscount) {
-        Campsite campsite1 = new Campsite();
+        Campsite campsite2 = new Campsite();
         try {
             utx.begin();
-            campsite1 = getEntityManager().find(Campsite.class, id);
-            campsite1.setTitle(title);
-            campsite1.setLocation(location);
-            campsite1.setAdultPrice(adultPrice);
-            campsite1.setChildPrice(childPrice);
-            campsite1.setBabyPrice(babyPrice);
-            campsite1.setContact(contact);
-            campsite1.setDescription(desc);
-            campsite1.setCampingCardDiscount(campingCardDiscount);
-            getEntityManager().merge(campsite1);
+            campsite2 = getEntityManager().find(Campsite.class, id);
+            campsite2.setTitle(title);
+            campsite2.setLocation(location);
+            campsite2.setAdultPrice(adultPrice);
+            campsite2.setChildPrice(childPrice);
+            campsite2.setBabyPrice(babyPrice);
+            campsite2.setContact(contact);
+            campsite2.setDescription(desc);
+            campsite2.setCampingCardDiscount(campingCardDiscount);
+            getEntityManager().merge(campsite2);
             utx.commit();
         } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
             System.out.println("update campsite didn't work");
@@ -301,7 +298,7 @@ public class CampsiteBean implements Serializable {
 
     public boolean deleteCampsite(int id) {
         try {
-            utx.begin();;
+            utx.begin();
             Campsite campsite1 = getEntityManager().find(Campsite.class, id);
             getEntityManager().remove(campsite1);
             utx.commit();
@@ -331,8 +328,8 @@ public class CampsiteBean implements Serializable {
     }
     
     public List<Campsite> listarCampsite(Manager manager) {
-        List<Campsite> campsites = new ArrayList<Campsite>();
-        List<Campsite> list = new ArrayList<Campsite>();
+        List<Campsite> campsites = new ArrayList<>();
+        List<Campsite> list = new ArrayList<>();
         try {
             utx.begin();
             Query query = getEntityManager().createQuery("select c from Campsite as c where c.manager = :manager");
