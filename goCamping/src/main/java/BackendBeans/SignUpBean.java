@@ -65,7 +65,9 @@ public class SignUpBean implements Serializable {
 
     @PersistenceContext(unitName = "PUnit")
     private EntityManager em;
-
+    
+    AuthenticationBean authenticationBean = new AuthenticationBean();
+    
     @PostConstruct
     private void init() {
         user = new Utilizador();
@@ -159,6 +161,30 @@ public class SignUpBean implements Serializable {
         this.flagManager = flagManager;
     }
 
+    
+
+    public Utilizador saveUtilizador(Camper camp, Manager man, String nome, String password) {
+        Utilizador u = new Utilizador();
+
+        try {
+            utx.begin();
+            u.setUsername(nome);
+            u.setPassword(password);
+            if (camp != null) {
+                u.setCamper(camp);
+            } else {
+                System.out.println("setting manager");
+                u.setManager(man);//getEntityManager().find(Manager.class, man.getUsername()));
+            }
+
+            getEntityManager().merge(u);
+            utx.commit();
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
+            System.out.println("save didn't work on user");
+        }
+        return u;
+    }
+    
     public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard) {
         Camper camper1 = new Camper();
         System.out.println("new camper");
@@ -177,43 +203,7 @@ public class SignUpBean implements Serializable {
         return camper1;
     }
 
-    public Utilizador saveUtilizador(Camper camp, Manager man, String nome, String password) {
-        user = new Utilizador();
-
-        try {
-            utx.begin();
-            user.setUsername(nome);
-            user.setPassword(password);
-            if (camp != null) {
-                user.setCamper(camp);
-            } else {
-                System.out.println("setting manager");
-                user.setManager(man);//getEntityManager().find(Manager.class, man.getUsername()));
-            }
-
-            getEntityManager().merge(user);
-            utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
-            System.out.println("save didn't work on user");
-        }
-        return user;
-    }
-
-    private Manager saveManager(String username, String fullName, String email, int NIF) {
-        manager = new Manager();
-        try {
-            utx.begin();
-            manager.setUsername(username);
-            manager.setFullName(fullName);
-            manager.setEmail(email);
-            manager.setNIF(NIF);
-            getEntityManager().persist(manager);
-            utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
-            System.out.println("save didn't work on manager");
-        }
-        return manager;
-    }
+    
 
     public Utilizador SearchUtilizador(String name) {
         Utilizador user1 = new Utilizador();
@@ -237,7 +227,7 @@ public class SignUpBean implements Serializable {
             return "login.xhtml";
         }
         if (flagManager == true && flagCamper == false) {
-            Manager manager1 = saveManager(username, fullName, email, NIF);
+            Manager manager1 = authenticationBean.saveManager(username, fullName, email, NIF);
             Utilizador user2 = saveUtilizador(null, manager1, username, password);
             return "login.xhtml";
         }
