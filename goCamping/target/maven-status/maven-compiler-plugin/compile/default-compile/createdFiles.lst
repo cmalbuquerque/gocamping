@@ -3,8 +3,8 @@ RESTservice/CampsiteFacadeREST.class
 Persistencia/Reservation.class
 Persistencia/Campsite.class
 BackendBeans/SignUpBean.class
-RESTservice/ApplicationConfig.class
 Persistencia/Utilizador.class
+RESTservice/ApplicationConfig.class
 RESTservice/ManagerFacadeREST.class
 Persistencia/CampsiteImageKey.class
 BackendBeans/SearchBean.class
@@ -23,5 +23,5 @@ BackendBeans/BookingBean.class
 InterfaceBeans/CalendarManagedBean.class
 RESTservice/UtilizadorFacadeREST.class
 BackendBeans/CampsiteBean.class
-RESTservice/AbstractFacade.class
 Persistencia/Manager.class
+RESTservice/AbstractFacade.class

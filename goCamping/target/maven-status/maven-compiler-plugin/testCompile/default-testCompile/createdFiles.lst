@@ -1,6 +1,8 @@
+BackendBeans/AuthenticationBeanTest.class
 Persistencia/FavouriteListTest.class
 Persistencia/ReservationTest.class
 Persistencia/CampsiteTest.class
+Selenium/ManagerSideTest.class
 Persistencia/CamperTest.class
 Persistencia/AssertAnnotations.class
 Persistencia/ManagerTest.class

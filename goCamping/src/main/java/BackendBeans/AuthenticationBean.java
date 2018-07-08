@@ -5,7 +5,9 @@
  */
 package BackendBeans;
 
+import Persistencia.Camper;
 import Persistencia.Campsite;
+import Persistencia.Manager;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -94,6 +96,25 @@ public class AuthenticationBean implements Serializable {
         }
         return user1;
     }
+    
+    public Manager saveManager(String username, String fullName, String email, int NIF) {
+        Manager manager = new Manager();
+        try {
+            System.out.println("Username: " +  username + "FullName" +  "email: " + email +  "NIF: " + NIF);
+            utx.begin();
+            System.out.println("O BEGIN COMEÇOU ");
+            manager.setUsername(username);
+            manager.setFullName(fullName);
+            manager.setEmail(email);
+            manager.setNIF(NIF);
+            System.out.println("OLA SOU O MANAGER: " + manager);
+            getEntityManager().persist(manager);
+            utx.commit();
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
+            System.out.println("save didn't work on manager");
+        }
+        return manager;
+    }
 
     public String validate() {
         user.setUsername(username);
@@ -149,4 +170,5 @@ public class AuthenticationBean implements Serializable {
     public String teste(){
         return "index.xhtml";
     }
+    
 }
