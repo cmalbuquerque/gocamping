@@ -164,25 +164,25 @@ public class SignUpBean implements Serializable {
     
 
     public Utilizador saveUtilizador(Camper camp, Manager man, String nome, String password) {
-        user = new Utilizador();
+        Utilizador u = new Utilizador();
 
         try {
             utx.begin();
-            user.setUsername(nome);
-            user.setPassword(password);
+            u.setUsername(nome);
+            u.setPassword(password);
             if (camp != null) {
-                user.setCamper(camp);
+                u.setCamper(camp);
             } else {
                 System.out.println("setting manager");
-                user.setManager(man);//getEntityManager().find(Manager.class, man.getUsername()));
+                u.setManager(man);//getEntityManager().find(Manager.class, man.getUsername()));
             }
 
-            getEntityManager().merge(user);
+            getEntityManager().merge(u);
             utx.commit();
         } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {
             System.out.println("save didn't work on user");
         }
-        return user;
+        return u;
     }
     
     public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard) {

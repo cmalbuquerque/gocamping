@@ -164,25 +164,25 @@ import javax.transaction.UserTransaction;
     
 
     public Utilizador saveUtilizador(Camper camp, Manager man, String nome, String password) {
-<span class="nc" id="L167">        user = new Utilizador();</span>
+<span class="nc" id="L167">        Utilizador u = new Utilizador();</span>
 
         try {
 <span class="nc" id="L170">            utx.begin();</span>
-<span class="nc" id="L171">            user.setUsername(nome);</span>
-<span class="nc" id="L172">            user.setPassword(password);</span>
+<span class="nc" id="L171">            u.setUsername(nome);</span>
+<span class="nc" id="L172">            u.setPassword(password);</span>
 <span class="nc bnc" id="L173" title="All 2 branches missed.">            if (camp != null) {</span>
-<span class="nc" id="L174">                user.setCamper(camp);</span>
+<span class="nc" id="L174">                u.setCamper(camp);</span>
             } else {
 <span class="nc" id="L176">                System.out.println(&quot;setting manager&quot;);</span>
-<span class="nc" id="L177">                user.setManager(man);//getEntityManager().find(Manager.class, man.getUsername()));</span>
+<span class="nc" id="L177">                u.setManager(man);//getEntityManager().find(Manager.class, man.getUsername()));</span>
             }
 
-<span class="nc" id="L180">            getEntityManager().merge(user);</span>
+<span class="nc" id="L180">            getEntityManager().merge(u);</span>
 <span class="nc" id="L181">            utx.commit();</span>
 <span class="nc" id="L182">        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) {</span>
 <span class="nc" id="L183">            System.out.println(&quot;save didn't work on user&quot;);</span>
 <span class="nc" id="L184">        }</span>
-<span class="nc" id="L185">        return user;</span>
+<span class="nc" id="L185">        return u;</span>
     }
     
     public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard) {
