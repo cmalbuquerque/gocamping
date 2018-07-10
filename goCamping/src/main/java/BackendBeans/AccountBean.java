@@ -48,6 +48,8 @@ public class AccountBean implements Serializable {
     @ManagedProperty(value = "#{emailManager}")
     private String emailManager;
     
+    private final String account = "account.xhtml";
+    
     @EJB
     NewSessionBean newSessionBean;
     
@@ -165,12 +167,12 @@ public class AccountBean implements Serializable {
    
     public String editPersonalInformation() {
         camper = newSessionBean.updateCamper(session.getAttribute(sessionGetUser).toString(), fullName, email, campsiteCard);
-        return "account.xhtml";
+        return account;
     }
     
     public String editPersonalInformationManager() {
         manager = newSessionBean.updateManager(session.getAttribute(sessionGetUser).toString(), fullNameManager, emailManager);
-        return "account.xhtml";
+        return account;
     }
 
     public String editLoginAccess() {
@@ -178,12 +180,10 @@ public class AccountBean implements Serializable {
         if (user.getPassword().equals(Hash.getmd5Hash(password))) {
             if (newPassword.equals(confirmationPassword)) {
                 newSessionBean.updateUtilizador(session.getAttribute(sessionGetUser).toString(), newPassword);
-                System.out.println("user pass updated, from " + password + "to" + newPassword);
-                return "account.xhtml";
+                return account;
             }
         }
-        System.out.println("didn't update user pass");
-        return "account.xhtml";
+        return account;
     }
     
 }

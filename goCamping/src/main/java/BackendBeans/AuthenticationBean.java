@@ -6,7 +6,6 @@
 package BackendBeans;
 
 import Persistencia.Campsite;
-import Persistencia.Manager;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -14,19 +13,10 @@ import Persistencia.Utilizador;
 import javax.annotation.PostConstruct;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 
 /**
  *
@@ -46,6 +36,9 @@ public class AuthenticationBean implements Serializable {
     @ManagedProperty(value = "#{password}")
     private String password;
 
+    private final String index = "index.xhtml";
+    private final String login = "login.xhtml";
+
     @EJB
     NewSessionBean newSessionBean;
 
@@ -55,8 +48,8 @@ public class AuthenticationBean implements Serializable {
     }
 
     public AuthenticationBean() {
+        //default Constructor
     }
-    
 
     public Utilizador getUser() {
         return user;
@@ -82,17 +75,14 @@ public class AuthenticationBean implements Serializable {
         this.password = password;
     }
 
-
     public String validate() {
         user.setUsername(username);
         user.setPassword(password);
-        System.out.println("user " + user);
-        System.out.println("username " + user.getUsername());
 
         Utilizador user1 = newSessionBean.searchUtilizador(user.getUsername());
 
         if (user1 == null) {
-            return "login.xhtml";
+            return login;
         }
 
         if (user1.equals(user)) {
@@ -102,31 +92,25 @@ public class AuthenticationBean implements Serializable {
             Campsite campsite = new Campsite();
             if (user1.getCamper() != null) {
                 session.setAttribute("isCamper", true);
-                return "index.xhtml";
+                return index;
             } else if (user1.getManager() != null) {
                 try {
                     session.setAttribute("isManager", true);
-                    return "index.xhtml";
+                    return index;
                 } catch (SecurityException | IllegalStateException ex) {
                     Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                System.out.println("an error ocurred");
             }
-            return "login.xhtml";
-        } else {
-            System.out.println("user is not right");
         }
-        return "login.xhtml";
+        return login;
     }
 
     public String logOut() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
         if (null != session) {
-            System.out.println("invalidating a session");
             session.invalidate();
         }
-        return "index.xhtml";
+        return index;
     }
 }

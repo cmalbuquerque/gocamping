@@ -33,6 +33,7 @@ public class Utilizador implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public Utilizador() {
+        //default contructor
     }
 
     @Id

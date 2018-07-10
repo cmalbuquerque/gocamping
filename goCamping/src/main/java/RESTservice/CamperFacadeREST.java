@@ -38,6 +38,7 @@ public class CamperFacadeREST {
     NewSessionBean nsb;
     
     public CamperFacadeREST() {
+        //default constructor
         
     }
 

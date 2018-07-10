@@ -44,24 +44,14 @@ public class CampsiteFacadeREST {
     NewSessionBean nsb;
     
     public CampsiteFacadeREST() {
+        // default constructor
     }
     
 //    @GET
 //    @Path("{name}")
 //    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 //    public List<Campsite> find(@PathParam("name") String name) {
-//        Manager manager = new Manager();
-//        Query query = em.createQuery("select c from Manager c where c.username = :name");
-//        query.setParameter("name", name);
-//        List<Manager> managers = query.getResultList();
-//        for (Iterator<Manager> iterator = managers.iterator(); iterator.hasNext();) {
-//            manager = iterator.next();
-//        }
-//
-//        Query query2 = em.createQuery("select c from Campsite c where c.manager = :manager");
-//        query2.setParameter("manager", manager);
-//        List<Campsite> campsites = query2.getResultList();
-//        return campsites;
+//    return nsb.listarCampsite(name);
 //    }
 
     @GET
