@@ -6,14 +6,10 @@
 package Selenium;
 
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
-
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
@@ -21,10 +17,11 @@ public class ManagerSideTest {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
+  private final StringBuffer verificationErrors = new StringBuffer();
 
   @Before
   public void setUp() throws Exception {
+    System.setProperty("webdriver.chrome.driver", "/home/carolinaalbuquerque");
     driver= new ChromeDriver();
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
