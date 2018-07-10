@@ -160,36 +160,28 @@ public class Campsite implements Serializable {
             return true;
         }
         if (obj == null) {
-            System.out.println("Object Null");
             return false;
         }
         if (getClass() != obj.getClass()) {
-            System.out.println("Object Different Class");
             return false;
         }
         final Campsite other = (Campsite) obj;
         if (Double.doubleToLongBits(this.adultPrice) != Double.doubleToLongBits(other.adultPrice)) {
-            System.out.println("Object Different adult Price");
             return false;
         }
         if (Double.doubleToLongBits(this.childPrice) != Double.doubleToLongBits(other.childPrice)) {
-            System.out.println("Object Different child Price");
             return false;
         }
         if (Double.doubleToLongBits(this.babyPrice) != Double.doubleToLongBits(other.babyPrice)) {
-            System.out.println("Object Different baby Price");
             return false;
         }
         if (!Objects.equals(this.title, other.title)) {
-            System.out.println("Object Different title");
             return false;
         }
         if (!Objects.equals(this.location, other.location)) {
-            System.out.println("Object Different location");
             return false;
         }
         if (!Objects.equals(this.contact, other.contact)) {
-            System.out.println("Object Different contact");
             return false;
         }
         return true;

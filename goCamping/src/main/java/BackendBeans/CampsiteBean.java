@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpSession;
 @ManagedBean(name = "campsitebean")
 @SessionScoped
 public class CampsiteBean implements Serializable {
+
     @ManagedProperty(value = "#{title}")
     private String title;
     @ManagedProperty(value = "#{location}")
@@ -44,11 +46,11 @@ public class CampsiteBean implements Serializable {
     private int NIF;
     @ManagedProperty(value = "#{listaCampsites}")
     private List<Campsite> listaCampsites;
-    @ManagedProperty(value ="#{campingCardDiscount}")
+    @ManagedProperty(value = "#{campingCardDiscount}")
     private double campingCardDiscount;
-    
+
     @ManagedProperty(value = "#{titleEdit}")
-    private String titleEdit; 
+    private String titleEdit;
     @ManagedProperty(value = "#{locationEdit}")
     private String locationEdit;
     @ManagedProperty(value = "#{descEdit}")
@@ -61,18 +63,24 @@ public class CampsiteBean implements Serializable {
     private double babiesPriceEdit;
     @ManagedProperty(value = "#{contactsEdit}")
     private String contactsEdit;
-    @ManagedProperty(value ="#{campingCardDiscountEdit}")
+    @ManagedProperty(value = "#{campingCardDiscountEdit}")
     private double campingCardDiscountEdit;
-    
+
     @EJB
     NewSessionBean newSessionBean;
-    
+
     private final String sessionGetUser = "username";
     private final String myCampsites = "myCampsites.xhtml";
-    
+
     private Campsite campsite;
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+
+    @PostConstruct
+    private void init() {
+        this.NIF = newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()).getNIF();
+
+    }
 
     public double getCampingCardDiscount() {
         return campingCardDiscount;
@@ -89,7 +97,7 @@ public class CampsiteBean implements Serializable {
     public void setCampingCardDiscountEdit(double campingCardDiscountEdit) {
         this.campingCardDiscountEdit = campingCardDiscountEdit;
     }
-    
+
     public String getContactsEdit() {
         return contactsEdit;
     }
@@ -97,7 +105,7 @@ public class CampsiteBean implements Serializable {
     public void setContactsEdit(String contactsEdit) {
         this.contactsEdit = contactsEdit;
     }
-    
+
     public String getTitleEdit() {
         return titleEdit;
     }
@@ -149,24 +157,23 @@ public class CampsiteBean implements Serializable {
     public void setCampsite(Campsite campsite) {
         this.campsite = campsite;
     }
-    
-               
+
     public List<Campsite> getListaCampsites() {
         return listaCampsites;
     }
 
     public void setListaCampsites(List<Campsite> listaCampsites) {
-        this.listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));
+        this.listaCampsites = listaCampsites;
     }
-           
+
     public int getNIF() {
         return NIF;
     }
 
     public void setNIF(int NIF) {
-        this.NIF = newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()).getNIF();
+        this.NIF = NIF;
     }
-    
+
     public String getTitle() {
         return title;
     }
@@ -226,37 +233,37 @@ public class CampsiteBean implements Serializable {
     public Campsite getCampsite() {
         return campsite;
     }
-    
-    public String view(Campsite campsiteOutro){
-        this.campsite=campsiteOutro;
-        this.titleEdit=campsiteOutro.getTitle();
-        this.locationEdit=campsiteOutro.getLocation();
-        this.adultsPriceEdit=campsiteOutro.getAdultPrice();
-        this.childsPriceEdit=campsiteOutro.getChildPrice();
-        this.babiesPriceEdit=campsiteOutro.getBabyPrice();
-        this.contactsEdit=campsiteOutro.getContact();
-        this.descEdit=campsiteOutro.getDescription();
-        this.campingCardDiscountEdit=campsiteOutro.getCampingCardDiscount();
+
+    public String view(Campsite campsiteOutro) {
+        this.campsite = campsiteOutro;
+        this.titleEdit = campsiteOutro.getTitle();
+        this.locationEdit = campsiteOutro.getLocation();
+        this.adultsPriceEdit = campsiteOutro.getAdultPrice();
+        this.childsPriceEdit = campsiteOutro.getChildPrice();
+        this.babiesPriceEdit = campsiteOutro.getBabyPrice();
+        this.contactsEdit = campsiteOutro.getContact();
+        this.descEdit = campsiteOutro.getDescription();
+        this.campingCardDiscountEdit = campsiteOutro.getCampingCardDiscount();
+
         return "editCampsite.xhtml";
     }
-    
-    
-    public String addCampsite(){       
-        newSessionBean.saveCampsite( title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()),campingCardDiscount);
+
+    public String addCampsite() {
+        newSessionBean.saveCampsite(title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()), campingCardDiscount);
         listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));
         return myCampsites;
     }
-    
-    public String removeCampsite(int id){     
+
+    public String removeCampsite(int id) {
         newSessionBean.deleteCampsite(id);
         listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));
         return myCampsites;
     }
-    
-    public String editCampsite(){
+
+    public String editCampsite() {
         newSessionBean.updateCampsite(campsite.getId(), titleEdit, locationEdit, adultsPriceEdit, childsPriceEdit, babiesPriceEdit, contactsEdit, descEdit, campingCardDiscountEdit);
         listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));
         return myCampsites;
     }
-    
+
 }

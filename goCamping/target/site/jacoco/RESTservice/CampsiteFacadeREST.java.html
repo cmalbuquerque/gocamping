@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CampsiteFacadeREST.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">RESTservice</a> &gt; <span class="el_source">CampsiteFacadeREST.java</span></div><h1>CampsiteFacadeREST.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CampsiteFacadeREST.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">RESTservice</a> &gt; <span class="el_source">CampsiteFacadeREST.java</span></div><h1>CampsiteFacadeREST.java</h1><pre class="source lang-java linenums">/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -44,34 +44,24 @@ public class CampsiteFacadeREST {
     NewSessionBean nsb;
     
 <span class="nc" id="L46">    public CampsiteFacadeREST() {</span>
-<span class="nc" id="L47">    }</span>
+        // default constructor
+<span class="nc" id="L48">    }</span>
     
-//    @GET
-//    @Path(&quot;{name}&quot;)
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public List&lt;Campsite&gt; find(@PathParam(&quot;name&quot;) String name) {
-//        Manager manager = new Manager();
-//        Query query = em.createQuery(&quot;select c from Manager c where c.username = :name&quot;);
-//        query.setParameter(&quot;name&quot;, name);
-//        List&lt;Manager&gt; managers = query.getResultList();
-//        for (Iterator&lt;Manager&gt; iterator = managers.iterator(); iterator.hasNext();) {
-//            manager = iterator.next();
-//        }
-//
-//        Query query2 = em.createQuery(&quot;select c from Campsite c where c.manager = :manager&quot;);
-//        query2.setParameter(&quot;manager&quot;, manager);
-//        List&lt;Campsite&gt; campsites = query2.getResultList();
-//        return campsites;
-//    }
+    @GET
+    @Path(&quot;{name}&quot;)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List&lt;Campsite&gt; find(@PathParam(&quot;name&quot;) String name) {
+<span class="nc" id="L54">    return nsb.listarCampsiteREST(name);</span>
+    }
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List&lt;Campsite&gt; findAll() {
-<span class="nc" id="L70">        return nsb.listarTodosCampsites();</span>
+<span class="nc" id="L60">        return nsb.listarTodosCampsites();</span>
     }
     
     protected EntityManager getEntityManager() {
-<span class="nc" id="L74">        return em;</span>
+<span class="nc" id="L64">        return em;</span>
     }
     
 }

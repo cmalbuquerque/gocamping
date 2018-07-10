@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utilizador.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">Persistencia</a> &gt; <span class="el_source">Utilizador.java</span></div><h1>Utilizador.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utilizador.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">Persistencia</a> &gt; <span class="el_source">Utilizador.java</span></div><h1>Utilizador.java</h1><pre class="source lang-java linenums">/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -33,7 +33,8 @@ public class Utilizador implements Serializable {
     private static final long serialVersionUID = 1L;
 
 <span class="fc" id="L35">    public Utilizador() {</span>
-<span class="fc" id="L36">    }</span>
+        //default contructor
+<span class="fc" id="L37">    }</span>
 
     @Id
     @Column(name = &quot;username&quot;)
@@ -53,80 +54,80 @@ public class Utilizador implements Serializable {
 
     @XmlTransient
     public Camper getCamper() {
-<span class="fc" id="L56">        return camper;</span>
+<span class="fc" id="L57">        return camper;</span>
     }
 
     public void setCamper(Camper camper) {
-<span class="fc" id="L60">        this.camper = camper;</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L61">        this.camper = camper;</span>
+<span class="fc" id="L62">    }</span>
     
     @XmlTransient
     public Manager getManager() {
-<span class="fc" id="L65">        return manager;</span>
+<span class="fc" id="L66">        return manager;</span>
     }
 
     public void setManager(Manager manager) {
-<span class="fc" id="L69">        this.manager = manager;</span>
-<span class="fc" id="L70">    }</span>
+<span class="fc" id="L70">        this.manager = manager;</span>
+<span class="fc" id="L71">    }</span>
 
     public String getUsername() {
-<span class="fc" id="L73">        return username;</span>
+<span class="fc" id="L74">        return username;</span>
     }
 
     public void setUsername(String username) {
-<span class="fc" id="L77">        this.username = username;</span>
-<span class="fc" id="L78">    }</span>
+<span class="fc" id="L78">        this.username = username;</span>
+<span class="fc" id="L79">    }</span>
 
     public String getPassword() {
-<span class="nc" id="L81">        return password;</span>
+<span class="nc" id="L82">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="fc" id="L85">        this.password = GeneralStuff.Hash.getmd5Hash(password);</span>
-<span class="fc" id="L86">    }</span>
+<span class="fc" id="L86">        this.password = GeneralStuff.Hash.getmd5Hash(password);</span>
+<span class="fc" id="L87">    }</span>
     
     
 
     @Override
     public int hashCode() {
-<span class="fc" id="L92">        int hash = 7;</span>
-<span class="fc" id="L93">        hash = 53 * hash + Objects.hashCode(this.username);</span>
-<span class="fc" id="L94">        hash = 53 * hash + Objects.hashCode(this.camper);</span>
-<span class="fc" id="L95">        hash = 53 * hash + Objects.hashCode(this.manager);</span>
-<span class="fc" id="L96">        return hash;</span>
+<span class="fc" id="L93">        int hash = 7;</span>
+<span class="fc" id="L94">        hash = 53 * hash + Objects.hashCode(this.username);</span>
+<span class="fc" id="L95">        hash = 53 * hash + Objects.hashCode(this.camper);</span>
+<span class="fc" id="L96">        hash = 53 * hash + Objects.hashCode(this.manager);</span>
+<span class="fc" id="L97">        return hash;</span>
     }
 
     @Override
     public boolean equals(Object obj) {
-<span class="fc bfc" id="L101" title="All 2 branches covered.">        if (this == obj) {</span>
-<span class="fc" id="L102">            return true;</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L103">            return true;</span>
         }
-<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        if (obj == null) {</span>
-<span class="nc" id="L105">            System.out.println(&quot;segundo é null&quot;);</span>
-<span class="nc" id="L106">            return false;</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L106">            System.out.println(&quot;segundo é null&quot;);</span>
+<span class="nc" id="L107">            return false;</span>
         }
-<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
-<span class="nc" id="L109">            System.out.println(&quot;classes diferentes&quot;);</span>
-<span class="nc" id="L110">            return false;</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L110">            System.out.println(&quot;classes diferentes&quot;);</span>
+<span class="nc" id="L111">            return false;</span>
         }
-<span class="fc" id="L112">        final Utilizador other = (Utilizador) obj;</span>
-<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if (!Objects.equals(this.username, other.username)) {</span>
-<span class="nc" id="L114">            System.out.println(&quot;nomes diferentes: &quot; + this.username + &quot;  &quot; + other.username);</span>
-<span class="nc" id="L115">            return false;</span>
+<span class="fc" id="L113">        final Utilizador other = (Utilizador) obj;</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        if (!Objects.equals(this.username, other.username)) {</span>
+<span class="nc" id="L115">            System.out.println(&quot;nomes diferentes: &quot; + this.username + &quot;  &quot; + other.username);</span>
+<span class="nc" id="L116">            return false;</span>
         }
-<span class="pc bpc" id="L117" title="1 of 2 branches missed.">        if (!Objects.equals(this.password, other.password)) {</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        if (!Objects.equals(this.password, other.password)) {</span>
             
-<span class="nc" id="L119">            System.out.println(&quot;passwords diferentes\n&quot; + this.password + &quot; != &quot; + other.password);</span>
-<span class="nc" id="L120">            return false;</span>
+<span class="nc" id="L120">            System.out.println(&quot;passwords diferentes\n&quot; + this.password + &quot; != &quot; + other.password);</span>
+<span class="nc" id="L121">            return false;</span>
         }
-<span class="fc" id="L122">        return true;</span>
+<span class="fc" id="L123">        return true;</span>
     }
 
 
 
     @Override
     public String toString() {
-<span class="fc" id="L129">        return &quot;Utilizador com username &quot; + username + &quot;, camper=&quot; + camper + &quot;, manager=&quot; + manager + '}';</span>
+<span class="fc" id="L130">        return &quot;Utilizador com username &quot; + username + &quot;, camper=&quot; + camper + &quot;, manager=&quot; + manager + '}';</span>
     }
 
 }

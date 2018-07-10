@@ -17,6 +17,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author Andreia Patrocínio
@@ -47,32 +48,31 @@ public class AccountBean implements Serializable {
     private String fullNameManager;
     @ManagedProperty(value = "#{emailManager}")
     private String emailManager;
-    
+
     private final String account = "account.xhtml";
-    
+
     @EJB
     NewSessionBean newSessionBean;
-    
+
     @PostConstruct
     private void init() {
-        if(session.getAttribute("isCamper") != null){
+        if (session.getAttribute("isCamper") != null) {
             Camper c = newSessionBean.searchCamper(session.getAttribute(sessionGetUser).toString());
             this.fullName = c.getFullName();
             this.email = c.getEmail();
             this.campsiteCard = c.getCampsiteCard();
-        } 
-        else{
+        } else {
             Manager m = newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString());
             this.fullNameManager = m.getFullName();
             this.emailManager = m.getEmail();
-            
+
         }
     }
-    
+
     private Manager manager;
     private Camper camper;
     private final String sessionGetUser = "username";
-    
+
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
@@ -163,13 +163,12 @@ public class AccountBean implements Serializable {
     public void setEmailManager(String emailManager) {
         this.emailManager = emailManager;
     }
-    
-   
+
     public String editPersonalInformation() {
         camper = newSessionBean.updateCamper(session.getAttribute(sessionGetUser).toString(), fullName, email, campsiteCard);
         return account;
     }
-    
+
     public String editPersonalInformationManager() {
         manager = newSessionBean.updateManager(session.getAttribute(sessionGetUser).toString(), fullNameManager, emailManager);
         return account;
@@ -177,13 +176,11 @@ public class AccountBean implements Serializable {
 
     public String editLoginAccess() {
         Utilizador user = newSessionBean.searchUtilizador(session.getAttribute(sessionGetUser).toString());
-        if (user.getPassword().equals(Hash.getmd5Hash(password))) {
-            if (newPassword.equals(confirmationPassword)) {
-                newSessionBean.updateUtilizador(session.getAttribute(sessionGetUser).toString(), newPassword);
-                return account;
-            }
+        if ((user.getPassword().equals(Hash.getmd5Hash(password))) && (newPassword.equals(confirmationPassword))) {
+            newSessionBean.updateUtilizador(session.getAttribute(sessionGetUser).toString(), newPassword);
+            return account;
         }
         return account;
     }
-    
+
 }

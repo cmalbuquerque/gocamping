@@ -47,12 +47,12 @@ public class CampsiteFacadeREST {
         // default constructor
     }
     
-//    @GET
-//    @Path("{name}")
-//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public List<Campsite> find(@PathParam("name") String name) {
-//    return nsb.listarCampsite(name);
-//    }
+    @GET
+    @Path("{name}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Campsite> find(@PathParam("name") String name) {
+    return nsb.listarCampsiteREST(name);
+    }
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

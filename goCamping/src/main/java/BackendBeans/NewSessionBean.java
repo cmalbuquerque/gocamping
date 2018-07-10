@@ -301,10 +301,7 @@ public class NewSessionBean implements Serializable {
         try {
             entityManager.getTransaction().begin();
             Utilizador utilizador = (Utilizador) entityManager.find(Utilizador.class, username);
-            Camper c = utilizador.getCamper();
-            Manager m = utilizador.getManager();
             entityManager.getTransaction().commit();
-            
             entityManager.remove(utilizador);
             return true;
         } catch (Exception e) {
@@ -344,7 +341,6 @@ public class NewSessionBean implements Serializable {
             campsite.setManager(manager);
             campsite.setCampingCardDiscount(campingCardDiscount);
             entityManager.persist(campsite);
-
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -396,6 +392,22 @@ public class NewSessionBean implements Serializable {
         }
         return campsites;
     }
+    
+    public List<Campsite> listarCampsiteREST(String name) {
+        Manager manager = new Manager();
+        Query query = entityManager.createQuery("select c from Manager c where c.username = :name");
+        query.setParameter("name", name);
+        List<Manager> managers = query.getResultList();
+        for (Iterator<Manager> iterator = managers.iterator(); iterator.hasNext();) {
+            manager = iterator.next();
+        }
+
+        Query query2 = entityManager.createQuery("select c from Campsite c where c.manager = :manager");
+        query2.setParameter("manager", manager);
+        List<Campsite> campsites = query2.getResultList();
+        return campsites;
+    }
+    
 
     public List<Campsite> listarCampsite(String location) {
         List<Campsite> campsites = new ArrayList<>();

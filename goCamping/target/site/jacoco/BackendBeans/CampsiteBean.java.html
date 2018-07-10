@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CampsiteBean.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">BackendBeans</a> &gt; <span class="el_source">CampsiteBean.java</span></div><h1>CampsiteBean.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CampsiteBean.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">BackendBeans</a> &gt; <span class="el_source">CampsiteBean.java</span></div><h1>CampsiteBean.java</h1><pre class="source lang-java linenums">/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
@@ -25,7 +26,8 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean(name = &quot;campsitebean&quot;)
 @SessionScoped
-<span class="nc" id="L28">public class CampsiteBean implements Serializable {</span>
+<span class="nc" id="L29">public class CampsiteBean implements Serializable {</span>
+
     @ManagedProperty(value = &quot;#{title}&quot;)
     private String title;
     @ManagedProperty(value = &quot;#{location}&quot;)
@@ -44,11 +46,11 @@ import javax.servlet.http.HttpSession;
     private int NIF;
     @ManagedProperty(value = &quot;#{listaCampsites}&quot;)
     private List&lt;Campsite&gt; listaCampsites;
-    @ManagedProperty(value =&quot;#{campingCardDiscount}&quot;)
+    @ManagedProperty(value = &quot;#{campingCardDiscount}&quot;)
     private double campingCardDiscount;
-    
+
     @ManagedProperty(value = &quot;#{titleEdit}&quot;)
-    private String titleEdit; 
+    private String titleEdit;
     @ManagedProperty(value = &quot;#{locationEdit}&quot;)
     private String locationEdit;
     @ManagedProperty(value = &quot;#{descEdit}&quot;)
@@ -61,201 +63,208 @@ import javax.servlet.http.HttpSession;
     private double babiesPriceEdit;
     @ManagedProperty(value = &quot;#{contactsEdit}&quot;)
     private String contactsEdit;
-    @ManagedProperty(value =&quot;#{campingCardDiscountEdit}&quot;)
+    @ManagedProperty(value = &quot;#{campingCardDiscountEdit}&quot;)
     private double campingCardDiscountEdit;
-    
+
     @EJB
     NewSessionBean newSessionBean;
-    
-<span class="nc" id="L70">    private final String sessionGetUser = &quot;username&quot;;</span>
+
+<span class="nc" id="L72">    private final String sessionGetUser = &quot;username&quot;;</span>
+<span class="nc" id="L73">    private final String myCampsites = &quot;myCampsites.xhtml&quot;;</span>
+
     private Campsite campsite;
-<span class="nc" id="L72">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
-<span class="nc" id="L73">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
+<span class="nc" id="L76">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L77">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
+
+    @PostConstruct
+    private void init() {
+<span class="nc" id="L81">        this.NIF = newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()).getNIF();</span>
+
+<span class="nc" id="L83">    }</span>
 
     public double getCampingCardDiscount() {
-<span class="nc" id="L76">        return campingCardDiscount;</span>
+<span class="nc" id="L86">        return campingCardDiscount;</span>
     }
 
     public void setCampingCardDiscount(double campingCardDiscount) {
-<span class="nc" id="L80">        this.campingCardDiscount = campingCardDiscount;</span>
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L90">        this.campingCardDiscount = campingCardDiscount;</span>
+<span class="nc" id="L91">    }</span>
 
     public double getCampingCardDiscountEdit() {
-<span class="nc" id="L84">        return campingCardDiscountEdit;</span>
+<span class="nc" id="L94">        return campingCardDiscountEdit;</span>
     }
 
     public void setCampingCardDiscountEdit(double campingCardDiscountEdit) {
-<span class="nc" id="L88">        this.campingCardDiscountEdit = campingCardDiscountEdit;</span>
-<span class="nc" id="L89">    }</span>
-    
+<span class="nc" id="L98">        this.campingCardDiscountEdit = campingCardDiscountEdit;</span>
+<span class="nc" id="L99">    }</span>
+
     public String getContactsEdit() {
-<span class="nc" id="L92">        return contactsEdit;</span>
+<span class="nc" id="L102">        return contactsEdit;</span>
     }
 
     public void setContactsEdit(String contactsEdit) {
-<span class="nc" id="L96">        this.contactsEdit = contactsEdit;</span>
-<span class="nc" id="L97">    }</span>
-    
+<span class="nc" id="L106">        this.contactsEdit = contactsEdit;</span>
+<span class="nc" id="L107">    }</span>
+
     public String getTitleEdit() {
-<span class="nc" id="L100">        return titleEdit;</span>
+<span class="nc" id="L110">        return titleEdit;</span>
     }
 
     public String getLocationEdit() {
-<span class="nc" id="L104">        return locationEdit;</span>
+<span class="nc" id="L114">        return locationEdit;</span>
     }
 
     public String getDescEdit() {
-<span class="nc" id="L108">        return descEdit;</span>
+<span class="nc" id="L118">        return descEdit;</span>
     }
 
     public double getAdultsPriceEdit() {
-<span class="nc" id="L112">        return adultsPriceEdit;</span>
+<span class="nc" id="L122">        return adultsPriceEdit;</span>
     }
 
     public double getChildsPriceEdit() {
-<span class="nc" id="L116">        return childsPriceEdit;</span>
+<span class="nc" id="L126">        return childsPriceEdit;</span>
     }
 
     public double getBabiesPriceEdit() {
-<span class="nc" id="L120">        return babiesPriceEdit;</span>
+<span class="nc" id="L130">        return babiesPriceEdit;</span>
     }
 
     public void setTitleEdit(String titleEdit) {
-<span class="nc" id="L124">        this.titleEdit = titleEdit;</span>
-<span class="nc" id="L125">    }</span>
+<span class="nc" id="L134">        this.titleEdit = titleEdit;</span>
+<span class="nc" id="L135">    }</span>
 
     public void setLocationEdit(String locationEdit) {
-<span class="nc" id="L128">        this.locationEdit = locationEdit;</span>
-<span class="nc" id="L129">    }</span>
+<span class="nc" id="L138">        this.locationEdit = locationEdit;</span>
+<span class="nc" id="L139">    }</span>
 
     public void setDescEdit(String descEdit) {
-<span class="nc" id="L132">        this.descEdit = descEdit;</span>
-<span class="nc" id="L133">    }</span>
+<span class="nc" id="L142">        this.descEdit = descEdit;</span>
+<span class="nc" id="L143">    }</span>
 
     public void setAdultsPriceEdit(double adultsPriceEdit) {
-<span class="nc" id="L136">        this.adultsPriceEdit = adultsPriceEdit;</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L146">        this.adultsPriceEdit = adultsPriceEdit;</span>
+<span class="nc" id="L147">    }</span>
 
     public void setChildsPriceEdit(double childsPriceEdit) {
-<span class="nc" id="L140">        this.childsPriceEdit = childsPriceEdit;</span>
-<span class="nc" id="L141">    }</span>
+<span class="nc" id="L150">        this.childsPriceEdit = childsPriceEdit;</span>
+<span class="nc" id="L151">    }</span>
 
     public void setBabiesPriceEdit(double babiesPriceEdit) {
-<span class="nc" id="L144">        this.babiesPriceEdit = babiesPriceEdit;</span>
-<span class="nc" id="L145">    }</span>
+<span class="nc" id="L154">        this.babiesPriceEdit = babiesPriceEdit;</span>
+<span class="nc" id="L155">    }</span>
 
     public void setCampsite(Campsite campsite) {
-<span class="nc" id="L148">        this.campsite = campsite;</span>
-<span class="nc" id="L149">    }</span>
-    
-               
+<span class="nc" id="L158">        this.campsite = campsite;</span>
+<span class="nc" id="L159">    }</span>
+
     public List&lt;Campsite&gt; getListaCampsites() {
-<span class="nc" id="L153">        return listaCampsites;</span>
+<span class="nc" id="L162">        return listaCampsites;</span>
     }
 
     public void setListaCampsites(List&lt;Campsite&gt; listaCampsites) {
-<span class="nc" id="L157">        this.listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(&quot;username&quot;).toString()));</span>
-<span class="nc" id="L158">    }</span>
-           
+<span class="nc" id="L166">        this.listaCampsites = listaCampsites;</span>
+<span class="nc" id="L167">    }</span>
+
     public int getNIF() {
-<span class="nc" id="L161">        return NIF;</span>
+<span class="nc" id="L170">        return NIF;</span>
     }
 
     public void setNIF(int NIF) {
-<span class="nc" id="L165">        this.NIF = newSessionBean.searchManager(session.getAttribute(&quot;username&quot;).toString()).getNIF();</span>
-<span class="nc" id="L166">    }</span>
-    
+<span class="nc" id="L174">        this.NIF = NIF;</span>
+<span class="nc" id="L175">    }</span>
+
     public String getTitle() {
-<span class="nc" id="L169">        return title;</span>
+<span class="nc" id="L178">        return title;</span>
     }
 
     public void setTitle(String title) {
-<span class="nc" id="L173">        this.title = title;</span>
-<span class="nc" id="L174">    }</span>
+<span class="nc" id="L182">        this.title = title;</span>
+<span class="nc" id="L183">    }</span>
 
     public String getLocation() {
-<span class="nc" id="L177">        return location;</span>
+<span class="nc" id="L186">        return location;</span>
     }
 
     public void setLocation(String location) {
-<span class="nc" id="L181">        this.location = location;</span>
-<span class="nc" id="L182">    }</span>
+<span class="nc" id="L190">        this.location = location;</span>
+<span class="nc" id="L191">    }</span>
 
     public String getDesc() {
-<span class="nc" id="L185">        return desc;</span>
+<span class="nc" id="L194">        return desc;</span>
     }
 
     public void setDesc(String desc) {
-<span class="nc" id="L189">        this.desc = desc;</span>
-<span class="nc" id="L190">    }</span>
+<span class="nc" id="L198">        this.desc = desc;</span>
+<span class="nc" id="L199">    }</span>
 
     public double getAdultsPrice() {
-<span class="nc" id="L193">        return adultsPrice;</span>
+<span class="nc" id="L202">        return adultsPrice;</span>
     }
 
     public void setAdultsPrice(double adultsPrice) {
-<span class="nc" id="L197">        this.adultsPrice = adultsPrice;</span>
-<span class="nc" id="L198">    }</span>
+<span class="nc" id="L206">        this.adultsPrice = adultsPrice;</span>
+<span class="nc" id="L207">    }</span>
 
     public double getChildsPrice() {
-<span class="nc" id="L201">        return childsPrice;</span>
+<span class="nc" id="L210">        return childsPrice;</span>
     }
 
     public void setChildsPrice(double childsPrice) {
-<span class="nc" id="L205">        this.childsPrice = childsPrice;</span>
-<span class="nc" id="L206">    }</span>
+<span class="nc" id="L214">        this.childsPrice = childsPrice;</span>
+<span class="nc" id="L215">    }</span>
 
     public double getBabiesPrice() {
-<span class="nc" id="L209">        return babiesPrice;</span>
+<span class="nc" id="L218">        return babiesPrice;</span>
     }
 
     public void setBabiesPrice(double babiesPrice) {
-<span class="nc" id="L213">        this.babiesPrice = babiesPrice;</span>
-<span class="nc" id="L214">    }</span>
+<span class="nc" id="L222">        this.babiesPrice = babiesPrice;</span>
+<span class="nc" id="L223">    }</span>
 
     public String getContacts() {
-<span class="nc" id="L217">        return contacts;</span>
+<span class="nc" id="L226">        return contacts;</span>
     }
 
     public void setContacts(String contacts) {
-<span class="nc" id="L221">        this.contacts = contacts;</span>
-<span class="nc" id="L222">    }</span>
+<span class="nc" id="L230">        this.contacts = contacts;</span>
+<span class="nc" id="L231">    }</span>
 
     public Campsite getCampsite() {
-<span class="nc" id="L225">        return campsite;</span>
+<span class="nc" id="L234">        return campsite;</span>
     }
-    
-    public String view(Campsite campsiteOutro){
-<span class="nc" id="L229">        this.campsite=campsiteOutro;</span>
-<span class="nc" id="L230">        this.titleEdit=campsiteOutro.getTitle();</span>
-<span class="nc" id="L231">        this.locationEdit=campsiteOutro.getLocation();</span>
-<span class="nc" id="L232">        this.adultsPriceEdit=campsiteOutro.getAdultPrice();</span>
-<span class="nc" id="L233">        this.childsPriceEdit=campsiteOutro.getChildPrice();</span>
-<span class="nc" id="L234">        this.babiesPriceEdit=campsiteOutro.getBabyPrice();</span>
-<span class="nc" id="L235">        this.contactsEdit=campsiteOutro.getContact();</span>
-<span class="nc" id="L236">        this.descEdit=campsiteOutro.getDescription();</span>
-<span class="nc" id="L237">        this.campingCardDiscountEdit=campsiteOutro.getCampingCardDiscount();</span>
-<span class="nc" id="L238">        return &quot;editCampsite.xhtml&quot;;</span>
+
+    public String view(Campsite campsiteOutro) {
+<span class="nc" id="L238">        this.campsite = campsiteOutro;</span>
+<span class="nc" id="L239">        this.titleEdit = campsiteOutro.getTitle();</span>
+<span class="nc" id="L240">        this.locationEdit = campsiteOutro.getLocation();</span>
+<span class="nc" id="L241">        this.adultsPriceEdit = campsiteOutro.getAdultPrice();</span>
+<span class="nc" id="L242">        this.childsPriceEdit = campsiteOutro.getChildPrice();</span>
+<span class="nc" id="L243">        this.babiesPriceEdit = campsiteOutro.getBabyPrice();</span>
+<span class="nc" id="L244">        this.contactsEdit = campsiteOutro.getContact();</span>
+<span class="nc" id="L245">        this.descEdit = campsiteOutro.getDescription();</span>
+<span class="nc" id="L246">        this.campingCardDiscountEdit = campsiteOutro.getCampingCardDiscount();</span>
+
+<span class="nc" id="L248">        return &quot;editCampsite.xhtml&quot;;</span>
     }
-    
-    
-    public String addCampsite(){       
-<span class="nc" id="L243">        newSessionBean.saveCampsite( title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()),campingCardDiscount);</span>
-<span class="nc" id="L244">        listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));</span>
-<span class="nc" id="L245">        return &quot;myCampsites.xhtml&quot;;</span>
+
+    public String addCampsite() {
+<span class="nc" id="L252">        newSessionBean.saveCampsite(title, location, adultsPrice, childsPrice, babiesPrice, contacts, desc, newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()), campingCardDiscount);</span>
+<span class="nc" id="L253">        listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));</span>
+<span class="nc" id="L254">        return myCampsites;</span>
     }
-    
-    public String removeCampsite(int id){     
-<span class="nc" id="L249">        newSessionBean.deleteCampsite(id);</span>
-<span class="nc" id="L250">        listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));</span>
-<span class="nc" id="L251">        return &quot;myCampsites.xhtml&quot;;</span>
+
+    public String removeCampsite(int id) {
+<span class="nc" id="L258">        newSessionBean.deleteCampsite(id);</span>
+<span class="nc" id="L259">        listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));</span>
+<span class="nc" id="L260">        return myCampsites;</span>
     }
-    
-    public String editCampsite(){
-<span class="nc" id="L255">        newSessionBean.updateCampsite(campsite.getId(), titleEdit, locationEdit, adultsPriceEdit, childsPriceEdit, babiesPriceEdit, contactsEdit, descEdit, campingCardDiscountEdit);</span>
-<span class="nc" id="L256">        listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));</span>
-<span class="nc" id="L257">        return &quot;myCampsites.xhtml&quot;;</span>
+
+    public String editCampsite() {
+<span class="nc" id="L264">        newSessionBean.updateCampsite(campsite.getId(), titleEdit, locationEdit, adultsPriceEdit, childsPriceEdit, babiesPriceEdit, contactsEdit, descEdit, campingCardDiscountEdit);</span>
+<span class="nc" id="L265">        listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(sessionGetUser).toString()));</span>
+<span class="nc" id="L266">        return myCampsites;</span>
     }
-    
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

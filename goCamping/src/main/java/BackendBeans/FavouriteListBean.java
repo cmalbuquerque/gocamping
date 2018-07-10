@@ -10,6 +10,7 @@ import Persistencia.Campsite;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -42,12 +43,18 @@ public class FavouriteListBean implements Serializable{
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
     
+        @PostConstruct
+    private void init() {
+        this.listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(sessionGetUser).toString());
+
+    }
+    
     public List<Campsite> getListCampsitesFav() {
         return listCampsitesFav;
     }
 
     public void setListCampsitesFav(List<Campsite> listCampsitesFav) {
-        this.listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(sessionGetUser).toString());
+        this.listCampsitesFav= listCampsitesFav;
     }
 
     public List<Integer> getListIntCampsites() {

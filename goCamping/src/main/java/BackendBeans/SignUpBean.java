@@ -152,12 +152,12 @@ public class SignUpBean implements Serializable {
     public String register() {
         if (flagCamper == true && flagManager == false) {
             Camper camper1 = newSessionBean.saveCamper(username, fullName, email, NIF, campsiteCard);
-            Utilizador user1 = newSessionBean.saveUtilizador(camper1, null, username, password);
+            newSessionBean.saveUtilizador(camper1, null, username, password);
             return "login.xhtml";
         }
         if (flagManager == true && flagCamper == false) {
             Manager manager1 = newSessionBean.saveManager(username, fullName, email, NIF);
-            Utilizador user2 = newSessionBean.saveUtilizador(null, manager1, username, password);
+            newSessionBean.saveUtilizador(null, manager1, username, password);
             return "login.xhtml";
         }
         return "signup.xhtml";
