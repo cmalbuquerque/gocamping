@@ -94,32 +94,32 @@ import javax.xml.bind.annotation.XmlTransient;
 
     @Override
     public int hashCode() {
-<span class="nc" id="L97">        int hash = 5;</span>
-<span class="nc" id="L98">        hash = 59 * hash + Objects.hashCode(this.username);</span>
-<span class="nc" id="L99">        return hash;</span>
+<span class="fc" id="L97">        int hash = 5;</span>
+<span class="fc" id="L98">        hash = 59 * hash + Objects.hashCode(this.username);</span>
+<span class="fc" id="L99">        return hash;</span>
     }
 
     @Override
     public boolean equals(Object obj) {
-<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        if (this == obj) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        if (this == obj) {</span>
 <span class="fc" id="L105">            return true;</span>
         }
-<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        if (obj == null) {</span>
 <span class="nc" id="L108">            return false;</span>
         }
-<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
 <span class="nc" id="L111">            return false;</span>
         }
-<span class="nc" id="L113">        final Manager other = (Manager) obj;</span>
-<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (this.NIF != other.NIF) {</span>
+<span class="fc" id="L113">        final Manager other = (Manager) obj;</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        if (this.NIF != other.NIF) {</span>
 <span class="nc" id="L115">            return false;</span>
         }
-<span class="nc" id="L117">        return Objects.equals(this.username, other.username);</span>
+<span class="fc" id="L117">        return Objects.equals(this.username, other.username);</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L122">        return &quot;Manager{&quot; + &quot;username=&quot; + username + &quot;, fullName=&quot; + fullName + &quot;, email=&quot; + email + &quot;, NIF=&quot; + NIF + '}';</span>
+<span class="fc" id="L122">        return &quot;Manager{&quot; + &quot;username=&quot; + username + &quot;, fullName=&quot; + fullName + &quot;, email=&quot; + email + &quot;, NIF=&quot; + NIF + '}';</span>
     }
 
 }

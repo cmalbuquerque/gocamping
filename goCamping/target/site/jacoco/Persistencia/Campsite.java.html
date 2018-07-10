@@ -156,50 +156,50 @@ import javax.xml.bind.annotation.XmlTransient;
 
     @Override
     public boolean equals(Object obj) {
-<span class="pc bpc" id="L159" title="1 of 2 branches missed.">        if (this == obj) {</span>
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        if (this == obj) {</span>
 <span class="fc" id="L160">            return true;</span>
         }
-<span class="nc bnc" id="L162" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">        if (obj == null) {</span>
 <span class="nc" id="L163">            System.out.println(&quot;Object Null&quot;);</span>
 <span class="nc" id="L164">            return false;</span>
         }
-<span class="nc bnc" id="L166" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
 <span class="nc" id="L167">            System.out.println(&quot;Object Different Class&quot;);</span>
 <span class="nc" id="L168">            return false;</span>
         }
-<span class="nc" id="L170">        final Campsite other = (Campsite) obj;</span>
-<span class="nc bnc" id="L171" title="All 2 branches missed.">        if (Double.doubleToLongBits(this.adultPrice) != Double.doubleToLongBits(other.adultPrice)) {</span>
+<span class="fc" id="L170">        final Campsite other = (Campsite) obj;</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if (Double.doubleToLongBits(this.adultPrice) != Double.doubleToLongBits(other.adultPrice)) {</span>
 <span class="nc" id="L172">            System.out.println(&quot;Object Different adult Price&quot;);</span>
 <span class="nc" id="L173">            return false;</span>
         }
-<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (Double.doubleToLongBits(this.childPrice) != Double.doubleToLongBits(other.childPrice)) {</span>
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">        if (Double.doubleToLongBits(this.childPrice) != Double.doubleToLongBits(other.childPrice)) {</span>
 <span class="nc" id="L176">            System.out.println(&quot;Object Different child Price&quot;);</span>
 <span class="nc" id="L177">            return false;</span>
         }
-<span class="nc bnc" id="L179" title="All 2 branches missed.">        if (Double.doubleToLongBits(this.babyPrice) != Double.doubleToLongBits(other.babyPrice)) {</span>
+<span class="pc bpc" id="L179" title="1 of 2 branches missed.">        if (Double.doubleToLongBits(this.babyPrice) != Double.doubleToLongBits(other.babyPrice)) {</span>
 <span class="nc" id="L180">            System.out.println(&quot;Object Different baby Price&quot;);</span>
 <span class="nc" id="L181">            return false;</span>
         }
-<span class="nc bnc" id="L183" title="All 2 branches missed.">        if (!Objects.equals(this.title, other.title)) {</span>
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">        if (!Objects.equals(this.title, other.title)) {</span>
 <span class="nc" id="L184">            System.out.println(&quot;Object Different title&quot;);</span>
 <span class="nc" id="L185">            return false;</span>
         }
-<span class="nc bnc" id="L187" title="All 2 branches missed.">        if (!Objects.equals(this.location, other.location)) {</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        if (!Objects.equals(this.location, other.location)) {</span>
 <span class="nc" id="L188">            System.out.println(&quot;Object Different location&quot;);</span>
 <span class="nc" id="L189">            return false;</span>
         }
-<span class="nc bnc" id="L191" title="All 2 branches missed.">        if (!Objects.equals(this.contact, other.contact)) {</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">        if (!Objects.equals(this.contact, other.contact)) {</span>
 <span class="nc" id="L192">            System.out.println(&quot;Object Different contact&quot;);</span>
 <span class="nc" id="L193">            return false;</span>
         }
-<span class="nc" id="L195">        return true;</span>
+<span class="fc" id="L195">        return true;</span>
     }
 
 
 
     @Override
     public String toString() {
-<span class="nc" id="L202">        return &quot;Campsite{&quot; + &quot;id=&quot; + id + &quot;, title=&quot; + title + &quot;, location=&quot; + location + &quot;, adultPrice=&quot; + adultPrice + &quot;, childPrice=&quot; + childPrice + &quot;, babyPrice=&quot; + babyPrice + &quot;, contact=&quot; + contact + &quot;, description=&quot; + description + &quot;, manager=&quot; + manager +  &quot;campingCardDiscount&quot;+ campingCardDiscount + '}';</span>
+<span class="fc" id="L202">        return &quot;Campsite{&quot; + &quot;id=&quot; + id + &quot;, title=&quot; + title + &quot;, location=&quot; + location + &quot;, adultPrice=&quot; + adultPrice + &quot;, childPrice=&quot; + childPrice + &quot;, babyPrice=&quot; + babyPrice + &quot;, contact=&quot; + contact + &quot;, description=&quot; + description + &quot;, manager=&quot; + manager +  &quot;campingCardDiscount&quot;+ campingCardDiscount + '}';</span>
     }
 
 }

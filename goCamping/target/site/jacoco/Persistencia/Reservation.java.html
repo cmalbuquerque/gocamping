@@ -111,7 +111,7 @@ import static javax.persistence.TemporalType.DATE;
       
 
     public int getId() {
-<span class="nc" id="L114">        return id;</span>
+<span class="fc" id="L114">        return id;</span>
     }
 
     public void setId(int id) {
@@ -162,42 +162,42 @@ import static javax.persistence.TemporalType.DATE;
 
     @Override
     public boolean equals(Object obj) {
-<span class="nc bnc" id="L165" title="All 2 branches missed.">        if (this == obj) {</span>
-<span class="nc" id="L166">            return true;</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L166">            return true;</span>
         }
-<span class="nc bnc" id="L168" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">        if (obj == null) {</span>
 <span class="nc" id="L169">            return false;</span>
         }
-<span class="nc bnc" id="L171" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
 <span class="nc" id="L172">            return false;</span>
         }
-<span class="nc" id="L174">        final Reservation other = (Reservation) obj;</span>
-<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (this.cellfone != other.cellfone) {</span>
+<span class="fc" id="L174">        final Reservation other = (Reservation) obj;</span>
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">        if (this.cellfone != other.cellfone) {</span>
 <span class="nc" id="L176">            return false;</span>
         }
-<span class="nc bnc" id="L178" title="All 2 branches missed.">        if (this.nrAdults != other.nrAdults) {</span>
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">        if (this.nrAdults != other.nrAdults) {</span>
 <span class="nc" id="L179">            return false;</span>
         }
-<span class="nc bnc" id="L181" title="All 2 branches missed.">        if (this.nrChildren != other.nrChildren) {</span>
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">        if (this.nrChildren != other.nrChildren) {</span>
 <span class="nc" id="L182">            return false;</span>
         }
-<span class="nc bnc" id="L184" title="All 2 branches missed.">        if (this.nrBabies != other.nrBabies) {</span>
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">        if (this.nrBabies != other.nrBabies) {</span>
 <span class="nc" id="L185">            return false;</span>
         }
-<span class="nc bnc" id="L187" title="All 2 branches missed.">        if (Double.doubleToLongBits(this.totalPrice) != Double.doubleToLongBits(other.totalPrice)) {</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        if (Double.doubleToLongBits(this.totalPrice) != Double.doubleToLongBits(other.totalPrice)) {</span>
 <span class="nc" id="L188">            return false;</span>
         }
-<span class="nc bnc" id="L190" title="All 2 branches missed.">        if (!Objects.equals(this.camper, other.camper)) {</span>
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">        if (!Objects.equals(this.camper, other.camper)) {</span>
 <span class="nc" id="L191">            return false;</span>
         }
-<span class="nc" id="L193">        return Objects.equals(this.campsite, other.campsite);</span>
+<span class="fc" id="L193">        return Objects.equals(this.campsite, other.campsite);</span>
     }
 
     
 
     @Override
     public String toString() {
-<span class="nc" id="L200">        return &quot;Reservation{&quot; + &quot;id=&quot; + id + &quot;, startDate=&quot; + startDate + &quot;, endDate=&quot; + endDate + &quot;, cellfone=&quot; + cellfone + &quot;, nrAdults=&quot; + nrAdults + &quot;, nrChildren=&quot; + nrChildren + &quot;, nrBabies=&quot; + nrBabies + &quot;, totalPrice=&quot; + totalPrice + &quot;, camper=&quot; + camper + &quot;, campsite=&quot; + campsite + '}';</span>
+<span class="fc" id="L200">        return &quot;Reservation{&quot; + &quot;id=&quot; + id + &quot;, startDate=&quot; + startDate + &quot;, endDate=&quot; + endDate + &quot;, cellfone=&quot; + cellfone + &quot;, nrAdults=&quot; + nrAdults + &quot;, nrChildren=&quot; + nrChildren + &quot;, nrBabies=&quot; + nrBabies + &quot;, totalPrice=&quot; + totalPrice + &quot;, camper=&quot; + camper + &quot;, campsite=&quot; + campsite + '}';</span>
     }
 
    

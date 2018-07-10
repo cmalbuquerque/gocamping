@@ -102,32 +102,32 @@ import javax.xml.bind.annotation.XmlTransient;
 
     @Override
     public int hashCode() {
-<span class="nc" id="L105">        int hash = 0;</span>
-<span class="nc bnc" id="L106" title="All 2 branches missed.">        hash += (fullName != null ? fullName.hashCode() : 0);</span>
-<span class="nc" id="L107">        return hash;</span>
+<span class="fc" id="L105">        int hash = 0;</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        hash += (fullName != null ? fullName.hashCode() : 0);</span>
+<span class="fc" id="L107">        return hash;</span>
     }
 
     @Override
     public boolean equals(Object obj) {
-<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (this == obj) {</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (this == obj) {</span>
 <span class="fc" id="L113">            return true;</span>
         }
-<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (obj == null) {</span>
 <span class="nc" id="L116">            return false;</span>
         }
-<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
 <span class="nc" id="L119">            return false;</span>
         }
-<span class="nc" id="L121">        final Camper other = (Camper) obj;</span>
-<span class="nc bnc" id="L122" title="All 2 branches missed.">        if (this.NIF != other.NIF) {</span>
+<span class="fc" id="L121">        final Camper other = (Camper) obj;</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (this.NIF != other.NIF) {</span>
 <span class="nc" id="L123">            return false;</span>
         }
-<span class="nc" id="L125">        return Objects.equals(this.username, other.username);</span>
+<span class="fc" id="L125">        return Objects.equals(this.username, other.username);</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L130">        return &quot;Persistencia.Camper[ full name=&quot; + fullName + &quot; ]&quot;;</span>
+<span class="fc" id="L130">        return &quot;Persistencia.Camper[ full name=&quot; + fullName + &quot; ]&quot;;</span>
     }
 
 }

@@ -1,11 +1,13 @@
+/home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/UtilizadorTest.java
+/home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Selenium/CamperSideTest.java
+/home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleIT.java
 /home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/CamperTest.java
 /home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/ManagerTest.java
 /home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Selenium/ManagerSideTest.java
-/home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/UtilizadorTest.java
 /home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/ReflectTool.java
 /home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/ReservationTest.java
 /home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/FavouriteListTest.java
-/home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Selenium/CamperSideTest.java
+/home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/BackendBeans/NewSessionBeanTest.java
 /home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/CampsiteTest.java
 /home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/AssertAnnotations.java
-/home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleIT.java
+/home/andreia/Documentos/PROJETOBOOOOM/GoCamping/goCamping/src/test/java/BackendBeans/NewSessionBeanIT.java

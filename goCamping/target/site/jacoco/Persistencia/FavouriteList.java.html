@@ -59,25 +59,25 @@ import javax.persistence.*;
 
     @Override
     public boolean equals(Object obj) {
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (this == obj) {</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (this == obj) {</span>
 <span class="nc" id="L63">            return true;</span>
         }
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (obj == null) {</span>
 <span class="nc" id="L66">            return false;</span>
         }
-<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
 <span class="nc" id="L69">            return false;</span>
         }
-<span class="nc" id="L71">        final FavouriteList other = (FavouriteList) obj;</span>
-<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (this.campsiteID != other.campsiteID) {</span>
+<span class="fc" id="L71">        final FavouriteList other = (FavouriteList) obj;</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (this.campsiteID != other.campsiteID) {</span>
 <span class="nc" id="L73">            return false;</span>
         }
-<span class="nc" id="L75">        return Objects.equals(this.camperUsername, other.camperUsername);</span>
+<span class="fc" id="L75">        return Objects.equals(this.camperUsername, other.camperUsername);</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L80">        return &quot;FavouriteList{&quot; + &quot;camperUsername=&quot; + camperUsername + &quot;, campsiteID=&quot; + campsiteID + '}';</span>
+<span class="fc" id="L80">        return &quot;FavouriteList{&quot; + &quot;camperUsername=&quot; + camperUsername + &quot;, campsiteID=&quot; + campsiteID + '}';</span>
     }
     
    
