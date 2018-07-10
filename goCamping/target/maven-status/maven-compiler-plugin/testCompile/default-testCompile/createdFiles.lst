@@ -1,1 +1,9 @@
+BackendBeans/NewSessionBeanTest.class
+Persistencia/FavouriteListTest.class
+Persistencia/ReservationTest.class
+Persistencia/CampsiteTest.class
+Persistencia/CamperTest.class
+Persistencia/AssertAnnotations.class
+Persistencia/ManagerTest.class
 Persistencia/UtilizadorTest.class
+Persistencia/ReflectTool.class

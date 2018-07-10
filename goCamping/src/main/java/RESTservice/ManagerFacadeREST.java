@@ -5,8 +5,10 @@
  */
 package RESTservice;
 
+import BackendBeans.NewSessionBean;
 import Persistencia.Manager;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,66 +32,25 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path("manager")
-public class ManagerFacadeREST extends AbstractFacade<Manager> {
-
-    @PersistenceContext(unitName = "PUnit")
-    private EntityManager em;
+public class ManagerFacadeREST {
+    
+    @EJB
+    NewSessionBean nsb;
 
     public ManagerFacadeREST() {
-        super(Manager.class);
-    }
-
-    @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Manager entity) {
-        super.create(entity);
-    }
-
-    @PUT
-    @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") String id, Manager entity) {
-        super.edit(entity);
-    }
-
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") String id) {
-        super.remove(super.find(id));
+        
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Manager find(@PathParam("id") String id) {
-        return super.find(id);
+        return nsb.searchManager(id);
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Manager> findAll() {
-        return super.findAll();
+        return nsb.listarTodosManagers();
     }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Manager> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-    
 }

@@ -5,8 +5,10 @@
  */
 package RESTservice;
 
+import BackendBeans.NewSessionBean;
 import Persistencia.Camper;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,66 +32,27 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path("camper")
-public class CamperFacadeREST extends AbstractFacade<Camper> {
+public class CamperFacadeREST {
 
-    @PersistenceContext(unitName = "PUnit")
-    private EntityManager em;
-
+    @EJB
+    NewSessionBean nsb;
+    
     public CamperFacadeREST() {
-        super(Camper.class);
-    }
-
-    @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Camper entity) {
-        super.create(entity);
-    }
-
-    @PUT
-    @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") String id, Camper entity) {
-        super.edit(entity);
-    }
-
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") String id) {
-        super.remove(super.find(id));
+        
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Camper find(@PathParam("id") String id) {
-        return super.find(id);
+        return nsb.searchCamper(id);
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Camper> findAll() {
-        return super.findAll();
+        return nsb.listarTodosCampers();
     }
 
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Camper> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
     
 }
