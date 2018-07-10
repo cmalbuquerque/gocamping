@@ -19,7 +19,7 @@ public class CamperSideTest {
 
   @Before
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "/home/carolinaalbuquerque");
+    System.setProperty("webdriver.chrome.driver", "/home/carolinaalbuquerque/chromedriver");
     driver = new ChromeDriver();
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
