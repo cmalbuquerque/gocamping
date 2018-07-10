@@ -11,24 +11,43 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+
+import java.io.File;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText emailText;
+    static final String API_KEY = "OoHPawan52M008dogcoBEBDPL0N2IBxC";
+    static final String API_URL = "http://192.168.160.223:8080/goCamping/rest/campsite";
+    EditText managerText;
     TextView responseView;
     ProgressBar progressBar;
-    static final String API_KEY = "OoHPawan52M008dogcoBEBDPL0N2IBxC";
-    static final String API_URL = "https://api.fullcontact.com/v2/person.json?";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         responseView = (TextView) findViewById(R.id.responseView);
-        emailText = (EditText) findViewById(R.id.emailText);
+        managerText = (EditText) findViewById(R.id.emailText);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         Button queryButton = (Button) findViewById(R.id.queryButton);
@@ -58,11 +77,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         protected String doInBackground(Void... urls) {
-            String email = emailText.getText().toString();
+            String manager = "/" + managerText.getText().toString();
+            if (manager.length() == 1) {
+                manager = "";
+            }
             // Do some validation here
 
             try {
-                URL url = new URL(API_URL + "email=" + email + "&apiKey=" + API_KEY);
+                URL url = new URL(API_URL + manager);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -73,39 +95,68 @@ public class MainActivity extends AppCompatActivity {
                     }
                     bufferedReader.close();
                     return stringBuilder.toString();
-                }
-                finally{
+                } finally {
                     urlConnection.disconnect();
                 }
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 Log.e("ERROR", e.getMessage(), e);
                 return null;
             }
         }
 
         protected void onPostExecute(String response) {
-            if(response == null) {
+            if (response == null) {
                 response = "THERE WAS AN ERROR";
             }
             progressBar.setVisibility(View.GONE);
             Log.i("INFO", response);
-            responseView.setText(response);
-            // TODO: check this.exception
-            // TODO: do something with the feed
+            Log.i("MINE1", response);
 
-//            try {
-//                JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
-//                String requestID = object.getString("requestId");
-//                int likelihood = object.getInt("likelihood");
-//                JSONArray photos = object.getJSONArray("photos");
-//                .
-//                .
-//                .
-//                .
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+
+            try {
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = null;
+                Document doc;
+                dBuilder = dbFactory.newDocumentBuilder();
+                doc = dBuilder.parse(new InputSource(new StringReader(response)));
+                doc.getDocumentElement().normalize();
+                NodeList nList = doc.getElementsByTagName("campsite");
+                StringBuilder stringBuilder = new StringBuilder();
+
+                for (int temp = 0; temp < nList.getLength(); temp++) {
+                    Node nNode = nList.item(temp);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                        Element eElement = (Element) nNode;
+
+                        stringBuilder.append("Adult Price : " + eElement.getElementsByTagName("adultPrice").item(0).getTextContent()).append("\n");
+                        stringBuilder.append("Child Price : " + eElement.getElementsByTagName("childPrice").item(0).getTextContent()).append("\n");
+                        stringBuilder.append("Baby Price : " + eElement.getElementsByTagName("babyPrice").item(0).getTextContent()).append("\n");
+                        stringBuilder.append("Card Discount : " + eElement.getElementsByTagName("campingCardDiscount").item(0).getTextContent()).append("\n");
+                        stringBuilder.append("Contact : " + eElement.getElementsByTagName("contact").item(0).getTextContent()).append("\n");
+                        stringBuilder.append("Description : " + eElement.getElementsByTagName("description").item(0).getTextContent()).append("\n");
+                        stringBuilder.append("Location : " + eElement.getElementsByTagName("location").item(0).getTextContent()).append("\n");
+                        stringBuilder.append("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent()).append("\n");
+
+                        Log.i("MINE", stringBuilder.toString());
+
+                    }
+                }
+                stringBuilder.toString();
+                responseView.setText(stringBuilder);
+
+            } catch (ParserConfigurationException e) {
+                Log.i("MINE", "Catch1");
+                e.printStackTrace();
+            } catch (SAXException e) {
+                Log.i("MINE", "Catch2");
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.i("MINE", "Catch3");
+                e.printStackTrace();
+            }
+
+
         }
     }
 
