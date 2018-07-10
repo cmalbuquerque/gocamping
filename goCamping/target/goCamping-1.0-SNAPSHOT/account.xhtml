@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>GoCamping</title>
+
+    </h:head>
+    <h:body>
+        <h:form>
+             <b:navBar brand="goCamping" brandHref="#">
+                <b:navbarLinks>
+                    <b:navLink icon="search" value="Search"  outcome="/index.xhtml"></b:navLink>
+                    <b:navLink rendered="#{not empty isCamper}" icon="heart" value="Favourite List" outcome="/favList.xhtml"></b:navLink>
+                    <b:navLink rendered="#{not empty username}" icon="user" value="Account" outcome="/account.xhtml"></b:navLink>
+                    <b:navLink rendered="#{not empty isManager}" icon="tent" value="My Campsites" outcome="/myCampsites.xhtml"></b:navLink>
+                    <b:navLink rendered="#{not empty isCamper}" icon="book" value="My Reservations" outcome="/myReservations.xhtml"></b:navLink>
+                </b:navbarLinks>
+                <b:navbarLinks pull="right">
+                    <b:navLink rendered="#{not empty isManager}" iconAwesome="plus-circle" value="Add Campsite" outcome="/addCampsite.xhtml"></b:navLink>
+                    <b:navLink rendered="#{empty username}" icon="log-in" value="Login/Sign Up" outcome="/login.xhtml"></b:navLink>
+                    <b:commandButton rendered="#{not empty username}" icon="log-out" value="Log out" action="#{authenticationbean.logOut}" style="margin-top:5%"></b:commandButton>
+                </b:navbarLinks>
+            </b:navBar>
+
+            <h3 style="color: #72b400; margin-left: 10%; margin-top:5%"><b:iconAwesome name="cogs" /> Account Settings<br>&nbsp;</br></h3>
+                
+            <p:panel rendered="#{not empty isCamper}" style="margin-left: 10%; margin-right: 5%; width: 35%; float: left">
+                <h4 style="text-align: center">Personal Information</h4>
+                    <h:panelGrid style="margin-left: 15%; margin-top: 7%">
+                        <b:inputText placeholder="Full Name" label="Full Name" value = "#{accountbean.fullName}">
+                            <f:facet name="prepend">
+                                <b:icon name="user" />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText placeholder="E-mail" label="E-mail" value = "#{accountbean.email}">
+                            <f:facet name="prepend">
+                                <b:iconAwesome name="envelope-o" />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText placeholder="Camping Card" label="Camping Card" value = "#{accountbean.campsiteCard}">
+                            <f:facet name="prepend">
+                                <b:iconAwesome name="address-card-o" />
+                            </f:facet>
+                        </b:inputText><br>&nbsp;</br>
+                        <b:row>
+                            <b:column span="3"></b:column>
+                            <b:commandButton span="6" value="Save" iconAwesome="check" look="success"  action="#{accountbean.editPersonalInformation}"></b:commandButton>
+                            <b:column span="3"></b:column>
+                        </b:row>
+                    </h:panelGrid>
+            </p:panel>
+            
+            <p:panel rendered="#{not empty isManager}" style="margin-left: 10%; margin-right: 5%; width: 35%; float: left">
+                <h4 style="text-align: center">Personal Information</h4>
+                    <h:panelGrid style="margin-left: 15%; margin-top: 7%">
+                        <b:inputText placeholder="Full Name" label="Full Name" value = "#{accountbean.fullNameManager}">
+                            <f:facet name="prepend">
+                                <b:icon name="user" />
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText placeholder="E-mail" label="E-mail" value = "#{accountbean.emailManager}">
+                            <f:facet name="prepend">
+                                <b:iconAwesome name="envelope-o" />
+                            </f:facet>
+                        </b:inputText>
+                        <b:row>
+                            <br>&nbsp;</br><br>&nbsp;</br><br>&nbsp;</br>
+                            <b:column span="3"></b:column>
+                            <b:commandButton span="6" value="Save" iconAwesome="check" look="success"  action="#{accountbean.editPersonalInformationManager}"></b:commandButton>
+                            <b:column span="3"></b:column>
+                        </b:row>
+                    </h:panelGrid>
+            </p:panel>
+            
+            
+            <p:panel style="margin-right: 10%; width: 35%; float: left; ">   
+                <h4 style="text-align: center">Login Access</h4>
+                <h:panelGrid style="margin-left: 15%; margin-top: 7%">
+                    <b:inputSecret placeholder="Old Password" label="Old Password" value="#{accountbean.password}">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key" />
+                        </f:facet>
+                    </b:inputSecret>
+                    <b:inputSecret placeholder="New Password" label="New Password" value="#{accountbean.newPassword}">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key" />
+                        </f:facet>
+                    </b:inputSecret>
+                    <b:inputSecret placeholder="Confirm Password" label="Confirm Password" value="#{accountbean.confirmationPassword}">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key" />
+                        </f:facet>
+                    </b:inputSecret><br>&nbsp;</br>
+                    <b:row>
+                        <b:column span="3"></b:column>
+                        <b:commandButton span = "6" value="Save" iconAwesome="check" look="success"  action="#{accountbean.editLoginAccess}"></b:commandButton>
+                        <b:column span="3"></b:column>
+                    </b:row>
+                    
+                </h:panelGrid>
+            </p:panel>
+
+        </h:form>
+    </h:body>
+</html>
+

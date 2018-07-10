@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Campsite.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">Persistencia</a> &gt; <span class="el_source">Campsite.java</span></div><h1>Campsite.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Persistencia;
+
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+/**
+ *
+ * @author Andreia Patrocínio
+ * @author Carolina Albuquerque
+ * @author Diogo Jorge
+ * @author Pedro Pires
+ *
+ */
+@Entity
+@Table(name = &quot;Campsite&quot;)
+@XmlRootElement
+<span class="fc" id="L25">public class Campsite implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = &quot;id&quot;)
+    private int id;
+
+    @Column(name = &quot;title&quot;)
+    private String title;
+
+    @Column(name = &quot;location&quot;)
+    private String location;
+
+    @Column(name = &quot;adultPrice&quot;)
+    private double adultPrice;
+
+    @Column(name = &quot;childPrice&quot;)
+    private double childPrice;
+
+    @Column(name = &quot;babyPrice&quot;)
+    private double babyPrice;
+
+    @Column(name = &quot;contact&quot;)
+    private String contact;
+
+    @Column(name = &quot;description&quot;)
+    private String description;
+    
+    @Column(name = &quot;campingCardDiscount&quot;)
+    private double campingCardDiscount;
+
+    //CHAVE ESTRANGEIRA
+    @ManyToOne()
+    @JoinColumn(name = &quot;manager&quot;)
+    private Manager manager;
+
+
+    public static long getSerialVersionUID() {
+<span class="nc" id="L64">        return serialVersionUID;</span>
+    }
+
+    public int getId() {
+<span class="fc" id="L68">        return id;</span>
+    }
+
+    public String getTitle() {
+<span class="fc" id="L72">        return title;</span>
+    }
+
+    public String getLocation() {
+<span class="fc" id="L76">        return location;</span>
+    }
+
+    public double getAdultPrice() {
+<span class="fc" id="L80">        return adultPrice;</span>
+    }
+
+    public double getChildPrice() {
+<span class="fc" id="L84">        return childPrice;</span>
+    }
+
+    public double getBabyPrice() {
+<span class="fc" id="L88">        return babyPrice;</span>
+    }
+
+    public String getContact() {
+<span class="fc" id="L92">        return contact;</span>
+    }
+
+    public String getDescription() {
+<span class="fc" id="L96">        return description;</span>
+    }
+
+    @XmlTransient
+    public Manager getManager() {
+<span class="fc" id="L101">        return manager;</span>
+    }
+
+    public void setManager(Manager manager) {
+<span class="fc" id="L105">        this.manager = manager;</span>
+<span class="fc" id="L106">    }</span>
+
+    public void setId(int id) {
+<span class="nc" id="L109">        this.id = id;</span>
+<span class="nc" id="L110">    }</span>
+
+    public void setTitle(String title) {
+<span class="fc" id="L113">        this.title = title;</span>
+<span class="fc" id="L114">    }</span>
+
+    public void setLocation(String location) {
+<span class="fc" id="L117">        this.location = location;</span>
+<span class="fc" id="L118">    }</span>
+
+    public void setAdultPrice(double adultPrice) {
+<span class="fc" id="L121">        this.adultPrice = adultPrice;</span>
+<span class="fc" id="L122">    }</span>
+
+    public void setChildPrice(double childPrice) {
+<span class="fc" id="L125">        this.childPrice = childPrice;</span>
+<span class="fc" id="L126">    }</span>
+
+    public void setBabyPrice(double babyPrice) {
+<span class="fc" id="L129">        this.babyPrice = babyPrice;</span>
+<span class="fc" id="L130">    }</span>
+
+    public void setContact(String contact) {
+<span class="fc" id="L133">        this.contact = contact;</span>
+<span class="fc" id="L134">    }</span>
+
+    public void setDescription(String description) {
+<span class="fc" id="L137">        this.description = description;</span>
+<span class="fc" id="L138">    }</span>
+
+    public double getCampingCardDiscount() {
+<span class="nc" id="L141">        return campingCardDiscount;</span>
+    }
+
+    public void setCampingCardDiscount(double campingCardDiscount) {
+<span class="fc" id="L145">        this.campingCardDiscount = campingCardDiscount;</span>
+<span class="fc" id="L146">    }</span>
+    
+    
+    
+    @Override
+    public int hashCode() {
+<span class="nc" id="L152">        int hash = 0;</span>
+<span class="nc" id="L153">        hash += (int) id;</span>
+<span class="nc" id="L154">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L160">            return true;</span>
+        }
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L163">            System.out.println(&quot;Object Null&quot;);</span>
+<span class="nc" id="L164">            return false;</span>
+        }
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L167">            System.out.println(&quot;Object Different Class&quot;);</span>
+<span class="nc" id="L168">            return false;</span>
+        }
+<span class="fc" id="L170">        final Campsite other = (Campsite) obj;</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if (Double.doubleToLongBits(this.adultPrice) != Double.doubleToLongBits(other.adultPrice)) {</span>
+<span class="nc" id="L172">            System.out.println(&quot;Object Different adult Price&quot;);</span>
+<span class="nc" id="L173">            return false;</span>
+        }
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">        if (Double.doubleToLongBits(this.childPrice) != Double.doubleToLongBits(other.childPrice)) {</span>
+<span class="nc" id="L176">            System.out.println(&quot;Object Different child Price&quot;);</span>
+<span class="nc" id="L177">            return false;</span>
+        }
+<span class="pc bpc" id="L179" title="1 of 2 branches missed.">        if (Double.doubleToLongBits(this.babyPrice) != Double.doubleToLongBits(other.babyPrice)) {</span>
+<span class="nc" id="L180">            System.out.println(&quot;Object Different baby Price&quot;);</span>
+<span class="nc" id="L181">            return false;</span>
+        }
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">        if (!Objects.equals(this.title, other.title)) {</span>
+<span class="nc" id="L184">            System.out.println(&quot;Object Different title&quot;);</span>
+<span class="nc" id="L185">            return false;</span>
+        }
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        if (!Objects.equals(this.location, other.location)) {</span>
+<span class="nc" id="L188">            System.out.println(&quot;Object Different location&quot;);</span>
+<span class="nc" id="L189">            return false;</span>
+        }
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">        if (!Objects.equals(this.contact, other.contact)) {</span>
+<span class="nc" id="L192">            System.out.println(&quot;Object Different contact&quot;);</span>
+<span class="nc" id="L193">            return false;</span>
+        }
+<span class="fc" id="L195">        return true;</span>
+    }
+
+
+
+    @Override
+    public String toString() {
+<span class="fc" id="L202">        return &quot;Campsite{&quot; + &quot;id=&quot; + id + &quot;, title=&quot; + title + &quot;, location=&quot; + location + &quot;, adultPrice=&quot; + adultPrice + &quot;, childPrice=&quot; + childPrice + &quot;, babyPrice=&quot; + babyPrice + &quot;, contact=&quot; + contact + &quot;, description=&quot; + description + &quot;, manager=&quot; + manager +  &quot;campingCardDiscount&quot;+ campingCardDiscount + '}';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>
