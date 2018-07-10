@@ -5,8 +5,10 @@
  */
 package RESTservice;
 
+import BackendBeans.NewSessionBean;
 import Persistencia.Camper;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,67 +32,28 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path(&quot;camper&quot;)
-public class CamperFacadeREST extends AbstractFacade&lt;Camper&gt; {
+public class CamperFacadeREST {
 
-    @PersistenceContext(unitName = &quot;PUnit&quot;)
-    private EntityManager em;
-
-    public CamperFacadeREST() {
-<span class="nc" id="L39">        super(Camper.class);</span>
-<span class="nc" id="L40">    }</span>
-
-    @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Camper entity) {
-<span class="nc" id="L46">        super.create(entity);</span>
-<span class="nc" id="L47">    }</span>
-
-    @PUT
-    @Path(&quot;{id}&quot;)
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam(&quot;id&quot;) String id, Camper entity) {
-<span class="nc" id="L53">        super.edit(entity);</span>
-<span class="nc" id="L54">    }</span>
-
-    @DELETE
-    @Path(&quot;{id}&quot;)
-    public void remove(@PathParam(&quot;id&quot;) String id) {
-<span class="nc" id="L59">        super.remove(super.find(id));</span>
-<span class="nc" id="L60">    }</span>
+    @EJB
+    NewSessionBean nsb;
+    
+<span class="nc" id="L40">    public CamperFacadeREST() {</span>
+        
+<span class="nc" id="L42">    }</span>
 
     @GET
     @Path(&quot;{id}&quot;)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Camper find(@PathParam(&quot;id&quot;) String id) {
-<span class="nc" id="L66">        return super.find(id);</span>
+<span class="nc" id="L48">        return nsb.searchCamper(id);</span>
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List&lt;Camper&gt; findAll() {
-<span class="nc" id="L73">        return super.findAll();</span>
+<span class="nc" id="L54">        return nsb.listarTodosCampers();</span>
     }
 
-    @GET
-    @Path(&quot;{from}/{to}&quot;)
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List&lt;Camper&gt; findRange(@PathParam(&quot;from&quot;) Integer from, @PathParam(&quot;to&quot;) Integer to) {
-<span class="nc" id="L80">        return super.findRange(new int[]{from, to});</span>
-    }
-
-    @GET
-    @Path(&quot;count&quot;)
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-<span class="nc" id="L87">        return String.valueOf(super.count());</span>
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-<span class="nc" id="L92">        return em;</span>
-    }
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

@@ -5,11 +5,16 @@
  */
 package RESTservice;
 
+import BackendBeans.NewSessionBean;
 import Persistencia.Campsite;
+import Persistencia.Manager;
+import java.util.Iterator;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -30,66 +35,43 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path(&quot;campsite&quot;)
-public class CampsiteFacadeREST extends AbstractFacade&lt;Campsite&gt; {
+public class CampsiteFacadeREST {
 
-    @PersistenceContext(unitName = &quot;PUnit&quot;)
+    
     private EntityManager em;
-
-    public CampsiteFacadeREST() {
-<span class="nc" id="L39">        super(Campsite.class);</span>
-<span class="nc" id="L40">    }</span>
-
-    @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Campsite entity) {
-<span class="nc" id="L46">        super.create(entity);</span>
+    
+    @EJB
+    NewSessionBean nsb;
+    
+<span class="nc" id="L46">    public CampsiteFacadeREST() {</span>
 <span class="nc" id="L47">    }</span>
-
-    @PUT
-    @Path(&quot;{id}&quot;)
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam(&quot;id&quot;) Integer id, Campsite entity) {
-<span class="nc" id="L53">        super.edit(entity);</span>
-<span class="nc" id="L54">    }</span>
-
-    @DELETE
-    @Path(&quot;{id}&quot;)
-    public void remove(@PathParam(&quot;id&quot;) Integer id) {
-<span class="nc" id="L59">        super.remove(super.find(id));</span>
-<span class="nc" id="L60">    }</span>
-
-    @GET
-    @Path(&quot;{id}&quot;)
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Campsite find(@PathParam(&quot;id&quot;) Integer id) {
-<span class="nc" id="L66">        return super.find(id);</span>
-    }
+    
+//    @GET
+//    @Path(&quot;{name}&quot;)
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public List&lt;Campsite&gt; find(@PathParam(&quot;name&quot;) String name) {
+//        Manager manager = new Manager();
+//        Query query = em.createQuery(&quot;select c from Manager c where c.username = :name&quot;);
+//        query.setParameter(&quot;name&quot;, name);
+//        List&lt;Manager&gt; managers = query.getResultList();
+//        for (Iterator&lt;Manager&gt; iterator = managers.iterator(); iterator.hasNext();) {
+//            manager = iterator.next();
+//        }
+//
+//        Query query2 = em.createQuery(&quot;select c from Campsite c where c.manager = :manager&quot;);
+//        query2.setParameter(&quot;manager&quot;, manager);
+//        List&lt;Campsite&gt; campsites = query2.getResultList();
+//        return campsites;
+//    }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List&lt;Campsite&gt; findAll() {
-<span class="nc" id="L73">        return super.findAll();</span>
+<span class="nc" id="L70">        return nsb.listarTodosCampsites();</span>
     }
-
-    @GET
-    @Path(&quot;{from}/{to}&quot;)
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List&lt;Campsite&gt; findRange(@PathParam(&quot;from&quot;) Integer from, @PathParam(&quot;to&quot;) Integer to) {
-<span class="nc" id="L80">        return super.findRange(new int[]{from, to});</span>
-    }
-
-    @GET
-    @Path(&quot;count&quot;)
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-<span class="nc" id="L87">        return String.valueOf(super.count());</span>
-    }
-
-    @Override
+    
     protected EntityManager getEntityManager() {
-<span class="nc" id="L92">        return em;</span>
+<span class="nc" id="L74">        return em;</span>
     }
     
 }
