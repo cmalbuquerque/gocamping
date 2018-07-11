@@ -1,12 +1,12 @@
 persistencia/Manager.class
 restservice/CamperFacadeREST.class
-restservice/ManagerFacadeREST.class
 backendbeans/CampsiteBean.class
+restservice/ManagerFacadeREST.class
 backendbeans/SearchBean.class
 persistencia/Campsite.class
 restservice/AbstractFacade.class
-persistencia/FavouriteList.class
 backendbeans/AuthenticationBean.class
+persistencia/FavouriteList.class
 interfacebeans/CalendarManagedBean.class
 backendbeans/NewSessionBean.class
 generalstuff/Hash.class
