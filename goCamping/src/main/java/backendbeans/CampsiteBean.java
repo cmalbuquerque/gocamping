@@ -42,7 +42,7 @@ public class CampsiteBean implements Serializable {
     private double babiesPrice;
     @ManagedProperty(value = "#{contacts}")
     private String contacts;
-    @ManagedProperty(value = "#{NIF}")
+    @ManagedProperty(value = "#{nif}")
     private int nif;
     @ManagedProperty(value = "#{listaCampsites}")
     private List<Campsite> listaCampsites;

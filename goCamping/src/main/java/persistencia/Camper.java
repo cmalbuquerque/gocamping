@@ -34,7 +34,7 @@ public class Camper implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "NIF")
+    @Column(name = "nif")
     private int nif;
     @Column(name = "campsiteCard")
     private int campsiteCard;

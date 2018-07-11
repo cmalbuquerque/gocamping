@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Persistencia.ReservationTest" time="0.039" tests="13" errors="0" skipped="0" failures="0">
+<testsuite name="Persistencia.ReservationTest" time="0.023" tests="13" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/pirex/jdk1.8.0_144/jre/lib/amd64"/>
@@ -61,17 +61,17 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testEndDate" classname="Persistencia.ReservationTest" time="0.025"/>
-  <testcase name="fieldAnnotations" classname="Persistencia.ReservationTest" time="0.001"/>
-  <testcase name="testStartDate" classname="Persistencia.ReservationTest" time="0.002"/>
-  <testcase name="testTotalPrice" classname="Persistencia.ReservationTest" time="0.002"/>
-  <testcase name="entity" classname="Persistencia.ReservationTest" time="0.002"/>
+  <testcase name="testEndDate" classname="Persistencia.ReservationTest" time="0.015"/>
+  <testcase name="fieldAnnotations" classname="Persistencia.ReservationTest" time="0"/>
+  <testcase name="testStartDate" classname="Persistencia.ReservationTest" time="0.001"/>
+  <testcase name="testTotalPrice" classname="Persistencia.ReservationTest" time="0.001"/>
+  <testcase name="entity" classname="Persistencia.ReservationTest" time="0"/>
   <testcase name="testNrAdults" classname="Persistencia.ReservationTest" time="0.002"/>
   <testcase name="testNrBabies" classname="Persistencia.ReservationTest" time="0.001"/>
   <testcase name="testCellfone" classname="Persistencia.ReservationTest" time="0.001"/>
   <testcase name="typeAnnotations" classname="Persistencia.ReservationTest" time="0.001"/>
   <testcase name="testCampsite" classname="Persistencia.ReservationTest" time="0"/>
   <testcase name="testNrChildren" classname="Persistencia.ReservationTest" time="0.001"/>
-  <testcase name="testCamper" classname="Persistencia.ReservationTest" time="0.001"/>
+  <testcase name="testCamper" classname="Persistencia.ReservationTest" time="0"/>
   <testcase name="methodAnnotations" classname="Persistencia.ReservationTest" time="0"/>
 </testsuite>

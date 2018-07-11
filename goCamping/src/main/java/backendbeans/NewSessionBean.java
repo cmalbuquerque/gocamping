@@ -63,14 +63,14 @@ public class NewSessionBean implements Serializable {
     //Camper 
     
    
-    public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard) {
+    public Camper saveCamper(String username, String fullname, String email, int nif, int campsiteCard) {
         Camper camper = new Camper();
         try {
             entityManager.getTransaction().begin();
             camper.setUsername(username);
             camper.setFullName(fullname);
             camper.setEmail(email);
-            camper.setNif(NIF);
+            camper.setNif(nif);
             camper.setCampsiteCard(campsiteCard);
             entityManager.persist(camper);
             entityManager.getTransaction().commit();
@@ -88,7 +88,7 @@ public class NewSessionBean implements Serializable {
             query.setParameter("name", name);
             List<Camper> utilizador = query.getResultList();
             for (Iterator<Camper> iterator = utilizador.iterator(); iterator.hasNext();) {
-                user = (Camper) iterator.next();
+                user = iterator.next();
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -97,25 +97,13 @@ public class NewSessionBean implements Serializable {
         return user;
     }
 
-    public void listCamper() {
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Camper c");
-            List<Camper> Campers = query.getResultList();
-            for (Iterator<Camper> iterator = Campers.iterator(); iterator.hasNext();) {
-                Camper camper = (Camper) iterator.next();
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-        }
-    }
+
 
     public Camper updateCamper(String username, String fullname, String email, int campingCard) {
         Camper camper = new Camper();
         try {
             entityManager.getTransaction().begin();
-            camper = (Camper) entityManager.find(Camper.class, username);
+            camper = entityManager.find(Camper.class, username);
             camper.setFullName(fullname);
             camper.setEmail(email);
             camper.setCampsiteCard(campingCard);
@@ -127,8 +115,8 @@ public class NewSessionBean implements Serializable {
     }
     
      public List<Camper> listarTodosCampers() {
-        List<Camper> campers = new ArrayList<Camper>();
-        List<Camper> list = new ArrayList<Camper>();
+        List<Camper> campers = new ArrayList<>();
+        List<Camper> list = new ArrayList<>();
 
         try {
             entityManager.getTransaction().begin();
@@ -136,7 +124,7 @@ public class NewSessionBean implements Serializable {
 
             campers = query.getResultList();
             for (Iterator<Camper> iterator = campers.iterator(); iterator.hasNext();) {
-                Camper utilizador = (Camper) iterator.next();
+                Camper utilizador =  iterator.next();
                 list.add(utilizador);
             }
 
@@ -150,7 +138,7 @@ public class NewSessionBean implements Serializable {
     public boolean deleteCamper(String username) {
         try {
             entityManager.getTransaction().begin();
-            Camper camper = (Camper) entityManager.find(Camper.class, username);
+            Camper camper = entityManager.find(Camper.class, username);
             entityManager.remove(camper);
             entityManager.getTransaction().commit();
             return true;
@@ -160,14 +148,14 @@ public class NewSessionBean implements Serializable {
         }
     }
 
-    public Manager saveManager(String username, String fullname, String email, int NIF) {
+    public Manager saveManager(String username, String fullname, String email, int nif) {
         Manager manager = new Manager();
         try {
             entityManager.getTransaction().begin();
             manager.setUsername(username);
             manager.setFullName(fullname);
             manager.setEmail(email);
-            manager.setNif(NIF);
+            manager.setNif(nif);
             entityManager.persist(manager);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -184,7 +172,7 @@ public class NewSessionBean implements Serializable {
             query.setParameter("name", name);
             List<Manager> managers = query.getResultList();
             for (Iterator<Manager> iterator = managers.iterator(); iterator.hasNext();) {
-                manager = (Manager) iterator.next();
+                manager = iterator.next();
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -193,25 +181,13 @@ public class NewSessionBean implements Serializable {
         return manager;
     }
 
-    public void listManager() {
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("select c from Manager c");
-            List<Manager> Managers = query.getResultList();
-            for (Iterator<Manager> iterator = Managers.iterator(); iterator.hasNext();) {
-                Manager manager = (Manager) iterator.next();
-            }
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-        }
-    }
+
 
     public Manager updateManager(String username, String fullname, String email) {
         Manager manager = new Manager();
         try {
             entityManager.getTransaction().begin();
-            manager = (Manager) entityManager.find(Manager.class, username);
+            manager = entityManager.find(Manager.class, username);
             manager.setFullName(fullname);
             manager.setEmail(email);
             entityManager.getTransaction().commit();
@@ -222,19 +198,16 @@ public class NewSessionBean implements Serializable {
     }
     
     public List<Manager> listarTodosManagers() {
-        List<Manager> managers = new ArrayList<Manager>();
-        List<Manager> list = new ArrayList<Manager>();
-
+        List<Manager> managers = new ArrayList<>();
+        List<Manager> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Manager c");
-
             managers = query.getResultList();
             for (Iterator<Manager> iterator = managers.iterator(); iterator.hasNext();) {
-                Manager utilizador = (Manager) iterator.next();
+                Manager utilizador = iterator.next();
                 list.add(utilizador);
             }
-
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -245,7 +218,7 @@ public class NewSessionBean implements Serializable {
     public boolean deleteManager(String username) {
         try {
             entityManager.getTransaction().begin();
-            Manager manager = (Manager) entityManager.find(Manager.class, username);
+            Manager manager = entityManager.find(Manager.class, username);
             entityManager.remove(manager);
             entityManager.getTransaction().commit();
             return true;
@@ -275,14 +248,14 @@ public class NewSessionBean implements Serializable {
     }
     
     public List<Utilizador> listarTodosUtilizadores() {
-        List<Utilizador> utilizadores = new ArrayList<Utilizador>();
-        List<Utilizador> list = new ArrayList<Utilizador>();
+        List<Utilizador> utilizadores = new ArrayList<>();
+        List<Utilizador> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Utilizador c");
             utilizadores = query.getResultList();
             for (Iterator<Utilizador> iterator = utilizadores.iterator(); iterator.hasNext();) {
-                Utilizador utilizador = (Utilizador) iterator.next();
+                Utilizador utilizador = iterator.next();
                 list.add(utilizador);
             }
 
@@ -297,7 +270,7 @@ public class NewSessionBean implements Serializable {
         Utilizador user = new Utilizador();
         try {
             entityManager.getTransaction().begin();
-            user = (Utilizador) entityManager.find(Utilizador.class, username);
+            user = entityManager.find(Utilizador.class, username);
             user.setUsername(username);
             user.setPassword(newPassword);
             entityManager.getTransaction().commit();
@@ -310,7 +283,7 @@ public class NewSessionBean implements Serializable {
     public boolean deleteUtilizador(String username) {
         try {
             entityManager.getTransaction().begin();
-            Utilizador utilizador = (Utilizador) entityManager.find(Utilizador.class, username);
+            Utilizador utilizador = entityManager.find(Utilizador.class, username);
             entityManager.getTransaction().commit();
             
             entityManager.remove(utilizador);
@@ -329,7 +302,7 @@ public class NewSessionBean implements Serializable {
             query.setParameter("name", name);
             List<Utilizador> utilizador = query.getResultList();
             for (Iterator<Utilizador> iterator = utilizador.iterator(); iterator.hasNext();) {
-                user = (Utilizador) iterator.next();
+                user = iterator.next();
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -368,7 +341,7 @@ public class NewSessionBean implements Serializable {
             query.setParameter("id", id);
             List<Campsite> campsites = query.getResultList();
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
-                campsite = (Campsite) iterator.next();
+                campsite = iterator.next();
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -378,15 +351,15 @@ public class NewSessionBean implements Serializable {
     }
 
     public List<Campsite> listarCampsite(Manager manager) {
-        List<Campsite> campsites = new ArrayList<Campsite>();
-        List<Campsite> list = new ArrayList<Campsite>();
+        List<Campsite> campsites = new ArrayList<>();
+        List<Campsite> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Campsite as c where c.manager = :manager");
             query.setParameter("manager", manager);
             campsites = query.getResultList();
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
-                Campsite campsite = (Campsite) iterator.next();
+                Campsite campsite =  iterator.next();
                 list.add(campsite);
             }
             entityManager.getTransaction().commit();
@@ -412,8 +385,8 @@ public class NewSessionBean implements Serializable {
     }
 
     public List<Campsite> listarTodosCampsites() {
-        List<Campsite> campsites = new ArrayList<Campsite>();
-        List<Campsite> list = new ArrayList<Campsite>();
+        List<Campsite> campsites = new ArrayList<>();
+        List<Campsite> list = new ArrayList<>();
 
         try {
             entityManager.getTransaction().begin();
@@ -421,7 +394,7 @@ public class NewSessionBean implements Serializable {
 
             campsites = query.getResultList();
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
-                Campsite campsite = (Campsite) iterator.next();
+                Campsite campsite = iterator.next();
                 list.add(campsite);
             }
             entityManager.getTransaction().commit();
@@ -432,15 +405,15 @@ public class NewSessionBean implements Serializable {
     }
 
     public List<Campsite> listarCampsite(String location) {
-        List<Campsite> campsites = new ArrayList<Campsite>();
-        List<Campsite> list = new ArrayList<Campsite>();
+        List<Campsite> campsites = new ArrayList<>();
+        List<Campsite> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Campsite as c where c.location like :location");
             query.setParameter("location", "%" + location + "%");
             campsites = query.getResultList();
             for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
-                Campsite campsite = (Campsite) iterator.next();
+                Campsite campsite = iterator.next();
                 list.add(campsite);
             }
             entityManager.getTransaction().commit();
@@ -473,7 +446,7 @@ public class NewSessionBean implements Serializable {
     public boolean deleteCampsite(int id) {
         try {
             entityManager.getTransaction().begin();
-            Campsite campsite = (Campsite) entityManager.find(Campsite.class, id);
+            Campsite campsite = entityManager.find(Campsite.class, id);
             entityManager.remove(campsite);
             entityManager.getTransaction().commit();
             return true;
@@ -506,15 +479,15 @@ public class NewSessionBean implements Serializable {
     }
 
     public List<Reservation> listarReservations(Camper camper) {
-        List<Reservation> reservations = new ArrayList<Reservation>();
-        List<Reservation> list = new ArrayList<Reservation>();
+        List<Reservation> reservations = new ArrayList<>();
+        List<Reservation> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Reservation as c where c.camper = :camper");
             query.setParameter("camper", camper);
             reservations = query.getResultList();
             for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
-                Reservation reservation = (Reservation) iterator.next();
+                Reservation reservation =  iterator.next();
                 list.add(reservation);
             }
             entityManager.getTransaction().commit();
@@ -527,7 +500,7 @@ public class NewSessionBean implements Serializable {
     public void updateReservation(int id, Date startDate, Date endDate) {
         try {
             entityManager.getTransaction().begin();
-            Reservation reservation = (Reservation) entityManager.find(Reservation.class, id);
+            Reservation reservation =  entityManager.find(Reservation.class, id);
             reservation.setStartDate(startDate);
             reservation.setEndDate(endDate);
             entityManager.getTransaction().commit();
@@ -539,7 +512,7 @@ public class NewSessionBean implements Serializable {
     public boolean deleteReservation(int id) {
         try {
             entityManager.getTransaction().begin();
-            Reservation reservation = (Reservation) entityManager.find(Reservation.class, id);
+            Reservation reservation = entityManager.find(Reservation.class, id);
             entityManager.remove(reservation);
             entityManager.getTransaction().commit();
             return true;
@@ -567,8 +540,8 @@ public class NewSessionBean implements Serializable {
     }
 
     public List<Campsite> listarCampsitesFavList(String username) {
-        List<FavouriteList> favouriteLists = new ArrayList<FavouriteList>();
-        List<Integer> list = new ArrayList<Integer>();
+        List<FavouriteList> favouriteLists = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         List<Campsite> campsites = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
@@ -594,7 +567,7 @@ public class NewSessionBean implements Serializable {
         FavouriteListKey favKey = new FavouriteListKey(camperUsername, campsiteID);
         try {
             entityManager.getTransaction().begin();
-            FavouriteList favouriteList = (FavouriteList) entityManager.find(FavouriteList.class, favKey);
+            FavouriteList favouriteList = entityManager.find(FavouriteList.class, favKey);
             entityManager.remove(favouriteList);
             entityManager.getTransaction().commit();
             return true;

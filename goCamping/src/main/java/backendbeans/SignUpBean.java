@@ -39,7 +39,7 @@ public class SignUpBean implements Serializable {
     private String fullName;
     @ManagedProperty(value = "#{email}")
     private String email;
-    @ManagedProperty(value = "#{NIF}")
+    @ManagedProperty(value = "#{nif}")
     private int nif;
     @ManagedProperty(value = "#{campsiteCard}")
     private int campsiteCard;

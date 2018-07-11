@@ -2,7 +2,7 @@ GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_
 goCamping,interfacebeans,MyBean,20,0,0,0,7,0,4,0,4,0
 goCamping,interfacebeans,CalendarManagedBean,15,0,0,0,5,0,3,0,3,0
 goCamping,generalstuff,Hash,12,43,1,3,6,8,3,3,2,2
-goCamping,backendbeans,NewSessionBean,495,858,14,20,161,238,19,34,12,24
+goCamping,backendbeans,NewSessionBean,427,858,10,20,139,238,15,34,10,24
 goCamping,backendbeans,FavouriteListBean,95,0,0,0,21,0,10,0,10,0
 goCamping,backendbeans,SearchBean,47,0,0,0,17,0,11,0,11,0
 goCamping,backendbeans,CampsiteBean,297,0,0,0,81,0,44,0,44,0

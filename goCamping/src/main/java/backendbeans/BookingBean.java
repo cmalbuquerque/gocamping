@@ -43,7 +43,7 @@ public class BookingBean implements Serializable{
     private int nrChildren;
     @ManagedProperty(value = "#{nrBabies}")
     private int nrBabies;
-    @ManagedProperty(value = "#{NIF}")
+    @ManagedProperty(value = "#{nif}")
     private int nif;
     @ManagedProperty(value = "#{cellphone}")
     private int cellphone;

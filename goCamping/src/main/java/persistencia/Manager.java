@@ -36,7 +36,7 @@ public class Manager implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "NIF")
+    @Column(name = "nif")
     private int nif;
 
     @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "manager")
