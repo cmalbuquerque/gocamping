@@ -54,7 +54,7 @@ public class SignUpBean implements Serializable {
     
 
     @PostConstruct
-    private void init() {
+    public void init() {
         user = new Utilizador();
         newSessionBean = new  NewSessionBean("PUnit");
  

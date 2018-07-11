@@ -7,6 +7,7 @@
 /home/pirex/NetBeansProjects/GoCamping/goCamping/src/test/java/Persistencia/ManagerTest.java
 /home/pirex/NetBeansProjects/GoCamping/goCamping/src/test/java/Selenium/CamperSideTest.java
 /home/pirex/NetBeansProjects/GoCamping/goCamping/src/test/java/Selenium/ManagerSideTest.java
+/home/pirex/NetBeansProjects/GoCamping/goCamping/src/test/java/BackendBeans/SignUpBeanCamperIT.java
 /home/pirex/NetBeansProjects/GoCamping/goCamping/src/test/java/Persistencia/ReflectTool.java
 /home/pirex/NetBeansProjects/GoCamping/goCamping/src/test/java/Persistencia/CamperTest.java
 /home/pirex/NetBeansProjects/GoCamping/goCamping/src/test/java/Persistencia/JPAExampleIT.java
