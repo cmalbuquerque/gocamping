@@ -5,12 +5,13 @@
  */
 package BackendBeans;
 
-import Persistencia.Camper;
-import Persistencia.Campsite;
-import Persistencia.FavouriteList;
-import Persistencia.Manager;
-import Persistencia.Reservation;
-import Persistencia.Utilizador;
+import backendbeans.NewSessionBean;
+import persistencia.Camper;
+import persistencia.Campsite;
+import persistencia.FavouriteList;
+import persistencia.Manager;
+import persistencia.Reservation;
+import persistencia.Utilizador;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -57,6 +58,7 @@ public class NewSessionBeanTest {
         this.campsite = new Campsite();
         this.reservation = new Reservation();
         this.favouriteList = new FavouriteList();
+
         
        
     }
@@ -82,7 +84,7 @@ public class NewSessionBeanTest {
         camper.setFullName(fullname);
         camper.setUsername(username);
         camper.setEmail(email);
-        camper.setNIF(NIF);
+        camper.setNif(NIF);
         Camper expResult = camper;
         Camper result = instance.saveCamper(username, fullname, email, NIF, campsiteCard);
         assertEquals(expResult, result);
@@ -104,7 +106,7 @@ public class NewSessionBeanTest {
         camper.setFullName(fullname);
         camper.setUsername(name);
         camper.setEmail(email);
-        camper.setNIF(NIF);
+        camper.setNif(NIF);
         Camper expResult = instance.saveCamper(name,fullname, email, NIF, campsiteCard);
         Camper result = instance.searchCamper(name);
         assertEquals(expResult, result);
@@ -130,7 +132,7 @@ public class NewSessionBeanTest {
         camper.setFullName(newFullname);
         camper.setUsername(name);
         camper.setEmail(email);
-        camper.setNIF(NIF);
+        camper.setNif(NIF);
         Camper result = instance.searchCamper(name);
         assertEquals(expResult, result);
         instance.deleteCamper(name);
@@ -164,7 +166,7 @@ public class NewSessionBeanTest {
         manager.setEmail(email);
         manager.setFullName(fullname);
         manager.setUsername(username);
-        manager.setNIF(NIF);
+        manager.setNif(NIF);
         Manager expResult = manager;
         Manager result = instance.saveManager(username, fullname, email, NIF);
         assertEquals(expResult, result);
@@ -185,7 +187,7 @@ public class NewSessionBeanTest {
         manager.setEmail(email);
         manager.setFullName(fullname);
         manager.setUsername(username);
-        manager.setNIF(NIF);
+        manager.setNif(NIF);
         Manager expResult = instance.saveManager(username, fullname, email, NIF);
         Manager result = instance.searchManager(username);
         assertEquals(expResult, result);
@@ -208,7 +210,7 @@ public class NewSessionBeanTest {
         manager.setEmail(email);
         manager.setFullName(newFullname);
         manager.setUsername(username);
-        manager.setNIF(NIF);
+        manager.setNif(NIF);
         Manager result = instance.searchManager(username);
         assertEquals(expResult, result);
         instance.deleteManager(username);
@@ -243,7 +245,7 @@ public class NewSessionBeanTest {
         String username= "stupidTestCamper";
         String fullname = "Bárbara Brito";
         String email = "bb@mail.com";
-        camper.setNIF(0);
+        camper.setNif(0);
         Camper c = new Camper(); 
         c = (Camper) instance.saveCamper(username, fullname, email, 0, 0);
         Manager manager = null;
@@ -273,7 +275,7 @@ public class NewSessionBeanTest {
         manager.setEmail(email);
         manager.setFullName(fullname);
         manager.setUsername(username);
-        manager.setNIF(NIF);
+        manager.setNif(NIF);
         Camper camper = null;
         String password = "fff";
         Manager m = new Manager();
@@ -461,7 +463,6 @@ public class NewSessionBeanTest {
         Campsite camp = instance.saveCampsite(title, location, adultPrice, childPrice, babyPrice, contact, desc, m, campingCardDiscount);
         boolean result = instance.deleteCampsite(camp.getId());
         assertTrue(result);
-        instance.deleteCampsite(camp.getId());
         instance.deleteManager(username);
         
     }

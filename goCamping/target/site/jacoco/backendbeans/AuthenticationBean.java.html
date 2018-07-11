@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuthenticationBean.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goCamping</a> &gt; <a href="index.source.html" class="el_package">backendbeans</a> &gt; <span class="el_source">AuthenticationBean.java</span></div><h1>AuthenticationBean.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package backendbeans;
+
+import persistencia.Campsite;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import persistencia.Utilizador;
+import javax.annotation.PostConstruct;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+/**
+ *
+ * @author Andreia Patrocínio
+ * @author Carolina Albuquerque
+ * @author Diogo Jorge
+ * @author Pedro Pires
+ *
+ */
+@ManagedBean(name = &quot;authenticationbean&quot;)
+@SessionScoped
+public class AuthenticationBean implements Serializable {
+
+    private Utilizador user;
+    @ManagedProperty(value = &quot;#{username}&quot;)
+    private String username;
+    @ManagedProperty(value = &quot;#{password}&quot;)
+    private String password;
+
+    private final static String INDEX = &quot;index.xhtml&quot;;
+    private final static String LOGIN = &quot;login.xhtml&quot;;
+
+    @EJB
+    NewSessionBean newSessionBean;
+
+    @PostConstruct
+    private void init() {
+<span class="nc" id="L47">        user = new Utilizador();</span>
+<span class="nc" id="L48">    }</span>
+
+<span class="nc" id="L50">    public AuthenticationBean() {</span>
+        //default Constructor
+<span class="nc" id="L52">    }</span>
+
+    public Utilizador getUser() {
+<span class="nc" id="L55">        return user;</span>
+    }
+
+    public void setUser(Utilizador user) {
+<span class="nc" id="L59">        this.user = user;</span>
+<span class="nc" id="L60">    }</span>
+
+    public String getUsername() {
+<span class="nc" id="L63">        return username;</span>
+    }
+
+    public void setUsername(String username) {
+<span class="nc" id="L67">        this.username = username;</span>
+<span class="nc" id="L68">    }</span>
+
+    public String getPassword() {
+<span class="nc" id="L71">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="nc" id="L75">        this.password = password;</span>
+<span class="nc" id="L76">    }</span>
+
+    public String validate() {
+<span class="nc" id="L79">        user.setUsername(username);</span>
+<span class="nc" id="L80">        user.setPassword(password);</span>
+<span class="nc" id="L81">        Utilizador user1 = newSessionBean.searchUtilizador(user.getUsername());</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (user1 == null) {</span>
+<span class="nc" id="L83">            return LOGIN;</span>
+        }
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        if (user1.equals(user)) {</span>
+<span class="nc" id="L86">            FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L87">            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
+<span class="nc" id="L88">            session.setAttribute(&quot;username&quot;, username);</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (user1.getCamper() != null) {</span>
+<span class="nc" id="L90">                session.setAttribute(&quot;isCamper&quot;, true);</span>
+<span class="nc" id="L91">                return INDEX;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            } else if (user1.getManager() != null) {</span>
+                try {
+<span class="nc" id="L94">                    session.setAttribute(&quot;isManager&quot;, true);</span>
+<span class="nc" id="L95">                    return INDEX;</span>
+<span class="nc" id="L96">                } catch (SecurityException | IllegalStateException ex) {</span>
+<span class="nc" id="L97">                    Logger.getLogger(AuthenticationBean.class.getName()).log(Level.SEVERE, null, ex);</span>
+                }
+            }
+        }
+<span class="nc" id="L101">        return LOGIN;</span>
+    }
+
+    public String logOut() {
+<span class="nc" id="L105">        FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L106">        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (null != session) {</span>
+<span class="nc" id="L108">            session.invalidate();</span>
+        }
+<span class="nc" id="L110">        return INDEX;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

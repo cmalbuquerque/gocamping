@@ -5,6 +5,9 @@
  */
 package Persistencia;
 
+import persistencia.Utilizador;
+import persistencia.Manager;
+import persistencia.Camper;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -49,12 +52,12 @@ public class UtilizadorTest {
         manager.setUsername("helder");
         manager.setEmail("helder@hotmail.com");
         manager.setFullName("Helder Matos");
-        manager.setNIF(222333);
+        manager.setNif(222333);
         
         camper.setUsername("gongas");
         camper.setCampsiteCard(123);
         camper.setEmail("gongas@mail.com");
-        camper.setNIF(12321);
+        camper.setNif(12321);
         camper.setFullName("Gonçalo ALves");
         
         instance1.setCamper(camper);

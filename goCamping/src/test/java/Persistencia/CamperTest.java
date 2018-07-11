@@ -5,6 +5,7 @@
  */
 package Persistencia;
 
+import persistencia.Camper;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -46,7 +47,7 @@ public class CamperTest {
         instance.setUsername("gongas");
         instance.setCampsiteCard(123);
         instance.setEmail("gongas@mail.com");
-        instance.setNIF(12321);
+        instance.setNif(12321);
         instance.setFullName("Gonçalo ALves");
     }
     
@@ -126,7 +127,7 @@ public class CamperTest {
     public void testNIF() {
         System.out.println("Testing getNIF");
         int expResult = 12321;
-        int result = instance.getNIF();
+        int result = instance.getNif();
         assertEquals(expResult, result);
     }
 

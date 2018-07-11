@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Persistencia.FavouriteListTest" time="0.016" tests="7" errors="0" skipped="0" failures="0">
+<testsuite name="Persistencia.FavouriteListTest" time="0.007" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/pirex/jdk1.8.0_144/jre/lib/amd64"/>
@@ -62,10 +62,10 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase name="fieldAnnotations" classname="Persistencia.FavouriteListTest" time="0"/>
-  <testcase name="testCampsiteID" classname="Persistencia.FavouriteListTest" time="0.004"/>
-  <testcase name="entity" classname="Persistencia.FavouriteListTest" time="0.001"/>
-  <testcase name="typeAnnotations" classname="Persistencia.FavouriteListTest" time="0.009"/>
+  <testcase name="testCampsiteID" classname="Persistencia.FavouriteListTest" time="0.002"/>
+  <testcase name="entity" classname="Persistencia.FavouriteListTest" time="0"/>
+  <testcase name="typeAnnotations" classname="Persistencia.FavouriteListTest" time="0.004"/>
   <testcase name="table" classname="Persistencia.FavouriteListTest" time="0"/>
-  <testcase name="testCamperUsername" classname="Persistencia.FavouriteListTest" time="0.001"/>
+  <testcase name="testCamperUsername" classname="Persistencia.FavouriteListTest" time="0"/>
   <testcase name="methodAnnotations" classname="Persistencia.FavouriteListTest" time="0.001"/>
 </testsuite>
