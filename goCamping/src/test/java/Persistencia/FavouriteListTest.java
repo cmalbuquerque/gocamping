@@ -5,6 +5,10 @@
  */
 package Persistencia;
 
+import persistencia.FavouriteList;
+import persistencia.Campsite;
+import persistencia.Manager;
+import persistencia.Camper;
 import javax.persistence.Entity;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
@@ -56,7 +60,7 @@ public class FavouriteListTest {
         campsite.setTitle("Parque de Campismo da Ericeira");
         manager.setUsername("helder");
         manager.setEmail("helder@ua.pt");
-        manager.setNIF(1543);
+        manager.setNif(1543);
         manager.setFullName("Helder Matos");
         campsite.setManager(manager);
         camper.setUsername("gongas");

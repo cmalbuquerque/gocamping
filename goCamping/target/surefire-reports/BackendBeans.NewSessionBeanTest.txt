@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: BackendBeans.NewSessionBeanTest
 -------------------------------------------------------------------------------
-Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.008 sec - in BackendBeans.NewSessionBeanTest
+Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.595 sec - in BackendBeans.NewSessionBeanTest

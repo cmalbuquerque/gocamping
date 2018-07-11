@@ -5,6 +5,11 @@
  */
 package Persistencia;
 
+import persistencia.Utilizador;
+import persistencia.Campsite;
+import persistencia.Manager;
+import persistencia.Camper;
+import persistencia.Reservation;
 import java.util.Date;
 import javax.persistence.Entity;
 import org.junit.After;
@@ -53,13 +58,13 @@ public class ReservationTest {
         campsite.setTitle("Parque de Campismo da Ericeira");
         manager.setUsername("helder");
         manager.setEmail("helder@ua.pt");
-        manager.setNIF(1543);
+        manager.setNif(1543);
         manager.setFullName("Helder Matos");
         campsite.setManager(manager);
         camper.setUsername("gongas");
         camper.setCampsiteCard(123);
         camper.setEmail("gongas@mail.com");
-        camper.setNIF(12321);
+        camper.setNif(12321);
         camper.setFullName("Gonçalo ALves");
         
         instance.setCamper(camper);

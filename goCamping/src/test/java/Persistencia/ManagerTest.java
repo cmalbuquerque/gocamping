@@ -5,6 +5,7 @@
  */
 package Persistencia;
 
+import persistencia.Manager;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -48,7 +49,7 @@ public class ManagerTest {
         instance.setUsername("helder");
         instance.setEmail("helder@hotmail.com");
         instance.setFullName("Helder Matos");
-        instance.setNIF(222333);
+        instance.setNif(222333);
         
     }
     
@@ -130,7 +131,7 @@ public class ManagerTest {
     public void testNIF() {
         System.out.println("getNIF");
         int expResult = 222333;
-        int result = instance.getNIF();
+        int result = instance.getNif();
         assertEquals(expResult, result);
     }
 

@@ -5,6 +5,8 @@
  */
 package Persistencia;
 
+import persistencia.Campsite;
+import persistencia.Manager;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -57,7 +59,7 @@ public class CampsiteTest {
         instance.setTitle("Parque de Campismo da Ericeira");
         manager.setUsername("helder");
         manager.setEmail("helder@ua.pt");
-        manager.setNIF(1543);
+        manager.setNif(1543);
         manager.setFullName("Helder Matos");
         instance.setManager(manager);
         
