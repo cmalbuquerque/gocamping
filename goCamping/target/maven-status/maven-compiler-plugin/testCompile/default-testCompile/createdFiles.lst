@@ -1,3 +1,5 @@
+BackendBeans/NewSessionBeanIT.class
+BackendBeans/SignUpBeanCamperIT.class
 BackendBeans/NewSessionBeanTest.class
 Persistencia/FavouriteListTest.class
 Persistencia/ReservationTest.class
