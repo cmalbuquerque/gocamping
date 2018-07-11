@@ -3,6 +3,7 @@ BackendBeans/SignUpBeanCamperIT.class
 BackendBeans/NewSessionBeanTest.class
 Persistencia/FavouriteListTest.class
 Persistencia/ReservationTest.class
+BackendBeans/SearchBeanIT.class
 Persistencia/CampsiteTest.class
 Persistencia/CamperTest.class
 Persistencia/AssertAnnotations.class
