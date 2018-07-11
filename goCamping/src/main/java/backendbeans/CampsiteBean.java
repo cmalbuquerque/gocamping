@@ -80,7 +80,8 @@ public class CampsiteBean implements Serializable {
     private void init() {
         newSessionBean = new  NewSessionBean("PUnit");
         this.nif = newSessionBean.searchManager(session.getAttribute(SESSIONGETUSER).toString()).getNif();
-        
+        listaCampsites = newSessionBean.listarCampsite(newSessionBean.searchManager(session.getAttribute(SESSIONGETUSER).toString()));
+
     }
 
     public double getCampingCardDiscount() {
