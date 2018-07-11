@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -43,7 +44,7 @@ public class BookingBean implements Serializable{
     private int nrChildren;
     @ManagedProperty(value = "#{nrBabies}")
     private int nrBabies;
-    @ManagedProperty(value = "#{NIF}")
+    @ManagedProperty(value = "#{nif}")
     private int nif;
     @ManagedProperty(value = "#{cellphone}")
     private int cellphone;
@@ -54,8 +55,8 @@ public class BookingBean implements Serializable{
     @ManagedProperty (value="#{listBooks}")
     private List<Reservation> listBooks;
    
-    @EJB
-    NewSessionBean newSessionBean;
+
+    private NewSessionBean newSessionBean;
     
     private final static String SESSIONGETUSER = "username";
     private final static long TRESDIAS = 259200;
@@ -66,6 +67,10 @@ public class BookingBean implements Serializable{
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
+    @PostConstruct
+    public void init() {
+        newSessionBean = new  NewSessionBean("PUnit");
+    }
     
     public Reservation getReservation() {
         return reservation;

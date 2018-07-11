@@ -35,18 +35,17 @@ public class FavouriteListBean implements Serializable{
     @ManagedProperty(value = "#{listIntCampsites}")
     private List<Integer> listIntCampsites;
     
-    @EJB
-    NewSessionBean newSessionBean;
+    private NewSessionBean newSessionBean;
     
     private final static String SESSIONGETUSER = "username";
     private Camper camper;
     FacesContext facesContext = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
     
-        @PostConstruct
+    @PostConstruct
     private void init() {
+        newSessionBean = new  NewSessionBean("PUnit");
         this.listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(SESSIONGETUSER).toString());
-
     }
     
     public List<Campsite> getListCampsitesFav() {

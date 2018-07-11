@@ -35,55 +35,54 @@ import javax.servlet.http.HttpSession;
     @ManagedProperty(value = &quot;#{listIntCampsites}&quot;)
     private List&lt;Integer&gt; listIntCampsites;
     
-    @EJB
-    NewSessionBean newSessionBean;
+    private NewSessionBean newSessionBean;
     
     private final static String SESSIONGETUSER = &quot;username&quot;;
     private Camper camper;
-<span class="nc" id="L43">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
-<span class="nc" id="L44">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
+<span class="nc" id="L42">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L43">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
     
-        @PostConstruct
+    @PostConstruct
     private void init() {
+<span class="nc" id="L47">        newSessionBean = new  NewSessionBean(&quot;PUnit&quot;);</span>
 <span class="nc" id="L48">        this.listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(SESSIONGETUSER).toString());</span>
-
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L49">    }</span>
     
     public List&lt;Campsite&gt; getListCampsitesFav() {
-<span class="nc" id="L53">        return listCampsitesFav;</span>
+<span class="nc" id="L52">        return listCampsitesFav;</span>
     }
 
     public void setListCampsitesFav(List&lt;Campsite&gt; listCampsitesFav) {
-<span class="nc" id="L57">        this.listCampsitesFav= listCampsitesFav;</span>
-<span class="nc" id="L58">    }</span>
+<span class="nc" id="L56">        this.listCampsitesFav= listCampsitesFav;</span>
+<span class="nc" id="L57">    }</span>
 
     public List&lt;Integer&gt; getListIntCampsites() {
-<span class="nc" id="L61">        return listIntCampsites;</span>
+<span class="nc" id="L60">        return listIntCampsites;</span>
     }
 
     public void setListIntCampsites(List&lt;Integer&gt; listIntCampsites) {
-<span class="nc" id="L65">        this.listIntCampsites = listIntCampsites;</span>
+<span class="nc" id="L64">        this.listIntCampsites = listIntCampsites;</span>
                 
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L66">    }</span>
     
     public Camper getCamper() {
-<span class="nc" id="L70">        return camper;</span>
+<span class="nc" id="L69">        return camper;</span>
     }
 
     public void setCamper(Camper camper) {
-<span class="nc" id="L74">        this.camper = camper;</span>
-<span class="nc" id="L75">    }</span>
+<span class="nc" id="L73">        this.camper = camper;</span>
+<span class="nc" id="L74">    }</span>
         
     public String addFavouriteList(int campsiteID){
-<span class="nc" id="L78">        newSessionBean.saveFavouriteList(session.getAttribute(SESSIONGETUSER).toString(), campsiteID);  </span>
-<span class="nc" id="L79">        listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(SESSIONGETUSER).toString());</span>
-<span class="nc" id="L80">        return &quot;favList.xhtml&quot; ;</span>
+<span class="nc" id="L77">        newSessionBean.saveFavouriteList(session.getAttribute(SESSIONGETUSER).toString(), campsiteID);  </span>
+<span class="nc" id="L78">        listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(SESSIONGETUSER).toString());</span>
+<span class="nc" id="L79">        return &quot;favList.xhtml&quot; ;</span>
     }
     
     public String removeFavouriteList(int campsiteID){
-<span class="nc" id="L84">        newSessionBean.deleteFavouriteList(session.getAttribute(SESSIONGETUSER).toString(), campsiteID);</span>
-<span class="nc" id="L85">        listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(SESSIONGETUSER).toString());</span>
-<span class="nc" id="L86">        return &quot;favList.xhtml&quot; ;</span>
+<span class="nc" id="L83">        newSessionBean.deleteFavouriteList(session.getAttribute(SESSIONGETUSER).toString(), campsiteID);</span>
+<span class="nc" id="L84">        listCampsitesFav= newSessionBean.listarCampsitesFavList(session.getAttribute(SESSIONGETUSER).toString());</span>
+<span class="nc" id="L85">        return &quot;favList.xhtml&quot; ;</span>
     }
     
 }

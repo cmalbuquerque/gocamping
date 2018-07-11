@@ -63,14 +63,14 @@ public class NewSessionBean implements Serializable {
     //Camper 
     
    
-    public Camper saveCamper(String username, String fullname, String email, int NIF, int campsiteCard) {
+    public Camper saveCamper(String username, String fullname, String email, int nif, int campsiteCard) {
 <span class="fc" id="L67">        Camper camper = new Camper();</span>
         try {
 <span class="fc" id="L69">            entityManager.getTransaction().begin();</span>
 <span class="fc" id="L70">            camper.setUsername(username);</span>
 <span class="fc" id="L71">            camper.setFullName(fullname);</span>
 <span class="fc" id="L72">            camper.setEmail(email);</span>
-<span class="fc" id="L73">            camper.setNif(NIF);</span>
+<span class="fc" id="L73">            camper.setNif(nif);</span>
 <span class="fc" id="L74">            camper.setCampsiteCard(campsiteCard);</span>
 <span class="fc" id="L75">            entityManager.persist(camper);</span>
 <span class="fc" id="L76">            entityManager.getTransaction().commit();</span>
@@ -88,7 +88,7 @@ public class NewSessionBean implements Serializable {
 <span class="fc" id="L88">            query.setParameter(&quot;name&quot;, name);</span>
 <span class="fc" id="L89">            List&lt;Camper&gt; utilizador = query.getResultList();</span>
 <span class="fc bfc" id="L90" title="All 2 branches covered.">            for (Iterator&lt;Camper&gt; iterator = utilizador.iterator(); iterator.hasNext();) {</span>
-<span class="fc" id="L91">                user = (Camper) iterator.next();</span>
+<span class="fc" id="L91">                user = iterator.next();</span>
             }
 <span class="fc" id="L93">            entityManager.getTransaction().commit();</span>
 <span class="nc" id="L94">        } catch (Exception e) {</span>
@@ -97,510 +97,447 @@ public class NewSessionBean implements Serializable {
 <span class="fc" id="L97">        return user;</span>
     }
 
-    public void listCamper() {
-        try {
-<span class="nc" id="L102">            entityManager.getTransaction().begin();</span>
-<span class="nc" id="L103">            Query query = entityManager.createQuery(&quot;select c from Camper c&quot;);</span>
-<span class="nc" id="L104">            List&lt;Camper&gt; Campers = query.getResultList();</span>
-<span class="nc bnc" id="L105" title="All 2 branches missed.">            for (Iterator&lt;Camper&gt; iterator = Campers.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L106">                Camper camper = (Camper) iterator.next();</span>
-<span class="nc" id="L107">            }</span>
-<span class="nc" id="L108">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L109">        } catch (Exception e) {</span>
-<span class="nc" id="L110">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L111">        }</span>
-<span class="nc" id="L112">    }</span>
+
 
     public Camper updateCamper(String username, String fullname, String email, int campingCard) {
-<span class="fc" id="L115">        Camper camper = new Camper();</span>
+<span class="fc" id="L103">        Camper camper = new Camper();</span>
         try {
-<span class="fc" id="L117">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L118">            camper = (Camper) entityManager.find(Camper.class, username);</span>
-<span class="fc" id="L119">            camper.setFullName(fullname);</span>
-<span class="fc" id="L120">            camper.setEmail(email);</span>
-<span class="fc" id="L121">            camper.setCampsiteCard(campingCard);</span>
-<span class="fc" id="L122">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L123">        } catch (Exception e) {</span>
-<span class="nc" id="L124">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L125">        }</span>
-<span class="fc" id="L126">        return camper;</span>
+<span class="fc" id="L105">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L106">            camper = entityManager.find(Camper.class, username);</span>
+<span class="fc" id="L107">            camper.setFullName(fullname);</span>
+<span class="fc" id="L108">            camper.setEmail(email);</span>
+<span class="fc" id="L109">            camper.setCampsiteCard(campingCard);</span>
+<span class="fc" id="L110">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L111">        } catch (Exception e) {</span>
+<span class="nc" id="L112">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L113">        }</span>
+<span class="fc" id="L114">        return camper;</span>
     }
     
      public List&lt;Camper&gt; listarTodosCampers() {
-<span class="nc" id="L130">        List&lt;Camper&gt; campers = new ArrayList&lt;Camper&gt;();</span>
-<span class="nc" id="L131">        List&lt;Camper&gt; list = new ArrayList&lt;Camper&gt;();</span>
+<span class="nc" id="L118">        List&lt;Camper&gt; campers = new ArrayList&lt;&gt;();</span>
 
         try {
-<span class="nc" id="L134">            entityManager.getTransaction().begin();</span>
-<span class="nc" id="L135">            Query query = entityManager.createQuery(&quot;select c from Camper c&quot;);</span>
-
-<span class="nc" id="L137">            campers = query.getResultList();</span>
-<span class="nc bnc" id="L138" title="All 2 branches missed.">            for (Iterator&lt;Camper&gt; iterator = campers.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L139">                Camper utilizador = (Camper) iterator.next();</span>
-<span class="nc" id="L140">                list.add(utilizador);</span>
-<span class="nc" id="L141">            }</span>
-
-<span class="nc" id="L143">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L144">        } catch (Exception e) {</span>
-<span class="nc" id="L145">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L146">        }</span>
-<span class="nc" id="L147">        return list;</span>
+<span class="nc" id="L121">            entityManager.getTransaction().begin();</span>
+<span class="nc" id="L122">            Query query = entityManager.createQuery(&quot;select c from Camper c&quot;);</span>
+<span class="nc" id="L123">            campers = query.getResultList();</span>
+<span class="nc" id="L124">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L125">        } catch (Exception e) {</span>
+<span class="nc" id="L126">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L127">        }</span>
+<span class="nc" id="L128">        return campers;</span>
     }
 
     public boolean deleteCamper(String username) {
         try {
-<span class="fc" id="L152">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L153">            Camper camper = (Camper) entityManager.find(Camper.class, username);</span>
-<span class="fc" id="L154">            entityManager.remove(camper);</span>
-<span class="fc" id="L155">            entityManager.getTransaction().commit();</span>
-<span class="fc" id="L156">            return true;</span>
-<span class="fc" id="L157">        } catch (Exception e) {</span>
-<span class="fc" id="L158">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L159">            return false;</span>
+<span class="fc" id="L133">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L134">            Camper camper = entityManager.find(Camper.class, username);</span>
+<span class="fc" id="L135">            entityManager.remove(camper);</span>
+<span class="fc" id="L136">            entityManager.getTransaction().commit();</span>
+<span class="fc" id="L137">            return true;</span>
+<span class="fc" id="L138">        } catch (Exception e) {</span>
+<span class="fc" id="L139">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L140">            return false;</span>
         }
     }
 
-    public Manager saveManager(String username, String fullname, String email, int NIF) {
-<span class="fc" id="L164">        Manager manager = new Manager();</span>
+    public Manager saveManager(String username, String fullname, String email, int nif) {
+<span class="fc" id="L145">        Manager manager = new Manager();</span>
         try {
-<span class="fc" id="L166">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L167">            manager.setUsername(username);</span>
-<span class="fc" id="L168">            manager.setFullName(fullname);</span>
-<span class="fc" id="L169">            manager.setEmail(email);</span>
-<span class="fc" id="L170">            manager.setNif(NIF);</span>
-<span class="fc" id="L171">            entityManager.persist(manager);</span>
-<span class="fc" id="L172">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L173">        } catch (Exception e) {</span>
-<span class="nc" id="L174">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L175">        }</span>
-<span class="fc" id="L176">        return manager;</span>
+<span class="fc" id="L147">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L148">            manager.setUsername(username);</span>
+<span class="fc" id="L149">            manager.setFullName(fullname);</span>
+<span class="fc" id="L150">            manager.setEmail(email);</span>
+<span class="fc" id="L151">            manager.setNif(nif);</span>
+<span class="fc" id="L152">            entityManager.persist(manager);</span>
+<span class="fc" id="L153">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L154">        } catch (Exception e) {</span>
+<span class="nc" id="L155">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L156">        }</span>
+<span class="fc" id="L157">        return manager;</span>
     }
 
     public Manager searchManager(String name) {
+<span class="fc" id="L161">        Manager manager = new Manager();</span>
+        try {
+<span class="fc" id="L163">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L164">            Query query = entityManager.createQuery(&quot;select c from Manager c where c.username = :name&quot;);</span>
+<span class="fc" id="L165">            query.setParameter(&quot;name&quot;, name);</span>
+<span class="fc" id="L166">            List&lt;Manager&gt; managers = query.getResultList();</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">            for (Iterator&lt;Manager&gt; iterator = managers.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L168">                manager = iterator.next();</span>
+            }
+<span class="fc" id="L170">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L171">        } catch (Exception e) {</span>
+<span class="nc" id="L172">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L173">        }</span>
+<span class="fc" id="L174">        return manager;</span>
+    }
+
+
+
+    public Manager updateManager(String username, String fullname, String email) {
 <span class="fc" id="L180">        Manager manager = new Manager();</span>
         try {
 <span class="fc" id="L182">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L183">            Query query = entityManager.createQuery(&quot;select c from Manager c where c.username = :name&quot;);</span>
-<span class="fc" id="L184">            query.setParameter(&quot;name&quot;, name);</span>
-<span class="fc" id="L185">            List&lt;Manager&gt; managers = query.getResultList();</span>
-<span class="fc bfc" id="L186" title="All 2 branches covered.">            for (Iterator&lt;Manager&gt; iterator = managers.iterator(); iterator.hasNext();) {</span>
-<span class="fc" id="L187">                manager = (Manager) iterator.next();</span>
-            }
-<span class="fc" id="L189">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L190">        } catch (Exception e) {</span>
-<span class="nc" id="L191">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L192">        }</span>
-<span class="fc" id="L193">        return manager;</span>
-    }
-
-    public void listManager() {
-        try {
-<span class="nc" id="L198">            entityManager.getTransaction().begin();</span>
-<span class="nc" id="L199">            Query query = entityManager.createQuery(&quot;select c from Manager c&quot;);</span>
-<span class="nc" id="L200">            List&lt;Manager&gt; Managers = query.getResultList();</span>
-<span class="nc bnc" id="L201" title="All 2 branches missed.">            for (Iterator&lt;Manager&gt; iterator = Managers.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L202">                Manager manager = (Manager) iterator.next();</span>
-<span class="nc" id="L203">            }</span>
-<span class="nc" id="L204">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L205">        } catch (Exception e) {</span>
-<span class="nc" id="L206">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L207">        }</span>
-<span class="nc" id="L208">    }</span>
-
-    public Manager updateManager(String username, String fullname, String email) {
-<span class="fc" id="L211">        Manager manager = new Manager();</span>
-        try {
-<span class="fc" id="L213">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L214">            manager = (Manager) entityManager.find(Manager.class, username);</span>
-<span class="fc" id="L215">            manager.setFullName(fullname);</span>
-<span class="fc" id="L216">            manager.setEmail(email);</span>
-<span class="fc" id="L217">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L218">        } catch (Exception e) {</span>
-<span class="nc" id="L219">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L220">        }</span>
-<span class="fc" id="L221">        return manager;</span>
+<span class="fc" id="L183">            manager = entityManager.find(Manager.class, username);</span>
+<span class="fc" id="L184">            manager.setFullName(fullname);</span>
+<span class="fc" id="L185">            manager.setEmail(email);</span>
+<span class="fc" id="L186">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L187">        } catch (Exception e) {</span>
+<span class="nc" id="L188">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L189">        }</span>
+<span class="fc" id="L190">        return manager;</span>
     }
     
     public List&lt;Manager&gt; listarTodosManagers() {
-<span class="nc" id="L225">        List&lt;Manager&gt; managers = new ArrayList&lt;Manager&gt;();</span>
-<span class="nc" id="L226">        List&lt;Manager&gt; list = new ArrayList&lt;Manager&gt;();</span>
-
+<span class="nc" id="L194">        List&lt;Manager&gt; managers = new ArrayList&lt;&gt;();</span>
         try {
-<span class="nc" id="L229">            entityManager.getTransaction().begin();</span>
-<span class="nc" id="L230">            Query query = entityManager.createQuery(&quot;select c from Manager c&quot;);</span>
-
-<span class="nc" id="L232">            managers = query.getResultList();</span>
-<span class="nc bnc" id="L233" title="All 2 branches missed.">            for (Iterator&lt;Manager&gt; iterator = managers.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L234">                Manager utilizador = (Manager) iterator.next();</span>
-<span class="nc" id="L235">                list.add(utilizador);</span>
-<span class="nc" id="L236">            }</span>
-
-<span class="nc" id="L238">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L239">        } catch (Exception e) {</span>
-<span class="nc" id="L240">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L241">        }</span>
-<span class="nc" id="L242">        return list;</span>
+<span class="nc" id="L196">            entityManager.getTransaction().begin();</span>
+<span class="nc" id="L197">            Query query = entityManager.createQuery(&quot;select c from Manager c&quot;);</span>
+<span class="nc" id="L198">            managers = query.getResultList();</span>
+<span class="nc" id="L199">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L200">        } catch (Exception e) {</span>
+<span class="nc" id="L201">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L202">        }</span>
+<span class="nc" id="L203">        return managers;</span>
     }
     
     public boolean deleteManager(String username) {
         try {
-<span class="fc" id="L247">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L248">            Manager manager = (Manager) entityManager.find(Manager.class, username);</span>
-<span class="fc" id="L249">            entityManager.remove(manager);</span>
-<span class="fc" id="L250">            entityManager.getTransaction().commit();</span>
-<span class="fc" id="L251">            return true;</span>
-<span class="fc" id="L252">        } catch (Exception e) {</span>
-<span class="fc" id="L253">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L254">            return false;</span>
+<span class="fc" id="L208">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L209">            Manager manager = entityManager.find(Manager.class, username);</span>
+<span class="fc" id="L210">            entityManager.remove(manager);</span>
+<span class="fc" id="L211">            entityManager.getTransaction().commit();</span>
+<span class="fc" id="L212">            return true;</span>
+<span class="fc" id="L213">        } catch (Exception e) {</span>
+<span class="fc" id="L214">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L215">            return false;</span>
         }
     }
 
     public Utilizador saveUtilizador(Camper camper, Manager manager, String username, String password) {
-<span class="fc" id="L259">        Utilizador user = new Utilizador();</span>
+<span class="fc" id="L220">        Utilizador user = new Utilizador();</span>
         try {
-<span class="fc" id="L261">            entityManager.getTransaction().begin();</span>
-<span class="fc bfc" id="L262" title="All 2 branches covered.">            if (camper != null) {</span>
-<span class="fc" id="L263">                user.setCamper(camper);</span>
+<span class="fc" id="L222">            entityManager.getTransaction().begin();</span>
+<span class="fc bfc" id="L223" title="All 2 branches covered.">            if (camper != null) {</span>
+<span class="fc" id="L224">                user.setCamper(camper);</span>
             } else {
-<span class="fc" id="L265">                user.setManager(manager);</span>
+<span class="fc" id="L226">                user.setManager(manager);</span>
             }
-<span class="fc" id="L267">            user.setUsername(username);</span>
-<span class="fc" id="L268">            user.setPassword(password);</span>
-<span class="fc" id="L269">            entityManager.persist(user);</span>
-<span class="fc" id="L270">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L271">        } catch (Exception e) {</span>
-<span class="nc" id="L272">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L273">        }</span>
-<span class="fc" id="L274">        return user;</span>
+<span class="fc" id="L228">            user.setUsername(username);</span>
+<span class="fc" id="L229">            user.setPassword(password);</span>
+<span class="fc" id="L230">            entityManager.persist(user);</span>
+<span class="fc" id="L231">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L232">        } catch (Exception e) {</span>
+<span class="nc" id="L233">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L234">        }</span>
+<span class="fc" id="L235">        return user;</span>
     }
     
     public List&lt;Utilizador&gt; listarTodosUtilizadores() {
-<span class="nc" id="L278">        List&lt;Utilizador&gt; utilizadores = new ArrayList&lt;Utilizador&gt;();</span>
-<span class="nc" id="L279">        List&lt;Utilizador&gt; list = new ArrayList&lt;Utilizador&gt;();</span>
+<span class="nc" id="L239">        List&lt;Utilizador&gt; utilizadores = new ArrayList&lt;&gt;();</span>
         try {
-<span class="nc" id="L281">            entityManager.getTransaction().begin();</span>
-<span class="nc" id="L282">            Query query = entityManager.createQuery(&quot;select c from Utilizador c&quot;);</span>
-<span class="nc" id="L283">            utilizadores = query.getResultList();</span>
-<span class="nc bnc" id="L284" title="All 2 branches missed.">            for (Iterator&lt;Utilizador&gt; iterator = utilizadores.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L285">                Utilizador utilizador = (Utilizador) iterator.next();</span>
-<span class="nc" id="L286">                list.add(utilizador);</span>
-<span class="nc" id="L287">            }</span>
+<span class="nc" id="L241">            entityManager.getTransaction().begin();</span>
+<span class="nc" id="L242">            Query query = entityManager.createQuery(&quot;select c from Utilizador c&quot;);</span>
+<span class="nc" id="L243">            utilizadores = query.getResultList();</span>
 
-<span class="nc" id="L289">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L290">        } catch (Exception e) {</span>
-<span class="nc" id="L291">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L292">        }</span>
-<span class="nc" id="L293">        return list;</span>
+
+<span class="nc" id="L246">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L247">        } catch (Exception e) {</span>
+<span class="nc" id="L248">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L249">        }</span>
+<span class="nc" id="L250">        return utilizadores;</span>
     }
     
     public Utilizador updateUtilizador(String username, String newPassword) {
-<span class="nc" id="L297">        Utilizador user = new Utilizador();</span>
+<span class="nc" id="L254">        Utilizador user = new Utilizador();</span>
         try {
-<span class="nc" id="L299">            entityManager.getTransaction().begin();</span>
-<span class="nc" id="L300">            user = (Utilizador) entityManager.find(Utilizador.class, username);</span>
-<span class="nc" id="L301">            user.setUsername(username);</span>
-<span class="nc" id="L302">            user.setPassword(newPassword);</span>
-<span class="nc" id="L303">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L304">        } catch (Exception e) {</span>
-<span class="nc" id="L305">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L306">        }</span>
-<span class="nc" id="L307">        return user;</span>
+<span class="nc" id="L256">            entityManager.getTransaction().begin();</span>
+<span class="nc" id="L257">            user = entityManager.find(Utilizador.class, username);</span>
+<span class="nc" id="L258">            user.setUsername(username);</span>
+<span class="nc" id="L259">            user.setPassword(newPassword);</span>
+<span class="nc" id="L260">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L261">        } catch (Exception e) {</span>
+<span class="nc" id="L262">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L263">        }</span>
+<span class="nc" id="L264">        return user;</span>
     }
 
     public boolean deleteUtilizador(String username) {
         try {
-<span class="fc" id="L312">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L313">            Utilizador utilizador = (Utilizador) entityManager.find(Utilizador.class, username);</span>
-<span class="fc" id="L314">            entityManager.getTransaction().commit();</span>
+<span class="fc" id="L269">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L270">            Utilizador utilizador = entityManager.find(Utilizador.class, username);</span>
+<span class="fc" id="L271">            entityManager.getTransaction().commit();</span>
             
-<span class="fc" id="L316">            entityManager.remove(utilizador);</span>
-<span class="fc" id="L317">            return true;</span>
-<span class="nc" id="L318">        } catch (Exception e) {</span>
-<span class="nc" id="L319">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L320">            return false;</span>
+<span class="fc" id="L273">            entityManager.remove(utilizador);</span>
+<span class="fc" id="L274">            return true;</span>
+<span class="nc" id="L275">        } catch (Exception e) {</span>
+<span class="nc" id="L276">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L277">            return false;</span>
         }
     }
 
     public Utilizador searchUtilizador(String name) {
-<span class="fc" id="L325">        Utilizador user = new Utilizador();</span>
+<span class="fc" id="L282">        Utilizador user = new Utilizador();</span>
         try {
-<span class="fc" id="L327">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L328">            Query query = entityManager.createQuery(&quot;select c from Utilizador c where c.username = :name&quot;);</span>
-<span class="fc" id="L329">            query.setParameter(&quot;name&quot;, name);</span>
-<span class="fc" id="L330">            List&lt;Utilizador&gt; utilizador = query.getResultList();</span>
-<span class="fc bfc" id="L331" title="All 2 branches covered.">            for (Iterator&lt;Utilizador&gt; iterator = utilizador.iterator(); iterator.hasNext();) {</span>
-<span class="fc" id="L332">                user = (Utilizador) iterator.next();</span>
+<span class="fc" id="L284">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L285">            Query query = entityManager.createQuery(&quot;select c from Utilizador c where c.username = :name&quot;);</span>
+<span class="fc" id="L286">            query.setParameter(&quot;name&quot;, name);</span>
+<span class="fc" id="L287">            List&lt;Utilizador&gt; utilizador = query.getResultList();</span>
+<span class="fc bfc" id="L288" title="All 2 branches covered.">            for (Iterator&lt;Utilizador&gt; iterator = utilizador.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L289">                user = iterator.next();</span>
             }
-<span class="fc" id="L334">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L335">        } catch (Exception e) {</span>
-<span class="nc" id="L336">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L337">        }</span>
-<span class="fc" id="L338">        return user;</span>
+<span class="fc" id="L291">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L292">        } catch (Exception e) {</span>
+<span class="nc" id="L293">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L294">        }</span>
+<span class="fc" id="L295">        return user;</span>
     }
 
     public Campsite saveCampsite(String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, Manager manager, double campingCardDiscount) {
-<span class="fc" id="L342">        Campsite campsite = new Campsite();</span>
+<span class="fc" id="L299">        Campsite campsite = new Campsite();</span>
         try {
-<span class="fc" id="L344">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L345">            campsite.setTitle(title);</span>
-<span class="fc" id="L346">            campsite.setLocation(location);</span>
-<span class="fc" id="L347">            campsite.setAdultPrice(adultPrice);</span>
-<span class="fc" id="L348">            campsite.setChildPrice(childPrice);</span>
-<span class="fc" id="L349">            campsite.setBabyPrice(babyPrice);</span>
-<span class="fc" id="L350">            campsite.setContact(contact);</span>
-<span class="fc" id="L351">            campsite.setDescription(desc);</span>
-<span class="fc" id="L352">            campsite.setManager(manager);</span>
-<span class="fc" id="L353">            campsite.setCampingCardDiscount(campingCardDiscount);</span>
-<span class="fc" id="L354">            entityManager.persist(campsite);</span>
+<span class="fc" id="L301">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L302">            campsite.setTitle(title);</span>
+<span class="fc" id="L303">            campsite.setLocation(location);</span>
+<span class="fc" id="L304">            campsite.setAdultPrice(adultPrice);</span>
+<span class="fc" id="L305">            campsite.setChildPrice(childPrice);</span>
+<span class="fc" id="L306">            campsite.setBabyPrice(babyPrice);</span>
+<span class="fc" id="L307">            campsite.setContact(contact);</span>
+<span class="fc" id="L308">            campsite.setDescription(desc);</span>
+<span class="fc" id="L309">            campsite.setManager(manager);</span>
+<span class="fc" id="L310">            campsite.setCampingCardDiscount(campingCardDiscount);</span>
+<span class="fc" id="L311">            entityManager.persist(campsite);</span>
 
-<span class="fc" id="L356">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L357">        } catch (Exception e) {</span>
-<span class="nc" id="L358">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L359">        }</span>
-<span class="fc" id="L360">        return campsite;</span>
+<span class="fc" id="L313">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L314">        } catch (Exception e) {</span>
+<span class="nc" id="L315">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L316">        }</span>
+<span class="fc" id="L317">        return campsite;</span>
     }
 
     public Campsite searchCampsite(int id) {
-<span class="fc" id="L364">        Campsite campsite = new Campsite();</span>
+<span class="fc" id="L321">        Campsite campsite = new Campsite();</span>
         try {
-<span class="fc" id="L366">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L367">            Query query = entityManager.createQuery(&quot;select c from Campsite c where c.id = :id&quot;);</span>
-<span class="fc" id="L368">            query.setParameter(&quot;id&quot;, id);</span>
-<span class="fc" id="L369">            List&lt;Campsite&gt; campsites = query.getResultList();</span>
-<span class="fc bfc" id="L370" title="All 2 branches covered.">            for (Iterator&lt;Campsite&gt; iterator = campsites.iterator(); iterator.hasNext();) {</span>
-<span class="fc" id="L371">                campsite = (Campsite) iterator.next();</span>
+<span class="fc" id="L323">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L324">            Query query = entityManager.createQuery(&quot;select c from Campsite c where c.id = :id&quot;);</span>
+<span class="fc" id="L325">            query.setParameter(&quot;id&quot;, id);</span>
+<span class="fc" id="L326">            List&lt;Campsite&gt; campsites = query.getResultList();</span>
+<span class="fc bfc" id="L327" title="All 2 branches covered.">            for (Iterator&lt;Campsite&gt; iterator = campsites.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L328">                campsite = iterator.next();</span>
             }
-<span class="fc" id="L373">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L374">        } catch (Exception e) {</span>
-<span class="nc" id="L375">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L376">        }</span>
-<span class="fc" id="L377">        return campsite;</span>
+<span class="fc" id="L330">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L331">        } catch (Exception e) {</span>
+<span class="nc" id="L332">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L333">        }</span>
+<span class="fc" id="L334">        return campsite;</span>
     }
 
     public List&lt;Campsite&gt; listarCampsite(Manager manager) {
-<span class="fc" id="L381">        List&lt;Campsite&gt; campsites = new ArrayList&lt;Campsite&gt;();</span>
-<span class="fc" id="L382">        List&lt;Campsite&gt; list = new ArrayList&lt;Campsite&gt;();</span>
+<span class="fc" id="L338">        List&lt;Campsite&gt; campsites = new ArrayList&lt;&gt;();</span>
         try {
-<span class="fc" id="L384">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L385">            Query query = entityManager.createQuery(&quot;select c from Campsite as c where c.manager = :manager&quot;);</span>
-<span class="fc" id="L386">            query.setParameter(&quot;manager&quot;, manager);</span>
-<span class="fc" id="L387">            campsites = query.getResultList();</span>
-<span class="fc bfc" id="L388" title="All 2 branches covered.">            for (Iterator&lt;Campsite&gt; iterator = campsites.iterator(); iterator.hasNext();) {</span>
-<span class="fc" id="L389">                Campsite campsite = (Campsite) iterator.next();</span>
-<span class="fc" id="L390">                list.add(campsite);</span>
-<span class="fc" id="L391">            }</span>
-<span class="fc" id="L392">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L393">        } catch (Exception e) {</span>
-<span class="nc" id="L394">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L395">        }</span>
-<span class="fc" id="L396">        return list;</span>
+<span class="fc" id="L340">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L341">            Query query = entityManager.createQuery(&quot;select c from Campsite as c where c.manager = :manager&quot;);</span>
+<span class="fc" id="L342">            query.setParameter(&quot;manager&quot;, manager);</span>
+<span class="fc" id="L343">            campsites = query.getResultList();</span>
+<span class="fc" id="L344">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L345">        } catch (Exception e) {</span>
+<span class="nc" id="L346">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L347">        }</span>
+<span class="fc" id="L348">        return campsites;</span>
     }
     
     public List&lt;Campsite&gt; listarCampsiteREST(String name) {
-<span class="nc" id="L400">        Manager manager = new Manager();</span>
-<span class="nc" id="L401">        Query query = entityManager.createQuery(&quot;select c from Manager c where c.username = :name&quot;);</span>
-<span class="nc" id="L402">        query.setParameter(&quot;name&quot;, name);</span>
-<span class="nc" id="L403">        List&lt;Manager&gt; managers = query.getResultList();</span>
-<span class="nc bnc" id="L404" title="All 2 branches missed.">        for (Iterator&lt;Manager&gt; iterator = managers.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L405">            manager = iterator.next();</span>
+<span class="nc" id="L352">        Manager manager = new Manager();</span>
+<span class="nc" id="L353">        Query query = entityManager.createQuery(&quot;select c from Manager c where c.username = :name&quot;);</span>
+<span class="nc" id="L354">        query.setParameter(&quot;name&quot;, name);</span>
+<span class="nc" id="L355">        List&lt;Manager&gt; managers = query.getResultList();</span>
+<span class="nc bnc" id="L356" title="All 2 branches missed.">        for (Iterator&lt;Manager&gt; iterator = managers.iterator(); iterator.hasNext();) {</span>
+<span class="nc" id="L357">            manager = iterator.next();</span>
         }
 
-<span class="nc" id="L408">        Query query2 = entityManager.createQuery(&quot;select c from Campsite c where c.manager = :manager&quot;);</span>
-<span class="nc" id="L409">        query2.setParameter(&quot;manager&quot;, manager);</span>
-<span class="nc" id="L410">        List&lt;Campsite&gt; campsites = query2.getResultList();</span>
-<span class="nc" id="L411">        return campsites;</span>
+<span class="nc" id="L360">        Query query2 = entityManager.createQuery(&quot;select c from Campsite c where c.manager = :manager&quot;);</span>
+<span class="nc" id="L361">        query2.setParameter(&quot;manager&quot;, manager);</span>
+<span class="nc" id="L362">        List&lt;Campsite&gt; campsites = query2.getResultList();</span>
+<span class="nc" id="L363">        return campsites;</span>
     }
 
     public List&lt;Campsite&gt; listarTodosCampsites() {
-<span class="nc" id="L415">        List&lt;Campsite&gt; campsites = new ArrayList&lt;Campsite&gt;();</span>
-<span class="nc" id="L416">        List&lt;Campsite&gt; list = new ArrayList&lt;Campsite&gt;();</span>
+<span class="nc" id="L367">        List&lt;Campsite&gt; campsites = new ArrayList&lt;&gt;();</span>
 
         try {
-<span class="nc" id="L419">            entityManager.getTransaction().begin();</span>
-<span class="nc" id="L420">            Query query = entityManager.createQuery(&quot;select c from Campsite c&quot;);</span>
+<span class="nc" id="L370">            entityManager.getTransaction().begin();</span>
+<span class="nc" id="L371">            Query query = entityManager.createQuery(&quot;select c from Campsite c&quot;);</span>
 
-<span class="nc" id="L422">            campsites = query.getResultList();</span>
-<span class="nc bnc" id="L423" title="All 2 branches missed.">            for (Iterator&lt;Campsite&gt; iterator = campsites.iterator(); iterator.hasNext();) {</span>
-<span class="nc" id="L424">                Campsite campsite = (Campsite) iterator.next();</span>
-<span class="nc" id="L425">                list.add(campsite);</span>
-<span class="nc" id="L426">            }</span>
-<span class="nc" id="L427">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L428">        } catch (Exception e) {</span>
-<span class="nc" id="L429">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L430">        }</span>
-<span class="nc" id="L431">        return list;</span>
+<span class="nc" id="L373">            campsites = query.getResultList();</span>
+<span class="nc" id="L374">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L375">        } catch (Exception e) {</span>
+<span class="nc" id="L376">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L377">        }</span>
+<span class="nc" id="L378">        return campsites;</span>
     }
 
     public List&lt;Campsite&gt; listarCampsite(String location) {
-<span class="fc" id="L435">        List&lt;Campsite&gt; campsites = new ArrayList&lt;Campsite&gt;();</span>
-<span class="fc" id="L436">        List&lt;Campsite&gt; list = new ArrayList&lt;Campsite&gt;();</span>
+<span class="fc" id="L382">        List&lt;Campsite&gt; campsites = new ArrayList&lt;&gt;();</span>
         try {
-<span class="fc" id="L438">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L439">            Query query = entityManager.createQuery(&quot;select c from Campsite as c where c.location like :location&quot;);</span>
-<span class="fc" id="L440">            query.setParameter(&quot;location&quot;, &quot;%&quot; + location + &quot;%&quot;);</span>
-<span class="fc" id="L441">            campsites = query.getResultList();</span>
-<span class="fc bfc" id="L442" title="All 2 branches covered.">            for (Iterator&lt;Campsite&gt; iterator = campsites.iterator(); iterator.hasNext();) {</span>
-<span class="fc" id="L443">                Campsite campsite = (Campsite) iterator.next();</span>
-<span class="fc" id="L444">                list.add(campsite);</span>
-<span class="fc" id="L445">            }</span>
-<span class="fc" id="L446">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L447">        } catch (Exception e) {</span>
-<span class="nc" id="L448">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L449">        }</span>
-<span class="fc" id="L450">        return list;</span>
+<span class="fc" id="L384">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L385">            Query query = entityManager.createQuery(&quot;select c from Campsite as c where c.location like :location&quot;);</span>
+<span class="fc" id="L386">            query.setParameter(&quot;location&quot;, &quot;%&quot; + location + &quot;%&quot;);</span>
+<span class="fc" id="L387">            campsites = query.getResultList();</span>
+<span class="fc" id="L388">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L389">        } catch (Exception e) {</span>
+<span class="nc" id="L390">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L391">        }</span>
+<span class="fc" id="L392">        return campsites;</span>
     }
 
     public Campsite updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, double campingCardDiscount) {
-<span class="fc" id="L454">        Campsite campsite = new Campsite();</span>
+<span class="fc" id="L396">        Campsite campsite = new Campsite();</span>
         try {
-<span class="fc" id="L456">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L457">            campsite = entityManager.find(Campsite.class, id);</span>
-<span class="fc" id="L458">            campsite.setTitle(title);</span>
-<span class="fc" id="L459">            campsite.setLocation(location);</span>
-<span class="fc" id="L460">            campsite.setAdultPrice(adultPrice);</span>
-<span class="fc" id="L461">            campsite.setChildPrice(childPrice);</span>
-<span class="fc" id="L462">            campsite.setBabyPrice(babyPrice);</span>
-<span class="fc" id="L463">            campsite.setContact(contact);</span>
-<span class="fc" id="L464">            campsite.setDescription(desc);</span>
-<span class="fc" id="L465">            campsite.setCampingCardDiscount(campingCardDiscount);</span>
-<span class="fc" id="L466">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L467">        } catch (Exception e) {</span>
-<span class="nc" id="L468">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L469">        }</span>
-<span class="fc" id="L470">        return  campsite;</span>
+<span class="fc" id="L398">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L399">            campsite = entityManager.find(Campsite.class, id);</span>
+<span class="fc" id="L400">            campsite.setTitle(title);</span>
+<span class="fc" id="L401">            campsite.setLocation(location);</span>
+<span class="fc" id="L402">            campsite.setAdultPrice(adultPrice);</span>
+<span class="fc" id="L403">            campsite.setChildPrice(childPrice);</span>
+<span class="fc" id="L404">            campsite.setBabyPrice(babyPrice);</span>
+<span class="fc" id="L405">            campsite.setContact(contact);</span>
+<span class="fc" id="L406">            campsite.setDescription(desc);</span>
+<span class="fc" id="L407">            campsite.setCampingCardDiscount(campingCardDiscount);</span>
+<span class="fc" id="L408">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L409">        } catch (Exception e) {</span>
+<span class="nc" id="L410">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L411">        }</span>
+<span class="fc" id="L412">        return  campsite;</span>
     }
 
     public boolean deleteCampsite(int id) {
         try {
-<span class="fc" id="L475">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L476">            Campsite campsite = (Campsite) entityManager.find(Campsite.class, id);</span>
-<span class="fc" id="L477">            entityManager.remove(campsite);</span>
-<span class="fc" id="L478">            entityManager.getTransaction().commit();</span>
-<span class="fc" id="L479">            return true;</span>
-<span class="nc" id="L480">        } catch (Exception e) {</span>
-<span class="nc" id="L481">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L482">            return false;</span>
+<span class="fc" id="L417">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L418">            Campsite campsite = entityManager.find(Campsite.class, id);</span>
+<span class="fc" id="L419">            entityManager.remove(campsite);</span>
+<span class="fc" id="L420">            entityManager.getTransaction().commit();</span>
+<span class="fc" id="L421">            return true;</span>
+<span class="nc" id="L422">        } catch (Exception e) {</span>
+<span class="nc" id="L423">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L424">            return false;</span>
         }
     }
 
 
     public Reservation saveReservation(Date startDate, Date endDate, Camper camper, Campsite campsite, int nrAdults, int nrChildren, int nrBabies, int cellphone, double totalPrice) {
-<span class="fc" id="L488">        Reservation reservation = new Reservation();</span>
+<span class="fc" id="L430">        Reservation reservation = new Reservation();</span>
         try {
-<span class="fc" id="L490">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L491">            reservation.setStartDate(startDate);</span>
-<span class="fc" id="L492">            reservation.setEndDate(endDate);</span>
-<span class="fc" id="L493">            reservation.setCamper(camper);</span>
-<span class="fc" id="L494">            reservation.setCampsite(campsite);</span>
-<span class="fc" id="L495">            reservation.setCellfone(cellphone);</span>
-<span class="fc" id="L496">            reservation.setNrAdults(nrAdults);</span>
-<span class="fc" id="L497">            reservation.setNrBabies(nrBabies);</span>
-<span class="fc" id="L498">            reservation.setNrChildren(nrChildren);</span>
-<span class="fc" id="L499">            reservation.setTotalPrice(totalPrice);</span>
-<span class="fc" id="L500">            entityManager.persist(reservation);</span>
-<span class="fc" id="L501">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L502">        } catch (Exception e) {</span>
-<span class="nc" id="L503">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L504">        }</span>
-<span class="fc" id="L505">        return reservation;</span>
+<span class="fc" id="L432">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L433">            reservation.setStartDate(startDate);</span>
+<span class="fc" id="L434">            reservation.setEndDate(endDate);</span>
+<span class="fc" id="L435">            reservation.setCamper(camper);</span>
+<span class="fc" id="L436">            reservation.setCampsite(campsite);</span>
+<span class="fc" id="L437">            reservation.setCellfone(cellphone);</span>
+<span class="fc" id="L438">            reservation.setNrAdults(nrAdults);</span>
+<span class="fc" id="L439">            reservation.setNrBabies(nrBabies);</span>
+<span class="fc" id="L440">            reservation.setNrChildren(nrChildren);</span>
+<span class="fc" id="L441">            reservation.setTotalPrice(totalPrice);</span>
+<span class="fc" id="L442">            entityManager.persist(reservation);</span>
+<span class="fc" id="L443">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L444">        } catch (Exception e) {</span>
+<span class="nc" id="L445">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L446">        }</span>
+<span class="fc" id="L447">        return reservation;</span>
     }
 
     public List&lt;Reservation&gt; listarReservations(Camper camper) {
-<span class="fc" id="L509">        List&lt;Reservation&gt; reservations = new ArrayList&lt;Reservation&gt;();</span>
-<span class="fc" id="L510">        List&lt;Reservation&gt; list = new ArrayList&lt;Reservation&gt;();</span>
+<span class="fc" id="L451">        List&lt;Reservation&gt; reservations = new ArrayList&lt;&gt;();</span>
         try {
-<span class="fc" id="L512">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L513">            Query query = entityManager.createQuery(&quot;select c from Reservation as c where c.camper = :camper&quot;);</span>
-<span class="fc" id="L514">            query.setParameter(&quot;camper&quot;, camper);</span>
-<span class="fc" id="L515">            reservations = query.getResultList();</span>
-<span class="fc bfc" id="L516" title="All 2 branches covered.">            for (Iterator&lt;Reservation&gt; iterator = reservations.iterator(); iterator.hasNext();) {</span>
-<span class="fc" id="L517">                Reservation reservation = (Reservation) iterator.next();</span>
-<span class="fc" id="L518">                list.add(reservation);</span>
-<span class="fc" id="L519">            }</span>
-<span class="fc" id="L520">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L521">        } catch (Exception e) {</span>
-<span class="nc" id="L522">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L523">        }</span>
-<span class="fc" id="L524">        return list;</span>
+<span class="fc" id="L453">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L454">            Query query = entityManager.createQuery(&quot;select c from Reservation as c where c.camper = :camper&quot;);</span>
+<span class="fc" id="L455">            query.setParameter(&quot;camper&quot;, camper);</span>
+<span class="fc" id="L456">            reservations = query.getResultList();</span>
+<span class="fc" id="L457">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L458">        } catch (Exception e) {</span>
+<span class="nc" id="L459">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L460">        }</span>
+<span class="fc" id="L461">        return reservations;</span>
     }
 
     public void updateReservation(int id, Date startDate, Date endDate) {
         try {
-<span class="nc" id="L529">            entityManager.getTransaction().begin();</span>
-<span class="nc" id="L530">            Reservation reservation = (Reservation) entityManager.find(Reservation.class, id);</span>
-<span class="nc" id="L531">            reservation.setStartDate(startDate);</span>
-<span class="nc" id="L532">            reservation.setEndDate(endDate);</span>
-<span class="nc" id="L533">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L534">        } catch (Exception e) {</span>
-<span class="nc" id="L535">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L536">        }</span>
-<span class="nc" id="L537">    }</span>
+<span class="nc" id="L466">            entityManager.getTransaction().begin();</span>
+<span class="nc" id="L467">            Reservation reservation =  entityManager.find(Reservation.class, id);</span>
+<span class="nc" id="L468">            reservation.setStartDate(startDate);</span>
+<span class="nc" id="L469">            reservation.setEndDate(endDate);</span>
+<span class="nc" id="L470">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L471">        } catch (Exception e) {</span>
+<span class="nc" id="L472">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L473">        }</span>
+<span class="nc" id="L474">    }</span>
 
     public boolean deleteReservation(int id) {
         try {
-<span class="fc" id="L541">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L542">            Reservation reservation = (Reservation) entityManager.find(Reservation.class, id);</span>
-<span class="fc" id="L543">            entityManager.remove(reservation);</span>
-<span class="fc" id="L544">            entityManager.getTransaction().commit();</span>
-<span class="fc" id="L545">            return true;</span>
-<span class="nc" id="L546">        } catch (Exception e) {</span>
-<span class="nc" id="L547">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L548">            return false;</span>
+<span class="fc" id="L478">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L479">            Reservation reservation = entityManager.find(Reservation.class, id);</span>
+<span class="fc" id="L480">            entityManager.remove(reservation);</span>
+<span class="fc" id="L481">            entityManager.getTransaction().commit();</span>
+<span class="fc" id="L482">            return true;</span>
+<span class="nc" id="L483">        } catch (Exception e) {</span>
+<span class="nc" id="L484">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L485">            return false;</span>
         }
     }
     
  
     public FavouriteList saveFavouriteList(String camperUsername, int campsiteID) {
-<span class="fc" id="L554">        FavouriteList favouriteList = new FavouriteList();</span>
+<span class="fc" id="L491">        FavouriteList favouriteList = new FavouriteList();</span>
         try {
-<span class="fc" id="L556">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L557">            favouriteList.setCamperUsername(camperUsername);</span>
-<span class="fc" id="L558">            favouriteList.setCampsiteID(campsiteID);</span>
+<span class="fc" id="L493">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L494">            favouriteList.setCamperUsername(camperUsername);</span>
+<span class="fc" id="L495">            favouriteList.setCampsiteID(campsiteID);</span>
 
-<span class="fc" id="L560">            entityManager.persist(favouriteList);</span>
+<span class="fc" id="L497">            entityManager.persist(favouriteList);</span>
 
-<span class="fc" id="L562">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L563">        } catch (Exception e) {</span>
-<span class="nc" id="L564">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L565">        }</span>
-<span class="fc" id="L566">        return favouriteList;</span>
+<span class="fc" id="L499">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L500">        } catch (Exception e) {</span>
+<span class="nc" id="L501">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L502">        }</span>
+<span class="fc" id="L503">        return favouriteList;</span>
     }
 
     public List&lt;Campsite&gt; listarCampsitesFavList(String username) {
-<span class="fc" id="L570">        List&lt;FavouriteList&gt; favouriteLists = new ArrayList&lt;FavouriteList&gt;();</span>
-<span class="fc" id="L571">        List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span>
-<span class="fc" id="L572">        List&lt;Campsite&gt; campsites = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L507">        List&lt;FavouriteList&gt; favouriteLists = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L508">        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L509">        List&lt;Campsite&gt; campsites = new ArrayList&lt;&gt;();</span>
         try {
-<span class="fc" id="L574">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L575">            Query query = entityManager.createQuery(&quot;select c from FavouriteList as c where c.camperUsername = :username&quot;);</span>
-<span class="fc" id="L576">            query.setParameter(&quot;username&quot;, username);</span>
-<span class="fc" id="L577">            favouriteLists = query.getResultList();</span>
-<span class="fc bfc" id="L578" title="All 2 branches covered.">            for (Iterator&lt;FavouriteList&gt; iterator = favouriteLists.iterator(); iterator.hasNext();) {</span>
-<span class="fc" id="L579">                Integer campsiteID = iterator.next().getCampsiteID();</span>
-<span class="fc" id="L580">                list.add(campsiteID);</span>
-<span class="fc" id="L581">            }</span>
-<span class="fc" id="L582">            entityManager.getTransaction().commit();</span>
-<span class="nc" id="L583">        } catch (Exception e) {</span>
-<span class="nc" id="L584">            entityManager.getTransaction().rollback();</span>
-<span class="fc" id="L585">        }</span>
-<span class="fc bfc" id="L586" title="All 2 branches covered.">        for (int elem : list) {</span>
-<span class="fc" id="L587">            campsites.add(searchCampsite(elem));</span>
-<span class="fc" id="L588">        }</span>
+<span class="fc" id="L511">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L512">            Query query = entityManager.createQuery(&quot;select c from FavouriteList as c where c.camperUsername = :username&quot;);</span>
+<span class="fc" id="L513">            query.setParameter(&quot;username&quot;, username);</span>
+<span class="fc" id="L514">            favouriteLists = query.getResultList();</span>
+<span class="fc bfc" id="L515" title="All 2 branches covered.">            for (Iterator&lt;FavouriteList&gt; iterator = favouriteLists.iterator(); iterator.hasNext();) {</span>
+<span class="fc" id="L516">                Integer campsiteID = iterator.next().getCampsiteID();</span>
+<span class="fc" id="L517">                list.add(campsiteID);</span>
+<span class="fc" id="L518">            }</span>
+<span class="fc" id="L519">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L520">        } catch (Exception e) {</span>
+<span class="nc" id="L521">            entityManager.getTransaction().rollback();</span>
+<span class="fc" id="L522">        }</span>
+<span class="fc bfc" id="L523" title="All 2 branches covered.">        for (int elem : list) {</span>
+<span class="fc" id="L524">            campsites.add(searchCampsite(elem));</span>
+<span class="fc" id="L525">        }</span>
 
-<span class="fc" id="L590">        return campsites;</span>
+<span class="fc" id="L527">        return campsites;</span>
     }
 
     public boolean deleteFavouriteList(String camperUsername, int campsiteID) {
-<span class="fc" id="L594">        FavouriteListKey favKey = new FavouriteListKey(camperUsername, campsiteID);</span>
+<span class="fc" id="L531">        FavouriteListKey favKey = new FavouriteListKey(camperUsername, campsiteID);</span>
         try {
-<span class="fc" id="L596">            entityManager.getTransaction().begin();</span>
-<span class="fc" id="L597">            FavouriteList favouriteList = (FavouriteList) entityManager.find(FavouriteList.class, favKey);</span>
-<span class="fc" id="L598">            entityManager.remove(favouriteList);</span>
-<span class="fc" id="L599">            entityManager.getTransaction().commit();</span>
-<span class="fc" id="L600">            return true;</span>
-<span class="nc" id="L601">        } catch (Exception e) {</span>
-<span class="nc" id="L602">            entityManager.getTransaction().rollback();</span>
-<span class="nc" id="L603">            return false;</span>
+<span class="fc" id="L533">            entityManager.getTransaction().begin();</span>
+<span class="fc" id="L534">            FavouriteList favouriteList = entityManager.find(FavouriteList.class, favKey);</span>
+<span class="fc" id="L535">            entityManager.remove(favouriteList);</span>
+<span class="fc" id="L536">            entityManager.getTransaction().commit();</span>
+<span class="fc" id="L537">            return true;</span>
+<span class="nc" id="L538">        } catch (Exception e) {</span>
+<span class="nc" id="L539">            entityManager.getTransaction().rollback();</span>
+<span class="nc" id="L540">            return false;</span>
         }
     }
        

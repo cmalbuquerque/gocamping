@@ -9,6 +9,7 @@ import persistencia.Campsite;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -24,7 +25,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = &quot;searchbean&quot;)
 @SessionScoped
-<span class="nc" id="L27">public class SearchBean implements Serializable{</span>
+<span class="nc" id="L28">public class SearchBean implements Serializable{</span>
     
     @ManagedProperty(value = &quot;#{campsiteLocation}&quot;)
     private String campsiteLocation;
@@ -36,52 +37,55 @@ import javax.faces.bean.SessionScoped;
     
    @ManagedProperty(value = &quot;#{checkout}&quot;)
     private Date checkout;
+
+    private NewSessionBean newSessionBean;
     
-    @EJB
-    NewSessionBean newSessionBean;
-    
+    @PostConstruct
+    public void init() {
+<span class="nc" id="L45">        newSessionBean = new  NewSessionBean(&quot;PUnit&quot;);</span>
+<span class="nc" id="L46">    }</span>
     
     public String getCampsiteLocation() {
-<span class="nc" id="L45">        return campsiteLocation;</span>
+<span class="nc" id="L49">        return campsiteLocation;</span>
     }
 
     public void setCampsiteLocation(String campsiteLocation) {
-<span class="nc" id="L49">        this.campsiteLocation = campsiteLocation;</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L53">        this.campsiteLocation = campsiteLocation;</span>
+<span class="nc" id="L54">    }</span>
 
 
     public List&lt;Campsite&gt; getListaCampsites() {
-<span class="nc" id="L54">        return listaCampsites;</span>
+<span class="nc" id="L58">        return listaCampsites;</span>
     }
 
     public void setListaCampsites(List&lt;Campsite&gt; listaCampsites) {
-<span class="nc" id="L58">        this.listaCampsites = listaCampsites;</span>
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L62">        this.listaCampsites = listaCampsites;</span>
+<span class="nc" id="L63">    }</span>
 
     public Date getCheckin() {
-<span class="nc" id="L62">        return checkin;</span>
+<span class="nc" id="L66">        return checkin;</span>
     }
 
     public void setCheckin(Date checkin) {
-<span class="nc" id="L66">        this.checkin = checkin;</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L70">        this.checkin = checkin;</span>
+<span class="nc" id="L71">    }</span>
 
     public Date getCheckout() {
-<span class="nc" id="L70">        return checkout;</span>
+<span class="nc" id="L74">        return checkout;</span>
     }
 
     public void setCheckout(Date checkout) {
-<span class="nc" id="L74">        this.checkout = checkout;</span>
-<span class="nc" id="L75">    }  </span>
+<span class="nc" id="L78">        this.checkout = checkout;</span>
+<span class="nc" id="L79">    }  </span>
   
     public String showAll(){
-<span class="nc" id="L78">        listaCampsites = newSessionBean.listarTodosCampsites();     </span>
-<span class="nc" id="L79">        return &quot;results.xhtml&quot;;</span>
+<span class="nc" id="L82">        listaCampsites = newSessionBean.listarTodosCampsites();     </span>
+<span class="nc" id="L83">        return &quot;results.xhtml&quot;;</span>
     }
     
     public String search(){
-<span class="nc" id="L83">        listaCampsites = newSessionBean.listarCampsite(campsiteLocation); </span>
-<span class="nc" id="L84">        return &quot;results.xhtml&quot;;</span>
+<span class="nc" id="L87">        listaCampsites = newSessionBean.listarCampsite(campsiteLocation); </span>
+<span class="nc" id="L88">        return &quot;results.xhtml&quot;;</span>
     }
     
    

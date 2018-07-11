@@ -9,6 +9,7 @@ import persistencia.Campsite;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -36,10 +37,13 @@ public class SearchBean implements Serializable{
     
    @ManagedProperty(value = "#{checkout}")
     private Date checkout;
+
+    private NewSessionBean newSessionBean;
     
-    @EJB
-    NewSessionBean newSessionBean;
-    
+    @PostConstruct
+    public void init() {
+        newSessionBean = new  NewSessionBean("PUnit");
+    }
     
     public String getCampsiteLocation() {
         return campsiteLocation;

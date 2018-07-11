@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -31,7 +32,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = &quot;bookingbean&quot;)
 @SessionScoped
-<span class="nc" id="L34">public class BookingBean implements Serializable{ </span>
+<span class="nc" id="L35">public class BookingBean implements Serializable{ </span>
     
     @ManagedProperty(value = &quot;#{fullName}&quot;)
     private String fullName;
@@ -43,7 +44,7 @@ import javax.servlet.http.HttpSession;
     private int nrChildren;
     @ManagedProperty(value = &quot;#{nrBabies}&quot;)
     private int nrBabies;
-    @ManagedProperty(value = &quot;#{NIF}&quot;)
+    @ManagedProperty(value = &quot;#{nif}&quot;)
     private int nif;
     @ManagedProperty(value = &quot;#{cellphone}&quot;)
     private int cellphone;
@@ -54,8 +55,8 @@ import javax.servlet.http.HttpSession;
     @ManagedProperty (value=&quot;#{listBooks}&quot;)
     private List&lt;Reservation&gt; listBooks;
    
-    @EJB
-    NewSessionBean newSessionBean;
+
+    private NewSessionBean newSessionBean;
     
     private final static String SESSIONGETUSER = &quot;username&quot;;
     private final static long TRESDIAS = 259200;
@@ -63,154 +64,158 @@ import javax.servlet.http.HttpSession;
     private Campsite campsite;
     private Camper camper;
 
-<span class="nc" id="L66">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
-<span class="nc" id="L67">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
+<span class="nc" id="L67">    FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="nc" id="L68">    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);</span>
 
+    @PostConstruct
+    public void init() {
+<span class="nc" id="L72">        newSessionBean = new  NewSessionBean(&quot;PUnit&quot;);</span>
+<span class="nc" id="L73">    }</span>
     
     public Reservation getReservation() {
-<span class="nc" id="L71">        return reservation;</span>
+<span class="nc" id="L76">        return reservation;</span>
     }
 
     public void setReservation(Reservation reservation) {
-<span class="nc" id="L75">        this.reservation = reservation;</span>
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L80">        this.reservation = reservation;</span>
+<span class="nc" id="L81">    }</span>
    
     public List&lt;Reservation&gt; getListBooks() {
-<span class="nc" id="L79">        return listBooks;</span>
+<span class="nc" id="L84">        return listBooks;</span>
     }
 
     public void setListBooks(List&lt;Reservation&gt; listBooks) {
-<span class="nc" id="L83">        this.listBooks = listBooks;</span>
-<span class="nc" id="L84">    }</span>
+<span class="nc" id="L88">        this.listBooks = listBooks;</span>
+<span class="nc" id="L89">    }</span>
     
     public int getNrBabies() {
-<span class="nc" id="L87">        return nrBabies;</span>
+<span class="nc" id="L92">        return nrBabies;</span>
     }
 
     public void setNrBabies(int nrBabies) {
-<span class="nc" id="L91">        this.nrBabies = nrBabies;</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L96">        this.nrBabies = nrBabies;</span>
+<span class="nc" id="L97">    }</span>
     
     public double getTotalPrice() {
-<span class="nc" id="L95">        return totalPrice;</span>
+<span class="nc" id="L100">        return totalPrice;</span>
     }
 
     public void setTotalPrice(double totalPrice) {
-<span class="nc" id="L99">        this.totalPrice =totalPrice;</span>
-<span class="nc" id="L100">    }</span>
+<span class="nc" id="L104">        this.totalPrice =totalPrice;</span>
+<span class="nc" id="L105">    }</span>
     
        
     public int getCampingCard() {
-<span class="nc" id="L104">        return campingCard;</span>
+<span class="nc" id="L109">        return campingCard;</span>
     }
 
     public void setCampingCard(int campingCard) {
-<span class="nc" id="L108">        this.campingCard = campingCard;</span>
-<span class="nc" id="L109">    }</span>
+<span class="nc" id="L113">        this.campingCard = campingCard;</span>
+<span class="nc" id="L114">    }</span>
       
     public String getFullName() {
-<span class="nc" id="L112">        return fullName;</span>
+<span class="nc" id="L117">        return fullName;</span>
     }
 
     public void setFullName(String fullName) {
-<span class="nc" id="L116">        this.fullName = fullName;</span>
-<span class="nc" id="L117">    }</span>
+<span class="nc" id="L121">        this.fullName = fullName;</span>
+<span class="nc" id="L122">    }</span>
 
 
     public String getEmail() {
-<span class="nc" id="L121">        return email;</span>
+<span class="nc" id="L126">        return email;</span>
     }
     
 
     public void setEmail(String email) {
-<span class="nc" id="L126">        this.email = email;</span>
-<span class="nc" id="L127">    }</span>
+<span class="nc" id="L131">        this.email = email;</span>
+<span class="nc" id="L132">    }</span>
 
     public int getNrAdults() {
-<span class="nc" id="L130">        return nrAdults;</span>
+<span class="nc" id="L135">        return nrAdults;</span>
     }
 
     public void setNrAdults(int nrAdults) {
-<span class="nc" id="L134">        this.nrAdults = nrAdults;</span>
-<span class="nc" id="L135">    }</span>
+<span class="nc" id="L139">        this.nrAdults = nrAdults;</span>
+<span class="nc" id="L140">    }</span>
 
     public int getNrChildren() {
-<span class="nc" id="L138">        return nrChildren;</span>
+<span class="nc" id="L143">        return nrChildren;</span>
     }
 
     public void setNrChildren(int nrChildren) {
-<span class="nc" id="L142">        this.nrChildren = nrChildren;</span>
-<span class="nc" id="L143">    }</span>
+<span class="nc" id="L147">        this.nrChildren = nrChildren;</span>
+<span class="nc" id="L148">    }</span>
 
      public int getNif(){
-<span class="nc" id="L146">        return nif;</span>
+<span class="nc" id="L151">        return nif;</span>
     }
      
     public void setNif(int nif) {
-<span class="nc" id="L150">        this.nif = nif;</span>
-<span class="nc" id="L151">    }</span>
+<span class="nc" id="L155">        this.nif = nif;</span>
+<span class="nc" id="L156">    }</span>
 
     public int getCellphone() {
-<span class="nc" id="L154">        return cellphone;</span>
+<span class="nc" id="L159">        return cellphone;</span>
     }
 
     public void setCellphone(int cellphone) {
-<span class="nc" id="L158">        this.cellphone = cellphone;</span>
-<span class="nc" id="L159">    }</span>
+<span class="nc" id="L163">        this.cellphone = cellphone;</span>
+<span class="nc" id="L164">    }</span>
 
     public Campsite getCampsite() {
-<span class="nc" id="L162">        return campsite;</span>
+<span class="nc" id="L167">        return campsite;</span>
     }
 
     public void setCampsite(Campsite campsite) {
-<span class="nc" id="L166">        this.campsite = campsite;</span>
-<span class="nc" id="L167">    }</span>
+<span class="nc" id="L171">        this.campsite = campsite;</span>
+<span class="nc" id="L172">    }</span>
 
     public Camper getCamper() {
-<span class="nc" id="L170">        return camper;</span>
+<span class="nc" id="L175">        return camper;</span>
     }
 
     public void setCamper(Camper camper) {
-<span class="nc" id="L174">        this.camper = camper;</span>
-<span class="nc" id="L175">    }</span>
+<span class="nc" id="L179">        this.camper = camper;</span>
+<span class="nc" id="L180">    }</span>
     
     public String view(Campsite campsiteOutro){
-<span class="nc" id="L178">        this.campsite=campsiteOutro;</span>
-<span class="nc" id="L179">        Camper c = newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString());</span>
-<span class="nc" id="L180">        this.campingCard=c.getCampsiteCard();</span>
-<span class="nc" id="L181">        this.fullName=c.getFullName();</span>
-<span class="nc" id="L182">        this.email=c.getEmail();</span>
-<span class="nc" id="L183">        this.nif=c.getNif();</span>
-<span class="nc" id="L184">        return &quot;booking.xhtml&quot;;</span>
+<span class="nc" id="L183">        this.campsite=campsiteOutro;</span>
+<span class="nc" id="L184">        Camper c = newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString());</span>
+<span class="nc" id="L185">        this.campingCard=c.getCampsiteCard();</span>
+<span class="nc" id="L186">        this.fullName=c.getFullName();</span>
+<span class="nc" id="L187">        this.email=c.getEmail();</span>
+<span class="nc" id="L188">        this.nif=c.getNif();</span>
+<span class="nc" id="L189">        return &quot;booking.xhtml&quot;;</span>
     }
     
     public String booking (Date checkin, Date checkout){
-<span class="nc" id="L188">        camper = newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString());</span>
-<span class="nc" id="L189">        calculatePrice();</span>
-<span class="nc" id="L190">        reservation = newSessionBean.saveReservation(checkin, checkout, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);</span>
-<span class="nc" id="L191">        listBooks=newSessionBean.listarReservations(newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString()));</span>
-<span class="nc" id="L192">        return &quot;payment.xhtml&quot;;</span>
+<span class="nc" id="L193">        camper = newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString());</span>
+<span class="nc" id="L194">        calculatePrice();</span>
+<span class="nc" id="L195">        reservation = newSessionBean.saveReservation(checkin, checkout, camper, campsite, nrAdults, nrChildren, nrBabies, cellphone, totalPrice);</span>
+<span class="nc" id="L196">        listBooks=newSessionBean.listarReservations(newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString()));</span>
+<span class="nc" id="L197">        return &quot;payment.xhtml&quot;;</span>
     }
     
     public double calculatePrice(){
-<span class="nc" id="L196">        double discount = (campsite.getAdultPrice()*(campsite.getCampingCardDiscount()))/100;</span>
-<span class="nc" id="L197">        totalPrice = (nrAdults*campsite.getAdultPrice())+(nrChildren*campsite.getChildPrice())+(nrBabies+campsite.getBabyPrice())-discount;</span>
-<span class="nc" id="L198">        return totalPrice;</span>
+<span class="nc" id="L201">        double discount = (campsite.getAdultPrice()*(campsite.getCampingCardDiscount()))/100;</span>
+<span class="nc" id="L202">        totalPrice = (nrAdults*campsite.getAdultPrice())+(nrChildren*campsite.getChildPrice())+(nrBabies+campsite.getBabyPrice())-discount;</span>
+<span class="nc" id="L203">        return totalPrice;</span>
     }
     
     public String cancelReservation(int id, Date startDate){
-<span class="nc" id="L202">        LocalDate localDate= LocalDate.now();</span>
-<span class="nc" id="L203">        long secsCheckIn=(startDate.getTime()/1000);</span>
-<span class="nc" id="L204">        ZoneId zoneId = ZoneId.systemDefault();</span>
-<span class="nc" id="L205">        long secsAtual = localDate.atStartOfDay(zoneId).toEpochSecond();</span>
+<span class="nc" id="L207">        LocalDate localDate= LocalDate.now();</span>
+<span class="nc" id="L208">        long secsCheckIn=(startDate.getTime()/1000);</span>
+<span class="nc" id="L209">        ZoneId zoneId = ZoneId.systemDefault();</span>
+<span class="nc" id="L210">        long secsAtual = localDate.atStartOfDay(zoneId).toEpochSecond();</span>
         //so cancela a reserva se for feita 3 dias antes
-<span class="nc" id="L207">        long difSecs= secsCheckIn-secsAtual;</span>
-<span class="nc bnc" id="L208" title="All 2 branches missed.">        if (difSecs&gt;TRESDIAS){</span>
-<span class="nc" id="L209">            newSessionBean.deleteReservation(id);</span>
-<span class="nc" id="L210">            listBooks=newSessionBean.listarReservations(newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString()));</span>
-<span class="nc" id="L211">            return &quot;myReservations.xhtml&quot;;</span>
+<span class="nc" id="L212">        long difSecs= secsCheckIn-secsAtual;</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">        if (difSecs&gt;TRESDIAS){</span>
+<span class="nc" id="L214">            newSessionBean.deleteReservation(id);</span>
+<span class="nc" id="L215">            listBooks=newSessionBean.listarReservations(newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString()));</span>
+<span class="nc" id="L216">            return &quot;myReservations.xhtml&quot;;</span>
         }
-<span class="nc" id="L213">        return &quot;myReservations.xhtml&quot;;</span>
+<span class="nc" id="L218">        return &quot;myReservations.xhtml&quot;;</span>
     }
     
     

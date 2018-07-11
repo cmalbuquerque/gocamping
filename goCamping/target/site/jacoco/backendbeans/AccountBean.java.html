@@ -52,11 +52,11 @@ import javax.servlet.http.HttpSession;
     private final static String ACCOUNT = &quot;account.xhtml&quot;;
     private final static String SESSIONGETUSER = &quot;username&quot;;
 
-    @EJB
-    NewSessionBean newSessionBean;
+    private NewSessionBean newSessionBean;
 
     @PostConstruct
     private void init() {
+<span class="nc" id="L59">        newSessionBean = new  NewSessionBean(&quot;PUnit&quot;);</span>
 <span class="nc bnc" id="L60" title="All 2 branches missed.">        if (session.getAttribute(&quot;isCamper&quot;) != null) {</span>
 <span class="nc" id="L61">            Camper c = newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString());</span>
 <span class="nc" id="L62">            this.fullName = c.getFullName();</span>
