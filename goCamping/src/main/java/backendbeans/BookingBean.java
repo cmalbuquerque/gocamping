@@ -70,6 +70,7 @@ public class BookingBean implements Serializable{
     @PostConstruct
     public void init() {
         newSessionBean = new  NewSessionBean("PUnit");
+        listBooks=newSessionBean.listarReservations(newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString()));
     }
     
     public Reservation getReservation() {
