@@ -42,6 +42,7 @@ import org.w3c.dom.Element;
 
 public class MainActivity extends AppCompatActivity {
 
+
     static final String API_URL = "http://192.168.160.223:8080/goCamping/rest/campsite";
     EditText managerText;
 
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         public String ids = "";
         protected void onPreExecute() {
-            ClearAll(ids);
+            ClearAll();
             progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -132,19 +133,8 @@ public class MainActivity extends AppCompatActivity {
                         //campsiteView.setVisibility(View.VISIBLE);
 
 
-                        ids = addChildLayout(eElement, ids);
+                        addChildLayout(eElement);
 
-
-/**
- stringBuilder.append("Adult Price : " + eElement.getElementsByTagName("adultPrice").item(0).getTextContent()).append("\n");
- stringBuilder.append("Child Price : " + eElement.getElementsByTagName("childPrice").item(0).getTextContent()).append("\n");
- stringBuilder.append("Baby Price : " + eElement.getElementsByTagName("babyPrice").item(0).getTextContent()).append("\n");
- stringBuilder.append("Card Discount : " + eElement.getElementsByTagName("campingCardDiscount").item(0).getTextContent()).append("\n");
- stringBuilder.append("Contact : " + eElement.getElementsByTagName("contact").item(0).getTextContent()).append("\n");
- stringBuilder.append("Description : " + eElement.getElementsByTagName("description").item(0).getTextContent()).append("\n");
- stringBuilder.append("Location : " + eElement.getElementsByTagName("location").item(0).getTextContent()).append("\n");
- stringBuilder.append("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent()).append("\n");
- **/
                     } else {
                         //campsiteView.setVisibility(View.GONE);
                     }
@@ -165,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        public String addChildLayout(Element eElement, String ids) {
+        public void addChildLayout(Element eElement) {
             Log.i("MINE", "Add Child Layout");
             //Inflater service
             LayoutInflater layoutInfralte = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -175,26 +165,35 @@ public class MainActivity extends AppCompatActivity {
             View view = layoutInfralte.inflate(R.layout.campsite, null);
             //add child to parent
 
-            ids = view.getId() + "";
-            Log.i("MINE", ids);
 
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(20, 20, 20, 20);
+            view.setLayoutParams(params);
 
             TextView titleView = (TextView) view.findViewById(R.id.TitleView);
-            TextView priceView = (TextView) view.findViewById(R.id.PriceView);
             TextView locationView = (TextView) view.findViewById(R.id.LocationView);
+            TextView kPriceView = (TextView) view.findViewById(R.id.KPriceView);
+            TextView contacts = (TextView) view.findViewById(R.id.ContactView);
             TextView discountView = (TextView) view.findViewById(R.id.DiscountView);
+            TextView descriptionView = (TextView) view.findViewById(R.id.Description);
+
+
 
 
             titleView.setText(eElement.getElementsByTagName("title").item(0).getTextContent());
             locationView.setText(eElement.getElementsByTagName("location").item(0).getTextContent());
-            priceView.setText(eElement.getElementsByTagName("adultPrice").item(0).getTextContent() + "€");
-            discountView.setText(eElement.getElementsByTagName("campingCardDiscount").item(0).getTextContent() + "%");
+            kPriceView.setText("Adulto/Criança: " + eElement.getElementsByTagName("adultPrice").item(0).getTextContent() + "/" + eElement.getElementsByTagName("childPrice").item(0).getTextContent() + "€");
+            contacts.setText("Contacto:" + eElement.getElementsByTagName("contact").item(0).getTextContent());
+            discountView.setText("Desconto:" + eElement.getElementsByTagName("campingCardDiscount").item(0).getTextContent() + "%");
+            descriptionView.setText(eElement.getElementsByTagName("description").item(0).getTextContent());
 
             linearLayout.addView(view);
-            return ids;
         }
 
-        public void ClearAll(String ids){
+        public void ClearAll(){
             ViewGroup viewGroup = findViewById(R.id.ListagemView);
             viewGroup.removeAllViews();
         }

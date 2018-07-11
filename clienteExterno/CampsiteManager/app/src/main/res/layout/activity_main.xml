@@ -28,7 +28,7 @@
                     android:id="@+id/emailText"
                     android:layout_width="242dp"
                     android:layout_height="wrap_content"
-                    android:hint="Enter campsite owner"
+                    android:hint="Procure por gerente"
                     android:inputType="textEmailAddress" />
 
                 <Button
@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="Search" />
+                    android:text="Procurar" />
             </LinearLayout>
 
             <View
