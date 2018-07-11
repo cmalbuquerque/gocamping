@@ -52,11 +52,11 @@ public class AccountBean implements Serializable {
     private final static String ACCOUNT = "account.xhtml";
     private final static String SESSIONGETUSER = "username";
 
-    @EJB
-    NewSessionBean newSessionBean;
+    private NewSessionBean newSessionBean;
 
     @PostConstruct
     private void init() {
+        newSessionBean = new  NewSessionBean("PUnit");
         if (session.getAttribute("isCamper") != null) {
             Camper c = newSessionBean.searchCamper(session.getAttribute(SESSIONGETUSER).toString());
             this.fullName = c.getFullName();

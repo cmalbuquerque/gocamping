@@ -66,8 +66,8 @@ public class CampsiteBean implements Serializable {
     @ManagedProperty(value = "#{campingCardDiscountEdit}")
     private double campingCardDiscountEdit;
 
-    @EJB
-    NewSessionBean newSessionBean;
+    
+    private NewSessionBean newSessionBean;
 
     private final static String SESSIONGETUSER = "username";
     private final static String MYCAMPSITES = "myCampsites.xhtml";
@@ -78,8 +78,9 @@ public class CampsiteBean implements Serializable {
 
     @PostConstruct
     private void init() {
+        newSessionBean = new  NewSessionBean("PUnit");
         this.nif = newSessionBean.searchManager(session.getAttribute(SESSIONGETUSER).toString()).getNif();
-
+        
     }
 
     public double getCampingCardDiscount() {

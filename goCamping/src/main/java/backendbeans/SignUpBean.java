@@ -49,14 +49,15 @@ public class SignUpBean implements Serializable {
 
     @ManagedProperty(value = "#{flagManager}")
     private boolean flagManager;
-    
-    @EJB
-    NewSessionBean newSessionBean ;
+
+    private NewSessionBean newSessionBean ;
     
 
     @PostConstruct
     private void init() {
         user = new Utilizador();
+        newSessionBean = new  NewSessionBean("PUnit");
+ 
     }
 
     public Utilizador getUser() {

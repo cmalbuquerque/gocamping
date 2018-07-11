@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Persistencia.CampsiteTest" time="0.004" tests="13" errors="0" skipped="0" failures="0">
+<testsuite name="Persistencia.CampsiteTest" time="0.006" tests="13" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/pirex/jdk1.8.0_144/jre/lib/amd64"/>
@@ -61,14 +61,14 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testLocation" classname="Persistencia.CampsiteTest" time="0.001"/>
+  <testcase name="testLocation" classname="Persistencia.CampsiteTest" time="0.003"/>
   <testcase name="fieldAnnotations" classname="Persistencia.CampsiteTest" time="0"/>
   <testcase name="entity" classname="Persistencia.CampsiteTest" time="0"/>
-  <testcase name="testTitle" classname="Persistencia.CampsiteTest" time="0"/>
+  <testcase name="testTitle" classname="Persistencia.CampsiteTest" time="0.001"/>
   <testcase name="testAdultPrice" classname="Persistencia.CampsiteTest" time="0.001"/>
   <testcase name="typeAnnotations" classname="Persistencia.CampsiteTest" time="0"/>
   <testcase name="table" classname="Persistencia.CampsiteTest" time="0"/>
-  <testcase name="testManager" classname="Persistencia.CampsiteTest" time="0.001"/>
+  <testcase name="testManager" classname="Persistencia.CampsiteTest" time="0"/>
   <testcase name="testContact" classname="Persistencia.CampsiteTest" time="0"/>
   <testcase name="testChildPrice" classname="Persistencia.CampsiteTest" time="0.001"/>
   <testcase name="testBabyPrice" classname="Persistencia.CampsiteTest" time="0"/>

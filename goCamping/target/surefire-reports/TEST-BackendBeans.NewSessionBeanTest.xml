@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="BackendBeans.NewSessionBeanTest" time="3.838" tests="22" errors="0" skipped="0" failures="0">
+<testsuite name="BackendBeans.NewSessionBeanTest" time="4.326" tests="22" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/pirex/jdk1.8.0_144/jre/lib/amd64"/>
@@ -61,26 +61,26 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testDeleteFavouriteList" classname="BackendBeans.NewSessionBeanTest" time="2.165"/>
-  <testcase name="testDeleteManager" classname="BackendBeans.NewSessionBeanTest" time="0.04"/>
-  <testcase name="testListarCampsitesFavList" classname="BackendBeans.NewSessionBeanTest" time="0.525"/>
-  <testcase name="testSearchUtilizador" classname="BackendBeans.NewSessionBeanTest" time="0.055"/>
-  <testcase name="testSaveUtilizador" classname="BackendBeans.NewSessionBeanTest" time="0.055"/>
-  <testcase name="testListarCampsite_Location" classname="BackendBeans.NewSessionBeanTest" time="0.056"/>
+  <testcase name="testDeleteFavouriteList" classname="BackendBeans.NewSessionBeanTest" time="2.712"/>
+  <testcase name="testDeleteManager" classname="BackendBeans.NewSessionBeanTest" time="0.046"/>
+  <testcase name="testListarCampsitesFavList" classname="BackendBeans.NewSessionBeanTest" time="0.464"/>
+  <testcase name="testSearchUtilizador" classname="BackendBeans.NewSessionBeanTest" time="0.044"/>
+  <testcase name="testSaveUtilizador" classname="BackendBeans.NewSessionBeanTest" time="0.044"/>
+  <testcase name="testListarCampsite_Location" classname="BackendBeans.NewSessionBeanTest" time="0.055"/>
   <testcase name="testUpdateCampsite" classname="BackendBeans.NewSessionBeanTest" time="0.066"/>
-  <testcase name="testSaveFavouriteList" classname="BackendBeans.NewSessionBeanTest" time="0.1"/>
-  <testcase name="testSaveReservation" classname="BackendBeans.NewSessionBeanTest" time="0.1"/>
-  <testcase name="testUpdateCamper" classname="BackendBeans.NewSessionBeanTest" time="0.043"/>
+  <testcase name="testSaveFavouriteList" classname="BackendBeans.NewSessionBeanTest" time="0.099"/>
+  <testcase name="testSaveReservation" classname="BackendBeans.NewSessionBeanTest" time="0.099"/>
+  <testcase name="testUpdateCamper" classname="BackendBeans.NewSessionBeanTest" time="0.055"/>
   <testcase name="testSearchManager" classname="BackendBeans.NewSessionBeanTest" time="0.033"/>
-  <testcase name="testDeleteCamper" classname="BackendBeans.NewSessionBeanTest" time="0.024"/>
-  <testcase name="testSaveCamper" classname="BackendBeans.NewSessionBeanTest" time="0.032"/>
-  <testcase name="testListarCampsite_Manager" classname="BackendBeans.NewSessionBeanTest" time="0.046"/>
+  <testcase name="testDeleteCamper" classname="BackendBeans.NewSessionBeanTest" time="0.034"/>
+  <testcase name="testSaveCamper" classname="BackendBeans.NewSessionBeanTest" time="0.033"/>
+  <testcase name="testListarCampsite_Manager" classname="BackendBeans.NewSessionBeanTest" time="0.055"/>
   <testcase name="testDeleteReservation" classname="BackendBeans.NewSessionBeanTest" time="0.1"/>
-  <testcase name="testSearchCamper" classname="BackendBeans.NewSessionBeanTest" time="0.034"/>
+  <testcase name="testSearchCamper" classname="BackendBeans.NewSessionBeanTest" time="0.033"/>
   <testcase name="testSearchCampsite" classname="BackendBeans.NewSessionBeanTest" time="0.055"/>
   <testcase name="testSaveCampsite" classname="BackendBeans.NewSessionBeanTest" time="0.055"/>
   <testcase name="testDeleteCampsite" classname="BackendBeans.NewSessionBeanTest" time="0.056"/>
-  <testcase name="testSaveManager" classname="BackendBeans.NewSessionBeanTest" time="0.044"/>
-  <testcase name="testListarReservations" classname="BackendBeans.NewSessionBeanTest" time="0.111"/>
-  <testcase name="testUpdateManager" classname="BackendBeans.NewSessionBeanTest" time="0.043"/>
+  <testcase name="testSaveManager" classname="BackendBeans.NewSessionBeanTest" time="0.033"/>
+  <testcase name="testListarReservations" classname="BackendBeans.NewSessionBeanTest" time="0.1"/>
+  <testcase name="testUpdateManager" classname="BackendBeans.NewSessionBeanTest" time="0.055"/>
 </testsuite>

@@ -116,23 +116,16 @@ public class NewSessionBean implements Serializable {
     
      public List<Camper> listarTodosCampers() {
         List<Camper> campers = new ArrayList<>();
-        List<Camper> list = new ArrayList<>();
 
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Camper c");
-
             campers = query.getResultList();
-            for (Iterator<Camper> iterator = campers.iterator(); iterator.hasNext();) {
-                Camper utilizador =  iterator.next();
-                list.add(utilizador);
-            }
-
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
-        return list;
+        return campers;
     }
 
     public boolean deleteCamper(String username) {
@@ -199,20 +192,15 @@ public class NewSessionBean implements Serializable {
     
     public List<Manager> listarTodosManagers() {
         List<Manager> managers = new ArrayList<>();
-        List<Manager> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Manager c");
             managers = query.getResultList();
-            for (Iterator<Manager> iterator = managers.iterator(); iterator.hasNext();) {
-                Manager utilizador = iterator.next();
-                list.add(utilizador);
-            }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
-        return list;
+        return managers;
     }
     
     public boolean deleteManager(String username) {
@@ -249,21 +237,17 @@ public class NewSessionBean implements Serializable {
     
     public List<Utilizador> listarTodosUtilizadores() {
         List<Utilizador> utilizadores = new ArrayList<>();
-        List<Utilizador> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Utilizador c");
             utilizadores = query.getResultList();
-            for (Iterator<Utilizador> iterator = utilizadores.iterator(); iterator.hasNext();) {
-                Utilizador utilizador = iterator.next();
-                list.add(utilizador);
-            }
+
 
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
-        return list;
+        return utilizadores;
     }
     
     public Utilizador updateUtilizador(String username, String newPassword) {
@@ -352,21 +336,16 @@ public class NewSessionBean implements Serializable {
 
     public List<Campsite> listarCampsite(Manager manager) {
         List<Campsite> campsites = new ArrayList<>();
-        List<Campsite> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Campsite as c where c.manager = :manager");
             query.setParameter("manager", manager);
             campsites = query.getResultList();
-            for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
-                Campsite campsite =  iterator.next();
-                list.add(campsite);
-            }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
-        return list;
+        return campsites;
     }
     
     public List<Campsite> listarCampsiteREST(String name) {
@@ -386,41 +365,31 @@ public class NewSessionBean implements Serializable {
 
     public List<Campsite> listarTodosCampsites() {
         List<Campsite> campsites = new ArrayList<>();
-        List<Campsite> list = new ArrayList<>();
 
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Campsite c");
 
             campsites = query.getResultList();
-            for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
-                Campsite campsite = iterator.next();
-                list.add(campsite);
-            }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
-        return list;
+        return campsites;
     }
 
     public List<Campsite> listarCampsite(String location) {
         List<Campsite> campsites = new ArrayList<>();
-        List<Campsite> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Campsite as c where c.location like :location");
             query.setParameter("location", "%" + location + "%");
             campsites = query.getResultList();
-            for (Iterator<Campsite> iterator = campsites.iterator(); iterator.hasNext();) {
-                Campsite campsite = iterator.next();
-                list.add(campsite);
-            }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
-        return list;
+        return campsites;
     }
 
     public Campsite updateCampsite(int id, String title, String location, double adultPrice, double childPrice, double babyPrice, String contact, String desc, double campingCardDiscount) {
@@ -480,21 +449,16 @@ public class NewSessionBean implements Serializable {
 
     public List<Reservation> listarReservations(Camper camper) {
         List<Reservation> reservations = new ArrayList<>();
-        List<Reservation> list = new ArrayList<>();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select c from Reservation as c where c.camper = :camper");
             query.setParameter("camper", camper);
             reservations = query.getResultList();
-            for (Iterator<Reservation> iterator = reservations.iterator(); iterator.hasNext();) {
-                Reservation reservation =  iterator.next();
-                list.add(reservation);
-            }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
-        return list;
+        return reservations;
     }
 
     public void updateReservation(int id, Date startDate, Date endDate) {

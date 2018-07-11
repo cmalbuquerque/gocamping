@@ -49,118 +49,119 @@ import javax.faces.bean.SessionScoped;
 
     @ManagedProperty(value = &quot;#{flagManager}&quot;)
     private boolean flagManager;
-    
-    @EJB
-    NewSessionBean newSessionBean ;
+
+    private NewSessionBean newSessionBean ;
     
 
     @PostConstruct
     private void init() {
-<span class="nc" id="L59">        user = new Utilizador();</span>
-<span class="nc" id="L60">    }</span>
+<span class="nc" id="L58">        user = new Utilizador();</span>
+<span class="nc" id="L59">        newSessionBean = new  NewSessionBean(&quot;PUnit&quot;);</span>
+ 
+<span class="nc" id="L61">    }</span>
 
     public Utilizador getUser() {
-<span class="nc" id="L63">        return user;</span>
+<span class="nc" id="L64">        return user;</span>
     }
 
     public void setUser(Utilizador user) {
-<span class="nc" id="L67">        this.user = user;</span>
-<span class="nc" id="L68">    }</span>
+<span class="nc" id="L68">        this.user = user;</span>
+<span class="nc" id="L69">    }</span>
 
     public Manager getManager() {
-<span class="nc" id="L71">        return manager;</span>
+<span class="nc" id="L72">        return manager;</span>
     }
 
     public void setManager(Manager manager) {
-<span class="nc" id="L75">        this.manager = manager;</span>
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L76">        this.manager = manager;</span>
+<span class="nc" id="L77">    }</span>
 
     public Camper getCamper() {
-<span class="nc" id="L79">        return camper;</span>
+<span class="nc" id="L80">        return camper;</span>
     }
 
     public void setCamper(Camper camper) {
-<span class="nc" id="L83">        this.camper = camper;</span>
-<span class="nc" id="L84">    }</span>
+<span class="nc" id="L84">        this.camper = camper;</span>
+<span class="nc" id="L85">    }</span>
 
     public String getUsername() {
-<span class="nc" id="L87">        return username;</span>
+<span class="nc" id="L88">        return username;</span>
     }
 
     public void setUsername(String username) {
-<span class="nc" id="L91">        this.username = username;</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L92">        this.username = username;</span>
+<span class="nc" id="L93">    }</span>
 
     public String getPassword() {
-<span class="nc" id="L95">        return password;</span>
+<span class="nc" id="L96">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="nc" id="L99">        this.password = password;</span>
-<span class="nc" id="L100">    }</span>
+<span class="nc" id="L100">        this.password = password;</span>
+<span class="nc" id="L101">    }</span>
 
     public String getFullName() {
-<span class="nc" id="L103">        return fullName;</span>
+<span class="nc" id="L104">        return fullName;</span>
     }
 
     public void setFullName(String fullName) {
-<span class="nc" id="L107">        this.fullName = fullName;</span>
-<span class="nc" id="L108">    }</span>
+<span class="nc" id="L108">        this.fullName = fullName;</span>
+<span class="nc" id="L109">    }</span>
 
     public String getEmail() {
-<span class="nc" id="L111">        return email;</span>
+<span class="nc" id="L112">        return email;</span>
     }
 
     public void setEmail(String email) {
-<span class="nc" id="L115">        this.email = email;</span>
-<span class="nc" id="L116">    }</span>
+<span class="nc" id="L116">        this.email = email;</span>
+<span class="nc" id="L117">    }</span>
 
     public int getNif() {
-<span class="nc" id="L119">        return nif;</span>
+<span class="nc" id="L120">        return nif;</span>
     }
 
     public void setNif(int nif) {
-<span class="nc" id="L123">        this.nif = nif;</span>
-<span class="nc" id="L124">    }</span>
+<span class="nc" id="L124">        this.nif = nif;</span>
+<span class="nc" id="L125">    }</span>
 
     public int getCampsiteCard() {
-<span class="nc" id="L127">        return campsiteCard;</span>
+<span class="nc" id="L128">        return campsiteCard;</span>
     }
 
     public void setCampsiteCard(int campsiteCard) {
-<span class="nc" id="L131">        this.campsiteCard = campsiteCard;</span>
-<span class="nc" id="L132">    }</span>
+<span class="nc" id="L132">        this.campsiteCard = campsiteCard;</span>
+<span class="nc" id="L133">    }</span>
 
     public boolean isFlagCamper() {
-<span class="nc" id="L135">        return flagCamper;</span>
+<span class="nc" id="L136">        return flagCamper;</span>
     }
 
     public void setFlagCamper(boolean flagCamper) {
-<span class="nc" id="L139">        this.flagCamper = flagCamper;</span>
-<span class="nc" id="L140">    }</span>
+<span class="nc" id="L140">        this.flagCamper = flagCamper;</span>
+<span class="nc" id="L141">    }</span>
 
     public boolean isFlagManager() {
-<span class="nc" id="L143">        return flagManager;</span>
+<span class="nc" id="L144">        return flagManager;</span>
     }
 
     public void setFlagManager(boolean flagManager) {
-<span class="nc" id="L147">        this.flagManager = flagManager;</span>
-<span class="nc" id="L148">    }</span>
+<span class="nc" id="L148">        this.flagManager = flagManager;</span>
+<span class="nc" id="L149">    }</span>
 
     
 
     public String register() {
-<span class="nc bnc" id="L153" title="All 4 branches missed.">        if (flagCamper &amp;&amp; !flagManager) {</span>
-<span class="nc" id="L154">            Camper camper1 = newSessionBean.saveCamper(username, fullName, email, nif, campsiteCard);</span>
-<span class="nc" id="L155">            newSessionBean.saveUtilizador(camper1, null, username, password);</span>
-<span class="nc" id="L156">            return &quot;login.xhtml&quot;;</span>
+<span class="nc bnc" id="L154" title="All 4 branches missed.">        if (flagCamper &amp;&amp; !flagManager) {</span>
+<span class="nc" id="L155">            Camper camper1 = newSessionBean.saveCamper(username, fullName, email, nif, campsiteCard);</span>
+<span class="nc" id="L156">            newSessionBean.saveUtilizador(camper1, null, username, password);</span>
+<span class="nc" id="L157">            return &quot;login.xhtml&quot;;</span>
         }
-<span class="nc bnc" id="L158" title="All 4 branches missed.">        if (flagManager &amp;&amp; !flagCamper) {</span>
-<span class="nc" id="L159">            Manager manager1 = newSessionBean.saveManager(username, fullName, email, nif);</span>
-<span class="nc" id="L160">            newSessionBean.saveUtilizador(null, manager1, username, password);</span>
-<span class="nc" id="L161">            return &quot;login.xhtml&quot;;</span>
+<span class="nc bnc" id="L159" title="All 4 branches missed.">        if (flagManager &amp;&amp; !flagCamper) {</span>
+<span class="nc" id="L160">            Manager manager1 = newSessionBean.saveManager(username, fullName, email, nif);</span>
+<span class="nc" id="L161">            newSessionBean.saveUtilizador(null, manager1, username, password);</span>
+<span class="nc" id="L162">            return &quot;login.xhtml&quot;;</span>
         }
-<span class="nc" id="L163">        return &quot;signup.xhtml&quot;;</span>
+<span class="nc" id="L164">        return &quot;signup.xhtml&quot;;</span>
     }
 
 

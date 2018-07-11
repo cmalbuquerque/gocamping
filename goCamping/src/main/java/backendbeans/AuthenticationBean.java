@@ -39,12 +39,13 @@ public class AuthenticationBean implements Serializable {
     private final static String INDEX = "index.xhtml";
     private final static String LOGIN = "login.xhtml";
 
-    @EJB
-    NewSessionBean newSessionBean;
+    
+    private NewSessionBean newSessionBean;
 
     @PostConstruct
     private void init() {
         user = new Utilizador();
+        newSessionBean = new  NewSessionBean("PUnit");
     }
 
     public AuthenticationBean() {
