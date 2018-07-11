@@ -1,14 +1,20 @@
 package com.example.android.campsitemanager;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -24,56 +30,51 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
-
-import java.io.File;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    static final String API_KEY = "OoHPawan52M008dogcoBEBDPL0N2IBxC";
     static final String API_URL = "http://192.168.160.223:8080/goCamping/rest/campsite";
     EditText managerText;
-    TextView responseView;
-    ProgressBar progressBar;
+
+    RelativeLayout progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        responseView = (TextView) findViewById(R.id.responseView);
+
         managerText = (EditText) findViewById(R.id.emailText);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (RelativeLayout) findViewById(R.id.progressBar);
 
         Button queryButton = (Button) findViewById(R.id.queryButton);
         queryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager inputManager = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
                 new RetrieveFeedTask().execute();
             }
         });
     }
 
     class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
-
-        private Exception exception;
-
+        public String ids = "";
         protected void onPreExecute() {
+            ClearAll(ids);
             progressBar.setVisibility(View.VISIBLE);
-            responseView.setText("");
         }
 
         protected String doInBackground(Void... urls) {
@@ -81,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
             if (manager.length() == 1) {
                 manager = "";
             }
-            // Do some validation here
 
             try {
                 URL url = new URL(API_URL + manager);
@@ -104,13 +104,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        @SuppressLint("ResourceType")
         protected void onPostExecute(String response) {
             if (response == null) {
                 response = "THERE WAS AN ERROR";
             }
             progressBar.setVisibility(View.GONE);
             Log.i("INFO", response);
-            Log.i("MINE1", response);
 
 
             try {
@@ -129,21 +129,27 @@ public class MainActivity extends AppCompatActivity {
 
                         Element eElement = (Element) nNode;
 
-                        stringBuilder.append("Adult Price : " + eElement.getElementsByTagName("adultPrice").item(0).getTextContent()).append("\n");
-                        stringBuilder.append("Child Price : " + eElement.getElementsByTagName("childPrice").item(0).getTextContent()).append("\n");
-                        stringBuilder.append("Baby Price : " + eElement.getElementsByTagName("babyPrice").item(0).getTextContent()).append("\n");
-                        stringBuilder.append("Card Discount : " + eElement.getElementsByTagName("campingCardDiscount").item(0).getTextContent()).append("\n");
-                        stringBuilder.append("Contact : " + eElement.getElementsByTagName("contact").item(0).getTextContent()).append("\n");
-                        stringBuilder.append("Description : " + eElement.getElementsByTagName("description").item(0).getTextContent()).append("\n");
-                        stringBuilder.append("Location : " + eElement.getElementsByTagName("location").item(0).getTextContent()).append("\n");
-                        stringBuilder.append("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent()).append("\n");
+                        //campsiteView.setVisibility(View.VISIBLE);
 
-                        Log.i("MINE", stringBuilder.toString());
 
+                        ids = addChildLayout(eElement, ids);
+
+
+/**
+ stringBuilder.append("Adult Price : " + eElement.getElementsByTagName("adultPrice").item(0).getTextContent()).append("\n");
+ stringBuilder.append("Child Price : " + eElement.getElementsByTagName("childPrice").item(0).getTextContent()).append("\n");
+ stringBuilder.append("Baby Price : " + eElement.getElementsByTagName("babyPrice").item(0).getTextContent()).append("\n");
+ stringBuilder.append("Card Discount : " + eElement.getElementsByTagName("campingCardDiscount").item(0).getTextContent()).append("\n");
+ stringBuilder.append("Contact : " + eElement.getElementsByTagName("contact").item(0).getTextContent()).append("\n");
+ stringBuilder.append("Description : " + eElement.getElementsByTagName("description").item(0).getTextContent()).append("\n");
+ stringBuilder.append("Location : " + eElement.getElementsByTagName("location").item(0).getTextContent()).append("\n");
+ stringBuilder.append("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent()).append("\n");
+ **/
+                    } else {
+                        //campsiteView.setVisibility(View.GONE);
                     }
                 }
                 stringBuilder.toString();
-                responseView.setText(stringBuilder);
 
             } catch (ParserConfigurationException e) {
                 Log.i("MINE", "Catch1");
@@ -157,6 +163,40 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+        }
+
+        public String addChildLayout(Element eElement, String ids) {
+            Log.i("MINE", "Add Child Layout");
+            //Inflater service
+            LayoutInflater layoutInfralte = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //parent layout xml refrence
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ListagemView);
+            //Child layout xml refrence
+            View view = layoutInfralte.inflate(R.layout.campsite, null);
+            //add child to parent
+
+            ids = view.getId() + "";
+            Log.i("MINE", ids);
+
+
+            TextView titleView = (TextView) view.findViewById(R.id.TitleView);
+            TextView priceView = (TextView) view.findViewById(R.id.PriceView);
+            TextView locationView = (TextView) view.findViewById(R.id.LocationView);
+            TextView discountView = (TextView) view.findViewById(R.id.DiscountView);
+
+
+            titleView.setText(eElement.getElementsByTagName("title").item(0).getTextContent());
+            locationView.setText(eElement.getElementsByTagName("location").item(0).getTextContent());
+            priceView.setText(eElement.getElementsByTagName("adultPrice").item(0).getTextContent() + "€");
+            discountView.setText(eElement.getElementsByTagName("campingCardDiscount").item(0).getTextContent() + "%");
+
+            linearLayout.addView(view);
+            return ids;
+        }
+
+        public void ClearAll(String ids){
+            ViewGroup viewGroup = findViewById(R.id.ListagemView);
+            viewGroup.removeAllViews();
         }
     }
 
